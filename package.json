@@ -1,0 +1,38 @@
+{
+  "name": "atlas",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@react-three/drei": "^9.115.0",
+    "@react-three/fiber": "^8.17.10",
+    "gsap": "^3.12.5",
+    "lenis": "^1.1.14",
+    "next": "14.2.35",
+    "next-mdx-remote": "^5.0.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "three": "^0.170.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/three": "^0.170.0",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.35",
+    "fast-check": "^3.23.2",
+    "jsdom": "^29.1.1",
+    "raw-loader": "^4.0.2",
+    "ttf2woff2": "^8.0.1",
+    "typescript": "^5",
+    "vitest": "^4.1.5"
+  }
+}
