@@ -259,10 +259,10 @@ Ce plan décompose le design ATLAS° en étapes de code incrémentales pour un a
     - Navigation clavier complète (Tab, Entrée/Espace), ordre de tabulation logique
     - _Exigences : 5.3, 6.11, 6.12, 12.1, 12.4, 14.1, 14.2_
 
-- [ ] 10. Checkpoint — Fiche pays
+- [x] 10. Checkpoint — Fiche pays
   - Vérifier que la CountryCard affiche correctement les 12+ dimensions de données avec la palette dynamique et les animations ScrollTrigger. Demander à l'utilisateur si des questions se posent.
 
-- [ ] 11. Pages Next.js et génération statique
+- [x] 11. Pages Next.js et génération statique
   - [x] 11.1 Créer `app/layout.tsx`
     - Chargement des polices : Bebas Neue, DM Sans Variable, JetBrains Mono Variable (woff2)
     - Initialisation Lenis globale
@@ -273,7 +273,7 @@ Ce plan décompose le design ATLAS° en étapes de code incrémentales pour un a
     - Montage `GlobeScene` + `LoadingScreen` + `SearchPalette`
     - _Exigences : 3.3, 3.4, 4.1–4.5_
 
-  - [ ] 11.3 Créer `app/pays/[code]/page.tsx`
+  - [x] 11.3 Créer `app/pays/[code]/page.tsx`
     - `generateStaticParams` : récupération des 195 codes via `lib/countries-api.ts`, throw si API indisponible
     - `export const dynamic = 'force-static'`
     - Chargement des données pays + MDX au build
@@ -285,20 +285,20 @@ Ce plan décompose le design ATLAS° en étapes de code incrémentales pour un a
     - Barre de navigation globale avec bouton d'ouverture de la `SearchPalette`
     - _Exigence : 8.1_
 
-- [ ] 12. Contenu éditorial MDX
-  - [ ] 12.1 Créer les fichiers MDX pour ≥ 20 pays
+- [x] 12. Contenu éditorial MDX
+  - [x] 12.1 Créer les fichiers MDX pour ≥ 20 pays
     - Créer `/content/countries/[CCA3].mdx` pour au minimum 20 pays au lancement
     - Chaque fichier inclut frontmatter (`title`, `description`, `author`, `date`) et contenu narratif
     - _Exigences : 7.6, 7.7_
 
-- [ ] 13. Assets et optimisation
-  - [ ] 13.1 Préparer et optimiser les assets statiques
+- [x] 13. Assets et optimisation
+  - [x] 13.1 Préparer et optimiser les assets statiques
     - Placer le fichier GeoJSON Natural Earth 110m minifié dans `public/geodata/ne_110m_admin_0_countries.geojson` (réduction ≥ 20% vs version non minifiée)
     - Placer les polices woff2 dans `public/fonts/`
     - Configurer Next.js pour la conversion WebP des images raster (qualité ≥ 80%)
     - _Exigences : 11.1_
 
-- [ ] 14. Checkpoint final — Intégration complète
+- [-] 14. Checkpoint final — Intégration complète
   - Vérifier que tous les tests de propriété et tests unitaires passent. Vérifier la compilation TypeScript sans erreur. Tester le flux complet : chargement → Globe → sélection pays → CountryCard → recherche → partage. Demander à l'utilisateur si des questions se posent.
 
 ---
