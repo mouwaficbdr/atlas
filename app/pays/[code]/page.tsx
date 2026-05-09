@@ -294,9 +294,22 @@ interface PageProps {
  * Charge les données du pays, la palette de couleurs et le contenu MDX,
  * puis affiche la CountryCard avec toutes les dimensions de données.
  */
+async function fetchCountryExtraData(cca3: string) {
+  try {
+    const res = await fetch(`https://restcountries.com/v3.1/alpha/${cca3}?fields=timezones,tld,idd`, {
+      next: { revalidate: 86400 }
+    });
+    if (!res.ok) return {};
+    const data = await res.json();
+    return data || {};
+  } catch {
+    return {};
+  }
+}
+
 export default async function CountryPage({ params }: PageProps) {
   const countries = await fetchAllCountries();
-  const country = countries.find(
+  let country = countries.find(
     (c) => c.cca3.toLowerCase() === params.code.toLowerCase(),
   );
 
@@ -304,14 +317,15 @@ export default async function CountryPage({ params }: PageProps) {
     notFound();
   }
 
+  // Le GeoJSON local ne contient pas timezones, tld, ni idd. On va les chercher via REST Countries.
+  const extraData = await fetchCountryExtraData(country.cca3);
+  country = { ...country, ...extraData };
+
   const allCountries = await getAllCountries(countries);
   const palette = await getCountryPalette(country);
   const mdxContent = await getCountryMDX(country.cca3);
   const canonicalUrl = `https://atlas.example.com/pays/${params.code}`;
 
-  // Récupération Wikipedia avec cascade de fallbacks (FR → EN) et cache 24h.
-  // La clé de cache est unique par pays (cca3) — au plus 4 requêtes HTTP par
-  // pays par 24h (FR common, FR official, EN common, EN official).
   const wikiSummary = await getCachedWikiSummary(
     country.name.common,
     country.name.official,
