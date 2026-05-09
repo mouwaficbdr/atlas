@@ -59,6 +59,13 @@ export interface CountryData {
 
   // Fuseaux horaires
   timezones: string[]; // Ex: ["UTC+01:00"]
+  
+  // Custom Atlas Fields
+  centroid: [number, number];
+  colors?: {
+    primary: string;
+    palette: string[];
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -88,13 +95,7 @@ export interface CountryPalette {
 
 export interface GeoJSONFeature {
   type: "Feature";
-  properties: {
-    NAME: string;
-    ISO_A3: string; // Code Alpha-3
-    ISO_A2: string;
-    CONTINENT: string;
-    SUBREGION: string;
-  };
+  properties: CountryData;
   geometry: {
     type: "Polygon" | "MultiPolygon";
     coordinates: number[][][] | number[][][][];

@@ -32,17 +32,25 @@ export async function loadGeoJSON(): Promise<GeoJSONCollection> {
     return cachedGeoJSON;
   }
 
-  const response = await fetch(
-    "/geodata/ne_110m_admin_0_countries.geojson"
-  );
+  let data: GeoJSONCollection;
 
-  if (!response.ok) {
-    throw new Error(
-      `[ATLAS] Impossible de charger le GeoJSON : ${response.status} ${response.statusText}`
-    );
+  if (typeof window === 'undefined') {
+    // Exécution côté serveur (build SSG ou SSR)
+    const fs = await import('fs');
+    const path = await import('path');
+    const filePath = path.join(process.cwd(), 'public', 'data', 'countries-geo.json');
+    const fileContent = await fs.promises.readFile(filePath, 'utf-8');
+    data = JSON.parse(fileContent) as GeoJSONCollection;
+  } else {
+    // Exécution côté client
+    const response = await fetch('/data/countries-geo.json');
+    if (!response.ok) {
+      throw new Error(
+        `[ATLAS] Impossible de charger le GeoJSON : ${response.status} ${response.statusText}`
+      );
+    }
+    data = (await response.json()) as GeoJSONCollection;
   }
-
-  const data = (await response.json()) as GeoJSONCollection;
 
   // Stocker dans le cache module pour les appels suivants
   cachedGeoJSON = data;

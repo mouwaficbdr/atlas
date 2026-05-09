@@ -22,11 +22,34 @@ export default function FlagDisplay({ flagSvg, countryName }: FlagDisplayProps) 
   }, []);
 
   return (
-    <div ref={ref} style={{ opacity: 0 }}>
-      <img
-        src={flagSvg}
-        alt={`Drapeau de ${countryName}`}
-        style={{ width: '100%', maxWidth: '320px', borderRadius: '8px', boxShadow: '0 4px 20px rgba(0,0,0,0.4)' }}
+    <div 
+      ref={ref} 
+      style={{ 
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        opacity: 0,
+        zIndex: 0,
+        pointerEvents: 'none',
+        overflow: 'hidden'
+      }}
+    >
+      <div 
+        style={{
+          position: 'absolute',
+          top: '-20%',
+          left: '-20%',
+          width: '140%',
+          height: '140%',
+          backgroundImage: `url(${flagSvg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          filter: 'blur(100px) saturate(2) brightness(0.5)',
+          opacity: 0.6,
+          mixBlendMode: 'screen',
+        }}
       />
     </div>
   );

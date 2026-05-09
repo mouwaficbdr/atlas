@@ -29,16 +29,24 @@ export default function ShareButton({ url }: ShareButtonProps) {
       <button
         onClick={handleShare}
         style={{
-          padding: '8px 16px',
-          backgroundColor: 'var(--color-accent)',
-          color: '#fff',
+          background: 'none',
+          color: 'var(--country-accent, #fff)',
           border: 'none',
-          borderRadius: '8px',
+          borderBottom: '2px solid var(--country-accent, #fff)',
+          padding: '0 0 5px 0',
           cursor: 'pointer',
-          fontSize: '0.9rem',
+          fontFamily: 'var(--font-bebas-neue), sans-serif',
+          fontSize: '3rem',
+          textTransform: 'uppercase',
+          letterSpacing: '0.05em',
+          lineHeight: 1,
+          opacity: copied ? 0.5 : 1,
+          transition: 'opacity 0.3s ease',
         }}
+        onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.5')}
+        onMouseLeave={(e) => (e.currentTarget.style.opacity = copied ? '0.5' : '1')}
       >
-        {copied ? '✓ Lien copié !' : '🔗 Partager'}
+        {copied ? 'LIEN COPIÉ' : 'COPIER LE LIEN'}
       </button>
       {showFallback && (
         <input

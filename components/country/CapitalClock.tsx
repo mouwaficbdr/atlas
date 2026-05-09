@@ -17,7 +17,7 @@ function getLocalTime(timezone: string): Date {
 }
 
 export default function CapitalClock({ capital, timezones }: CapitalClockProps) {
-  const timezone = timezones[0] ?? 'UTC';
+  const timezone = timezones?.[0] ?? 'UTC';
   const [time, setTime] = useState<Date>(() => getLocalTime(timezone));
 
   useEffect(() => {
@@ -37,17 +37,14 @@ export default function CapitalClock({ capital, timezones }: CapitalClockProps) 
   });
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-      <span style={{ fontSize: '1.5rem' }}>{isDay ? '☀️' : '🌙'}</span>
-      <div>
-        <div style={{ color: 'var(--text-primary)', fontWeight: 600 }}>
-          {capital[0] ?? '—'}
-        </div>
-        <div style={{ fontFamily: 'JetBrains Mono, monospace', color: 'var(--text-accent)', fontSize: '1.1rem' }}>
-          {timeStr}
-        </div>
-        <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>{timezone}</div>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0' }}>
+      <div style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-bebas-neue), sans-serif', fontSize: 'clamp(3rem, 5vw, 6rem)', lineHeight: 0.9, textTransform: 'uppercase', letterSpacing: '0.02em' }}>
+        {capital?.[0] ?? '—'}
       </div>
+      <div style={{ fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--country-accent, #fff)', fontSize: 'clamp(2rem, 3vw, 4rem)', fontWeight: 100, display: 'flex', alignItems: 'center', gap: '1rem', marginTop: '1rem' }}>
+        <span style={{ opacity: 0.5 }}>{isDay ? '☀️' : '🌙'}</span> {timeStr}
+      </div>
+      <div style={{ color: 'var(--text-muted)', fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '0.2em', marginTop: '0.5rem' }}>{timezone}</div>
     </div>
   );
 }

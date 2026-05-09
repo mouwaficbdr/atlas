@@ -1,80 +1,132 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo, useRef } from 'react';
 import * as THREE from 'three';
+import { useFrame } from '@react-three/fiber';
 import { loadGeoJSON } from '@/lib/geojson-loader';
-import { extractPalette } from '@/lib/color-extractor';
 import type { GeoJSONFeature, CountryData } from '@/lib/types';
+import { useAppStore } from '@/lib/store';
+import { prefetchWikiSummary, getPreferredWikiTitle } from '@/lib/wiki-summary';
 import CountryMesh from './CountryMesh';
-import Tooltip from './Tooltip';
+import BordersMesh from './BordersMesh';
+import HolographicText from './HolographicText';
+
+import oceanVert from '../../shaders/ocean.vert.glsl';
+import oceanFrag from '../../shaders/ocean.frag.glsl';
 
 interface GlobeMeshProps {
   countries: CountryData[];
   onSelect: (cca3: string) => void;
+  onLoad?: () => void;
 }
 
-export default function GlobeMesh({ countries, onSelect }: GlobeMeshProps) {
+export default function GlobeMesh({
+  countries,
+  onSelect,
+  onLoad,
+}: GlobeMeshProps) {
   const [features, setFeatures] = useState<GeoJSONFeature[]>([]);
-  const [colors, setColors] = useState<Record<string, string>>({});
   const [hoveredCca3, setHoveredCca3] = useState<string | null>(null);
+  const setHoveredCountry = useAppStore((state) => state.setHoveredCountry);
 
   useEffect(() => {
-    loadGeoJSON().then((data) => setFeatures(data.features)).catch(console.error);
-  }, []);
-
-  useEffect(() => {
-    if (!features.length || !countries.length) return;
-
-    const countryMap = new Map(countries.map((c) => [c.cca3, c]));
-
-    features.forEach((feature) => {
-      const cca3 = feature.properties.ISO_A3;
-      const country = countryMap.get(cca3);
-      if (!country) return;
-
-      extractPalette(country.flags.svg, cca3)
-        .then((palette) => {
-          setColors((prev) => ({ ...prev, [cca3]: palette.primary }));
-        })
-        .catch(() => {
-          setColors((prev) => ({ ...prev, [cca3]: '#4A5568' }));
-        });
-    });
-  }, [features, countries]);
+    loadGeoJSON()
+      .then((data) => {
+        setFeatures(data.features);
+        onLoad?.();
+      })
+      .catch(console.error);
+  }, [onLoad]);
 
   const hoveredFeature = hoveredCca3
-    ? features.find((f) => f.properties.ISO_A3 === hoveredCca3)
+    ? features.find((f) => f.properties.cca3 === hoveredCca3)
     : null;
 
   const hoveredCountry = hoveredCca3
     ? countries.find((c) => c.cca3 === hoveredCca3)
     : null;
 
+  useEffect(() => {
+    setHoveredCountry(hoveredCca3);
+  }, [hoveredCca3, setHoveredCountry]);
+
+  useEffect(() => {
+    if (!hoveredCountry) return;
+
+    const title = getPreferredWikiTitle(hoveredCountry);
+    if (!title) return;
+
+    const t = setTimeout(() => {
+      prefetchWikiSummary(title);
+    }, 150);
+
+    return () => clearTimeout(t);
+  }, [hoveredCountry]);
+
+  const oceanMaterial = useMemo(() => {
+    return new THREE.ShaderMaterial({
+      vertexShader:
+        typeof oceanVert === 'string' ? oceanVert : (oceanVert as any).default,
+      fragmentShader:
+        typeof oceanFrag === 'string' ? oceanFrag : (oceanFrag as any).default,
+      uniforms: {
+        uTime: { value: 0 },
+      },
+    });
+  }, []);
+
+  const groupRef = useRef<THREE.Group>(null);
+
+  useFrame(({ clock, mouse }) => {
+    if (oceanMaterial) {
+      oceanMaterial.uniforms.uTime.value = clock.elapsedTime;
+    }
+
+    // Tilt effect on hover
+    if (groupRef.current) {
+      const tiltFactor = hoveredCca3 ? 0.15 : 0.05;
+      const targetRotationX = mouse.y * tiltFactor;
+      const targetRotationY = mouse.x * tiltFactor;
+
+      groupRef.current.rotation.x = THREE.MathUtils.lerp(
+        groupRef.current.rotation.x,
+        targetRotationX,
+        0.05,
+      );
+      groupRef.current.rotation.z = THREE.MathUtils.lerp(
+        groupRef.current.rotation.z,
+        -targetRotationY,
+        0.05,
+      );
+    }
+  });
+
   return (
-    <group>
-      {/* Sphère principale */}
-      <mesh>
+    <group ref={groupRef}>
+      {/* Océan — techy grid shader */}
+      <mesh material={oceanMaterial}>
         <sphereGeometry args={[1, 64, 64]} />
-        <meshPhongMaterial color="#1a1a2e" shininess={10} />
       </mesh>
 
       {/* Pays */}
       {features.map((feature) => (
         <CountryMesh
-          key={feature.properties.ISO_A3}
+          key={feature.properties.cca3}
           feature={feature}
-          color={colors[feature.properties.ISO_A3] ?? '#4A5568'}
+          color={feature.properties.colors?.primary ?? '#4A5568'}
           onSelect={onSelect}
           onHover={setHoveredCca3}
         />
       ))}
 
-      {/* Tooltip au survol */}
-      {hoveredFeature && hoveredCountry && (
-        <Tooltip
-          flagSvg={hoveredCountry.flags.svg}
-          countryName={hoveredCountry.name.official}
-          visible={true}
+      <BordersMesh features={features} />
+
+      {/* Holographic Text au survol */}
+      {hoveredFeature && hoveredCountry && hoveredCountry.latlng && (
+        <HolographicText
+          text={hoveredCountry.name.official}
+          latlng={hoveredCountry.latlng}
+          color={hoveredFeature.properties.colors?.primary ?? '#ffffff'}
         />
       )}
     </group>

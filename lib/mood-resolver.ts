@@ -61,8 +61,10 @@ const MOODS: Record<MoodType, CountryMood> = {
  * @returns CountryMood — l'ambiance résolue avec type, label, icône et classe CSS
  */
 export function resolveMood(country: CountryData): CountryMood {
-  const { borders, area, landlocked, latlng } = country;
-  const latitude = latlng[0];
+  const borders = country.borders || [];
+  const area = country.area || 0;
+  const landlocked = country.landlocked || false;
+  const latitude = country.latlng?.[0] || 0;
 
   // Règle 1 : Insulaire — pas de frontières terrestres ET superficie < 100 000 km²
   if (borders.length === 0 && area < ISLAND_MAX_AREA_KM2) {

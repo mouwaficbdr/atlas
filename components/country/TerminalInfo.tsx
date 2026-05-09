@@ -4,27 +4,17 @@ interface TerminalInfoProps {
 }
 
 export default function TerminalInfo({ idd, tld }: TerminalInfoProps) {
-  const dialCode = idd.root + (idd.suffixes[0] ?? '');
+  const dialCode = (idd?.root || '') + (idd?.suffixes?.[0] || '');
 
   return (
-    <div
-      style={{
-        fontFamily: 'JetBrains Mono, monospace',
-        backgroundColor: 'var(--bg-surface)',
-        border: '1px solid var(--text-muted)',
-        borderRadius: '8px',
-        padding: '12px 16px',
-        display: 'flex',
-        gap: '24px',
-      }}
-    >
+    <div style={{ fontFamily: 'var(--font-jetbrains-mono), monospace', display: 'flex', gap: '4rem', opacity: 0.8 }}>
       <div>
-        <div style={{ color: 'var(--text-muted)', fontSize: '0.75rem', marginBottom: '4px' }}>INDICATIF</div>
-        <div style={{ color: 'var(--text-accent)', fontSize: '1.1rem' }}>{dialCode || '—'}</div>
+        <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem', letterSpacing: '0.2em', marginBottom: '0.5rem' }}>INDICATIF</div>
+        <div style={{ fontSize: '2rem', fontWeight: 100 }}>{dialCode || '—'}</div>
       </div>
       <div>
-        <div style={{ color: 'var(--text-muted)', fontSize: '0.75rem', marginBottom: '4px' }}>TLD</div>
-        <div style={{ color: 'var(--text-accent)', fontSize: '1.1rem' }}>{tld[0] ?? '—'}</div>
+        <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem', letterSpacing: '0.2em', marginBottom: '0.5rem' }}>TLD</div>
+        <div style={{ fontSize: '2rem', fontWeight: 100 }}>{tld?.[0] ?? '—'}</div>
       </div>
     </div>
   );

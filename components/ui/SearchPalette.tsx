@@ -3,14 +3,19 @@
 import { useEffect, useRef, useState } from 'react';
 import { filterCountries } from '@/lib/search-engine';
 import type { CountryData, SearchResult } from '@/lib/types';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { getPreferredWikiTitle, prefetchWikiSummary } from '@/lib/wiki-summary';
 
 interface SearchPaletteProps {
   countries: CountryData[];
   onSelect: (cca3: string) => void;
 }
 
-export default function SearchPalette({ countries, onSelect }: SearchPaletteProps) {
+export default function SearchPalette({
+  countries,
+  onSelect,
+}: SearchPaletteProps) {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
@@ -114,12 +119,21 @@ export default function SearchPalette({ countries, onSelect }: SearchPaletteProp
                 key={result.cca3}
                 style={{
                   padding: '12px 16px',
-                  backgroundColor: idx === selectedIndex ? 'var(--bg-surface)' : 'transparent',
+                  backgroundColor:
+                    idx === selectedIndex ? 'var(--bg-surface)' : 'transparent',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '12px',
                   borderBottom: '1px solid var(--border-subtle)',
+                }}
+                onMouseEnter={() => {
+                  router.prefetch(`/pays/${result.cca3.toLowerCase()}`);
+                  const c = countries.find((cc) => cc.cca3 === result.cca3);
+                  if (!c) return;
+                  const title = getPreferredWikiTitle(c);
+                  if (!title) return;
+                  prefetchWikiSummary(title);
                 }}
                 onClick={() => {
                   onSelect(result.cca3);
@@ -127,16 +141,35 @@ export default function SearchPalette({ countries, onSelect }: SearchPaletteProp
                   setQuery('');
                 }}
               >
-                <img src={result.flagSvg} alt={result.name} width={32} height={21} />
+                <img
+                  src={result.flagSvg}
+                  alt={result.name}
+                  width={32}
+                  height={21}
+                />
                 <div>
-                  <div style={{ color: 'var(--text-primary)', fontWeight: 500 }}>{result.name}</div>
-                  <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>{result.region}</div>
+                  <div
+                    style={{ color: 'var(--text-primary)', fontWeight: 500 }}
+                  >
+                    {result.name}
+                  </div>
+                  <div
+                    style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}
+                  >
+                    {result.region}
+                  </div>
                 </div>
               </div>
             ))
           ) : query.trim() ? (
-            <div style={{ padding: '16px', color: 'var(--text-muted)', textAlign: 'center' }}>
-              Aucun résultat pour "{query}"
+            <div
+              style={{
+                padding: '16px',
+                color: 'var(--text-muted)',
+                textAlign: 'center',
+              }}
+            >
+              Aucun résultat pour &quot;{query}&quot;
             </div>
           ) : null}
         </div>

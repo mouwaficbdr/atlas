@@ -7,7 +7,9 @@ import GlobeMesh from './GlobeMesh';
 import AtmosphereMesh from './AtmosphereMesh';
 import StarField from './StarField';
 import GlobeControls from './GlobeControls';
+import CameraTransition from './CameraTransition';
 import SROnlyList from '@/components/ui/SROnlyList';
+import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing';
 
 interface GlobeSceneProps {
   countries: CountryData[];
@@ -19,12 +21,25 @@ interface GlobeSceneProps {
 export default function GlobeScene({ countries, onCountrySelect, onProgress, onLoad }: GlobeSceneProps) {
   const [webGLSupported, setWebGLSupported] = useState(true);
   const [controlsEnabled, setControlsEnabled] = useState(true);
+  const onLoadCalledRef = useRef(false);
 
   useEffect(() => {
     const canvas = document.createElement('canvas');
     const gl = canvas.getContext('webgl2');
     if (!gl) setWebGLSupported(false);
   }, []);
+
+  // Fallback: if onLoad hasn't fired after 3s, call it anyway
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!onLoadCalledRef.current) {
+        onLoadCalledRef.current = true;
+        onProgress?.(100);
+        onLoad?.();
+      }
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [onLoad, onProgress]);
 
   if (!webGLSupported) {
     return <SROnlyList countries={countries} visible={true} />;
@@ -34,6 +49,15 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
     ? Math.min(window.devicePixelRatio, navigator.maxTouchPoints > 0 ? 1.5 : 2.0)
     : 1;
 
+  const handleCreated = () => {
+    // Canvas is ready — signal loading complete
+    if (!onLoadCalledRef.current) {
+      onLoadCalledRef.current = true;
+      onProgress?.(100);
+      onLoad?.();
+    }
+  };
+
   return (
     <>
       <Canvas
@@ -42,14 +66,31 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
         role="application"
         aria-label="Globe interactif — Explorateur de pays"
         style={{ width: '100%', height: '100%' }}
+        onCreated={handleCreated}
       >
-        <ambientLight intensity={0.4} />
-        <directionalLight position={[5, 3, 5]} intensity={1} />
+        <ambientLight intensity={1.2} />
+        <directionalLight position={[0, 0, 5]} intensity={1.5} />
+        <directionalLight position={[5, 3, 2]} intensity={0.8} />
 
         <StarField />
-        <GlobeMesh countries={countries} onSelect={onCountrySelect} />
+        <GlobeMesh 
+          countries={countries} 
+          onSelect={onCountrySelect} 
+          onLoad={handleCreated}
+        />
         <AtmosphereMesh />
         <GlobeControls enabled={controlsEnabled} />
+        <CameraTransition countries={countries} />
+
+        <EffectComposer>
+          <Bloom 
+            intensity={1.5} 
+            luminanceThreshold={0.2} 
+            luminanceSmoothing={0.9} 
+            mipmapBlur 
+          />
+          <Vignette eskil={false} offset={0.1} darkness={1.1} />
+        </EffectComposer>
       </Canvas>
 
       <SROnlyList countries={countries} visible={false} />

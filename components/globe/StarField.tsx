@@ -5,9 +5,6 @@
  */
 
 import { useRef, useMemo } from "react";
-// Import from @react-three/fiber to load the JSX namespace augmentation
-// that types Three.js primitives as JSX intrinsic elements (points, bufferGeometry, etc.)
-import "@react-three/fiber";
 import * as THREE from "three";
 
 const STAR_COUNT = 10_000;
@@ -17,13 +14,13 @@ export default function StarField() {
   const pointsRef = useRef<THREE.Points>(null);
 
   /**
-   * Génère les positions des étoiles une seule fois via useMemo.
+   * Génère la géométrie des étoiles une seule fois via useMemo.
    * Distribution sphérique uniforme via la méthode de rejet :
    * on tire des points dans un cube [-1, 1]³ et on ne conserve
    * que ceux dont la norme est ≤ 1, garantissant une répartition
    * homogène dans la sphère (pas de concentration aux pôles).
    */
-  const positions = useMemo(() => {
+  const geometry = useMemo(() => {
     const arr = new Float32Array(STAR_COUNT * 3);
     let count = 0;
 
@@ -32,7 +29,6 @@ export default function StarField() {
       const y = (Math.random() * 2 - 1) * SPHERE_RADIUS;
       const z = (Math.random() * 2 - 1) * SPHERE_RADIUS;
 
-      // Rejet des points hors de la sphère
       if (x * x + y * y + z * z <= SPHERE_RADIUS * SPHERE_RADIUS) {
         arr[count * 3] = x;
         arr[count * 3 + 1] = y;
@@ -41,23 +37,20 @@ export default function StarField() {
       }
     }
 
-    return arr;
+    const geom = new THREE.BufferGeometry();
+    geom.setAttribute('position', new THREE.BufferAttribute(arr, 3));
+    return geom;
   }, []);
 
-  return (
-    <points ref={pointsRef}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          args={[positions, 3]}
-        />
-      </bufferGeometry>
-      <pointsMaterial
-        size={0.5}
-        color="#ffffff"
-        sizeAttenuation={true}
-        transparent={false}
-      />
-    </points>
+  const material = useMemo(
+    () =>
+      new THREE.PointsMaterial({
+        size: 0.5,
+        color: '#ffffff',
+        sizeAttenuation: true,
+      }),
+    []
   );
+
+  return <points ref={pointsRef} geometry={geometry} material={material} />;
 }

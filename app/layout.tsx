@@ -1,7 +1,28 @@
 import type { Metadata } from 'next';
+import { Bebas_Neue, DM_Sans, JetBrains_Mono } from 'next/font/google';
 import LenisProvider from '@/components/layout/LenisProvider';
 import CustomCursor from '@/components/ui/CustomCursor';
+import PersistentLayout from '@/components/layout/PersistentLayout';
 import './globals.css';
+
+const bebasNeue = Bebas_Neue({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-bebas-neue',
+  display: 'swap',
+});
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  variable: '--font-dm-sans',
+  display: 'swap',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains-mono',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'ATLAS°',
@@ -14,62 +35,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
-      <head>
-        {/* Bebas Neue Regular */}
-        <link
-          rel="preload"
-          href="/fonts/BebasNeue-Regular.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        {/* DM Sans Variable */}
-        <link
-          rel="preload"
-          href="/fonts/DMSans-Variable.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        {/* JetBrains Mono Variable */}
-        <link
-          rel="preload"
-          href="/fonts/JetBrainsMono-Variable.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <style>{`
-          @font-face {
-            font-family: 'Bebas Neue';
-            src: url('/fonts/BebasNeue-Regular.woff2') format('woff2');
-            font-weight: 400;
-            font-style: normal;
-            font-display: swap;
-          }
-
-          @font-face {
-            font-family: 'DM Sans';
-            src: url('/fonts/DMSans-Variable.woff2') format('woff2');
-            font-weight: 100 900;
-            font-style: normal;
-            font-display: swap;
-          }
-
-          @font-face {
-            font-family: 'JetBrains Mono';
-            src: url('/fonts/JetBrainsMono-Variable.woff2') format('woff2');
-            font-weight: 100 900;
-            font-style: normal;
-            font-display: swap;
-          }
-        `}</style>
-      </head>
+    <html lang="fr" className={`${bebasNeue.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}>
       <body>
         <LenisProvider>
           <CustomCursor />
-          {children}
+          <PersistentLayout>
+            {children}
+          </PersistentLayout>
         </LenisProvider>
       </body>
     </html>

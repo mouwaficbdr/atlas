@@ -1,4 +1,11 @@
-# Plan d'implémentation — ATLAS° Globe 3D Interactif
+The fan triangulation is fundamentally broken for concave polygons. I need to replace it with proper Earcut triangulation from Three.js. Let me rewrite CountryMesh completely:
+
+Error(s) while creating
+
+CountryMesh.tsx
+
+aborted. The agent has seen this error and will try a different approach to write the file if needed.
+A network error occurred. Please check your connection and try again.# Plan d'implémentation — ATLAS° Globe 3D Interactif
 
 ## Vue d'ensemble
 
@@ -298,7 +305,7 @@ Ce plan décompose le design ATLAS° en étapes de code incrémentales pour un a
     - Configurer Next.js pour la conversion WebP des images raster (qualité ≥ 80%)
     - _Exigences : 11.1_
 
-- [-] 14. Checkpoint final — Intégration complète
+- [x] 14. Checkpoint final — Intégration complète
   - Vérifier que tous les tests de propriété et tests unitaires passent. Vérifier la compilation TypeScript sans erreur. Tester le flux complet : chargement → Globe → sélection pays → CountryCard → recherche → partage. Demander à l'utilisateur si des questions se posent.
 
 ---

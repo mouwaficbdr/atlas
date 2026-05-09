@@ -1,4 +1,8 @@
+'use client';
+
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import gsap from 'gsap';
 import type { CountryData } from '@/lib/types';
 
 interface NeighborCardsProps {
@@ -7,6 +11,29 @@ interface NeighborCardsProps {
 }
 
 export default function NeighborCards({ borders, allCountries }: NeighborCardsProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const cards = containerRef.current.querySelectorAll('.neighbor-card');
+    
+    gsap.fromTo(cards, 
+      { opacity: 0, scale: 0.9, y: 20 },
+      { 
+        opacity: 1, 
+        scale: 1, 
+        y: 0, 
+        stagger: 0.05, 
+        duration: 0.6, 
+        ease: 'back.out(1.7)',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 95%',
+        }
+      }
+    );
+  }, [borders]);
+
   if (!borders.length) return <p style={{ color: 'var(--text-muted)' }}>Aucun pays voisin</p>;
 
   const neighbors = borders
@@ -14,27 +41,47 @@ export default function NeighborCards({ borders, allCountries }: NeighborCardsPr
     .filter(Boolean) as CountryData[];
 
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+    <div 
+      ref={containerRef}
+      style={{ 
+        display: 'flex', 
+        flexDirection: 'column',
+        gap: '0',
+        width: '100%',
+      }}
+    >
       {neighbors.map((country) => (
         <Link
           key={country.cca3}
           href={`/pays/${country.cca3.toLowerCase()}`}
-          prefetch={true}
+          className="neighbor-card"
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            padding: '8px 12px',
-            backgroundColor: 'var(--bg-elevated)',
-            borderRadius: '8px',
-            border: '1px solid var(--border-subtle)',
+            display: 'block',
+            padding: '2rem 0',
+            borderBottom: '1px solid rgba(255,255,255,0.1)',
             color: 'var(--text-primary)',
             textDecoration: 'none',
-            fontSize: '0.9rem',
+            transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+            position: 'relative',
+          }}
+          onMouseEnter={(e) => {
+             e.currentTarget.style.paddingLeft = '3rem';
+             e.currentTarget.style.color = 'var(--country-accent, #fff)';
+          }}
+          onMouseLeave={(e) => {
+             e.currentTarget.style.paddingLeft = '0';
+             e.currentTarget.style.color = 'var(--text-primary)';
           }}
         >
-          <img src={country.flags.svg} alt={country.name.common} width={24} height={16} />
-          <span>{country.name.common}</span>
+          <span style={{ 
+            fontFamily: 'var(--font-bebas-neue), sans-serif', 
+            fontSize: 'clamp(3rem, 6vw, 8rem)', 
+            lineHeight: 0.9,
+            textTransform: 'uppercase',
+            letterSpacing: '0.02em',
+          }}>
+            {country.name.common}
+          </span>
         </Link>
       ))}
     </div>

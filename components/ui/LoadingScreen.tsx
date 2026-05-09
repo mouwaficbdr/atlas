@@ -49,16 +49,17 @@ export default function LoadingScreen({ loadingState, onRevealComplete }: Loadin
     }
   }, []);
 
-  // Fondu de sortie
+  // Fondu de sortie — déclenché quand les deux conditions sont réunies
   useEffect(() => {
-    if (loadingState.phase === 'revealing' && loadingState.minDurationElapsed) {
-      if (containerRef.current) {
-        gsap.to(containerRef.current, {
-          opacity: 0,
-          duration: 0.4,
-          onComplete: onRevealComplete,
-        });
-      }
+    const shouldDismiss =
+      loadingState.phase === 'revealing' && loadingState.minDurationElapsed;
+
+    if (shouldDismiss && containerRef.current) {
+      gsap.to(containerRef.current, {
+        opacity: 0,
+        duration: 0.4,
+        onComplete: onRevealComplete,
+      });
     }
   }, [loadingState.phase, loadingState.minDurationElapsed, onRevealComplete]);
 
@@ -79,55 +80,92 @@ export default function LoadingScreen({ loadingState, onRevealComplete }: Loadin
         gap: '2rem',
       }}
     >
+      {/* Arrière-plan techy */}
+      <div 
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: 'linear-gradient(var(--border-subtle) 1px, transparent 1px), linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
+          opacity: 0.1,
+          zIndex: -1
+        }}
+      />
+      <div 
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '2px',
+          background: 'linear-gradient(90deg, transparent, var(--text-accent), transparent)',
+          animation: 'scan 3s linear infinite',
+          zIndex: -1
+        }}
+      />
+
       <div
         style={{
-          fontFamily: 'JetBrains Mono, monospace',
-          fontSize: '1.2rem',
+          fontFamily: 'var(--font-jetbrains-mono), monospace',
+          fontSize: '1rem',
           color: 'var(--text-accent)',
-          letterSpacing: '0.1em',
+          letterSpacing: '0.2em',
+          marginBottom: '-1rem'
         }}
       >
         {gpsText}
       </div>
 
       <div
-        style={{
-          width: '60px',
-          height: '60px',
-          border: '3px solid var(--text-accent)',
-          borderRadius: '50%',
-          borderTopColor: 'transparent',
-          animation: 'spin 1.5s linear infinite',
-        }}
-      />
-
-      <div
         ref={textRef}
         style={{
-          fontFamily: 'Bebas Neue, sans-serif',
-          fontSize: '2rem',
+          fontFamily: 'var(--font-bebas-neue), sans-serif',
+          fontSize: '4rem',
           color: 'var(--text-primary)',
-          opacity: 0.6,
+          opacity: 1,
+          letterSpacing: '0.05em'
         }}
       >
-        Mapping the world...
+        ATLAS°
       </div>
 
       <div
         style={{
-          fontFamily: 'DM Sans, sans-serif',
-          fontSize: '1rem',
-          color: 'var(--text-muted)',
+          width: '200px',
+          height: '2px',
+          backgroundColor: 'rgba(255,255,255,0.1)',
+          position: 'relative',
+          overflow: 'hidden'
         }}
       >
-        {loadingState.progress}%
+        <div 
+          style={{
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            height: '100%',
+            width: `${loadingState.progress}%`,
+            backgroundColor: 'var(--text-accent)',
+            transition: 'width 0.3s ease-out'
+          }}
+        />
+      </div>
+
+      <div
+        style={{
+          fontFamily: 'var(--font-jetbrains-mono), monospace',
+          fontSize: '0.8rem',
+          color: 'var(--text-muted)',
+          textTransform: 'uppercase'
+        }}
+      >
+        MAPPING THE WORLD {loadingState.progress}%
       </div>
 
       <style jsx>{`
-        @keyframes spin {
-          to {
-            transform: rotate(360deg);
-          }
+        @keyframes scan {
+          from { top: 0%; }
+          to { top: 100%; }
         }
       `}</style>
     </div>

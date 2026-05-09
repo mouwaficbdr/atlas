@@ -22,9 +22,12 @@ export default function GlobeControls({ enabled = true }: GlobeControlsProps) {
   return (
     <OrbitControls
       enableDamping={true}
-      dampingFactor={0.85}
+      dampingFactor={0.05}
       enabled={enabled}
       enableRotate={true}
+      rotateSpeed={0.8}
+      minDistance={1.5}
+      maxDistance={5}
     />
   );
 }

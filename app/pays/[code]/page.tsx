@@ -11,10 +11,10 @@
 
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { unstable_cache } from 'next/cache';
 import CountryCard from '@/components/country/CountryCard';
 import { fetchAllCountries } from '@/lib/countries-api';
 import { loadMDX } from '@/lib/mdx-loader';
-import { extractPalette } from '@/lib/color-extractor';
 import type { CountryData, CountryPalette, MDXContent } from '@/lib/types';
 
 // ---------------------------------------------------------------------------
@@ -56,8 +56,9 @@ export async function generateStaticParams() {
   } catch (error) {
     // Exigence 13.4 : Throw explicite pour interrompre le build
     throw new Error(
-      `[ATLAS] Impossible de générer les pages pays. Cause : ${error instanceof Error ? error.message : String(error)
-      }`
+      `[ATLAS] Impossible de générer les pages pays. Cause : ${
+        error instanceof Error ? error.message : String(error)
+      }`,
     );
   }
 }
@@ -89,10 +90,11 @@ export async function generateMetadata({
   }
 
   const canonicalUrl = `https://atlas.example.com/pays/${params.code}`;
-  const description = `Découvrez ${country.name.official} sur ATLAS° : population, superficie, capitale, langues, monnaie, et bien plus.`.slice(
-    0,
-    160
-  );
+  const description =
+    `Découvrez ${country.name.official} sur ATLAS° : population, superficie, capitale, langues, monnaie, et bien plus.`.slice(
+      0,
+      160,
+    );
 
   return {
     title: `${country.name.common} — ATLAS°`,
@@ -131,7 +133,7 @@ async function getCountryData(code: string): Promise<CountryData | null> {
   try {
     const countries = await fetchAllCountries();
     const country = countries.find(
-      (c) => c.cca3.toLowerCase() === code.toLowerCase()
+      (c) => c.cca3.toLowerCase() === code.toLowerCase(),
     );
     return country || null;
   } catch {
@@ -144,41 +146,41 @@ async function getCountryData(code: string): Promise<CountryData | null> {
  *
  * @returns Tableau de tous les pays
  */
-async function getAllCountries(): Promise<CountryData[]> {
+async function getAllCountries(
+  preloaded?: CountryData[],
+): Promise<CountryData[]> {
   try {
+    if (preloaded) return preloaded;
     return await fetchAllCountries();
   } catch {
     return [];
   }
 }
 
-/**
- * Extrait la palette de couleurs pour un pays.
- *
- * Exigence 5.1 : Extraction de palette au build.
- * Exigence 5.2 : Palette composée de 4 couleurs depuis le drapeau SVG.
- * Exigence 5.3 : Application de la palette via variables CSS.
- * Exigence 5.4 : Garantie de contraste WCAG AA.
- * Exigence 5.5 : Palette de repli si SVG indisponible.
- *
- * @param country - Données du pays
- * @returns CountryPalette
- */
-async function getCountryPalette(country: CountryData): Promise<CountryPalette> {
-  try {
-    return await extractPalette(country.flags.svg, country.cca3);
-  } catch {
-    // Retourner une palette de repli en cas d'erreur
+async function getCountryPalette(
+  country: CountryData,
+): Promise<CountryPalette> {
+  const c = country.colors;
+  if (c && c.primary) {
     return {
-      primary: '#1E3A5F',
-      secondary: '#2D5986',
-      accent: '#4A90D9',
+      primary: c.primary,
+      secondary: c.palette?.[1] || '#2D5986',
+      accent: c.palette?.[2] || '#4A90D9',
       background: '#0A0A14',
       cca3: country.cca3,
-      source: 'fallback',
+      source: 'extracted',
       contrastRatio: 4.5,
     };
   }
+  return {
+    primary: '#1E3A5F',
+    secondary: '#2D5986',
+    accent: '#4A90D9',
+    background: '#0A0A14',
+    cca3: country.cca3,
+    source: 'fallback',
+    contrastRatio: 4.5,
+  };
 }
 
 /**
@@ -203,6 +205,82 @@ async function getCountryMDX(cca3: string): Promise<MDXContent> {
 }
 
 // ---------------------------------------------------------------------------
+// Wikipedia — Fetch avec cascade de fallbacks et cache 24h
+// ---------------------------------------------------------------------------
+
+/**
+ * Tente de récupérer un extrait Wikipedia pour un titre donné sur une langue.
+ * Retourne null si la page n'existe pas ou si la réponse est invalide.
+ *
+ * Wikipedia REST API retourne 404 si la page n'existe pas exactement.
+ * Elle gère aussi les redirections automatiquement (ex: "Benin" → "Bénin").
+ */
+async function fetchWikiExtract(
+  title: string,
+  lang: 'fr' | 'en',
+): Promise<string | null> {
+  try {
+    const url = `https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`;
+    const res = await fetch(url, {
+      headers: {
+        'User-Agent': 'AtlasGlobe/1.0 (contact@atlasglobe.example.com)',
+        Accept: 'application/json',
+      },
+      next: { revalidate: 60 * 60 * 24 },
+    });
+    if (!res.ok) return null;
+    const data = (await res.json()) as {
+      extract?: string;
+      type?: string;
+    };
+    // On ignore les pages de désambiguïsation
+    if (data.type === 'disambiguation') return null;
+    return typeof data.extract === 'string' && data.extract.length > 50
+      ? data.extract
+      : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Cascade de tentatives Wikipedia pour maximiser les hits :
+ *  1. FR + nom commun anglais (Wikipedia FR redirige souvent)
+ *  2. FR + nom officiel (ex: "République du Bénin")
+ *  3. EN + nom commun (fallback fiable)
+ *  4. EN + nom officiel (dernier recours)
+ *
+ * Résultat mis en cache 24h par Next.js Data Cache (clé = cca3).
+ */
+const getCachedWikiSummary = unstable_cache(
+  async (
+    nameCommon: string,
+    nameOfficial: string,
+    cca3: string,
+  ): Promise<string | null> => {
+    // Tentative 1 : Wikipedia FR avec le nom commun anglais
+    // (Wikipedia FR gère les redirections depuis les noms anglais)
+    const attempt1 = await fetchWikiExtract(nameCommon, 'fr');
+    if (attempt1) return attempt1;
+
+    // Tentative 2 : Wikipedia FR avec le nom officiel
+    // (utile pour "Micronesia" → "Federated States of Micronesia")
+    const attempt2 = await fetchWikiExtract(nameOfficial, 'fr');
+    if (attempt2) return attempt2;
+
+    // Tentative 3 : Wikipedia EN avec le nom commun (très fiable)
+    const attempt3 = await fetchWikiExtract(nameCommon, 'en');
+    if (attempt3) return attempt3;
+
+    // Tentative 4 : Wikipedia EN avec le nom officiel (dernier recours fiable)
+    const attempt4 = await fetchWikiExtract(nameOfficial, 'en');
+    return attempt4;
+  },
+  ['wiki-summary-v2'],
+  { revalidate: 60 * 60 * 24, tags: ['wiki-summary'] },
+);
+
+// ---------------------------------------------------------------------------
 // Composant Page
 // ---------------------------------------------------------------------------
 
@@ -217,24 +295,28 @@ interface PageProps {
  * puis affiche la CountryCard avec toutes les dimensions de données.
  */
 export default async function CountryPage({ params }: PageProps) {
-  // Récupérer les données du pays
-  const country = await getCountryData(params.code);
+  const countries = await fetchAllCountries();
+  const country = countries.find(
+    (c) => c.cca3.toLowerCase() === params.code.toLowerCase(),
+  );
 
   if (!country) {
     notFound();
   }
 
-  // Récupérer tous les pays (pour les références)
-  const allCountries = await getAllCountries();
-
-  // Extraire la palette de couleurs
+  const allCountries = await getAllCountries(countries);
   const palette = await getCountryPalette(country);
-
-  // Charger le contenu MDX
   const mdxContent = await getCountryMDX(country.cca3);
-
-  // Construire l'URL canonique
   const canonicalUrl = `https://atlas.example.com/pays/${params.code}`;
+
+  // Récupération Wikipedia avec cascade de fallbacks (FR → EN) et cache 24h.
+  // La clé de cache est unique par pays (cca3) — au plus 4 requêtes HTTP par
+  // pays par 24h (FR common, FR official, EN common, EN official).
+  const wikiSummary = await getCachedWikiSummary(
+    country.name.common,
+    country.name.official,
+    country.cca3,
+  );
 
   return (
     <CountryCard
@@ -243,6 +325,7 @@ export default async function CountryPage({ params }: PageProps) {
       mdxContent={mdxContent}
       palette={palette}
       canonicalUrl={canonicalUrl}
+      wikiSummary={wikiSummary}
     />
   );
 }

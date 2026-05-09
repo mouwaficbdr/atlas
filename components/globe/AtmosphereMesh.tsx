@@ -1,20 +1,22 @@
 /**
  * AtmosphereMesh — Halo atmosphérique autour du Globe
- * Sphère de rayon 1,05× le Globe avec shader GLSL rim lighting
- * Matériau additif semi-transparent produisant un halo #4FC3F7, opacité max 0,35
+ * Sphère de rayon 1,15× le Globe avec shader GLSL rim lighting
+ * Matériau additif semi-transparent produisant un halo bleu
  * Exigence : 1.4
  */
 
 import { useMemo } from "react";
-// Import from @react-three/fiber to load the JSX namespace augmentation
 import "@react-three/fiber";
 import * as THREE from "three";
-import vertexShader from "../../shaders/atmosphere.vert.glsl";
-import fragmentShader from "../../shaders/atmosphere.frag.glsl";
+// Webpack 5 raw-loader often returns an ES module with a .default string
+import vertexShaderRaw from "../../shaders/atmosphere.vert.glsl";
+import fragmentShaderRaw from "../../shaders/atmosphere.frag.glsl";
 
-// Globe radius is 1.0 (standard unit sphere), atmosphere is 1.05×
+const vertexShader = typeof vertexShaderRaw === 'string' ? vertexShaderRaw : (vertexShaderRaw as any).default;
+const fragmentShader = typeof fragmentShaderRaw === 'string' ? fragmentShaderRaw : (fragmentShaderRaw as any).default;
+
 const GLOBE_RADIUS = 1.0;
-const ATMOSPHERE_RADIUS = GLOBE_RADIUS * 1.05;
+const ATMOSPHERE_RADIUS = GLOBE_RADIUS * 1.15; // Plus large pour un halo visible
 const SPHERE_SEGMENTS = 64;
 
 export default function AtmosphereMesh() {
@@ -27,6 +29,7 @@ export default function AtmosphereMesh() {
         blending: THREE.AdditiveBlending,
         transparent: true,
         depthWrite: false,
+        depthTest: true,
       }),
     []
   );

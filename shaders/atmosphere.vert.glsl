@@ -4,7 +4,7 @@
 varying vec3 vNormal;
 
 void main() {
-  // Transform normal to view space
+  // Transform normal to view space for rim lighting
   vNormal = normalize(normalMatrix * normal);
 
   // Standard position transform
