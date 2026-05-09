@@ -12,6 +12,25 @@ interface PopulationCloudProps {
 
 const WORLD_POPULATION = 8_000_000_000;
 
+function generateGlowTexture() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 64;
+  canvas.height = 64;
+  const context = canvas.getContext('2d');
+  if (context) {
+    const gradient = context.createRadialGradient(32, 32, 0, 32, 32, 32);
+    gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+    gradient.addColorStop(0.2, 'rgba(255, 255, 255, 0.8)');
+    gradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.2)');
+    gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    context.fillStyle = gradient;
+    context.fillRect(0, 0, 64, 64);
+  }
+  const texture = new THREE.Texture(canvas);
+  texture.needsUpdate = true;
+  return texture;
+}
+
 function Particles({ count }: { count: number }) {
   const pointsRef = useRef<THREE.Points>(null);
 
@@ -33,20 +52,20 @@ function Particles({ count }: { count: number }) {
     return geom;
   }, [count]);
 
+  const glowTexture = useMemo(() => generateGlowTexture(), []);
+
   const material = useMemo(
     () =>
       new THREE.PointsMaterial({
-        size: 0.05,
-        color: 'var(--country-accent, #4A90D9)', // Uses CSS variable context but in WebGL we need to pass hex. Let's use white for now and tint it via CSS or pass it.
-        // Actually, CSS variables aren't directly supported in WebGL color.
-        // We'll use a hardcoded color or retrieve it if passed.
-        // But let's just use white with AdditiveBlending for a wow effect!
+        size: 0.25,
+        color: '#ffffff',
+        map: glowTexture,
         transparent: true,
-        opacity: 0.8,
+        opacity: 0.9,
         blending: THREE.AdditiveBlending,
         depthWrite: false,
       }),
-    []
+    [glowTexture]
   );
 
   useFrame(({ clock }) => {
