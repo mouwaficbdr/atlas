@@ -27,25 +27,25 @@ const MOODS: Record<MoodType, CountryMood> = {
   Île: {
     type: "Île",
     label: "Île",
-    icon: "🏝️",
+    icon: "Palmtree",
     colorScheme: "mood-island",
   },
   Continental: {
     type: "Continental",
     label: "Continental",
-    icon: "🏔️",
+    icon: "Mountain",
     colorScheme: "mood-continental",
   },
   Polaire: {
     type: "Polaire",
     label: "Polaire",
-    icon: "❄️",
+    icon: "Snowflake",
     colorScheme: "mood-polar",
   },
   Tropical: {
     type: "Tropical",
     label: "Tropical",
-    icon: "🌴",
+    icon: "Sun",
     colorScheme: "mood-tropical",
   },
 };

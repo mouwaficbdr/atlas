@@ -19,6 +19,7 @@
     "gsap": "^3.12.5",
     "howler": "^2.2.4",
     "lenis": "^1.1.14",
+    "lucide-react": "^1.14.0",
     "next": "14.2.35",
     "next-mdx-remote": "^5.0.0",
     "postprocessing": "^6.39.1",

@@ -582,7 +582,6 @@ export default function CountryCard({
             {/* Header de colonne */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '1.5rem', marginBottom: '5vh' }}>
               <span style={{ fontSize: '0.65rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.25em' }}>GOUVERNANCE & CLIMAT</span>
-              <span style={{ fontSize: '0.65rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--country-accent)', letterSpacing: '0.1em' }}>GOV_DATA / ENV_DATA</span>
             </div>
 
             {/* Bloc 01 : Régime */}
@@ -609,7 +608,6 @@ export default function CountryCard({
             {/* Header de colonne */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '1.5rem', marginBottom: '5vh' }}>
               <span style={{ fontSize: '0.65rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.25em' }}>CAPITALE & GÉOLOCALISATION</span>
-              <span style={{ fontSize: '0.65rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--country-accent)', letterSpacing: '0.1em' }}>TIME_SYNC</span>
             </div>
 
             {/* Bloc 03 : Horloge capitale */}
