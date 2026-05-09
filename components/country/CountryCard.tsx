@@ -15,6 +15,7 @@ import TerminalInfo from './TerminalInfo';
 import MoodDisplay from './MoodDisplay';
 import PoliticalRegime from './PoliticalRegime';
 import MDXSection from './MDXSection';
+import WikiExtract from './WikiExtract';
 
 const PopulationCloud = dynamic(() => import('./PopulationCloud'), {
   ssr: false,
@@ -276,40 +277,7 @@ export default function CountryCard({
           )}
 
           {typeof wikiSummary === 'string' && (
-            <div
-              style={{
-                position: 'absolute',
-                bottom: '10vh',
-                right: '5vw',
-                width: '400px',
-                zIndex: 30,
-                borderTop: '1px solid var(--country-accent)',
-                paddingTop: '1.5rem',
-                mixBlendMode: 'difference',
-              }}
-            >
-              <h4
-                style={{
-                  fontSize: '0.6rem',
-                  fontFamily: 'var(--font-jetbrains-mono), monospace',
-                  color: 'var(--country-accent)',
-                  marginBottom: '1.5rem',
-                  letterSpacing: '0.2em',
-                }}
-              >
-                WIKIPEDIA EXTRACT
-              </h4>
-              <p
-                style={{
-                  fontSize: '0.85rem',
-                  lineHeight: 1.8,
-                  color: '#fff',
-                  textAlign: 'justify',
-                }}
-              >
-                {wikiSummary.slice(0, 350)}...
-              </p>
-            </div>
+            <WikiExtract wikiSummary={wikiSummary} />
           )}
         </section>
 
