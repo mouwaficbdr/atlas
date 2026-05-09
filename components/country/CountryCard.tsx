@@ -361,27 +361,52 @@ export default function CountryCard({
             </h2>
           </div>
 
+          {/* Chiffre géant centré — taille adaptative selon nombre de chiffres */}
           <div
             style={{
               position: 'absolute',
-              top: '30%',
-              left: '-2vw',
-              transform: 'translateY(-50%)',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
               zIndex: 10,
               mixBlendMode: 'difference',
+              width: '100%',
+              textAlign: 'center',
+              padding: '0 3vw',
             }}
           >
             <div
               style={{
-                fontSize: 'clamp(12rem, 28vw, 35rem)',
+                // Population mondiale max ~10 chiffres (8 000 000 000)
+                // On adapte la taille selon le nombre de chiffres du nombre formaté (avec espaces)
+                fontSize: country.population >= 1_000_000_000
+                  ? 'clamp(5rem, 12vw, 16rem)'   // ≥ 1 milliard — très long
+                  : country.population >= 100_000_000
+                  ? 'clamp(6rem, 14vw, 19rem)'   // ≥ 100 millions
+                  : country.population >= 10_000_000
+                  ? 'clamp(7rem, 17vw, 22rem)'   // ≥ 10 millions
+                  : 'clamp(8rem, 20vw, 26rem)',   // < 10 millions — court, on peut y aller fort
                 fontFamily: 'var(--font-bebas-neue), sans-serif',
                 color: '#fff',
-                lineHeight: 0.8,
+                lineHeight: 0.85,
                 letterSpacing: '-0.03em',
-                whiteSpace: 'nowrap',
+                // Pas de nowrap — le Intl.NumberFormat avec fr-FR insère des espaces insécables
+                // qui servent de points de coupure naturels si nécessaire
               }}
             >
               {new Intl.NumberFormat('fr-FR').format(country.population)}
+            </div>
+            <div
+              style={{
+                fontSize: '0.65rem',
+                fontFamily: 'var(--font-jetbrains-mono), monospace',
+                color: 'rgba(255,255,255,0.4)',
+                letterSpacing: '0.3em',
+                marginTop: '1.5rem',
+                textTransform: 'uppercase',
+              }}
+            >
+              Habitants recensés
             </div>
           </div>
 

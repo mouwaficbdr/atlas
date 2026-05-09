@@ -61,34 +61,17 @@ function Particles({ count }: { count: number }) {
 
 export default function PopulationCloud({ population, worldPopulation = WORLD_POPULATION }: PopulationCloudProps) {
   const count = useMemo(() => {
-    // 1000 to 100,000 particles based on population relative to world
     const raw = Math.round((population / worldPopulation) * 100000);
     return Math.min(Math.max(1000, raw), 100000);
   }, [population, worldPopulation]);
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '200px' }}>
+    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
       <View style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
         <ambientLight intensity={0.5} />
         <Particles count={count} />
         <perspectiveCamera position={[0, 0, 5]} />
       </View>
-      <div
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          width: '100%',
-          textAlign: 'center',
-          color: 'var(--text-primary)',
-          fontSize: '1.4rem',
-          fontFamily: 'Bebas Neue, Impact, sans-serif',
-          letterSpacing: '0.05em',
-          pointerEvents: 'none',
-          textShadow: '0 2px 4px rgba(0,0,0,0.5)',
-        }}
-      >
-        {population.toLocaleString()} habitants
-      </div>
     </div>
   );
 }
