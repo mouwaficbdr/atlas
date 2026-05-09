@@ -422,36 +422,51 @@ export default function CountryCard({
               borderTop: '1px solid rgba(255,255,255,0.1)',
             }}
           >
-            {/* Colonne 1 : Label */}
+            {/* Colonne 1 : Région géographique */}
             <div
               style={{
-                padding: '3vw',
+                padding: '2vw',
                 borderRight: '1px solid rgba(255,255,255,0.1)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'flex-end',
               }}
             >
               <div
                 style={{
-                  fontSize: '0.7rem',
+                  fontSize: '0.65rem',
                   fontFamily: 'var(--font-jetbrains-mono), monospace',
-                  color: 'var(--country-accent)',
-                  marginBottom: '1rem',
-                  letterSpacing: '0.1em',
+                  color: 'rgba(255,255,255,0.4)',
+                  marginBottom: '0.75rem',
+                  letterSpacing: '0.2em',
                 }}
               >
-                MÉTRIQUE PRINCIPALE
+                RÉGION
               </div>
               <div
                 style={{
-                  fontSize: '1.2rem',
+                  fontSize: '1.1rem',
                   fontFamily: 'var(--font-dm-sans), sans-serif',
                   fontWeight: 300,
                   opacity: 0.9,
+                  lineHeight: 1.2,
                 }}
               >
-                Habitants
-                <br />
-                vivants recensés
+                {country.region}
               </div>
+              {country.subregion && (
+                <div
+                  style={{
+                    fontSize: '0.7rem',
+                    fontFamily: 'var(--font-jetbrains-mono), monospace',
+                    color: 'rgba(255,255,255,0.4)',
+                    marginTop: '0.4rem',
+                    letterSpacing: '0.05em',
+                  }}
+                >
+                  {country.subregion}
+                </div>
+              )}
             </div>
 
             {/* Colonne 2 : Superficie */}
@@ -630,15 +645,21 @@ export default function CountryCard({
                   )}
                 </div>
                 <div>
-                  <div style={{ fontSize: '0.6rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.2em', marginBottom: '0.75rem' }}>RÉGION</div>
-                  <div style={{ fontSize: '1.1rem', fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 300, opacity: 0.9 }}>
-                    {country.region}{country.subregion ? <><br /><span style={{ fontSize: '0.85rem', opacity: 0.5 }}>{country.subregion}</span></> : ''}
+                  <div style={{ fontSize: '0.6rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.2em', marginBottom: '0.75rem' }}>ENCLAVÉ</div>
+                  <div style={{ fontSize: '1.8rem', fontFamily: 'var(--font-bebas-neue), sans-serif', lineHeight: 1, color: country.landlocked ? 'var(--country-accent)' : '#fff' }}>
+                    {country.landlocked ? 'OUI' : 'NON'}
+                  </div>
+                  <div style={{ fontSize: '0.65rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', marginTop: '0.4rem' }}>
+                    {country.landlocked ? 'Aucun accès maritime' : 'Accès côtier'}
                   </div>
                 </div>
                 <div>
-                  <div style={{ fontSize: '0.6rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.2em', marginBottom: '0.75rem' }}>CODE ALPHA-3</div>
-                  <div style={{ fontSize: '2.5rem', fontFamily: 'var(--font-bebas-neue), sans-serif', color: 'var(--country-accent)', letterSpacing: '0.1em' }}>
-                    {country.cca3}
+                  <div style={{ fontSize: '0.6rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.2em', marginBottom: '0.75rem' }}>FRONTIÈRES</div>
+                  <div style={{ fontSize: '1.8rem', fontFamily: 'var(--font-bebas-neue), sans-serif', lineHeight: 1, color: '#fff' }}>
+                    {country.borders?.length ?? 0}
+                  </div>
+                  <div style={{ fontSize: '0.65rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', marginTop: '0.4rem' }}>
+                    {country.borders?.length === 1 ? 'pays voisin' : 'pays voisins'}
                   </div>
                 </div>
               </div>
@@ -650,7 +671,7 @@ export default function CountryCard({
           className="editorial-panel"
           style={{
             height: '100vh',
-            width: '100vw',
+            width: '100%',
             position: 'sticky',
             top: 0,
             zIndex: 4,
@@ -730,7 +751,7 @@ export default function CountryCard({
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', flex: 1 }}>
             {/* Col 1 : Indicatif téléphonique */}
             <div style={{ padding: '5vh 5vw', borderRight: '1px solid rgba(255,255,255,0.08)', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ fontSize: '0.6rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.3em', marginBottom: '3rem' }}>06 / INDICATIF TÉLÉPHONIQUE</div>
+              <div style={{ fontSize: '0.6rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.3em', marginBottom: '3rem' }}>05 / INDICATIF TÉLÉPHONIQUE</div>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <div style={{ fontSize: 'clamp(4rem, 10vw, 12rem)', fontFamily: 'var(--font-bebas-neue), sans-serif', lineHeight: 0.9, color: 'var(--country-accent)' }}>
                   {(country.idd?.root || '') + (country.idd?.suffixes?.[0] || '') || '—'}
@@ -743,7 +764,7 @@ export default function CountryCard({
 
             {/* Col 2 : TLD Internet */}
             <div style={{ padding: '5vh 5vw', borderRight: '1px solid rgba(255,255,255,0.08)', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ fontSize: '0.6rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.3em', marginBottom: '3rem' }}>07 / DOMAINE INTERNET (TLD)</div>
+              <div style={{ fontSize: '0.6rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.3em', marginBottom: '3rem' }}>06 / DOMAINE INTERNET (TLD)</div>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <div style={{ fontSize: 'clamp(4rem, 10vw, 12rem)', fontFamily: 'var(--font-bebas-neue), sans-serif', lineHeight: 0.9, color: '#fff' }}>
                   {country.tld?.[0] ?? '—'}
@@ -763,7 +784,7 @@ export default function CountryCard({
 
             {/* Col 3 : Partager */}
             <div style={{ padding: '5vh 5vw', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ fontSize: '0.6rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.3em', marginBottom: '3rem' }}>08 / PARTAGER</div>
+              <div style={{ fontSize: '0.6rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.3em', marginBottom: '3rem' }}>07 / PARTAGER</div>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <p style={{ fontSize: '0.85rem', fontFamily: 'var(--font-jetbrains-mono), monospace', lineHeight: 1.8, opacity: 0.5, marginBottom: '4rem' }}>
                   Diffusez cet atlas numérique. Chaque lien partagé étend la connaissance géopolitique du monde.
@@ -791,7 +812,7 @@ export default function CountryCard({
                 textAlign: 'center',
               }}
             >
-              07 / ARCHIVES
+              08 / ARCHIVES
             </h3>
             <MDXSection content={mdxContent} />
           </div>
@@ -815,7 +836,7 @@ export default function CountryCard({
                   letterSpacing: '0.2em',
                 }}
               >
-                08 / FRONTIÈRES TERRESTRES
+                09 / FRONTIÈRES TERRESTRES
               </h3>
               <NeighborCards
                 borders={country.borders}
