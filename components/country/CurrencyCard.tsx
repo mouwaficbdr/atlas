@@ -1,8 +1,8 @@
 'use client';
 
 import { useRef } from 'react';
-import { View, Text } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
+import { Text } from '@react-three/drei';
+import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 interface CurrencyCardProps {
@@ -56,12 +56,12 @@ export default function CurrencyCard({ currencies }: CurrencyCardProps) {
       {entries.map(([code, { name, symbol }]) => (
         <div key={code} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <div style={{ position: 'relative', width: '200px', height: '200px', filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.5))' }}>
-            <View style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
+            <Canvas style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
               <ambientLight intensity={1.5} />
               <directionalLight position={[2, 5, 2]} intensity={2.5} />
               <Coin symbol={symbol || code} />
               <perspectiveCamera position={[0, 0, 3.5]} />
-            </View>
+            </Canvas>
           </div>
           <div style={{ color: 'rgba(0,0,0,0.85)', fontFamily: 'var(--font-bebas-neue), sans-serif', fontSize: 'clamp(2rem, 4vw, 5rem)', marginTop: '2rem', textAlign: 'center', textTransform: 'uppercase', lineHeight: 0.9 }}>
             {name}

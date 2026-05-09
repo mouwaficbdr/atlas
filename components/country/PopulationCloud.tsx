@@ -1,8 +1,8 @@
 'use client';
 
 import { useMemo, useRef } from 'react';
-import { View } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
+
 import * as THREE from 'three';
 
 interface PopulationCloudProps {
@@ -67,11 +67,11 @@ export default function PopulationCloud({ population, worldPopulation = WORLD_PO
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-      <View style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
+      <Canvas style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
         <ambientLight intensity={0.5} />
         <Particles count={count} />
         <perspectiveCamera position={[0, 0, 5]} />
-      </View>
+      </Canvas>
     </div>
   );
 }
