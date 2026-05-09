@@ -146,7 +146,7 @@ export default function CountryCard({
           minHeight: '100vh',
         }}
       >
-        {/* Massive Fixed Title */}
+        {/* Massive Fixed Title — taille adaptative selon longueur */}
         <div
           style={{
             position: 'fixed',
@@ -156,27 +156,62 @@ export default function CountryCard({
             zIndex: 10,
             pointerEvents: 'none',
             display: 'flex',
-            justifyContent: 'center',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '1rem',
+            padding: '0 5vw',
           }}
         >
           <h1
             ref={titleRef}
             style={{
-              fontSize: 'clamp(6rem, 15vw, 20rem)',
+              // Taille dynamique inversement proportionnelle à la longueur du nom
+              // < 8 chars (Chad, Cuba) → énorme / > 20 chars → raisonnable
+              fontSize: country.name.common.length <= 6
+                ? 'clamp(7rem, 18vw, 22rem)'
+                : country.name.common.length <= 10
+                ? 'clamp(5rem, 13vw, 17rem)'
+                : country.name.common.length <= 15
+                ? 'clamp(4rem, 10vw, 13rem)'
+                : country.name.common.length <= 20
+                ? 'clamp(3rem, 7.5vw, 10rem)'
+                : 'clamp(2.5rem, 5.5vw, 7rem)',
               fontWeight: 400,
               fontFamily: 'var(--font-bebas-neue), Impact, sans-serif',
               color: 'var(--country-primary)',
-              lineHeight: 0.8,
+              lineHeight: 0.85,
               textAlign: 'center',
               mixBlendMode: 'screen',
               opacity: 0.9,
-              whiteSpace: 'nowrap',
+              // Pas de nowrap : on autorise le retour à la ligne sur noms très longs
+              wordBreak: 'break-word',
+              hyphens: 'auto',
               textTransform: 'uppercase',
               textShadow: '0 10px 30px rgba(0,0,0,0.5)',
+              maxWidth: '90vw',
             }}
           >
-            {country.name.official}
+            {country.name.common}
           </h1>
+          {/* Nom officiel en sous-titre technique — toujours lisible quelle que soit la longueur */}
+          {country.name.official !== country.name.common && (
+            <div
+              style={{
+                fontSize: '0.6rem',
+                fontFamily: 'var(--font-jetbrains-mono), monospace',
+                color: 'var(--country-primary)',
+                letterSpacing: '0.2em',
+                opacity: 0.5,
+                textAlign: 'center',
+                textTransform: 'uppercase',
+                maxWidth: '80vw',
+                lineHeight: 1.5,
+                mixBlendMode: 'screen',
+              }}
+            >
+              {country.name.official}
+            </div>
+          )}
         </div>
 
         {/* Panel 1: Hero & Flag */}
