@@ -63,10 +63,10 @@ export default function CurrencyCard({ currencies }: CurrencyCardProps) {
               <perspectiveCamera position={[0, 0, 3.5]} />
             </View>
           </div>
-          <div style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-bebas-neue), sans-serif', fontSize: 'clamp(2rem, 4vw, 5rem)', marginTop: '2rem', textAlign: 'center', textTransform: 'uppercase', lineHeight: 0.9 }}>
+          <div style={{ color: 'rgba(0,0,0,0.85)', fontFamily: 'var(--font-bebas-neue), sans-serif', fontSize: 'clamp(2rem, 4vw, 5rem)', marginTop: '2rem', textAlign: 'center', textTransform: 'uppercase', lineHeight: 0.9 }}>
             {name}
           </div>
-          <div style={{ color: 'var(--text-accent)', fontSize: '1.5rem', fontFamily: 'var(--font-jetbrains-mono), monospace', marginTop: '0.5rem', opacity: 0.8 }}>
+          <div style={{ color: 'rgba(0,0,0,0.5)', fontSize: '1.5rem', fontFamily: 'var(--font-jetbrains-mono), monospace', marginTop: '0.5rem', letterSpacing: '0.1em' }}>
             {code}
           </div>
         </div>

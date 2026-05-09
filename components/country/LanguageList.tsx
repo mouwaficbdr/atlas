@@ -48,16 +48,23 @@ export default function LanguageList({ languages }: LanguageListProps) {
           key={code}
           className="lang-item"
           style={{
-            fontSize: 'clamp(3rem, 6vw, 8rem)',
-            lineHeight: 0.9,
-            fontFamily: 'var(--font-bebas-neue), sans-serif',
-            color: 'rgba(0,0,0,0.85)',
-            whiteSpace: 'nowrap',
-            textTransform: 'uppercase',
-            letterSpacing: '0.02em',
-            display: 'flex',
-            alignItems: 'baseline',
-            gap: '2rem'
+          // Taille adaptative : moins de langues = plus grand, plus = plus petit
+          fontSize: entries.length <= 2
+            ? 'clamp(2.5rem, 5vw, 7rem)'
+            : entries.length <= 4
+            ? 'clamp(1.8rem, 3.5vw, 5rem)'
+            : 'clamp(1.2rem, 2.5vw, 3.5rem)',
+          lineHeight: 0.95,
+          fontFamily: 'var(--font-bebas-neue), sans-serif',
+          color: 'rgba(0,0,0,0.85)',
+          // Pas de nowrap — les noms peuvent être longs
+          wordBreak: 'break-word',
+          textTransform: 'uppercase',
+          letterSpacing: '0.02em',
+          display: 'flex',
+          alignItems: 'baseline',
+          gap: '1.5rem',
+          flexWrap: 'wrap',
           }}
         >
           <span>{name}</span>
