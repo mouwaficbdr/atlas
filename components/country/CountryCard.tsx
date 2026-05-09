@@ -48,7 +48,7 @@ export default function CountryCard({
   wikiSummary,
 }: CountryCardProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
   const mood = resolveMood(country);
 
 
@@ -148,6 +148,7 @@ export default function CountryCard({
       >
         {/* Massive Fixed Title — taille adaptative selon longueur */}
         <div
+          ref={titleRef}
           style={{
             position: 'fixed',
             top: '10vh',
@@ -163,7 +164,6 @@ export default function CountryCard({
           }}
         >
           <h1
-            ref={titleRef}
             style={{
               // Taille dynamique inversement proportionnelle à la longueur du nom
               // < 8 chars (Chad, Cuba) → énorme / > 20 chars → raisonnable
