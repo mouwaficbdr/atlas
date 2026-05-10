@@ -55,8 +55,8 @@ void main() {
   vec3 color = mix(uColor1, uColor2, smoothstep(0.0, 0.5, n));
   color = mix(color, uColor3, smoothstep(0.5, 1.0, n));
   
-  // Assombrir pour faire un fond d'ambiance
-  color *= 0.3;
+  // Assombrir légèrement pour faire un fond d'ambiance subtil
+  color *= 0.5;
 
   gl_FragColor = vec4(color, 1.0);
 }
@@ -110,6 +110,7 @@ export default function MoodBackground({ palette }: MoodBackgroundProps) {
         height: '100vh',
         zIndex: -2, // Derrière tout
         pointerEvents: 'none',
+        opacity: 0.4, // Réduit l'opacité pour laisser voir le globe
       }}
     >
       <Canvas

@@ -223,7 +223,7 @@ export default function CountryCard({
             flexDirection: 'column',
             justifyContent: 'flex-end',
             padding: '4rem',
-            background: 'transparent',
+            background: 'linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 100%)',
             overflow: 'hidden',
           }}
         >
