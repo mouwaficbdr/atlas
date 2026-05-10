@@ -14,7 +14,7 @@ export default function GlobeOnboarding() {
   useEffect(() => {
     // Ne s'affiche que sur desktop
     if (isMobile) return;
-    
+
     // Ne s'affiche qu'au tout premier chargement
     const hasSeen = sessionStorage.getItem('atlas_globe_onboarding');
     if (!hasSeen) {
@@ -29,12 +29,12 @@ export default function GlobeOnboarding() {
   useEffect(() => {
     if (show && dragRef.current && clickRef.current) {
       const tl = gsap.timeline();
-      
+
       // Setup initial
-      gsap.set([dragRef.current, clickRef.current], { 
-        y: '50%', 
+      gsap.set([dragRef.current, clickRef.current], {
+        y: '50%',
         x: '-50%',
-        opacity: 0, 
+        opacity: 0,
         filter: 'blur(10px)',
         scale: 0.95
       });
@@ -48,42 +48,42 @@ export default function GlobeOnboarding() {
         duration: 1.2,
         ease: 'power3.out'
       })
-      // Pause pour la lecture (augmentée de 1s)
-      .to({}, { duration: 3.5 })
-      // Disparition de l'instruction de rotation
-      .to(dragRef.current, {
-        y: '-50%',
-        opacity: 0,
-        filter: 'blur(10px)',
-        scale: 0.95,
-        duration: 0.8,
-        ease: 'power2.in'
-      })
-      
-      // 2. Apparition de l'instruction de clic
-      .to(clickRef.current, {
-        y: '0%',
-        opacity: 1,
-        filter: 'blur(0px)',
-        scale: 1,
-        duration: 1.2,
-        ease: 'power3.out',
-      }, "-=0.2") // Léger chevauchement
-      // Pause pour la lecture (augmentée de 1s)
-      .to({}, { duration: 4 })
-      // Disparition de l'instruction de clic
-      .to(clickRef.current, {
-        y: '-50%',
-        opacity: 0,
-        filter: 'blur(10px)',
-        scale: 0.95,
-        duration: 0.8,
-        ease: 'power2.in',
-        onComplete: () => {
-          sessionStorage.setItem('atlas_globe_onboarding', 'true');
-          setShow(false);
-        }
-      });
+        // Pause pour la lecture (augmentée de 1s)
+        .to({}, { duration: 3.5 })
+        // Disparition de l'instruction de rotation
+        .to(dragRef.current, {
+          y: '-50%',
+          opacity: 0,
+          filter: 'blur(10px)',
+          scale: 0.95,
+          duration: 0.8,
+          ease: 'power2.in'
+        })
+
+        // 2. Apparition de l'instruction de clic
+        .to(clickRef.current, {
+          y: '0%',
+          opacity: 1,
+          filter: 'blur(0px)',
+          scale: 1,
+          duration: 1.2,
+          ease: 'power3.out',
+        }, "-=0.2") // Léger chevauchement
+        // Pause pour la lecture (augmentée de 1s)
+        .to({}, { duration: 4 })
+        // Disparition de l'instruction de clic
+        .to(clickRef.current, {
+          y: '-50%',
+          opacity: 0,
+          filter: 'blur(10px)',
+          scale: 0.95,
+          duration: 0.8,
+          ease: 'power2.in',
+          onComplete: () => {
+            sessionStorage.setItem('atlas_globe_onboarding', 'true');
+            setShow(false);
+          }
+        });
     }
   }, [show]);
 
@@ -146,7 +146,7 @@ export default function GlobeOnboarding() {
             <path d="M20 12h2"></path>
           </svg>
         </div>
-        <span>Sélectionnez un pays pour l'explorer</span>
+        <span>Sélectionnez un pays pour l&apos;explorer</span>
       </div>
     </div>
   );

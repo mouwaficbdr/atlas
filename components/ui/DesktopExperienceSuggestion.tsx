@@ -12,7 +12,7 @@ export default function DesktopExperienceSuggestion() {
 
   useEffect(() => {
     if (!isMobile) return;
-    
+
     // Use sessionStorage so it only shows once per session
     const hasSeen = sessionStorage.getItem('atlas_desktop_suggested');
     if (!hasSeen) {
@@ -32,7 +32,7 @@ export default function DesktopExperienceSuggestion() {
         { opacity: 0, backdropFilter: 'blur(0px)' },
         { opacity: 1, backdropFilter: 'blur(15px)', duration: 1.2, ease: 'power2.out' }
       );
-      
+
       gsap.fromTo(
         contentRef.current,
         { y: 60, opacity: 0, scale: 0.9 },
@@ -95,7 +95,7 @@ export default function DesktopExperienceSuggestion() {
             <line x1="12" y1="17" x2="12" y2="21"></line>
           </svg>
         </div>
-        
+
         <h2 style={{
           fontFamily: 'var(--font-bebas-neue), sans-serif',
           fontSize: '2.5rem',
@@ -105,9 +105,9 @@ export default function DesktopExperienceSuggestion() {
           marginBottom: '1rem',
           textTransform: 'uppercase'
         }}>
-          L'Expérience<br/>Complète
+          L&apos;Expérience<br />Complète
         </h2>
-        
+
         <p style={{
           fontFamily: 'var(--font-jetbrains-mono), monospace',
           fontSize: '0.75rem',
@@ -116,9 +116,9 @@ export default function DesktopExperienceSuggestion() {
           marginBottom: '2.5rem',
           opacity: 0.8
         }}>
-          Pour profiter pleinement de l'immersion 3D et des interactions visuelles d'ATLAS°, nous vous recommandons de visiter ce site sur un écran d'ordinateur.
+          Pour profiter pleinement de l&apos;immersion 3D et des interactions visuelles d&apos;ATLAS°, nous vous recommandons de visiter ce site sur un écran d&apos;ordinateur.
         </p>
-        
+
         <button
           onClick={handleDismiss}
           style={{

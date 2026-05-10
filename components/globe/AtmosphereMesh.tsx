@@ -12,8 +12,8 @@ import * as THREE from "three";
 import vertexShaderRaw from "../../shaders/atmosphere.vert.glsl";
 import fragmentShaderRaw from "../../shaders/atmosphere.frag.glsl";
 
-const vertexShader = typeof vertexShaderRaw === 'string' ? vertexShaderRaw : (vertexShaderRaw as any).default;
-const fragmentShader = typeof fragmentShaderRaw === 'string' ? fragmentShaderRaw : (fragmentShaderRaw as any).default;
+const vertexShader = typeof vertexShaderRaw === 'string' ? vertexShaderRaw : (vertexShaderRaw as { default: string }).default;
+const fragmentShader = typeof fragmentShaderRaw === 'string' ? fragmentShaderRaw : (fragmentShaderRaw as { default: string }).default;
 
 const GLOBE_RADIUS = 1.0;
 const ATMOSPHERE_RADIUS = GLOBE_RADIUS * 1.15; // Plus large pour un halo visible

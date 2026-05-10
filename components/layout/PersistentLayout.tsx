@@ -14,6 +14,16 @@ import { fetchAllCountries } from '@/lib/countries-api';
 import { useAppStore } from '@/lib/store';
 import { useIsMobile } from '@/lib/hooks/useIsMobile';
 
+function MobileFallbackLoader({ loadingProgress, onComplete }: { loadingProgress: number; onComplete: () => void }) {
+  useEffect(() => {
+    if (loadingProgress < 100) {
+      const timer = setTimeout(onComplete, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [loadingProgress, onComplete]);
+  return null;
+}
+
 export default function PersistentLayout({
   children,
 }: {
@@ -148,16 +158,16 @@ export default function PersistentLayout({
               alignItems: 'center',
               marginBottom: '2rem'
             }}>
-              <span style={{ 
-                fontFamily: 'var(--font-jetbrains-mono)', 
-                fontSize: '0.7rem', 
+              <span style={{
+                fontFamily: 'var(--font-jetbrains-mono)',
+                fontSize: '0.7rem',
                 letterSpacing: '0.3em',
-                opacity: 0.5 
+                opacity: 0.5
               }}>
                 ATLAS°
               </span>
             </div>
-            
+
             {/* CTA Explorer + GitHub — page d'accueil uniquement */}
             {pathname === '/' && (
               <>
@@ -179,7 +189,7 @@ export default function PersistentLayout({
                     boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
                   }}
                 >
-                  Explorer l'Index
+                  Explorer l&apos;Index
                 </button>
 
                 {/* Lien GitHub — discret, contextuel */}
@@ -210,14 +220,13 @@ export default function PersistentLayout({
             )}
 
             {/* NOTE: Force le LoadingScreen à se terminer sur mobile où le GlobeScene n'est pas monté */}
-            <div style={{ display: 'none' }}>
-              {setTimeout(() => {
-                if(loadingState.progress < 100) {
-                  handleProgress(100);
-                  handleLoad();
-                }
-              }, 100)}
-            </div>
+            <MobileFallbackLoader
+              loadingProgress={loadingState.progress}
+              onComplete={() => {
+                handleProgress(100);
+                handleLoad();
+              }}
+            />
           </div>
         )}
       </div>

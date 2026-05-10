@@ -19,6 +19,7 @@ export default function CameraTransition({ countries }: CameraTransitionProps) {
   useEffect(() => {
     // NOTE: controls n'est disponible qu'après le premier rendu du Canvas
     if (!controls) return;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const orbitControls = controls as any;
 
     if (cameraMode === 'globe' || !selectedCountryCca3) {

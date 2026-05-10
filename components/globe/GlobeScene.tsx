@@ -19,7 +19,6 @@ interface GlobeSceneProps {
 
 export default function GlobeScene({ countries, onCountrySelect, onProgress, onLoad }: GlobeSceneProps) {
   const [webGLSupported, setWebGLSupported] = useState(true);
-  const [controlsEnabled, setControlsEnabled] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
   const onLoadCalledRef = useRef(false);
 
@@ -94,7 +93,7 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
           onLoad={handleCreated}
         />
         <AtmosphereMesh />
-        <GlobeControls enabled={controlsEnabled} />
+        <GlobeControls enabled={true} />
         <CameraTransition countries={countries} />
       </Canvas>
 

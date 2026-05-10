@@ -29,8 +29,7 @@ export async function generateStaticParams() {
     }));
   } catch (error) {
     throw new Error(
-      `[ATLAS] Impossible de générer les pages pays. Cause : ${
-        error instanceof Error ? error.message : String(error)
+      `[ATLAS] Impossible de générer les pages pays. Cause : ${error instanceof Error ? error.message : String(error)
       }`,
     );
   }
@@ -211,7 +210,6 @@ const getCachedWikiSummary = unstable_cache(
   async (
     nameCommon: string,
     nameOfficial: string,
-    cca3: string,
   ): Promise<string | null> => {
     const attempt1 = await fetchWikiExtract(nameCommon, 'fr');
     if (attempt1) return attempt1;
@@ -237,9 +235,9 @@ interface PageProps {
   params: { code: string };
 }
 
-async function fetchCountryExtraData(cca3: string) {
+async function fetchCountryExtraData(code: string) {
   try {
-    const res = await fetch(`https://restcountries.com/v3.1/alpha/${cca3}?fields=timezones,tld,idd`, {
+    const res = await fetch(`https://restcountries.com/v3.1/alpha/${code}?fields=timezones,tld,idd`, {
       next: { revalidate: 86400 }
     });
     if (!res.ok) return {};
@@ -252,7 +250,7 @@ async function fetchCountryExtraData(cca3: string) {
 
 export default async function CountryPage({ params }: PageProps) {
   const countries = await fetchAllCountries();
-  let country = countries.find(
+  const country = countries.find(
     (c) => c.cca3.toLowerCase() === params.code.toLowerCase(),
   );
 
@@ -263,22 +261,21 @@ export default async function CountryPage({ params }: PageProps) {
   // NOTE: Le GeoJSON local ne contient pas timezones, tld, ni idd.
   // Ces champs sont complétés via REST Countries API au moment du rendu.
   const extraData = await fetchCountryExtraData(country.cca3);
-  country = { ...country, ...extraData };
+  const enrichedCountry = { ...country, ...extraData };
 
   const allCountries = await getAllCountries(countries);
-  const palette = await getCountryPalette(country);
-  const mdxContent = await getCountryMDX(country.cca3);
+  const palette = await getCountryPalette(enrichedCountry);
+  const mdxContent = await getCountryMDX(enrichedCountry.cca3);
   const canonicalUrl = `https://atlas.example.com/pays/${params.code}`;
 
   const wikiSummary = await getCachedWikiSummary(
-    country.name.common,
-    country.name.official,
-    country.cca3,
+    enrichedCountry.name.common,
+    enrichedCountry.name.official,
   );
 
   return (
     <CountryCard
-      country={country}
+      country={enrichedCountry}
       allCountries={allCountries}
       mdxContent={mdxContent}
       palette={palette}

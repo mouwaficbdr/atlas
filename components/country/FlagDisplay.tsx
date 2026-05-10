@@ -8,7 +8,7 @@ interface FlagDisplayProps {
   countryName: string;
 }
 
-export default function FlagDisplay({ flagSvg, countryName }: FlagDisplayProps) {
+export default function FlagDisplay({ flagSvg }: FlagDisplayProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -22,9 +22,9 @@ export default function FlagDisplay({ flagSvg, countryName }: FlagDisplayProps) 
   }, []);
 
   return (
-    <div 
-      ref={ref} 
-      style={{ 
+    <div
+      ref={ref}
+      style={{
         position: 'absolute',
         top: 0,
         left: 0,
@@ -36,7 +36,7 @@ export default function FlagDisplay({ flagSvg, countryName }: FlagDisplayProps) 
         overflow: 'hidden'
       }}
     >
-      <div 
+      <div
         style={{
           position: 'absolute',
           top: '-20%',

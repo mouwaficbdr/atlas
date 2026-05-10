@@ -592,9 +592,9 @@ export default function CountryCard({
                 }}
               >
                 La structure gouvernementale définit le cadre légal et
-                administratif du territoire. Ce régime encadre l'organisation
+                administratif du territoire. Ce régime encadre l&apos;organisation
                 des pouvoirs constitutionnels, la représentation citoyenne et la
-                délégation des compétences administratives à l'échelle
+                délégation des compétences administratives à l&apos;échelle
                 nationale.
               </p>
             </div>
@@ -910,7 +910,7 @@ export default function CountryCard({
                 paddingTop: '2rem',
               }}
             >
-              La diversité linguistique reflète les strates historiques d'un
+              La diversité linguistique reflète les strates historiques d&apos;un
               territoire et ses influences géopolitiques séculaires.
             </p>
           </div>
@@ -1088,7 +1088,7 @@ export default function CountryCard({
                     lineHeight: 1.6,
                   }}
                 >
-                  Code d'appel international alloué par l'UIT (Union
+                  Code d&apos;appel international alloué par l&apos;UIT (Union
                   Internationale des Télécommunications).
                 </div>
               </div>
@@ -1165,8 +1165,8 @@ export default function CountryCard({
                     lineHeight: 1.6,
                   }}
                 >
-                  Domaine de premier niveau géographique géré par l'ICANN pour
-                  l'espace numérique souverain.
+                  Domaine de premier niveau géographique géré par l&apos;ICANN pour
+                  l&apos;espace numérique souverain.
                 </div>
               </div>
             </div>

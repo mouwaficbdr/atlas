@@ -73,9 +73,9 @@ export default function GlobeMesh({
   const oceanMaterial = useMemo(() => {
     return new THREE.ShaderMaterial({
       vertexShader:
-        typeof oceanVert === 'string' ? oceanVert : (oceanVert as any).default,
+        typeof oceanVert === 'string' ? oceanVert : (oceanVert as { default: string }).default,
       fragmentShader:
-        typeof oceanFrag === 'string' ? oceanFrag : (oceanFrag as any).default,
+        typeof oceanFrag === 'string' ? oceanFrag : (oceanFrag as { default: string }).default,
       uniforms: {
         uTime: { value: 0 },
       },

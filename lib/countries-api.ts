@@ -10,7 +10,7 @@ import type { CountryData } from "./types";
 export async function fetchAllCountries(): Promise<CountryData[]> {
   try {
     const geojson = await loadGeoJSON();
-    const countries: CountryData[] = geojson.features.map((feature: any) => {
+    const countries: CountryData[] = geojson.features.map((feature: { properties: CountryData }) => {
       // NOTE: L'objet GeoJSON enrichi stocke les CountryData directement dans .properties
       return feature.properties as CountryData;
     });

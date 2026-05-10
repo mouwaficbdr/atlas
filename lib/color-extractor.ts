@@ -142,7 +142,7 @@ function pixelToHex(p: Pixel): string {
 function medianCut(pixels: Pixel[], numColors: number): string[] {
   if (pixels.length === 0) return [];
 
-  let boxes: ColorBox[] = [computeBox(pixels)];
+  const boxes: ColorBox[] = [computeBox(pixels)];
 
   // Diviser les boîtes jusqu'à obtenir le nombre de couleurs souhaité
   while (boxes.length < numColors) {

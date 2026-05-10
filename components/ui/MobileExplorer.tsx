@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useState, useMemo } from 'react';
-import { useRouter } from 'next/navigation';
 import { gsap } from 'gsap';
 import { filterCountries } from '@/lib/search-engine';
 import type { CountryData } from '@/lib/types';
@@ -14,7 +13,6 @@ interface MobileExplorerProps {
 }
 
 export default function MobileExplorer({ countries, isOpen, onClose, onSelect }: MobileExplorerProps) {
-  const router = useRouter();
   const [query, setQuery] = useState('');
   const overlayRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -28,15 +26,15 @@ export default function MobileExplorer({ countries, isOpen, onClose, onSelect }:
       if (!groups[region]) groups[region] = [];
       groups[region].push(c);
     });
-    
+
     // Sort regions
     const sortedRegions = Object.keys(groups).sort();
-    
+
     // Sort countries in regions
     sortedRegions.forEach(region => {
       groups[region].sort((a, b) => a.name.common.localeCompare(b.name.common));
     });
-    
+
     return { regions: sortedRegions, groups };
   }, [countries]);
 
@@ -92,7 +90,7 @@ export default function MobileExplorer({ countries, isOpen, onClose, onSelect }:
         opacity: 0, // for gsap
       }}
     >
-      <div 
+      <div
         ref={contentRef}
         style={{
           display: 'flex',
@@ -197,7 +195,7 @@ export default function MobileExplorer({ countries, isOpen, onClose, onSelect }:
                 ))
               ) : (
                 <div style={{ padding: '4rem 0', textAlign: 'center', color: 'rgba(255,255,255,0.5)', fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
-                  Aucun résultat pour "{query}"
+                  Aucun résultat pour &quot;{query}&quot;
                 </div>
               )}
             </div>

@@ -9,8 +9,8 @@ import vertexShaderRaw from '../../shaders/country.vert.glsl';
 import fragmentShaderRaw from '../../shaders/country.frag.glsl';
 
 // NOTE: raw-loader (Webpack 5) peut retourner un ES module avec .default
-const vertexShader = typeof vertexShaderRaw === 'string' ? vertexShaderRaw : (vertexShaderRaw as any).default;
-const fragmentShader = typeof fragmentShaderRaw === 'string' ? fragmentShaderRaw : (fragmentShaderRaw as any).default;
+const vertexShader = typeof vertexShaderRaw === 'string' ? vertexShaderRaw : (vertexShaderRaw as { default: string }).default;
+const fragmentShader = typeof fragmentShaderRaw === 'string' ? fragmentShaderRaw : (fragmentShaderRaw as { default: string }).default;
 
 interface CountryMeshProps {
   feature: GeoJSONFeature;
@@ -115,6 +115,7 @@ export default function CountryMesh({ feature, color, onSelect, onHover }: Count
     }
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handlePointerEnter = (e: any) => {
     e.stopPropagation();
     onHover(feature.properties.cca3);
@@ -166,6 +167,7 @@ export default function CountryMesh({ feature, color, onSelect, onHover }: Count
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleClick = (e: any) => {
     e.stopPropagation();
     onSelect(feature.properties.cca3);

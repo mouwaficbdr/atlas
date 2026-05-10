@@ -1,4 +1,4 @@
-import type { MDXRemoteSerializeResult } from 'next-mdx-remote';
+// No external imports needed - all types are defined locally
 
 // ---------------------------------------------------------------------------
 // CountryData — REST Countries API v3.1
@@ -106,6 +106,7 @@ export interface CountryMood {
   colorScheme: string;
 }
 
+// ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // MDXContent — Contenu éditorial
 // NOTE: MDXRemoteSerializeResult est redéfini ici pour éviter une dépendance
