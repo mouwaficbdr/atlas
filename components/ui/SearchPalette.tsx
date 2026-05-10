@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { filterCountries } from '@/lib/search-engine';
 import type { CountryData, SearchResult } from '@/lib/types';
 import { useRouter } from 'next/navigation';
@@ -141,11 +142,12 @@ export default function SearchPalette({
                   setQuery('');
                 }}
               >
-                <img
+                <Image
                   src={result.flagSvg}
                   alt={result.name}
                   width={32}
                   height={21}
+                  unoptimized
                 />
                 <div>
                   <div

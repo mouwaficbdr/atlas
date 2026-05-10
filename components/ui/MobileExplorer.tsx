@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, useMemo } from 'react';
+import Image from 'next/image';
 import { gsap } from 'gsap';
 import { filterCountries } from '@/lib/search-engine';
 import type { CountryData } from '@/lib/types';
@@ -186,7 +187,7 @@ export default function MobileExplorer({ countries, isOpen, onClose, onSelect }:
                       cursor: 'pointer',
                     }}
                   >
-                    <img src={result.flagSvg} alt={result.name} width={40} height={26} style={{ borderRadius: '4px', objectFit: 'cover' }} />
+                    <Image src={result.flagSvg} alt={result.name} width={40} height={26} style={{ borderRadius: '4px', objectFit: 'cover' }} unoptimized />
                     <div>
                       <div style={{ fontSize: '1.2rem', fontFamily: 'var(--font-dm-sans), sans-serif', color: '#fff' }}>{result.name}</div>
                       <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginTop: '0.2rem' }}>{result.region}</div>

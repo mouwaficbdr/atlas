@@ -36,7 +36,7 @@ export default function CountryLoader({ countryName = '...', cca3 = '---' }: Cou
 
     rafRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafRef.current);
-  }, []);
+  }, [phases.length]);
 
   return (
     <div

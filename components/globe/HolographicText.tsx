@@ -50,8 +50,8 @@ function makeTextTexture(text: string, color: string): THREE.CanvasTexture {
 export default function HolographicText({ text, latlng, color = '#ffffff' }: HolographicTextProps) {
   const spriteRef = useRef<THREE.Sprite>(null);
 
-  const position = projectPoint(latlng[0], latlng[1], 1.02);
-  const normal = new THREE.Vector3(...position).normalize();
+  const position = useMemo(() => projectPoint(latlng[0], latlng[1], 1.02), [latlng]);
+  const normal = useMemo(() => new THREE.Vector3(...position).normalize(), [position]);
 
   const { spriteMaterial, spriteScale } = useMemo(() => {
     const texture = makeTextTexture(text, color);
@@ -73,7 +73,9 @@ export default function HolographicText({ text, latlng, color = '#ffffff' }: Hol
 
   useEffect(() => {
     if (spriteRef.current) {
-      const targetPos = projectPoint(latlng[0], latlng[1], 1.12);
+      const lat = latlng[0];
+      const lon = latlng[1];
+      const targetPos = projectPoint(lat, lon, 1.12);
       spriteRef.current.position.set(position[0], position[1], position[2]);
 
       gsap.to(spriteRef.current.position, {
@@ -92,7 +94,7 @@ export default function HolographicText({ text, latlng, color = '#ffffff' }: Hol
     return () => {
       spriteMaterial.opacity = 0;
     };
-  }, [latlng[0], latlng[1], text]);
+  }, [latlng, position, spriteMaterial, text]);
 
   useFrame(({ clock }) => {
     if (spriteRef.current) {
