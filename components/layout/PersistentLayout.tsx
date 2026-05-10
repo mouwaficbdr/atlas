@@ -7,6 +7,7 @@ import LoadingScreen from '@/components/ui/LoadingScreen';
 import SearchPalette from '@/components/ui/SearchPalette';
 import DesktopExperienceSuggestion from '@/components/ui/DesktopExperienceSuggestion';
 import MobileExplorer from '@/components/ui/MobileExplorer';
+import GlobeOnboarding from '@/components/ui/GlobeOnboarding';
 import type { CountryData, LoadingState } from '@/lib/types';
 import { fetchAllCountries } from '@/lib/countries-api';
 import { useAppStore } from '@/lib/store';
@@ -227,6 +228,11 @@ export default function PersistentLayout({
           onClose={() => setIsMobileExplorerOpen(false)}
           onSelect={handleCountrySelect}
         />
+      )}
+
+      {/* Globe Micro-interactions (Desktop only) */}
+      {countries.length > 0 && pathname === '/' && !isMobile && (
+        <GlobeOnboarding />
       )}
     </>
   );
