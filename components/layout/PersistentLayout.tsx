@@ -8,6 +8,7 @@ import SearchPalette from '@/components/ui/SearchPalette';
 import DesktopExperienceSuggestion from '@/components/ui/DesktopExperienceSuggestion';
 import MobileExplorer from '@/components/ui/MobileExplorer';
 import GlobeOnboarding from '@/components/ui/GlobeOnboarding';
+import GithubBadge from '@/components/ui/GithubBadge';
 import type { CountryData, LoadingState } from '@/lib/types';
 import { fetchAllCountries } from '@/lib/countries-api';
 import { useAppStore } from '@/lib/store';
@@ -159,26 +160,56 @@ export default function PersistentLayout({
               </span>
             </div>
             
-            <button
-              onClick={() => setIsMobileExplorerOpen(true)}
-              style={{
-                marginTop: '1rem',
-                background: 'transparent',
-                border: '1px solid rgba(255,255,255,0.2)',
-                color: '#fff',
-                padding: '1rem 2.5rem',
-                borderRadius: '2rem',
-                fontFamily: 'var(--font-jetbrains-mono), monospace',
-                fontSize: '0.8rem',
-                letterSpacing: '0.15em',
-                textTransform: 'uppercase',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
-              }}
-            >
-              Explorer l'Index
-            </button>
+            {/* Bouton Explorer + Lien GitHub — page d'accueil uniquement */}
+            {pathname === '/' && (
+              <>
+                <button
+                  onClick={() => setIsMobileExplorerOpen(true)}
+                  style={{
+                    marginTop: '1rem',
+                    background: 'transparent',
+                    border: '1px solid rgba(255,255,255,0.2)',
+                    color: '#fff',
+                    padding: '1rem 2.5rem',
+                    borderRadius: '2rem',
+                    fontFamily: 'var(--font-jetbrains-mono), monospace',
+                    fontSize: '0.8rem',
+                    letterSpacing: '0.15em',
+                    textTransform: 'uppercase',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease',
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
+                  }}
+                >
+                  Explorer l'Index
+                </button>
+
+                {/* Lien GitHub — discret, contextuel */}
+                <a
+                  href="https://github.com/mouwaficbdr/atlas"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    marginTop: '1.5rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    color: 'rgba(255,255,255,0.3)',
+                    textDecoration: 'none',
+                    fontFamily: 'var(--font-jetbrains-mono), monospace',
+                    fontSize: '0.65rem',
+                    letterSpacing: '0.2em',
+                    textTransform: 'uppercase',
+                    transition: 'color 0.2s ease',
+                  }}
+                >
+                  <svg height="14" viewBox="0 0 16 16" fill="currentColor" width="14">
+                    <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27-.01-1.13-.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
+                  </svg>
+                  Open Source
+                </a>
+              </>
+            )}
 
             {/* Forcer le chargement pour enlever le LoadingScreen */}
             <div style={{ display: 'none' }}>
@@ -234,6 +265,9 @@ export default function PersistentLayout({
       {countries.length > 0 && pathname === '/' && !isMobile && (
         <GlobeOnboarding />
       )}
+
+      {/* GitHub Badge - Floating Magnetic Link (page globe, desktop uniquement) */}
+      {pathname === '/' && !isMobile && <GithubBadge />}
     </>
   );
 }

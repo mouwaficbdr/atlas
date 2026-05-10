@@ -85,7 +85,7 @@ export async function generateMetadata({
 
   if (!country) {
     return {
-      title: 'Pays non trouvé — ATLAS°',
+      title: 'Pays non trouvé - ATLAS°',
     };
   }
 
@@ -97,7 +97,7 @@ export async function generateMetadata({
     );
 
   return {
-    title: `${country.name.common} — ATLAS°`,
+    title: `${country.name.common} - ATLAS°`,
     description,
     openGraph: {
       title: country.name.common,
