@@ -94,7 +94,8 @@ export default function HolographicText({ text, latlng, color = '#ffffff' }: Hol
     return () => {
       spriteMaterial.opacity = 0;
     };
-  }, [latlng, position, spriteMaterial, text]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [text]);
 
   useFrame(({ clock }) => {
     if (spriteRef.current) {
