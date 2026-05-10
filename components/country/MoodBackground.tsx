@@ -111,6 +111,7 @@ export default function MoodBackground({ palette }: MoodBackgroundProps) {
         zIndex: -2, // Derrière tout
         pointerEvents: 'none',
         opacity: 0.4, // Réduit l'opacité pour laisser voir le globe
+        animation: 'moodFadeIn 1.5s ease-in-out',
       }}
     >
       <Canvas
@@ -128,6 +129,17 @@ export default function MoodBackground({ palette }: MoodBackgroundProps) {
       >
         <FluidShader palette={palette} />
       </Canvas>
+
+      <style jsx>{`
+        @keyframes moodFadeIn {
+          from {
+            opacity: 0.15;
+          }
+          to {
+            opacity: 0.4;
+          }
+        }
+      `}</style>
     </div>
   );
 }

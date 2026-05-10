@@ -128,6 +128,7 @@ export default function PersistentLayout({
           zIndex: 1,
           minHeight: '100vh',
           pointerEvents: 'none',
+          transition: 'opacity 0.5s ease-in-out',
         }}
       >
         {/* We enable pointer events inside children components if needed */}

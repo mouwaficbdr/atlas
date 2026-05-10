@@ -139,6 +139,7 @@ export default function CountryCard({
           position: 'relative',
           width: '100%',
           minHeight: '100vh',
+          animation: 'fadeIn 1.5s ease-in-out',
         }}
       >
         {/* Massive Fixed Title — taille adaptative selon longueur */}
@@ -1297,6 +1298,17 @@ export default function CountryCard({
           )}
         </section>
       </div>
+
+      <style jsx>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+      `}</style>
     </>
   );
 }
