@@ -5,6 +5,8 @@ import { useRouter, usePathname } from 'next/navigation';
 import GlobeScene from '@/components/globe/GlobeScene';
 import LoadingScreen from '@/components/ui/LoadingScreen';
 import SearchPalette from '@/components/ui/SearchPalette';
+import DesktopExperienceSuggestion from '@/components/ui/DesktopExperienceSuggestion';
+import MobileExplorer from '@/components/ui/MobileExplorer';
 import type { CountryData, LoadingState } from '@/lib/types';
 import { fetchAllCountries } from '@/lib/countries-api';
 import { useAppStore } from '@/lib/store';
@@ -19,6 +21,7 @@ export default function PersistentLayout({
   const router = useRouter();
   const pathname = usePathname();
   const isMobile = useIsMobile();
+  const [isMobileExplorerOpen, setIsMobileExplorerOpen] = useState(false);
   const [countries, setCountries] = useState<CountryData[]>([]);
   const [loadingState, setLoadingState] = useState<LoadingState>({
     progress: 0,
@@ -154,6 +157,28 @@ export default function PersistentLayout({
                 ATLAS°
               </span>
             </div>
+            
+            <button
+              onClick={() => setIsMobileExplorerOpen(true)}
+              style={{
+                marginTop: '1rem',
+                background: 'transparent',
+                border: '1px solid rgba(255,255,255,0.2)',
+                color: '#fff',
+                padding: '1rem 2.5rem',
+                borderRadius: '2rem',
+                fontFamily: 'var(--font-jetbrains-mono), monospace',
+                fontSize: '0.8rem',
+                letterSpacing: '0.15em',
+                textTransform: 'uppercase',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
+              }}
+            >
+              Explorer l'Index
+            </button>
+
             {/* Forcer le chargement pour enlever le LoadingScreen */}
             <div style={{ display: 'none' }}>
               {setTimeout(() => {
@@ -187,8 +212,21 @@ export default function PersistentLayout({
       />
 
       {/* Search Palette (only show on globe mode maybe, or always) */}
-      {countries.length > 0 && pathname === '/' && (
+      {countries.length > 0 && pathname === '/' && !isMobile && (
         <SearchPalette countries={countries} onSelect={handleCountrySelect} />
+      )}
+
+      {/* Suggestion Desktop pour Mobile */}
+      <DesktopExperienceSuggestion />
+
+      {/* Mobile Navigation Index */}
+      {countries.length > 0 && isMobile && (
+        <MobileExplorer
+          countries={countries}
+          isOpen={isMobileExplorerOpen}
+          onClose={() => setIsMobileExplorerOpen(false)}
+          onSelect={handleCountrySelect}
+        />
       )}
     </>
   );

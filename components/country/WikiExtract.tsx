@@ -14,7 +14,7 @@ export default function WikiExtract({ wikiSummary }: WikiExtractProps) {
     <div
       style={{
         position: 'absolute',
-        bottom: '10vh',
+        bottom: '5vh',
         right: '5vw',
         width: 'min(90vw, 400px)',
         zIndex: 30,

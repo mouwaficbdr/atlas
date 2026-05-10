@@ -148,3 +148,29 @@ a {
     grid-template-columns: 1fr;
   }
 }
+
+/* Panel 5 Network & Share Grid */
+.panel-5-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  flex: 1;
+}
+.panel-5-grid > div {
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+.panel-5-grid > div:last-child {
+  border-right: none;
+}
+
+@media (max-width: 768px) {
+  .panel-5-grid {
+    grid-template-columns: 1fr;
+  }
+  .panel-5-grid > div {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .panel-5-grid > div:last-child {
+    border-bottom: none;
+  }
+}

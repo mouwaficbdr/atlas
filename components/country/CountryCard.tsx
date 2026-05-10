@@ -165,14 +165,14 @@ export default function CountryCard({
               // < 8 chars (Chad, Cuba) → énorme / > 20 chars → raisonnable
               fontSize:
                 country.name.common.length <= 6
-                  ? 'clamp(7rem, 18vw, 22rem)'
+                  ? 'clamp(4rem, 18vw, 22rem)'
                   : country.name.common.length <= 10
-                    ? 'clamp(5rem, 13vw, 17rem)'
+                    ? 'clamp(3rem, 13vw, 17rem)'
                     : country.name.common.length <= 15
-                      ? 'clamp(4rem, 10vw, 13rem)'
+                      ? 'clamp(2.5rem, 10vw, 13rem)'
                       : country.name.common.length <= 20
-                        ? 'clamp(3rem, 7.5vw, 10rem)'
-                        : 'clamp(2.5rem, 5.5vw, 7rem)',
+                        ? 'clamp(2rem, 7.5vw, 10rem)'
+                        : 'clamp(1.5rem, 5.5vw, 7rem)',
               fontWeight: 400,
               fontFamily: 'var(--font-bebas-neue), Impact, sans-serif',
               color: 'var(--country-primary)',
@@ -180,8 +180,8 @@ export default function CountryCard({
               textAlign: 'center',
               mixBlendMode: 'screen',
               opacity: 0.9,
-              // Pas de nowrap : on autorise le retour à la ligne sur noms très longs
-              wordBreak: 'break-word',
+              wordBreak: 'keep-all',
+              overflowWrap: 'break-word',
               hyphens: 'auto',
               textTransform: 'uppercase',
               textShadow: '0 10px 30px rgba(0,0,0,0.5)',
@@ -251,7 +251,7 @@ export default function CountryCard({
             <div
               style={{
                 position: 'absolute',
-                bottom: '10vh',
+                bottom: '5vh',
                 right: '5vw',
                 width: 'min(90vw, 400px)',
                 zIndex: 30,
@@ -344,12 +344,12 @@ export default function CountryCard({
               style={{
                 fontSize:
                   country.population >= 1_000_000_000
-                    ? 'clamp(5rem, 12vw, 16rem)'
+                    ? 'clamp(2.5rem, 10vw, 16rem)'
                     : country.population >= 100_000_000
-                      ? 'clamp(6rem, 14vw, 19rem)'
+                      ? 'clamp(3rem, 12vw, 19rem)'
                       : country.population >= 10_000_000
-                        ? 'clamp(7rem, 17vw, 22rem)'
-                        : 'clamp(8rem, 20vw, 26rem)',
+                        ? 'clamp(3.5rem, 14vw, 22rem)'
+                        : 'clamp(4rem, 16vw, 26rem)',
                 fontFamily: 'var(--font-bebas-neue), sans-serif',
                 color: '#fff',
                 lineHeight: 0.85,
@@ -1040,18 +1040,11 @@ export default function CountryCard({
           </div>
 
           {/* Grille de données réseau : 3 colonnes */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              flex: 1,
-            }}
-          >
+          <div className="panel-5-grid">
             {/* Col 1 : Indicatif téléphonique */}
             <div
               style={{
                 padding: '5vh 5vw',
-                borderRight: '1px solid rgba(255,255,255,0.08)',
                 display: 'flex',
                 flexDirection: 'column',
               }}
@@ -1105,7 +1098,6 @@ export default function CountryCard({
             <div
               style={{
                 padding: '5vh 5vw',
-                borderRight: '1px solid rgba(255,255,255,0.08)',
                 display: 'flex',
                 flexDirection: 'column',
               }}
