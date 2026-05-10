@@ -84,7 +84,7 @@ Projet personnel de [BADAROU Mouwafic](https://github.com/mouwaficbdr). Aucune v
 | Animation | GSAP 3 + ScrollTrigger | 3.12 |
 | État global | Zustand | 5.0 |
 | Smooth scroll | Lenis | 1.1 |
-| Contenu éditorial | MDX + next-mdx-remote | 5.0 |
+| Contenu éditorial | MDX + next-mdx-remote | 6.0 |
 | Triangulation | earcut | 3.0 |
 | Tests | Vitest + fast-check | 4.1 |
 
