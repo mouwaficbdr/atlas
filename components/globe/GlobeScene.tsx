@@ -20,6 +20,7 @@ interface GlobeSceneProps {
 export default function GlobeScene({ countries, onCountrySelect, onProgress, onLoad }: GlobeSceneProps) {
   const [webGLSupported, setWebGLSupported] = useState(true);
   const [controlsEnabled, setControlsEnabled] = useState(true);
+  const [isDragging, setIsDragging] = useState(false);
   const onLoadCalledRef = useRef(false);
 
   useEffect(() => {
@@ -57,6 +58,14 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
     }
   };
 
+  const handlePointerDown = () => {
+    setIsDragging(true);
+  };
+
+  const handlePointerUp = () => {
+    setIsDragging(false);
+  };
+
   return (
     <>
       <Canvas
@@ -64,8 +73,15 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
         camera={{ position: [0, 0, 3], fov: 45 }}
         role="application"
         aria-label="Globe interactif — Explorateur de pays"
-        style={{ width: '100%', height: '100%' }}
+        style={{
+          width: '100%',
+          height: '100%',
+          cursor: isDragging ? 'grabbing' : 'grab'
+        }}
         onCreated={handleCreated}
+        onPointerDown={handlePointerDown}
+        onPointerUp={handlePointerUp}
+        onPointerLeave={handlePointerUp}
       >
         <ambientLight intensity={1.2} />
         <directionalLight position={[0, 0, 5]} intensity={1.5} />
