@@ -8,6 +8,7 @@ import SearchPalette from '@/components/ui/SearchPalette';
 import type { CountryData, LoadingState } from '@/lib/types';
 import { fetchAllCountries } from '@/lib/countries-api';
 import { useAppStore } from '@/lib/store';
+import { useIsMobile } from '@/lib/hooks/useIsMobile';
 // Note: do not use View.Port outside the Canvas context
 
 export default function PersistentLayout({
@@ -17,6 +18,7 @@ export default function PersistentLayout({
 }) {
   const router = useRouter();
   const pathname = usePathname();
+  const isMobile = useIsMobile();
   const [countries, setCountries] = useState<CountryData[]>([]);
   const [loadingState, setLoadingState] = useState<LoadingState>({
     progress: 0,
@@ -111,13 +113,57 @@ export default function PersistentLayout({
           backgroundColor: 'var(--bg-surface)',
         }}
       >
-        {countries.length > 0 && (
+        {countries.length > 0 && !isMobile && (
           <GlobeScene
             countries={countries}
             onCountrySelect={handleCountrySelect}
             onProgress={handleProgress}
             onLoad={handleLoad}
           />
+        )}
+        {countries.length > 0 && isMobile && (
+          <div style={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            background: 'radial-gradient(circle at center, #1a1a2e 0%, #0a0a14 100%)',
+            color: 'var(--text-muted)'
+          }}>
+            {/* Fallback statique pour mobile : Cercle lumineux symbolisant le globe */}
+            <div style={{
+              width: '60vw',
+              height: '60vw',
+              borderRadius: '50%',
+              background: 'radial-gradient(circle at 30% 30%, rgba(74, 144, 217, 0.4) 0%, rgba(0,0,0,0) 70%)',
+              border: '1px solid rgba(255,255,255,0.05)',
+              boxShadow: '0 0 50px rgba(74, 144, 217, 0.1), inset 0 0 20px rgba(255,255,255,0.05)',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginBottom: '2rem'
+            }}>
+              <span style={{ 
+                fontFamily: 'var(--font-jetbrains-mono)', 
+                fontSize: '0.7rem', 
+                letterSpacing: '0.3em',
+                opacity: 0.5 
+              }}>
+                ATLAS°
+              </span>
+            </div>
+            {/* Forcer le chargement pour enlever le LoadingScreen */}
+            <div style={{ display: 'none' }}>
+              {setTimeout(() => {
+                if(loadingState.progress < 100) {
+                  handleProgress(100);
+                  handleLoad();
+                }
+              }, 100)}
+            </div>
+          </div>
         )}
       </div>
 

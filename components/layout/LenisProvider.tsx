@@ -14,6 +14,9 @@ interface LenisProviderProps {
 
 export default function LenisProvider({ children }: LenisProviderProps) {
   useEffect(() => {
+    // Désactiver Lenis sur mobile
+    if (window.innerWidth < 768) return;
+
     // Initialisation Lenis globale avec durée d'inertie 1.2s
     const lenis = new Lenis({
       duration: 1.2,

@@ -16,7 +16,7 @@ export default function WikiExtract({ wikiSummary }: WikiExtractProps) {
         position: 'absolute',
         bottom: '10vh',
         right: '5vw',
-        width: '400px',
+        width: 'min(90vw, 400px)',
         zIndex: 30,
         borderTop: '1px solid var(--country-accent)',
         paddingTop: '1.5rem',

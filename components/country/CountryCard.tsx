@@ -223,7 +223,7 @@ export default function CountryCard({
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'flex-end',
-            padding: '4rem',
+            padding: 'clamp(1rem, 5vw, 4rem)',
             background: 'linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 100%)',
             overflow: 'hidden',
           }}
@@ -253,7 +253,7 @@ export default function CountryCard({
                 position: 'absolute',
                 bottom: '10vh',
                 right: '5vw',
-                width: '400px',
+                width: 'min(90vw, 400px)',
                 zIndex: 30,
                 borderTop: '1px solid rgba(255,255,255,0.2)',
                 paddingTop: '1.5rem',
@@ -373,14 +373,13 @@ export default function CountryCard({
           </div>
 
           <div
+            className="panel-2-stats"
             style={{
               position: 'absolute',
               bottom: '0',
               left: '0',
               width: '100%',
               zIndex: 10,
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
               borderTop: '1px solid rgba(255,255,255,0.1)',
             }}
           >
@@ -526,7 +525,7 @@ export default function CountryCard({
 
         {/* Panel 3: Régime / Ambiance / Capitale */}
         <section
-          className="editorial-panel"
+          className="editorial-panel panel-3-grid"
           style={{
             height: '100vh',
             width: '100%',
@@ -534,19 +533,11 @@ export default function CountryCard({
             top: 0,
             zIndex: 3,
             backgroundColor: 'var(--country-background, #05050A)',
-            display: 'grid',
-            gridTemplateColumns: '1fr 1px 1fr',
             overflow: 'hidden',
           }}
         >
           {/* Colonne gauche : Régime + Ambiance */}
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              padding: '8vh 5vw',
-            }}
-          >
+          <div className="panel-3-col">
             {/* Header de colonne */}
             <div
               style={{
@@ -625,19 +616,11 @@ export default function CountryCard({
             </div>
           </div>
 
-          {/* Séparateur vertical */}
-          <div
-            style={{ backgroundColor: 'rgba(255,255,255,0.1)', height: '100%' }}
-          />
+          {/* Séparateur */}
+          <div className="panel-3-divider" />
 
           {/* Colonne droite : Capitale + Coordonnées */}
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              padding: '8vh 5vw',
-            }}
-          >
+          <div className="panel-3-col">
             {/* Header de colonne */}
             <div
               style={{
@@ -700,13 +683,7 @@ export default function CountryCard({
               >
                 04 — COORDONNÉES GLOBALES
               </div>
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 1fr',
-                  gap: '3rem',
-                }}
-              >
+              <div className="coord-grid">
                 <div>
                   <div
                     style={{

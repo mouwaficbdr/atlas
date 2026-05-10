@@ -82,6 +82,7 @@ export default function CustomCursor() {
     <>
       <div
         ref={cursorRef}
+        className="custom-cursor"
         style={{
           position: 'fixed',
           top: 0,
@@ -97,6 +98,7 @@ export default function CustomCursor() {
       />
       <div
         ref={followerRef}
+        className="custom-cursor-follower"
         style={{
           position: 'fixed',
           top: 0,

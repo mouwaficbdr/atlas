@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+import { useIsMobile } from '@/lib/hooks/useIsMobile';
 
 interface CurrencyCardProps {
   currencies: Record<string, { name: string; symbol: string }>;
@@ -27,6 +28,8 @@ function Coin() {
 
 export default function CurrencyCard({ currencies }: CurrencyCardProps) {
   const entries = Object.entries(currencies);
+  const isMobile = useIsMobile();
+
   if (!entries.length) return null;
 
   return (
@@ -35,12 +38,20 @@ export default function CurrencyCard({ currencies }: CurrencyCardProps) {
         <div key={code} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           {/* Pièce 3D avec symbole en overlay HTML */}
           <div style={{ position: 'relative', width: '200px', height: '200px', filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.5))' }}>
-            <Canvas style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
-              <ambientLight intensity={1.5} />
-              <directionalLight position={[2, 5, 2]} intensity={2.5} />
-              <Coin />
-              <perspectiveCamera position={[0, 0, 3.5]} />
-            </Canvas>
+            {!isMobile ? (
+              <Canvas style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
+                <ambientLight intensity={1.5} />
+                <directionalLight position={[2, 5, 2]} intensity={2.5} />
+                <Coin />
+                <perspectiveCamera position={[0, 0, 3.5]} />
+              </Canvas>
+            ) : (
+              <div style={{
+                position: 'absolute', top: '10%', left: '10%', width: '80%', height: '80%',
+                borderRadius: '50%', backgroundColor: '#D4AF37',
+                boxShadow: 'inset 0 0 20px rgba(0,0,0,0.3)',
+              }} />
+            )}
             {/* Symbole monétaire en overlay */}
             <div
               style={{
