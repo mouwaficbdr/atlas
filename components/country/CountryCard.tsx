@@ -295,7 +295,9 @@ export default function CountryCard({
               left: '0',
               width: '100%',
               height: '100%',
-              opacity: 0.5,
+              opacity: 0.3,
+              zIndex: 1,
+              filter: 'blur(1px)',
             }}
           >
             <PopulationCloud population={country.population} />
@@ -330,8 +332,7 @@ export default function CountryCard({
               top: '50%',
               left: '50%',
               transform: 'translate(-50%, -50%)',
-              zIndex: 10,
-              mixBlendMode: 'difference',
+              zIndex: 20,
               width: '100%',
               textAlign: 'center',
               padding: '0 3vw',
@@ -351,7 +352,6 @@ export default function CountryCard({
                 color: '#fff',
                 lineHeight: 0.85,
                 letterSpacing: '-0.03em',
-                zIndex: 2,
               }}
             >
               {new Intl.NumberFormat('fr-FR').format(country.population)}
@@ -364,7 +364,6 @@ export default function CountryCard({
                 letterSpacing: '0.3em',
                 marginTop: '1.5rem',
                 textTransform: 'uppercase',
-                zIndex: 2,
               }}
             >
               Habitants recensés
