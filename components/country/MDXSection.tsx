@@ -1,6 +1,7 @@
 'use client';
 
-import { MDXRemote, type MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { MDXRemote } from 'next-mdx-remote';
+import type { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import type { MDXContent } from '@/lib/types';
 
 interface MDXSectionProps {
@@ -22,7 +23,11 @@ export default function MDXSection({ content }: MDXSectionProps) {
         lineHeight: 1.8,
       }}
     >
-      <MDXRemote {...source} />
+      <MDXRemote
+        compiledSource={source.compiledSource}
+        frontmatter={source.frontmatter}
+        scope={source.scope}
+      />
     </section>
   );
 }

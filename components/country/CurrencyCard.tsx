@@ -1,7 +1,6 @@
 'use client';
 
 import { useRef } from 'react';
-import { Text } from '@react-three/drei';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
@@ -9,7 +8,7 @@ interface CurrencyCardProps {
   currencies: Record<string, { name: string; symbol: string }>;
 }
 
-function Coin({ symbol }: { symbol: string }) {
+function Coin() {
   const meshRef = useRef<THREE.Mesh>(null);
 
   useFrame(({ clock }) => {
@@ -20,29 +19,8 @@ function Coin({ symbol }: { symbol: string }) {
 
   return (
     <mesh ref={meshRef} rotation={[Math.PI / 2, 0, 0]}>
-      {/* Pièce très fine */}
-      <cylinderGeometry args={[1, 1, 0.1, 32]} />
-      <meshStandardMaterial color="#D4AF37" metalness={0.8} roughness={0.2} />
-      {/* Symbole au recto */}
-      <Text
-        position={[0, 0.051, 0]}
-        rotation={[-Math.PI / 2, 0, 0]}
-        fontSize={1}
-        color="#8B6508"
-        font="https://fonts.gstatic.com/s/bebasneue/v9/JTUSjIg69CK48gW7PXoo9Wlhyw.woff"
-      >
-        {symbol}
-      </Text>
-      {/* Symbole au verso */}
-      <Text
-        position={[0, -0.051, 0]}
-        rotation={[Math.PI / 2, Math.PI, 0]}
-        fontSize={1}
-        color="#8B6508"
-        font="https://fonts.gstatic.com/s/bebasneue/v9/JTUSjIg69CK48gW7PXoo9Wlhyw.woff"
-      >
-        {symbol}
-      </Text>
+      <cylinderGeometry args={[1, 1, 0.1, 64]} />
+      <meshStandardMaterial color="#D4AF37" metalness={0.9} roughness={0.1} />
     </mesh>
   );
 }
@@ -55,18 +33,54 @@ export default function CurrencyCard({ currencies }: CurrencyCardProps) {
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem' }}>
       {entries.map(([code, { name, symbol }]) => (
         <div key={code} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          {/* Pièce 3D avec symbole en overlay HTML */}
           <div style={{ position: 'relative', width: '200px', height: '200px', filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.5))' }}>
             <Canvas style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
               <ambientLight intensity={1.5} />
               <directionalLight position={[2, 5, 2]} intensity={2.5} />
-              <Coin symbol={symbol || code} />
+              <Coin />
               <perspectiveCamera position={[0, 0, 3.5]} />
             </Canvas>
+            {/* Symbole monétaire en overlay */}
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                pointerEvents: 'none',
+                fontSize: '3rem',
+                fontFamily: 'var(--font-bebas-neue), sans-serif',
+                color: '#8B6508',
+                textShadow: '0 2px 8px rgba(0,0,0,0.4)',
+              }}
+            >
+              {symbol || code}
+            </div>
           </div>
-          <div style={{ color: 'rgba(0,0,0,0.85)', fontFamily: 'var(--font-bebas-neue), sans-serif', fontSize: 'clamp(2rem, 4vw, 5rem)', marginTop: '2rem', textAlign: 'center', textTransform: 'uppercase', lineHeight: 0.9 }}>
+          <div
+            style={{
+              color: 'rgba(0,0,0,0.85)',
+              fontFamily: 'var(--font-bebas-neue), sans-serif',
+              fontSize: 'clamp(2rem, 4vw, 5rem)',
+              marginTop: '2rem',
+              textAlign: 'center',
+              textTransform: 'uppercase',
+              lineHeight: 0.9,
+            }}
+          >
             {name}
           </div>
-          <div style={{ color: 'rgba(0,0,0,0.5)', fontSize: '1.5rem', fontFamily: 'var(--font-jetbrains-mono), monospace', marginTop: '0.5rem', letterSpacing: '0.1em' }}>
+          <div
+            style={{
+              color: 'rgba(0,0,0,0.5)',
+              fontSize: '1.5rem',
+              fontFamily: 'var(--font-jetbrains-mono), monospace',
+              marginTop: '0.5rem',
+              letterSpacing: '0.1em',
+            }}
+          >
             {code}
           </div>
         </div>

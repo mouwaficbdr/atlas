@@ -36,7 +36,7 @@ export default function CountryMesh({ feature, color, onSelect, onHover }: Count
     const projectPoint = (lon: number, lat: number): [number, number, number] => {
       const phi = (90 - lat) * (Math.PI / 180);
       const theta = (lon + 180) * (Math.PI / 180);
-      const r = 1.002;
+      const r = 1.005; // Augmenté de 1.002 à 1.005 pour éviter z-fighting
       return [
         r * Math.sin(phi) * Math.cos(theta),
         r * Math.cos(phi),
@@ -186,7 +186,13 @@ export default function CountryMesh({ feature, color, onSelect, onHover }: Count
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
         uniforms={uniforms}
-        transparent={true}
+        transparent={false}
+        depthWrite={true}
+        depthTest={true}
+        side={THREE.FrontSide}
+        polygonOffset={true}
+        polygonOffsetFactor={-1}
+        polygonOffsetUnits={-1}
       />
     </mesh>
   );

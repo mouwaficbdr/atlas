@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Plus, X } from 'lucide-react';
 
 interface WikiExtractProps {
   wikiSummary: string;
@@ -51,11 +50,15 @@ export default function WikiExtract({ wikiSummary }: WikiExtractProps) {
               padding: '0.5rem',
               margin: '-0.5rem',
               transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-              transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)',
+              transform: isExpanded ? 'rotate(45deg)' : 'rotate(0deg)',
             }}
             aria-label={isExpanded ? 'Réduire' : 'Lire la suite'}
           >
-            {isExpanded ? <X size={16} strokeWidth={1} /> : <Plus size={16} strokeWidth={1} />}
+            {/* SVG inline Plus/X — pas de dépendance externe */}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
           </button>
         )}
       </div>
@@ -81,7 +84,7 @@ export default function WikiExtract({ wikiSummary }: WikiExtractProps) {
         >
           {wikiSummary}
         </p>
-        
+
         {/* Gradient fade when collapsed */}
         {!isExpanded && isLong && (
           <div
@@ -97,7 +100,7 @@ export default function WikiExtract({ wikiSummary }: WikiExtractProps) {
           />
         )}
       </div>
-      
+
       {!isExpanded && isLong && (
         <button
           onClick={() => setIsExpanded(true)}

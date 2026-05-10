@@ -1,8 +1,7 @@
 'use client';
 
 import { useMemo, useRef } from 'react';
-import { View } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import type { CountryPalette } from '@/lib/types';
 
@@ -77,7 +76,7 @@ function FluidShader({ palette }: MoodBackgroundProps) {
       uColor2: { value: new THREE.Color(palette.secondary) },
       uColor3: { value: new THREE.Color(palette.accent) },
     }),
-    [palette]
+    [palette],
   );
 
   useFrame(({ clock }) => {
@@ -113,11 +112,21 @@ export default function MoodBackground({ palette }: MoodBackgroundProps) {
         pointerEvents: 'none',
       }}
     >
-      <View style={{ width: '100%', height: '100%' }}>
-        {/* Caméra orthographique pour remplir l'écran avec le plan [-1, 1] */}
-        <orthographicCamera position={[0, 0, 1]} left={-1} right={1} top={1} bottom={-1} near={0.1} far={10} />
+      <Canvas
+        orthographic
+        camera={{
+          position: [0, 0, 1],
+          left: -1,
+          right: 1,
+          top: 1,
+          bottom: -1,
+          near: 0.1,
+          far: 10,
+        }}
+        style={{ width: '100%', height: '100%' }}
+      >
         <FluidShader palette={palette} />
-      </View>
+      </Canvas>
     </div>
   );
 }

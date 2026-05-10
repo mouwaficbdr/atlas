@@ -5,8 +5,6 @@
  * pendant le chargement SSR de la page pays (Suspense boundary).
  */
 
-import CountryLoader from '@/components/country/CountryLoader';
-
 export default function CountryLoading() {
-  return <CountryLoader />;
+  return <div>Loading...</div>;
 }

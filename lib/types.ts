@@ -3,6 +3,8 @@
  * Exigences : 1.2, 3.2, 5.2, 8.2
  */
 
+import type { MDXRemoteSerializeResult } from 'next-mdx-remote';
+
 // ---------------------------------------------------------------------------
 // CountryData — Données REST Countries API v3.1
 // ---------------------------------------------------------------------------

@@ -10,10 +10,8 @@ import FlagDisplay from './FlagDisplay';
 import CapitalClock from './CapitalClock';
 import LanguageList from './LanguageList';
 import NeighborCards from './NeighborCards';
-import TerminalInfo from './TerminalInfo';
 import MoodDisplay from './MoodDisplay';
 import PoliticalRegime from './PoliticalRegime';
-import MDXSection from './MDXSection';
 import WikiExtract from './WikiExtract';
 import PopulationCloud from './PopulationCloud';
 import CurrencyCard from './CurrencyCard';
@@ -22,6 +20,9 @@ import Breadcrumb from './Breadcrumb';
 import ShareButton from './ShareButton';
 import { resolveMood } from '@/lib/mood-resolver';
 import MoodAudio from './MoodAudio';
+import dynamic from 'next/dynamic';
+
+const MDXSection = dynamic(() => import('./MDXSection'), { ssr: false });
 
 gsap.registerPlugin(ScrollTrigger);
 

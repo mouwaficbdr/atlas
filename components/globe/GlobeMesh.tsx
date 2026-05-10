@@ -28,6 +28,7 @@ export default function GlobeMesh({
   const [features, setFeatures] = useState<GeoJSONFeature[]>([]);
   const [hoveredCca3, setHoveredCca3] = useState<string | null>(null);
   const setHoveredCountry = useAppStore((state) => state.setHoveredCountry);
+  const cameraMode = useAppStore((state) => state.cameraMode);
 
   useEffect(() => {
     loadGeoJSON()
@@ -49,6 +50,12 @@ export default function GlobeMesh({
   useEffect(() => {
     setHoveredCountry(hoveredCca3);
   }, [hoveredCca3, setHoveredCountry]);
+
+  useEffect(() => {
+    if (cameraMode !== 'country') return;
+    setHoveredCca3(null);
+    setHoveredCountry(null);
+  }, [cameraMode, setHoveredCountry]);
 
   useEffect(() => {
     if (!hoveredCountry) return;
@@ -122,13 +129,16 @@ export default function GlobeMesh({
       <BordersMesh features={features} />
 
       {/* Holographic Text au survol */}
-      {hoveredFeature && hoveredCountry && hoveredCountry.latlng && (
-        <HolographicText
-          text={hoveredCountry.name.official}
-          latlng={hoveredCountry.latlng}
-          color={hoveredFeature.properties.colors?.primary ?? '#ffffff'}
-        />
-      )}
+      {cameraMode === 'globe' &&
+        hoveredFeature &&
+        hoveredCountry &&
+        hoveredCountry.latlng && (
+          <HolographicText
+            text={hoveredCountry.name.official}
+            latlng={hoveredCountry.latlng}
+            color={hoveredFeature.properties.colors?.primary ?? '#ffffff'}
+          />
+        )}
     </group>
   );
 }
