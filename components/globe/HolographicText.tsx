@@ -1,6 +1,5 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Text } from '@react-three/drei';
 import * as THREE from 'three';
 import { gsap } from 'gsap';
 
@@ -20,69 +19,95 @@ const projectPoint = (lat: number, lon: number, r: number = 1.05): [number, numb
   ];
 };
 
-export default function HolographicText({ text, latlng, color = '#ffffff' }: HolographicTextProps) {
-  const textRef = useRef<any>(null);
+function makeTextTexture(text: string, color: string): THREE.CanvasTexture {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
 
-  // Convert lat/lng to 3D position on the sphere
+  if (ctx) {
+    // Mesurer le texte d'abord pour déterminer la largeur nécessaire
+    ctx.font = 'bold 24px "JetBrains Mono", monospace';
+    const metrics = ctx.measureText(text.toUpperCase());
+    const textWidth = metrics.width;
+
+    // Définir la taille du canvas avec padding
+    canvas.width = Math.max(256, Math.ceil(textWidth + 40));
+    canvas.height = 64;
+
+    // Redessiner avec la bonne taille
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.font = 'bold 24px "JetBrains Mono", monospace';
+    ctx.fillStyle = color;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(text.toUpperCase(), canvas.width / 2, 32);
+  }
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.needsUpdate = true;
+  return texture;
+}
+
+export default function HolographicText({ text, latlng, color = '#ffffff' }: HolographicTextProps) {
+  const spriteRef = useRef<THREE.Sprite>(null);
+
   const position = projectPoint(latlng[0], latlng[1], 1.02);
-  
-  // The normal vector at this position on the sphere is exactly the normalized position
   const normal = new THREE.Vector3(...position).normalize();
 
-  useEffect(() => {
-    if (textRef.current) {
-      // Orient the text to face strictly OUTWARD from the sphere
-      // The text's Z axis should point along the normal
-      textRef.current.quaternion.setFromUnitVectors(
-        new THREE.Vector3(0, 0, 1),
-        normal
-      );
+  const { spriteMaterial, spriteScale } = useMemo(() => {
+    const texture = makeTextTexture(text, color);
+    const material = new THREE.SpriteMaterial({
+      map: texture,
+      transparent: true,
+      opacity: 0,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
 
-      // Animate entry (emerging from the surface)
-      const targetPos = projectPoint(latlng[0], latlng[1], 1.08); // Float slightly above
-      gsap.fromTo(
-        textRef.current.position,
-        { x: position[0], y: position[1], z: position[2] },
-        { x: targetPos[0], y: targetPos[1], z: targetPos[2], duration: 0.8, ease: 'back.out(1.5)' }
-      );
-      
-      // Animate opacity/glow
-      gsap.fromTo(
-        textRef.current.material,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.4 }
-      );
+    // Calculer l'échelle en fonction de la largeur du canvas
+    const aspectRatio = texture.image.width / texture.image.height;
+    const baseHeight = 0.1;
+    const scale: [number, number, number] = [baseHeight * aspectRatio, baseHeight, 1];
+
+    return { spriteMaterial: material, spriteScale: scale };
+  }, [text, color]);
+
+  useEffect(() => {
+    if (spriteRef.current) {
+      const targetPos = projectPoint(latlng[0], latlng[1], 1.12);
+      spriteRef.current.position.set(position[0], position[1], position[2]);
+
+      gsap.to(spriteRef.current.position, {
+        x: targetPos[0],
+        y: targetPos[1],
+        z: targetPos[2],
+        duration: 0.8,
+        ease: 'back.out(1.5)',
+      });
+
+      gsap.to(spriteMaterial, {
+        opacity: 1,
+        duration: 0.4,
+      });
     }
+    return () => {
+      spriteMaterial.opacity = 0;
+    };
   }, [latlng[0], latlng[1], text]);
 
   useFrame(({ clock }) => {
-    if (textRef.current) {
-      // Subtle hovering animation
-      const basePos = projectPoint(latlng[0], latlng[1], 1.08);
-      const hoverOffset = Math.sin(clock.elapsedTime * 3) * 0.01;
-      const currentNormal = normal.clone().multiplyScalar(hoverOffset);
-      textRef.current.position.set(
-        basePos[0] + currentNormal.x,
-        basePos[1] + currentNormal.y,
-        basePos[2] + currentNormal.z
+    if (spriteRef.current) {
+      const basePos = projectPoint(latlng[0], latlng[1], 1.12);
+      const hoverOffset = Math.sin(clock.elapsedTime * 3) * 0.005;
+      const offsetVec = normal.clone().multiplyScalar(hoverOffset);
+      spriteRef.current.position.set(
+        basePos[0] + offsetVec.x,
+        basePos[1] + offsetVec.y,
+        basePos[2] + offsetVec.z
       );
     }
   });
 
   return (
-    <Text
-      ref={textRef}
-      fontSize={0.06}
-      color={color}
-      anchorX="center"
-      anchorY="middle"
-      transparent
-      opacity={0}
-      outlineWidth={0.005}
-      outlineColor="#000000"
-    >
-      {text.toUpperCase()}
-      <meshBasicMaterial attach="material" color={color} toneMapped={false} />
-    </Text>
+    <sprite ref={spriteRef} material={spriteMaterial} scale={spriteScale} />
   );
 }
