@@ -1,8 +1,3 @@
-/**
- * LenisProvider — Initialisation Lenis globale
- * Exigences : 14.1
- */
-
 'use client';
 
 import { useEffect, ReactNode } from 'react';
@@ -14,10 +9,9 @@ interface LenisProviderProps {
 
 export default function LenisProvider({ children }: LenisProviderProps) {
   useEffect(() => {
-    // Désactiver Lenis sur mobile
+    // NOTE: Lenis est désactivé sur mobile pour laisser le scroll natif gérer l'UX
     if (window.innerWidth < 768) return;
 
-    // Initialisation Lenis globale avec durée d'inertie 1.2s
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

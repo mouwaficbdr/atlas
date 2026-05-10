@@ -13,7 +13,6 @@ import type { CountryData, LoadingState } from '@/lib/types';
 import { fetchAllCountries } from '@/lib/countries-api';
 import { useAppStore } from '@/lib/store';
 import { useIsMobile } from '@/lib/hooks/useIsMobile';
-// Note: do not use View.Port outside the Canvas context
 
 export default function PersistentLayout({
   children,
@@ -38,7 +37,6 @@ export default function PersistentLayout({
   const minDurationRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    // If we're on a country page, set mode
     if (pathname.startsWith('/pays/')) {
       const cca3 = pathname.split('/').pop()?.toUpperCase();
       if (cca3) {
@@ -106,7 +104,7 @@ export default function PersistentLayout({
 
   return (
     <>
-      {/* Background fixed Canvas layer */}
+      {/* Globe 3D — couche fixe en fond de page */}
       <div
         style={{
           position: 'fixed',
@@ -137,7 +135,7 @@ export default function PersistentLayout({
             background: 'radial-gradient(circle at center, #1a1a2e 0%, #0a0a14 100%)',
             color: 'var(--text-muted)'
           }}>
-            {/* Fallback statique pour mobile : Cercle lumineux symbolisant le globe */}
+            {/* Orbe lumineux — substitut statique du globe sur mobile */}
             <div style={{
               width: '60vw',
               height: '60vw',
@@ -160,7 +158,7 @@ export default function PersistentLayout({
               </span>
             </div>
             
-            {/* Bouton Explorer + Lien GitHub — page d'accueil uniquement */}
+            {/* CTA Explorer + GitHub — page d'accueil uniquement */}
             {pathname === '/' && (
               <>
                 <button
@@ -211,7 +209,7 @@ export default function PersistentLayout({
               </>
             )}
 
-            {/* Forcer le chargement pour enlever le LoadingScreen */}
+            {/* NOTE: Force le LoadingScreen à se terminer sur mobile où le GlobeScene n'est pas monté */}
             <div style={{ display: 'none' }}>
               {setTimeout(() => {
                 if(loadingState.progress < 100) {
@@ -224,7 +222,7 @@ export default function PersistentLayout({
         )}
       </div>
 
-      {/* Children pages overlay (Country page, etc.) */}
+      {/* Overlay des pages enfants (ex: CountryCard) */}
       <div
         style={{
           position: 'relative',
@@ -234,7 +232,6 @@ export default function PersistentLayout({
           transition: 'opacity 0.5s ease-in-out',
         }}
       >
-        {/* We enable pointer events inside children components if needed */}
         <div style={{ pointerEvents: 'auto' }}>{children}</div>
       </div>
 

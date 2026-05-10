@@ -89,7 +89,7 @@ export default function GlobeMesh({
       oceanMaterial.uniforms.uTime.value = clock.elapsedTime;
     }
 
-    // Tilt effect on hover
+    // Parallaxe de léger tilt en fonction de la position de la souris
     if (groupRef.current) {
       const tiltFactor = hoveredCca3 ? 0.15 : 0.05;
       const targetRotationX = mouse.y * tiltFactor;
@@ -110,7 +110,7 @@ export default function GlobeMesh({
 
   return (
     <group ref={groupRef}>
-      {/* Océan — techy grid shader */}
+      {/* Océan */}
       <mesh material={oceanMaterial}>
         <sphereGeometry args={[1, 64, 64]} />
       </mesh>
@@ -128,7 +128,7 @@ export default function GlobeMesh({
 
       <BordersMesh features={features} />
 
-      {/* Holographic Text au survol */}
+      {/* Holographic Text — visible uniquement au survol en mode globe */}
       {cameraMode === 'globe' &&
         hoveredFeature &&
         hoveredCountry &&

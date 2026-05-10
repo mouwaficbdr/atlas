@@ -5,13 +5,12 @@ import { gsap } from 'gsap';
 import earcut from 'earcut';
 import type { GeoJSONFeature } from '@/lib/types';
 
-// Webpack 5 raw-loader often returns an ES module with a .default string
 import vertexShaderRaw from '../../shaders/country.vert.glsl';
 import fragmentShaderRaw from '../../shaders/country.frag.glsl';
 
+// NOTE: raw-loader (Webpack 5) peut retourner un ES module avec .default
 const vertexShader = typeof vertexShaderRaw === 'string' ? vertexShaderRaw : (vertexShaderRaw as any).default;
 const fragmentShader = typeof fragmentShaderRaw === 'string' ? fragmentShaderRaw : (fragmentShaderRaw as any).default;
-
 
 interface CountryMeshProps {
   feature: GeoJSONFeature;
@@ -25,7 +24,6 @@ export default function CountryMesh({ feature, color, onSelect, onHover }: Count
 
   const geometry = useMemo(() => {
     if (!feature || !feature.geometry || !feature.geometry.coordinates) {
-      console.warn('Invalid geometry for feature:', feature);
       return new THREE.BufferGeometry();
     }
 
@@ -36,7 +34,7 @@ export default function CountryMesh({ feature, color, onSelect, onHover }: Count
     const projectPoint = (lon: number, lat: number): [number, number, number] => {
       const phi = (90 - lat) * (Math.PI / 180);
       const theta = (lon + 180) * (Math.PI / 180);
-      const r = 1.005; // Augmenté de 1.002 à 1.005 pour éviter z-fighting
+      const r = 1.005; // NOTE: Offset de 0.003 pour éviter le z-fighting avec la sphère océan (r=1)
       return [
         r * Math.sin(phi) * Math.cos(theta),
         r * Math.cos(phi),
