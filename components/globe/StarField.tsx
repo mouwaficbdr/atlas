@@ -1,8 +1,3 @@
-/**
- * StarField — Fond spatial composé de 10 000 particules étoiles
- * THREE.Points réparties aléatoirement dans une sphère de rayon 500 unités
- * Exigence : 1.1
- */
 
 import { useRef, useMemo } from "react";
 import * as THREE from "three";

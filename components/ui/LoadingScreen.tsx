@@ -1,7 +1,3 @@
-/**
- * LoadingScreen — Séquence d'animation de chargement premium
- * Exigences : 3.3, 3.4, 4.1, 4.2, 4.3, 4.4, 4.5
- */
 
 'use client';
 
@@ -21,7 +17,7 @@ export default function LoadingScreen({ loadingState, onRevealComplete }: Loadin
 
   const fullGPS = '48.8566°N, 2.3522°E';
 
-  // Animation GPS caractère par caractère
+  // Animation GPS : défilement caractère par caractère
   useEffect(() => {
     let index = 0;
     const interval = setInterval(() => {
@@ -36,7 +32,7 @@ export default function LoadingScreen({ loadingState, onRevealComplete }: Loadin
     return () => clearInterval(interval);
   }, []);
 
-  // Animation pulsation texte
+  // Pulsation ATLAS° pendant le chargement
   useEffect(() => {
     if (textRef.current) {
       gsap.to(textRef.current, {
@@ -49,7 +45,7 @@ export default function LoadingScreen({ loadingState, onRevealComplete }: Loadin
     }
   }, []);
 
-  // Fondu de sortie — déclenché quand les deux conditions sont réunies
+  // NOTE: Le fondu de sortie attend que les assets soient prêts ET que la durée minimale soit écoulée
   useEffect(() => {
     const shouldDismiss =
       loadingState.phase === 'revealing' && loadingState.minDurationElapsed;

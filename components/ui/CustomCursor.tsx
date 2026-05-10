@@ -15,11 +15,9 @@ export default function CustomCursor() {
     let currentContext = 'default';
 
     const onMouseMove = (e: MouseEvent) => {
-      // Basic following
       gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 });
       gsap.to(follower, { x: e.clientX, y: e.clientY, duration: 0.3 });
 
-      // Context detection
       const target = e.target as HTMLElement;
       let newContext = 'default';
       
@@ -39,15 +37,12 @@ export default function CustomCursor() {
       if (newContext !== currentContext) {
         currentContext = newContext;
         if (newContext === 'globe') {
-          // Crosshair mode
           gsap.to(cursor, { scale: 0.5, backgroundColor: '#ffffff', duration: 0.2 });
           gsap.to(follower, { scale: 1.5, borderRadius: '0%', border: '1px dashed rgba(255,255,255,0.5)', duration: 0.2 });
         } else if (newContext === 'interactive') {
-          // Magnetic / Expand mode
           gsap.to(cursor, { scale: 0, duration: 0.2 });
           gsap.to(follower, { scale: 1.5, backgroundColor: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.8)', duration: 0.2 });
         } else {
-          // Default
           gsap.to(cursor, { scale: 1, backgroundColor: 'var(--text-accent)', duration: 0.2 });
           gsap.to(follower, { scale: 1, borderRadius: '50%', backgroundColor: 'transparent', border: '1px solid var(--text-accent)', duration: 0.2 });
         }
@@ -59,7 +54,6 @@ export default function CustomCursor() {
     };
 
     const onMouseUp = () => {
-      // Re-trigger the scale based on context
       if (currentContext === 'globe' || currentContext === 'interactive') {
         gsap.to(follower, { scale: 1.5, duration: 0.2, overwrite: 'auto' });
       } else {

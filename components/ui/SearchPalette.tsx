@@ -23,7 +23,7 @@ export default function SearchPalette({
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Cmd+K / Ctrl+K pour ouvrir
+  // Cmd+K / Ctrl+K — raccourci global pour ouvrir la palette
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
@@ -37,7 +37,7 @@ export default function SearchPalette({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  // Filtrage
+  // Filtrage instantané à chaque frappe
   useEffect(() => {
     if (query.trim()) {
       const filtered = filterCountries(query, countries);
@@ -48,7 +48,7 @@ export default function SearchPalette({
     }
   }, [query, countries]);
 
-  // Navigation clavier
+  // Navigation clavier dans les résultats (Esc, ↑, ↓, Enter)
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Escape') {
       setIsOpen(false);

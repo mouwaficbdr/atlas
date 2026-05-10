@@ -1,12 +1,8 @@
 /**
- * ATLAS° Globe 3D — Page pays dynamique
- * Exigences : 3.5, 5.1, 7.1, 7.2, 9.1, 9.2, 9.3, 9.7, 11.5, 13.1, 13.3, 13.4
- *
  * Route : /pays/[code]
- * - Génération statique (SSG) de 195 pages via generateStaticParams
- * - Chargement des données pays + MDX au build
- * - Métadonnées SEO : title, description, og:tags, canonical
- * - Montage CountryCard avec palette dynamique
+ *
+ * Génération statique (SSG) de 195 pages via generateStaticParams.
+ * Charge les données pays + MDX au build et monte CountryCard.
  */
 
 import { Metadata } from 'next';
@@ -17,36 +13,14 @@ import { fetchAllCountries } from '@/lib/countries-api';
 import { loadMDX } from '@/lib/mdx-loader';
 import type { CountryData, CountryPalette, MDXContent } from '@/lib/types';
 
-// ---------------------------------------------------------------------------
-// Configuration Next.js
-// ---------------------------------------------------------------------------
-
-/**
- * Force la génération statique complète (SSG) sans ISR ni SSR.
- * Exigence 11.5 : Génération statique pure pour les 195 pages pays.
- */
+// SSG pur : les données sont figées au build, pas de revalidation.
 export const dynamic = 'force-static';
-
-/**
- * Revalidation : pas de revalidation (SSG pur).
- * Les données sont figées au build.
- */
 export const revalidate = false;
 
 // ---------------------------------------------------------------------------
-// generateStaticParams — Génération des 195 pages
+// generateStaticParams
 // ---------------------------------------------------------------------------
 
-/**
- * Génère les paramètres statiques pour les 195 pages pays.
- *
- * Exigence 3.5 : Récupération des 195 codes via REST Countries API.
- * Exigence 13.4 : Throw si API indisponible (interrompt le build).
- * Exigence 13.3 : Génération statique au build, pas de déploiement partiel.
- *
- * @returns Tableau de { code: string } pour chaque pays
- * @throws {Error} Si REST Countries API est indisponible
- */
 export async function generateStaticParams() {
   try {
     const countries = await fetchAllCountries();
@@ -54,7 +28,6 @@ export async function generateStaticParams() {
       code: country.cca3.toLowerCase(),
     }));
   } catch (error) {
-    // Exigence 13.4 : Throw explicite pour interrompre le build
     throw new Error(
       `[ATLAS] Impossible de générer les pages pays. Cause : ${
         error instanceof Error ? error.message : String(error)
@@ -67,15 +40,6 @@ export async function generateStaticParams() {
 // Métadonnées SEO
 // ---------------------------------------------------------------------------
 
-/**
- * Génère les métadonnées SEO pour chaque page pays.
- *
- * Exigence 9.1 : URL permanente `/pays/[code_alpha3]` en minuscules
- * Exigence 9.2 : Balises Open Graph (og:title, og:description, og:image)
- * Exigence 9.3 : Élément <title> au format "[Nom du pays] — ATLAS°"
- * Exigence 9.7 : Balise <link rel="canonical">
- * Exigence 13.1 : Métadonnées SEO minimales (title, description, og:*, canonical)
- */
 export async function generateMetadata({
   params,
 }: {
@@ -185,12 +149,7 @@ async function getCountryPalette(
 
 /**
  * Charge le contenu MDX pour un pays.
- *
- * Exigence 7.1 : Lecture depuis `/content/countries/[cca3].mdx`
- * Exigence 7.2 : Rendu entièrement statique au build
- *
- * @param cca3 - Code Alpha-3 du pays
- * @returns MDXContent
+ * Retourne `source: null` silencieusement si absent.
  */
 async function getCountryMDX(cca3: string): Promise<MDXContent> {
   try {
@@ -244,13 +203,9 @@ async function fetchWikiExtract(
 }
 
 /**
- * Cascade de tentatives Wikipedia pour maximiser les hits :
- *  1. FR + nom commun anglais (Wikipedia FR redirige souvent)
- *  2. FR + nom officiel (ex: "République du Bénin")
- *  3. EN + nom commun (fallback fiable)
- *  4. EN + nom officiel (dernier recours)
- *
- * Résultat mis en cache 24h par Next.js Data Cache (clé = cca3).
+ * NOTE: Cascade de tentatives Wikipedia pour maximiser les hits :
+ * 1. FR + nom commun  2. FR + nom officiel  3. EN + nom commun  4. EN + nom officiel
+ * Résultat mis en cache 24h par Next.js Data Cache.
  */
 const getCachedWikiSummary = unstable_cache(
   async (
@@ -258,21 +213,15 @@ const getCachedWikiSummary = unstable_cache(
     nameOfficial: string,
     cca3: string,
   ): Promise<string | null> => {
-    // Tentative 1 : Wikipedia FR avec le nom commun anglais
-    // (Wikipedia FR gère les redirections depuis les noms anglais)
     const attempt1 = await fetchWikiExtract(nameCommon, 'fr');
     if (attempt1) return attempt1;
 
-    // Tentative 2 : Wikipedia FR avec le nom officiel
-    // (utile pour "Micronesia" → "Federated States of Micronesia")
     const attempt2 = await fetchWikiExtract(nameOfficial, 'fr');
     if (attempt2) return attempt2;
 
-    // Tentative 3 : Wikipedia EN avec le nom commun (très fiable)
     const attempt3 = await fetchWikiExtract(nameCommon, 'en');
     if (attempt3) return attempt3;
 
-    // Tentative 4 : Wikipedia EN avec le nom officiel (dernier recours fiable)
     const attempt4 = await fetchWikiExtract(nameOfficial, 'en');
     return attempt4;
   },
@@ -288,12 +237,6 @@ interface PageProps {
   params: { code: string };
 }
 
-/**
- * Page pays dynamique.
- *
- * Charge les données du pays, la palette de couleurs et le contenu MDX,
- * puis affiche la CountryCard avec toutes les dimensions de données.
- */
 async function fetchCountryExtraData(cca3: string) {
   try {
     const res = await fetch(`https://restcountries.com/v3.1/alpha/${cca3}?fields=timezones,tld,idd`, {
@@ -317,7 +260,8 @@ export default async function CountryPage({ params }: PageProps) {
     notFound();
   }
 
-  // Le GeoJSON local ne contient pas timezones, tld, ni idd. On va les chercher via REST Countries.
+  // NOTE: Le GeoJSON local ne contient pas timezones, tld, ni idd.
+  // Ces champs sont complétés via REST Countries API au moment du rendu.
   const extraData = await fetchCountryExtraData(country.cca3);
   country = { ...country, ...extraData };
 
