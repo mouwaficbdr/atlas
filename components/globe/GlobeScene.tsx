@@ -9,7 +9,6 @@ import StarField from './StarField';
 import GlobeControls from './GlobeControls';
 import CameraTransition from './CameraTransition';
 import SROnlyList from '@/components/ui/SROnlyList';
-import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing';
 
 interface GlobeSceneProps {
   countries: CountryData[];
@@ -73,24 +72,14 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
         <directionalLight position={[5, 3, 2]} intensity={0.8} />
 
         <StarField />
-        <GlobeMesh 
-          countries={countries} 
-          onSelect={onCountrySelect} 
+        <GlobeMesh
+          countries={countries}
+          onSelect={onCountrySelect}
           onLoad={handleCreated}
         />
         <AtmosphereMesh />
         <GlobeControls enabled={controlsEnabled} />
         <CameraTransition countries={countries} />
-
-        <EffectComposer>
-          <Bloom 
-            intensity={1.5} 
-            luminanceThreshold={0.2} 
-            luminanceSmoothing={0.9} 
-            mipmapBlur 
-          />
-          <Vignette eskil={false} offset={0.1} darkness={1.1} />
-        </EffectComposer>
       </Canvas>
 
       <SROnlyList countries={countries} visible={false} />

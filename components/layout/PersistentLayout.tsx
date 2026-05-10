@@ -5,7 +5,6 @@ import { useRouter, usePathname } from 'next/navigation';
 import GlobeScene from '@/components/globe/GlobeScene';
 import LoadingScreen from '@/components/ui/LoadingScreen';
 import SearchPalette from '@/components/ui/SearchPalette';
-import CustomCursor from '@/components/ui/CustomCursor';
 import type { CountryData, LoadingState } from '@/lib/types';
 import { fetchAllCountries } from '@/lib/countries-api';
 import { useAppStore } from '@/lib/store';
@@ -108,7 +107,7 @@ export default function PersistentLayout({
           left: 0,
           width: '100vw',
           height: '100vh',
-          zIndex: 0, // keep the canvas behind overlays but above page background
+          zIndex: 0,
           backgroundColor: 'var(--bg-surface)',
         }}
       >
@@ -139,8 +138,6 @@ export default function PersistentLayout({
         loadingState={loadingState}
         onRevealComplete={handleRevealComplete}
       />
-
-      <CustomCursor />
 
       {/* Search Palette (only show on globe mode maybe, or always) */}
       {countries.length > 0 && pathname === '/' && (

@@ -10,7 +10,6 @@ interface MDXSectionProps {
 export default function MDXSection({ content }: MDXSectionProps) {
   if (!content.source) return null;
 
-  // Cast to the actual next-mdx-remote type
   const source = content.source as MDXRemoteSerializeResult;
 
   return (

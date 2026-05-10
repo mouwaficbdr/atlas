@@ -5,7 +5,6 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import type { CountryData, MDXContent, CountryPalette } from '@/lib/types';
-import dynamic from 'next/dynamic';
 
 import FlagDisplay from './FlagDisplay';
 import CapitalClock from './CapitalClock';
@@ -16,14 +15,9 @@ import MoodDisplay from './MoodDisplay';
 import PoliticalRegime from './PoliticalRegime';
 import MDXSection from './MDXSection';
 import WikiExtract from './WikiExtract';
-
-const PopulationCloud = dynamic(() => import('./PopulationCloud'), {
-  ssr: false,
-});
-const CurrencyCard = dynamic(() => import('./CurrencyCard'), { ssr: false });
-const MoodBackground = dynamic(() => import('./MoodBackground'), {
-  ssr: false,
-});
+import PopulationCloud from './PopulationCloud';
+import CurrencyCard from './CurrencyCard';
+import MoodBackground from './MoodBackground';
 import Breadcrumb from './Breadcrumb';
 import ShareButton from './ShareButton';
 import { resolveMood } from '@/lib/mood-resolver';
@@ -51,7 +45,6 @@ export default function CountryCard({
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const mood = resolveMood(country);
-
 
   useEffect(() => {
     document.documentElement.style.setProperty(
@@ -168,15 +161,16 @@ export default function CountryCard({
             style={{
               // Taille dynamique inversement proportionnelle à la longueur du nom
               // < 8 chars (Chad, Cuba) → énorme / > 20 chars → raisonnable
-              fontSize: country.name.common.length <= 6
-                ? 'clamp(7rem, 18vw, 22rem)'
-                : country.name.common.length <= 10
-                ? 'clamp(5rem, 13vw, 17rem)'
-                : country.name.common.length <= 15
-                ? 'clamp(4rem, 10vw, 13rem)'
-                : country.name.common.length <= 20
-                ? 'clamp(3rem, 7.5vw, 10rem)'
-                : 'clamp(2.5rem, 5.5vw, 7rem)',
+              fontSize:
+                country.name.common.length <= 6
+                  ? 'clamp(7rem, 18vw, 22rem)'
+                  : country.name.common.length <= 10
+                    ? 'clamp(5rem, 13vw, 17rem)'
+                    : country.name.common.length <= 15
+                      ? 'clamp(4rem, 10vw, 13rem)'
+                      : country.name.common.length <= 20
+                        ? 'clamp(3rem, 7.5vw, 10rem)'
+                        : 'clamp(2.5rem, 5.5vw, 7rem)',
               fontWeight: 400,
               fontFamily: 'var(--font-bebas-neue), Impact, sans-serif',
               color: 'var(--country-primary)',
@@ -329,17 +323,15 @@ export default function CountryCard({
             </h2>
           </div>
 
-          {/* Nuage de particules + Chiffre géant centré */}
+          {/* Chiffre géant centré */}
           <div
             style={{
               position: 'absolute',
-              top: '45%',
+              top: '50%',
               left: '50%',
               transform: 'translate(-50%, -50%)',
               zIndex: 10,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
+              mixBlendMode: 'difference',
               width: '100%',
               textAlign: 'center',
               padding: '0 3vw',
@@ -347,25 +339,14 @@ export default function CountryCard({
           >
             <div
               style={{
-                width: '300px',
-                height: '300px',
-                marginBottom: '-2rem',
-                zIndex: 1,
-                mixBlendMode: 'screen',
-              }}
-            >
-              <PopulationCloud population={country.population} />
-            </div>
-            
-            <div
-              style={{
-                fontSize: country.population >= 1_000_000_000
-                  ? 'clamp(5rem, 12vw, 16rem)'
-                  : country.population >= 100_000_000
-                  ? 'clamp(6rem, 14vw, 19rem)'
-                  : country.population >= 10_000_000
-                  ? 'clamp(7rem, 17vw, 22rem)'
-                  : 'clamp(8rem, 20vw, 26rem)',
+                fontSize:
+                  country.population >= 1_000_000_000
+                    ? 'clamp(5rem, 12vw, 16rem)'
+                    : country.population >= 100_000_000
+                      ? 'clamp(6rem, 14vw, 19rem)'
+                      : country.population >= 10_000_000
+                        ? 'clamp(7rem, 17vw, 22rem)'
+                        : 'clamp(8rem, 20vw, 26rem)',
                 fontFamily: 'var(--font-bebas-neue), sans-serif',
                 color: '#fff',
                 lineHeight: 0.85,
@@ -558,86 +539,318 @@ export default function CountryCard({
           }}
         >
           {/* Colonne gauche : Régime + Ambiance */}
-          <div style={{ display: 'flex', flexDirection: 'column', padding: '8vh 5vw' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              padding: '8vh 5vw',
+            }}
+          >
             {/* Header de colonne */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '1.5rem', marginBottom: '5vh' }}>
-              <span style={{ fontSize: '0.65rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.25em' }}>GOUVERNANCE & CLIMAT</span>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                borderBottom: '1px solid rgba(255,255,255,0.1)',
+                paddingBottom: '1.5rem',
+                marginBottom: '5vh',
+              }}
+            >
+              <span
+                style={{
+                  fontSize: '0.65rem',
+                  fontFamily: 'var(--font-jetbrains-mono), monospace',
+                  color: 'var(--text-muted)',
+                  letterSpacing: '0.25em',
+                }}
+              >
+                GOUVERNANCE & CLIMAT
+              </span>
             </div>
 
             {/* Bloc 01 : Régime */}
-            <div style={{ flex: 1, borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '5vh', marginBottom: '5vh' }}>
-              <div style={{ fontSize: '0.6rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.3em', marginBottom: '2.5rem' }}>01 — RÉGIME POLITIQUE</div>
+            <div
+              style={{
+                flex: 1,
+                borderBottom: '1px solid rgba(255,255,255,0.08)',
+                paddingBottom: '5vh',
+                marginBottom: '5vh',
+              }}
+            >
+              <div
+                style={{
+                  fontSize: '0.6rem',
+                  fontFamily: 'var(--font-jetbrains-mono), monospace',
+                  color: 'var(--text-muted)',
+                  letterSpacing: '0.3em',
+                  marginBottom: '2.5rem',
+                }}
+              >
+                01 — RÉGIME POLITIQUE
+              </div>
               <PoliticalRegime officialName={country.name.official} />
-              <p style={{ marginTop: '2.5rem', fontSize: '0.85rem', lineHeight: 1.8, opacity: 0.55, textAlign: 'justify' }}>
-                La structure gouvernementale définit le cadre légal et administratif du territoire. Ce régime encadre l'organisation des pouvoirs constitutionnels, la représentation citoyenne et la délégation des compétences administratives à l'échelle nationale.
+              <p
+                style={{
+                  marginTop: '2.5rem',
+                  fontSize: '0.85rem',
+                  lineHeight: 1.8,
+                  opacity: 0.55,
+                  textAlign: 'justify',
+                }}
+              >
+                La structure gouvernementale définit le cadre légal et
+                administratif du territoire. Ce régime encadre l'organisation
+                des pouvoirs constitutionnels, la représentation citoyenne et la
+                délégation des compétences administratives à l'échelle
+                nationale.
               </p>
             </div>
 
             {/* Bloc 02 : Ambiance / Climat */}
             <div style={{ flex: 1 }}>
-              <div style={{ fontSize: '0.6rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.3em', marginBottom: '2.5rem' }}>02 — CLIMAT & AMBIANCE</div>
+              <div
+                style={{
+                  fontSize: '0.6rem',
+                  fontFamily: 'var(--font-jetbrains-mono), monospace',
+                  color: 'var(--text-muted)',
+                  letterSpacing: '0.3em',
+                  marginBottom: '2.5rem',
+                }}
+              >
+                02 — CLIMAT & AMBIANCE
+              </div>
               <MoodDisplay country={country} />
             </div>
           </div>
 
           {/* Séparateur vertical */}
-          <div style={{ backgroundColor: 'rgba(255,255,255,0.1)', height: '100%' }} />
+          <div
+            style={{ backgroundColor: 'rgba(255,255,255,0.1)', height: '100%' }}
+          />
 
           {/* Colonne droite : Capitale + Coordonnées */}
-          <div style={{ display: 'flex', flexDirection: 'column', padding: '8vh 5vw' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              padding: '8vh 5vw',
+            }}
+          >
             {/* Header de colonne */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '1.5rem', marginBottom: '5vh' }}>
-              <span style={{ fontSize: '0.65rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.25em' }}>CAPITALE & GÉOLOCALISATION</span>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                borderBottom: '1px solid rgba(255,255,255,0.1)',
+                paddingBottom: '1.5rem',
+                marginBottom: '5vh',
+              }}
+            >
+              <span
+                style={{
+                  fontSize: '0.65rem',
+                  fontFamily: 'var(--font-jetbrains-mono), monospace',
+                  color: 'var(--text-muted)',
+                  letterSpacing: '0.25em',
+                }}
+              >
+                CAPITALE & GÉOLOCALISATION
+              </span>
             </div>
 
             {/* Bloc 03 : Horloge capitale */}
-            <div style={{ flex: 1, borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '5vh', marginBottom: '5vh' }}>
-              <div style={{ fontSize: '0.6rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.3em', marginBottom: '2.5rem' }}>03 — TEMPS LOCAL</div>
-              <CapitalClock capital={country.capital} timezones={country.timezones} />
+            <div
+              style={{
+                flex: 1,
+                borderBottom: '1px solid rgba(255,255,255,0.08)',
+                paddingBottom: '5vh',
+                marginBottom: '5vh',
+              }}
+            >
+              <div
+                style={{
+                  fontSize: '0.6rem',
+                  fontFamily: 'var(--font-jetbrains-mono), monospace',
+                  color: 'var(--text-muted)',
+                  letterSpacing: '0.3em',
+                  marginBottom: '2.5rem',
+                }}
+              >
+                03 — TEMPS LOCAL
+              </div>
+              <CapitalClock
+                capital={country.capital}
+                timezones={country.timezones}
+              />
             </div>
 
             {/* Bloc 04 : Données techniques géo */}
             <div style={{ flex: 1 }}>
-              <div style={{ fontSize: '0.6rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.3em', marginBottom: '2.5rem' }}>04 — COORDONNÉES GLOBALES</div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem' }}>
+              <div
+                style={{
+                  fontSize: '0.6rem',
+                  fontFamily: 'var(--font-jetbrains-mono), monospace',
+                  color: 'var(--text-muted)',
+                  letterSpacing: '0.3em',
+                  marginBottom: '2.5rem',
+                }}
+              >
+                04 — COORDONNÉES GLOBALES
+              </div>
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '1fr 1fr',
+                  gap: '3rem',
+                }}
+              >
                 <div>
-                  <div style={{ fontSize: '0.6rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.2em', marginBottom: '0.75rem' }}>LATITUDE / LONGITUDE</div>
-                  <div style={{ fontSize: '1.8rem', fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 200, lineHeight: 1.2 }}>
+                  <div
+                    style={{
+                      fontSize: '0.6rem',
+                      fontFamily: 'var(--font-jetbrains-mono), monospace',
+                      color: 'var(--text-muted)',
+                      letterSpacing: '0.2em',
+                      marginBottom: '0.75rem',
+                    }}
+                  >
+                    LATITUDE / LONGITUDE
+                  </div>
+                  <div
+                    style={{
+                      fontSize: '1.8rem',
+                      fontFamily: 'var(--font-dm-sans), sans-serif',
+                      fontWeight: 200,
+                      lineHeight: 1.2,
+                    }}
+                  >
                     {country.latlng && country.latlng.length >= 2 ? (
                       <>
-                        {country.latlng[0].toFixed(4)}<span style={{ fontSize: '1rem', opacity: 0.4 }}>° N</span><br />
-                        {country.latlng[1].toFixed(4)}<span style={{ fontSize: '1rem', opacity: 0.4 }}>° E</span>
+                        {country.latlng[0].toFixed(4)}
+                        <span style={{ fontSize: '1rem', opacity: 0.4 }}>
+                          ° N
+                        </span>
+                        <br />
+                        {country.latlng[1].toFixed(4)}
+                        <span style={{ fontSize: '1rem', opacity: 0.4 }}>
+                          ° E
+                        </span>
                       </>
-                    ) : 'N/A'}
+                    ) : (
+                      'N/A'
+                    )}
                   </div>
                 </div>
                 <div>
-                  <div style={{ fontSize: '0.6rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.2em', marginBottom: '0.75rem' }}>DÉCALAGE UTC</div>
-                  <div style={{ fontSize: '1.8rem', fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 200, lineHeight: 1.2 }}>
-                    {country.timezones && country.timezones.length > 0 ? country.timezones[0] : 'N/A'}
+                  <div
+                    style={{
+                      fontSize: '0.6rem',
+                      fontFamily: 'var(--font-jetbrains-mono), monospace',
+                      color: 'var(--text-muted)',
+                      letterSpacing: '0.2em',
+                      marginBottom: '0.75rem',
+                    }}
+                  >
+                    DÉCALAGE UTC
+                  </div>
+                  <div
+                    style={{
+                      fontSize: '1.8rem',
+                      fontFamily: 'var(--font-dm-sans), sans-serif',
+                      fontWeight: 200,
+                      lineHeight: 1.2,
+                    }}
+                  >
+                    {country.timezones && country.timezones.length > 0
+                      ? country.timezones[0]
+                      : 'N/A'}
                   </div>
                   {country.timezones && country.timezones.length > 1 && (
-                    <div style={{ marginTop: '0.5rem', fontSize: '0.75rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)' }}>
-                      +{country.timezones.length - 1} zone{country.timezones.length > 2 ? 's' : ''}
+                    <div
+                      style={{
+                        marginTop: '0.5rem',
+                        fontSize: '0.75rem',
+                        fontFamily: 'var(--font-jetbrains-mono), monospace',
+                        color: 'var(--text-muted)',
+                      }}
+                    >
+                      +{country.timezones.length - 1} zone
+                      {country.timezones.length > 2 ? 's' : ''}
                     </div>
                   )}
                 </div>
                 <div>
-                  <div style={{ fontSize: '0.6rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.2em', marginBottom: '0.75rem' }}>ENCLAVÉ</div>
-                  <div style={{ fontSize: '1.8rem', fontFamily: 'var(--font-bebas-neue), sans-serif', lineHeight: 1, color: country.landlocked ? 'var(--country-accent)' : '#fff' }}>
+                  <div
+                    style={{
+                      fontSize: '0.6rem',
+                      fontFamily: 'var(--font-jetbrains-mono), monospace',
+                      color: 'var(--text-muted)',
+                      letterSpacing: '0.2em',
+                      marginBottom: '0.75rem',
+                    }}
+                  >
+                    ENCLAVÉ
+                  </div>
+                  <div
+                    style={{
+                      fontSize: '1.8rem',
+                      fontFamily: 'var(--font-bebas-neue), sans-serif',
+                      lineHeight: 1,
+                      color: country.landlocked
+                        ? 'var(--country-accent)'
+                        : '#fff',
+                    }}
+                  >
                     {country.landlocked ? 'OUI' : 'NON'}
                   </div>
-                  <div style={{ fontSize: '0.65rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', marginTop: '0.4rem' }}>
-                    {country.landlocked ? 'Aucun accès maritime' : 'Accès côtier'}
+                  <div
+                    style={{
+                      fontSize: '0.65rem',
+                      fontFamily: 'var(--font-jetbrains-mono), monospace',
+                      color: 'var(--text-muted)',
+                      marginTop: '0.4rem',
+                    }}
+                  >
+                    {country.landlocked
+                      ? 'Aucun accès maritime'
+                      : 'Accès côtier'}
                   </div>
                 </div>
                 <div>
-                  <div style={{ fontSize: '0.6rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.2em', marginBottom: '0.75rem' }}>FRONTIÈRES</div>
-                  <div style={{ fontSize: '1.8rem', fontFamily: 'var(--font-bebas-neue), sans-serif', lineHeight: 1, color: '#fff' }}>
+                  <div
+                    style={{
+                      fontSize: '0.6rem',
+                      fontFamily: 'var(--font-jetbrains-mono), monospace',
+                      color: 'var(--text-muted)',
+                      letterSpacing: '0.2em',
+                      marginBottom: '0.75rem',
+                    }}
+                  >
+                    FRONTIÈRES
+                  </div>
+                  <div
+                    style={{
+                      fontSize: '1.8rem',
+                      fontFamily: 'var(--font-bebas-neue), sans-serif',
+                      lineHeight: 1,
+                      color: '#fff',
+                    }}
+                  >
                     {country.borders?.length ?? 0}
                   </div>
-                  <div style={{ fontSize: '0.65rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', marginTop: '0.4rem' }}>
-                    {country.borders?.length === 1 ? 'pays voisin' : 'pays voisins'}
+                  <div
+                    style={{
+                      fontSize: '0.65rem',
+                      fontFamily: 'var(--font-jetbrains-mono), monospace',
+                      color: 'var(--text-muted)',
+                      marginTop: '0.4rem',
+                    }}
+                  >
+                    {country.borders?.length === 1
+                      ? 'pays voisin'
+                      : 'pays voisins'}
                   </div>
                 </div>
               </div>
@@ -661,16 +874,66 @@ export default function CountryCard({
           }}
         >
           {/* Colonne gauche : Langues */}
-          <div style={{ display: 'flex', flexDirection: 'column', padding: '8vh 5vw' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(0,0,0,0.1)', paddingBottom: '1.5rem', marginBottom: '5vh' }}>
-              <span style={{ fontSize: '0.65rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'rgba(0,0,0,0.5)', letterSpacing: '0.25em' }}>LANGUES OFFICIELLES</span>
-              <span style={{ fontSize: '0.65rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'rgba(0,0,0,0.35)', letterSpacing: '0.1em' }}>ISO_639</span>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              padding: '8vh 5vw',
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                borderBottom: '1px solid rgba(0,0,0,0.1)',
+                paddingBottom: '1.5rem',
+                marginBottom: '5vh',
+              }}
+            >
+              <span
+                style={{
+                  fontSize: '0.65rem',
+                  fontFamily: 'var(--font-jetbrains-mono), monospace',
+                  color: 'rgba(0,0,0,0.5)',
+                  letterSpacing: '0.25em',
+                }}
+              >
+                LANGUES OFFICIELLES
+              </span>
+              <span
+                style={{
+                  fontSize: '0.65rem',
+                  fontFamily: 'var(--font-jetbrains-mono), monospace',
+                  color: 'rgba(0,0,0,0.35)',
+                  letterSpacing: '0.1em',
+                }}
+              >
+                ISO_639
+              </span>
             </div>
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <div
+              style={{
+                flex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+              }}
+            >
               <LanguageList languages={country.languages} />
             </div>
-            <p style={{ fontSize: '0.75rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'rgba(0,0,0,0.4)', lineHeight: 1.6, borderTop: '1px solid rgba(0,0,0,0.1)', paddingTop: '2rem' }}>
-              La diversité linguistique reflète les strates historiques d'un territoire et ses influences géopolitiques séculaires.
+            <p
+              style={{
+                fontSize: '0.75rem',
+                fontFamily: 'var(--font-jetbrains-mono), monospace',
+                color: 'rgba(0,0,0,0.4)',
+                lineHeight: 1.6,
+                borderTop: '1px solid rgba(0,0,0,0.1)',
+                paddingTop: '2rem',
+              }}
+            >
+              La diversité linguistique reflète les strates historiques d'un
+              territoire et ses influences géopolitiques séculaires.
             </p>
           </div>
 
@@ -678,30 +941,77 @@ export default function CountryCard({
           <div style={{ backgroundColor: 'rgba(0,0,0,0.1)', height: '100%' }} />
 
           {/* Colonne droite : Monnaie */}
-          <div style={{ display: 'flex', flexDirection: 'column', padding: '8vh 5vw', position: 'relative', overflow: 'hidden' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(0,0,0,0.1)', paddingBottom: '1.5rem', marginBottom: '5vh' }}>
-              <span style={{ fontSize: '0.65rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'rgba(0,0,0,0.5)', letterSpacing: '0.25em' }}>ÉCONOMIE & MONNAIE</span>
-              <span style={{ fontSize: '0.65rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'rgba(0,0,0,0.35)', letterSpacing: '0.1em' }}>ISO_4217</span>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              padding: '8vh 5vw',
+              position: 'relative',
+              overflow: 'hidden',
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                borderBottom: '1px solid rgba(0,0,0,0.1)',
+                paddingBottom: '1.5rem',
+                marginBottom: '5vh',
+              }}
+            >
+              <span
+                style={{
+                  fontSize: '0.65rem',
+                  fontFamily: 'var(--font-jetbrains-mono), monospace',
+                  color: 'rgba(0,0,0,0.5)',
+                  letterSpacing: '0.25em',
+                }}
+              >
+                ÉCONOMIE & MONNAIE
+              </span>
+              <span
+                style={{
+                  fontSize: '0.65rem',
+                  fontFamily: 'var(--font-jetbrains-mono), monospace',
+                  color: 'rgba(0,0,0,0.35)',
+                  letterSpacing: '0.1em',
+                }}
+              >
+                ISO_4217
+              </span>
             </div>
 
             {/* Filigrane symbole monnaie */}
             {country.currencies && Object.keys(country.currencies)[0] && (
-              <div style={{
-                position: 'absolute',
-                bottom: '-5vh',
-                right: '-2vw',
-                fontSize: '50vw',
-                fontWeight: 900,
-                color: 'rgba(0,0,0,0.04)',
-                lineHeight: 1,
-                pointerEvents: 'none',
-                userSelect: 'none',
-              }}>
-                {country.currencies[Object.keys(country.currencies)[0]].symbol || Object.keys(country.currencies)[0]}
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: '-5vh',
+                  right: '-2vw',
+                  fontSize: '50vw',
+                  fontWeight: 900,
+                  color: 'rgba(0,0,0,0.04)',
+                  lineHeight: 1,
+                  pointerEvents: 'none',
+                  userSelect: 'none',
+                }}
+              >
+                {country.currencies[Object.keys(country.currencies)[0]]
+                  .symbol || Object.keys(country.currencies)[0]}
               </div>
             )}
 
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', zIndex: 2 }}>
+            <div
+              style={{
+                flex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                position: 'relative',
+                zIndex: 2,
+              }}
+            >
               <CurrencyCard currencies={country.currencies} />
             </div>
           </div>
@@ -720,52 +1030,215 @@ export default function CountryCard({
           }}
         >
           {/* Barre header pleine largeur */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4vh 5vw' }}>
-            <span style={{ fontSize: '0.65rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.25em' }}>RÉSEAU & COMMUNICATIONS</span>
-            <span style={{ fontSize: '0.65rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--country-accent)', letterSpacing: '0.1em' }}>TLD & IDD</span>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              borderBottom: '1px solid rgba(255,255,255,0.1)',
+              padding: '4vh 5vw',
+            }}
+          >
+            <span
+              style={{
+                fontSize: '0.65rem',
+                fontFamily: 'var(--font-jetbrains-mono), monospace',
+                color: 'var(--text-muted)',
+                letterSpacing: '0.25em',
+              }}
+            >
+              RÉSEAU & COMMUNICATIONS
+            </span>
+            <span
+              style={{
+                fontSize: '0.65rem',
+                fontFamily: 'var(--font-jetbrains-mono), monospace',
+                color: 'var(--country-accent)',
+                letterSpacing: '0.1em',
+              }}
+            >
+              TLD & IDD
+            </span>
           </div>
 
           {/* Grille de données réseau : 3 colonnes */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', flex: 1 }}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3, 1fr)',
+              flex: 1,
+            }}
+          >
             {/* Col 1 : Indicatif téléphonique */}
-            <div style={{ padding: '5vh 5vw', borderRight: '1px solid rgba(255,255,255,0.08)', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ fontSize: '0.6rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.3em', marginBottom: '3rem' }}>05 / INDICATIF TÉLÉPHONIQUE</div>
-              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <div style={{ fontSize: 'clamp(4rem, 10vw, 12rem)', fontFamily: 'var(--font-bebas-neue), sans-serif', lineHeight: 0.9, color: 'var(--country-accent)' }}>
-                  {(country.idd?.root || '') + (country.idd?.suffixes?.[0] || '') || '—'}
+            <div
+              style={{
+                padding: '5vh 5vw',
+                borderRight: '1px solid rgba(255,255,255,0.08)',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <div
+                style={{
+                  fontSize: '0.6rem',
+                  fontFamily: 'var(--font-jetbrains-mono), monospace',
+                  color: 'var(--text-muted)',
+                  letterSpacing: '0.3em',
+                  marginBottom: '3rem',
+                }}
+              >
+                05 / INDICATIF TÉLÉPHONIQUE
+              </div>
+              <div
+                style={{
+                  flex: 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: 'clamp(4rem, 10vw, 12rem)',
+                    fontFamily: 'var(--font-bebas-neue), sans-serif',
+                    lineHeight: 0.9,
+                    color: 'var(--country-accent)',
+                  }}
+                >
+                  {(country.idd?.root || '') +
+                    (country.idd?.suffixes?.[0] || '') || '—'}
                 </div>
-                <div style={{ marginTop: '2rem', fontSize: '0.75rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                  Code d'appel international alloué par l'UIT (Union Internationale des Télécommunications).
+                <div
+                  style={{
+                    marginTop: '2rem',
+                    fontSize: '0.75rem',
+                    fontFamily: 'var(--font-jetbrains-mono), monospace',
+                    color: 'var(--text-muted)',
+                    lineHeight: 1.6,
+                  }}
+                >
+                  Code d'appel international alloué par l'UIT (Union
+                  Internationale des Télécommunications).
                 </div>
               </div>
             </div>
 
             {/* Col 2 : TLD Internet */}
-            <div style={{ padding: '5vh 5vw', borderRight: '1px solid rgba(255,255,255,0.08)', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ fontSize: '0.6rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.3em', marginBottom: '3rem' }}>06 / DOMAINE INTERNET (TLD)</div>
-              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <div style={{ fontSize: 'clamp(4rem, 10vw, 12rem)', fontFamily: 'var(--font-bebas-neue), sans-serif', lineHeight: 0.9, color: '#fff' }}>
+            <div
+              style={{
+                padding: '5vh 5vw',
+                borderRight: '1px solid rgba(255,255,255,0.08)',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <div
+                style={{
+                  fontSize: '0.6rem',
+                  fontFamily: 'var(--font-jetbrains-mono), monospace',
+                  color: 'var(--text-muted)',
+                  letterSpacing: '0.3em',
+                  marginBottom: '3rem',
+                }}
+              >
+                06 / DOMAINE INTERNET (TLD)
+              </div>
+              <div
+                style={{
+                  flex: 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: 'clamp(4rem, 10vw, 12rem)',
+                    fontFamily: 'var(--font-bebas-neue), sans-serif',
+                    lineHeight: 0.9,
+                    color: '#fff',
+                  }}
+                >
                   {country.tld?.[0] ?? '—'}
                 </div>
                 {country.tld && country.tld.length > 1 && (
-                  <div style={{ marginTop: '1rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                  <div
+                    style={{
+                      marginTop: '1rem',
+                      display: 'flex',
+                      gap: '1rem',
+                      flexWrap: 'wrap',
+                    }}
+                  >
                     {country.tld.slice(1).map((t: string) => (
-                      <span key={t} style={{ fontSize: '1rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', borderBottom: '1px solid rgba(255,255,255,0.2)', paddingBottom: '2px' }}>{t}</span>
+                      <span
+                        key={t}
+                        style={{
+                          fontSize: '1rem',
+                          fontFamily: 'var(--font-jetbrains-mono), monospace',
+                          color: 'var(--text-muted)',
+                          borderBottom: '1px solid rgba(255,255,255,0.2)',
+                          paddingBottom: '2px',
+                        }}
+                      >
+                        {t}
+                      </span>
                     ))}
                   </div>
                 )}
-                <div style={{ marginTop: '2rem', fontSize: '0.75rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                  Domaine de premier niveau géographique géré par l'ICANN pour l'espace numérique souverain.
+                <div
+                  style={{
+                    marginTop: '2rem',
+                    fontSize: '0.75rem',
+                    fontFamily: 'var(--font-jetbrains-mono), monospace',
+                    color: 'var(--text-muted)',
+                    lineHeight: 1.6,
+                  }}
+                >
+                  Domaine de premier niveau géographique géré par l'ICANN pour
+                  l'espace numérique souverain.
                 </div>
               </div>
             </div>
 
             {/* Col 3 : Partager */}
-            <div style={{ padding: '5vh 5vw', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ fontSize: '0.6rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--text-muted)', letterSpacing: '0.3em', marginBottom: '3rem' }}>07 / PARTAGER</div>
-              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <p style={{ fontSize: '0.85rem', fontFamily: 'var(--font-jetbrains-mono), monospace', lineHeight: 1.8, opacity: 0.5, marginBottom: '4rem' }}>
-                  Diffusez cet atlas numérique. Chaque lien partagé étend la connaissance géopolitique du monde.
+            <div
+              style={{
+                padding: '5vh 5vw',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <div
+                style={{
+                  fontSize: '0.6rem',
+                  fontFamily: 'var(--font-jetbrains-mono), monospace',
+                  color: 'var(--text-muted)',
+                  letterSpacing: '0.3em',
+                  marginBottom: '3rem',
+                }}
+              >
+                07 / PARTAGER
+              </div>
+              <div
+                style={{
+                  flex: 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                }}
+              >
+                <p
+                  style={{
+                    fontSize: '0.85rem',
+                    fontFamily: 'var(--font-jetbrains-mono), monospace',
+                    lineHeight: 1.8,
+                    opacity: 0.5,
+                    marginBottom: '4rem',
+                  }}
+                >
+                  Diffusez cet atlas numérique. Chaque lien partagé étend la
+                  connaissance géopolitique du monde.
                 </p>
                 <ShareButton url={canonicalUrl} />
               </div>
