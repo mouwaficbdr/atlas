@@ -6,6 +6,7 @@ import { filterCountries } from '@/lib/search-engine';
 import type { CountryData, SearchResult } from '@/lib/types';
 import { useRouter } from 'next/navigation';
 import { getPreferredWikiTitle, prefetchWikiSummary } from '@/lib/wiki-summary';
+import { useAppStore } from '@/lib/store';
 
 interface SearchPaletteProps {
   countries: CountryData[];
@@ -17,7 +18,8 @@ export default function SearchPalette({
   onSelect,
 }: SearchPaletteProps) {
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
+  const isOpen = useAppStore((state) => state.isSearchOpen);
+  const setIsOpen = useAppStore((state) => state.setSearchOpen);
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -36,7 +38,7 @@ export default function SearchPalette({
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [setIsOpen]);
 
   // Filtrage instantané à chaque frappe
   useEffect(() => {

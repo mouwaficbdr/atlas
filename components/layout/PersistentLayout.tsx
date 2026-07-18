@@ -5,6 +5,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import GlobeScene from '@/components/globe/GlobeScene';
 import LoadingScreen from '@/components/ui/LoadingScreen';
 import SearchPalette from '@/components/ui/SearchPalette';
+import Navigation from '@/components/layout/Navigation';
 import DesktopExperienceSuggestion from '@/components/ui/DesktopExperienceSuggestion';
 import MobileExplorer from '@/components/ui/MobileExplorer';
 import GlobeOnboarding from '@/components/ui/GlobeOnboarding';
@@ -43,6 +44,7 @@ export default function PersistentLayout({
 
   const setSelectedCountry = useAppStore((state) => state.setSelectedCountry);
   const setCameraMode = useAppStore((state) => state.setCameraMode);
+  const setSearchOpen = useAppStore((state) => state.setSearchOpen);
 
   const minDurationRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -249,8 +251,13 @@ export default function PersistentLayout({
         onRevealComplete={handleRevealComplete}
       />
 
-      {/* Search Palette (only show on globe mode maybe, or always) */}
-      {countries.length > 0 && pathname === '/' && !isMobile && (
+      {/* Navigation (desktop) — disponible sur toutes les pages, y compris les
+          pages pays, pour offrir un chemin clavier/visible vers la recherche. */}
+      {!isMobile && <Navigation onSearchOpen={() => setSearchOpen(true)} />}
+
+      {/* Search Palette — disponible sur toutes les pages desktop (Cmd+K ou
+          bouton de la Navigation), pas seulement sur le globe. */}
+      {countries.length > 0 && !isMobile && (
         <SearchPalette countries={countries} onSelect={handleCountrySelect} />
       )}
 
