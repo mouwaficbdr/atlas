@@ -11,6 +11,7 @@ import { unstable_cache } from 'next/cache';
 import CountryCard from '@/components/country/CountryCard';
 import { fetchAllCountries } from '@/lib/countries-api';
 import { loadMDX } from '@/lib/mdx-loader';
+import { SITE_URL } from '@/lib/site-config';
 import type { CountryData, CountryPalette, MDXContent } from '@/lib/types';
 
 // SSG pur : les données sont figées au build, pas de revalidation.
@@ -52,7 +53,7 @@ export async function generateMetadata({
     };
   }
 
-  const canonicalUrl = `https://atlas.example.com/pays/${params.code}`;
+  const canonicalUrl = `${SITE_URL}/pays/${params.code}`;
   const description =
     `Découvrez ${country.name.official} sur ATLAS° : population, superficie, capitale, langues, monnaie, et bien plus.`.slice(
       0,
@@ -266,7 +267,7 @@ export default async function CountryPage({ params }: PageProps) {
   const allCountries = await getAllCountries(countries);
   const palette = await getCountryPalette(enrichedCountry);
   const mdxContent = await getCountryMDX(enrichedCountry.cca3);
-  const canonicalUrl = `https://atlas.example.com/pays/${params.code}`;
+  const canonicalUrl = `${SITE_URL}/pays/${params.code}`;
 
   const wikiSummary = await getCachedWikiSummary(
     enrichedCountry.name.common,
