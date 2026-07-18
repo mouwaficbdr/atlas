@@ -52,6 +52,10 @@ const arbitraryCountryData: fc.Arbitrary<CountryData> = fc.record({
     minLength: 0,
     maxLength: 20,
   }),
+  centroid: fc.tuple(
+    fc.float({ min: -90, max: 90, noNaN: true }),
+    fc.float({ min: -180, max: 180, noNaN: true })
+  ) as fc.Arbitrary<[number, number]>,
 
   // Démographie et culture
   population: fc.integer({ min: 0, max: 2_000_000_000 }),
