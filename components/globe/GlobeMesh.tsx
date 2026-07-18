@@ -18,17 +18,18 @@ interface GlobeMeshProps {
   countries: CountryData[];
   onSelect: (cca3: string) => void;
   onLoad?: () => void;
+  cameraMode: 'globe' | 'country';
 }
 
 export default function GlobeMesh({
   countries,
   onSelect,
   onLoad,
+  cameraMode,
 }: GlobeMeshProps) {
   const [features, setFeatures] = useState<GeoJSONFeature[]>([]);
   const [hoveredCca3, setHoveredCca3] = useState<string | null>(null);
   const setHoveredCountry = useAppStore((state) => state.setHoveredCountry);
-  const cameraMode = useAppStore((state) => state.cameraMode);
 
   useEffect(() => {
     loadGeoJSON()

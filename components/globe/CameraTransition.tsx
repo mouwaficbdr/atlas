@@ -3,18 +3,17 @@
 import { useEffect } from 'react';
 import { useThree } from '@react-three/fiber';
 import { gsap } from 'gsap';
-import { useAppStore } from '@/lib/store';
 import type { CountryData } from '@/lib/types';
 import * as THREE from 'three';
 
 interface CameraTransitionProps {
   countries: CountryData[];
+  cameraMode: 'globe' | 'country';
+  selectedCountryCca3: string | null;
 }
 
-export default function CameraTransition({ countries }: CameraTransitionProps) {
+export default function CameraTransition({ countries, cameraMode, selectedCountryCca3 }: CameraTransitionProps) {
   const { camera, controls } = useThree();
-  const selectedCountryCca3 = useAppStore(state => state.selectedCountryCca3);
-  const cameraMode = useAppStore(state => state.cameraMode);
 
   useEffect(() => {
     // NOTE: controls n'est disponible qu'après le premier rendu du Canvas

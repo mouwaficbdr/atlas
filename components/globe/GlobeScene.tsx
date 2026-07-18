@@ -15,9 +15,11 @@ interface GlobeSceneProps {
   onCountrySelect: (cca3: string) => void;
   onProgress?: (progress: number) => void;
   onLoad?: () => void;
+  cameraMode: 'globe' | 'country';
+  selectedCountryCca3: string | null;
 }
 
-export default function GlobeScene({ countries, onCountrySelect, onProgress, onLoad }: GlobeSceneProps) {
+export default function GlobeScene({ countries, onCountrySelect, onProgress, onLoad, cameraMode, selectedCountryCca3 }: GlobeSceneProps) {
   const [webGLSupported, setWebGLSupported] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
   const onLoadCalledRef = useRef(false);
@@ -91,10 +93,15 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
           countries={countries}
           onSelect={onCountrySelect}
           onLoad={handleCreated}
+          cameraMode={cameraMode}
         />
         <AtmosphereMesh />
         <GlobeControls enabled={true} />
-        <CameraTransition countries={countries} />
+        <CameraTransition
+          countries={countries}
+          cameraMode={cameraMode}
+          selectedCountryCca3={selectedCountryCca3}
+        />
       </Canvas>
 
       <SROnlyList countries={countries} visible={false} />
