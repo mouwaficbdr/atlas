@@ -42,24 +42,18 @@ export default function PersistentLayout({
     assetsLoaded: false,
   });
 
-  const setSelectedCountry = useAppStore((state) => state.setSelectedCountry);
-  const setCameraMode = useAppStore((state) => state.setCameraMode);
   const setSearchOpen = useAppStore((state) => state.setSearchOpen);
 
-  const minDurationRef = useRef<NodeJS.Timeout | null>(null);
+  // Dérivés directement de l'URL à chaque rendu plutôt que synchronisés dans
+  // le store via un useEffect : évite le décalage d'une frame (le globe
+  // affichait encore le mode précédent le temps que l'effet se déclenche).
+  const cameraMode: 'globe' | 'country' = pathname.startsWith('/pays/')
+    ? 'country'
+    : 'globe';
+  const selectedCountryCca3 =
+    cameraMode === 'country' ? pathname.split('/').pop()?.toUpperCase() ?? null : null;
 
-  useEffect(() => {
-    if (pathname.startsWith('/pays/')) {
-      const cca3 = pathname.split('/').pop()?.toUpperCase();
-      if (cca3) {
-        setSelectedCountry(cca3);
-        setCameraMode('country');
-      }
-    } else {
-      setSelectedCountry(null);
-      setCameraMode('globe');
-    }
-  }, [pathname, setSelectedCountry, setCameraMode]);
+  const minDurationRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const loadCountries = async () => {
@@ -134,6 +128,8 @@ export default function PersistentLayout({
             onCountrySelect={handleCountrySelect}
             onProgress={handleProgress}
             onLoad={handleLoad}
+            cameraMode={cameraMode}
+            selectedCountryCca3={selectedCountryCca3}
           />
         )}
         {countries.length > 0 && isMobile && (
