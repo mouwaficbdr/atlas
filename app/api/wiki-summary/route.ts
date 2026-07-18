@@ -2,7 +2,41 @@ import { NextResponse } from 'next/server';
 
 export const runtime = 'edge';
 
+const RATE_LIMIT_WINDOW_MS = 60_000; // 1 minute
+const RATE_LIMIT_MAX_REQUESTS = 20; // 20 requêtes / minute / IP
+
+// État en mémoire de l'instance edge — best-effort : ne persiste pas entre
+// isolates/régions ni redéploiements, mais suffit à empêcher un client isolé
+// de spammer des titres distincts (jamais mis en cache) et d'épuiser le quota
+// d'Edge Functions.
+const requestTimestamps = new Map<string, number[]>();
+
+function getClientIp(req: Request): string {
+  return (
+    req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+    req.headers.get('x-real-ip') ||
+    'unknown'
+  );
+}
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const recent = (requestTimestamps.get(ip) ?? []).filter(
+    (t) => now - t < RATE_LIMIT_WINDOW_MS,
+  );
+  recent.push(now);
+  requestTimestamps.set(ip, recent);
+  return recent.length > RATE_LIMIT_MAX_REQUESTS;
+}
+
 export async function GET(req: Request) {
+  if (isRateLimited(getClientIp(req))) {
+    return NextResponse.json(
+      { extract: null },
+      { status: 429, headers: { 'Retry-After': '60' } },
+    );
+  }
+
   const { searchParams } = new URL(req.url);
   const title = searchParams.get('title')?.trim();
 
