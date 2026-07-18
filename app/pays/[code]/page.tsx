@@ -61,6 +61,13 @@ export async function generateMetadata({
       160,
     );
 
+  const flagImage = {
+    url: country.flags.png,
+    width: 1200,
+    height: 630,
+    alt: `Drapeau de ${country.name.common}`,
+  };
+
   return {
     title: `${country.name.common} - ATLAS°`,
     description,
@@ -69,14 +76,15 @@ export async function generateMetadata({
       description,
       type: 'website',
       url: canonicalUrl,
-      images: [
-        {
-          url: country.flags.svg,
-          width: 1200,
-          height: 630,
-          alt: `Drapeau de ${country.name.common}`,
-        },
-      ],
+      // Le PNG (pas le SVG) est utilisé : Facebook/LinkedIn/Slack/Twitter ne
+      // rendent généralement pas les SVG comme og:image.
+      images: [flagImage],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: country.name.common,
+      description,
+      images: [flagImage.url],
     },
     alternates: {
       canonical: canonicalUrl,
