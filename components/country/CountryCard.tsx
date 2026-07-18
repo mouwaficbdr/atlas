@@ -3,7 +3,6 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Lenis from 'lenis';
 import type { CountryData, MDXContent, CountryPalette } from '@/lib/types';
 
 import FlagDisplay from './FlagDisplay';
@@ -72,40 +71,6 @@ export default function CountryCard({
       document.documentElement.style.removeProperty('--country-background');
     };
   }, [palette]);
-
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      syncTouch: false,
-    });
-
-    ScrollTrigger.scrollerProxy(window, {
-      scrollTop(value) {
-        if (arguments.length)
-          lenis.scrollTo(value as number, { immediate: true });
-        return lenis.actualScroll;
-      },
-      getBoundingClientRect() {
-        return {
-          top: 0,
-          left: 0,
-          width: window.innerWidth,
-          height: window.innerHeight,
-        };
-      },
-      pinType: 'transform',
-    });
-
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => lenis.raf(time * 1000));
-
-    return () => {
-      lenis.destroy();
-      gsap.ticker.remove((time) => lenis.raf(time * 1000));
-    };
-  }, []);
 
   useEffect(() => {
     // We remove the complex GSAP parallax to let the pure CSS sticky wipe shine,

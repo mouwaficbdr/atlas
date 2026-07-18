@@ -2,11 +2,21 @@
 
 import { useEffect, ReactNode } from 'react';
 import Lenis from 'lenis';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface LenisProviderProps {
   children: ReactNode;
 }
 
+/**
+ * Instance Lenis unique pour toute l'app, synchronisée avec gsap.ticker et
+ * exposée à ScrollTrigger via scrollerProxy. Toute animation pilotée par
+ * ScrollTrigger (ex: CountryCard) profite de ce scroll fluide sans avoir à
+ * créer sa propre instance Lenis.
+ */
 export default function LenisProvider({ children }: LenisProviderProps) {
   useEffect(() => {
     // NOTE: Lenis est désactivé sur mobile pour laisser le scroll natif gérer l'UX
@@ -19,14 +29,29 @@ export default function LenisProvider({ children }: LenisProviderProps) {
       syncTouch: false,
     });
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+    ScrollTrigger.scrollerProxy(window, {
+      scrollTop(value) {
+        if (arguments.length) lenis.scrollTo(value as number, { immediate: true });
+        return lenis.actualScroll;
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight,
+        };
+      },
+      pinType: 'transform',
+    });
 
-    requestAnimationFrame(raf);
+    lenis.on('scroll', ScrollTrigger.update);
+
+    const onTick = (time: number) => lenis.raf(time * 1000);
+    gsap.ticker.add(onTick);
 
     return () => {
+      gsap.ticker.remove(onTick);
       lenis.destroy();
     };
   }, []);
