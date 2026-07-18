@@ -12,6 +12,7 @@ import CountryCard from '@/components/country/CountryCard';
 import { fetchAllCountries } from '@/lib/countries-api';
 import { loadMDX } from '@/lib/mdx-loader';
 import { SITE_URL } from '@/lib/site-config';
+import { adjustForContrast, getContrastRatio } from '@/lib/contrast-checker';
 import type { CountryData, CountryPalette, MDXContent } from '@/lib/types';
 
 // SSG pur : les données sont figées au build, pas de revalidation.
@@ -121,29 +122,34 @@ async function getAllCountries(
   }
 }
 
+const PALETTE_BACKGROUND = '#0A0A14';
+const MIN_CONTRAST_RATIO = 4.5; // WCAG AA pour texte normal
+
 async function getCountryPalette(
   country: CountryData,
 ): Promise<CountryPalette> {
   const c = country.colors;
-  if (c && c.primary) {
-    return {
-      primary: c.primary,
-      secondary: c.palette?.[1] || '#2D5986',
-      accent: c.palette?.[2] || '#4A90D9',
-      background: '#0A0A14',
-      cca3: country.cca3,
-      source: 'extracted',
-      contrastRatio: 4.5,
-    };
-  }
+  const rawPrimary = c?.primary || '#1E3A5F';
+  const secondary = c?.palette?.[1] || '#2D5986';
+  const accent = c?.palette?.[2] || '#4A90D9';
+
+  // Le ratio annoncé est réellement calculé (et la couleur primaire ajustée
+  // si besoin) via lib/contrast-checker.ts, plutôt que déclaré en dur.
+  const primary = adjustForContrast(
+    rawPrimary,
+    PALETTE_BACKGROUND,
+    MIN_CONTRAST_RATIO,
+  );
+  const contrastRatio = getContrastRatio(primary, PALETTE_BACKGROUND);
+
   return {
-    primary: '#1E3A5F',
-    secondary: '#2D5986',
-    accent: '#4A90D9',
-    background: '#0A0A14',
+    primary,
+    secondary,
+    accent,
+    background: PALETTE_BACKGROUND,
     cca3: country.cca3,
-    source: 'fallback',
-    contrastRatio: 4.5,
+    source: c?.primary ? 'extracted' : 'fallback',
+    contrastRatio,
   };
 }
 
