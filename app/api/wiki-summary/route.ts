@@ -77,7 +77,22 @@ export async function GET(req: Request) {
     );
   }
 
-  const data = (await upstreamRes.json()) as { extract?: string };
+  let data: { extract?: string };
+  try {
+    data = (await upstreamRes.json()) as { extract?: string };
+  } catch {
+    // Réponse 200 mais corps non-JSON/malformé côté Wikipedia — même
+    // dégradation gracieuse que les autres cas d'échec de cette route.
+    return NextResponse.json(
+      { extract: null },
+      {
+        status: 200,
+        headers: {
+          'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=86400',
+        },
+      },
+    );
+  }
 
   return NextResponse.json(
     { extract: typeof data.extract === 'string' ? data.extract : null },
