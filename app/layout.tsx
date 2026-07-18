@@ -3,6 +3,7 @@ import { Bebas_Neue, DM_Sans, JetBrains_Mono } from 'next/font/google';
 import LenisProvider from '@/components/layout/LenisProvider';
 import CustomCursor from '@/components/ui/CustomCursor';
 import PersistentLayout from '@/components/layout/PersistentLayout';
+import { SITE_URL } from '@/lib/site-config';
 import './globals.css';
 
 const bebasNeue = Bebas_Neue({
@@ -25,7 +26,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://atlas-globe.vercel.app'),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: 'ATLAS° — Explorateur mondial de pays',
     template: '%s | ATLAS°',
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
-    url: 'https://atlas-globe.vercel.app',
+    url: SITE_URL,
     siteName: 'ATLAS°',
     title: 'ATLAS° — Explorateur mondial de pays',
     description: 'Explorez le monde en 3D avec ATLAS° : un globe interactif présentant 195 pays avec leurs données géographiques, culturelles et économiques.',
