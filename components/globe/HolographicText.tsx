@@ -49,9 +49,13 @@ function makeTextTexture(text: string, color: string): THREE.CanvasTexture {
 
 export default function HolographicText({ text, latlng, color = '#ffffff' }: HolographicTextProps) {
   const spriteRef = useRef<THREE.Sprite>(null);
+  const [lat, lon] = latlng;
 
-  const position = useMemo(() => projectPoint(latlng[0], latlng[1], 1.02), [latlng]);
+  const position = useMemo(() => projectPoint(lat, lon, 1.02), [lat, lon]);
+  const targetPosition = useMemo(() => projectPoint(lat, lon, 1.12), [lat, lon]);
   const normal = useMemo(() => new THREE.Vector3(...position).normalize(), [position]);
+  // Vecteur de travail réutilisé dans useFrame pour éviter une allocation par frame.
+  const hoverOffset = useRef(new THREE.Vector3());
 
   const { spriteMaterial, spriteScale } = useMemo(() => {
     const texture = makeTextTexture(text, color);
@@ -71,17 +75,24 @@ export default function HolographicText({ text, latlng, color = '#ffffff' }: Hol
     return { spriteMaterial: material, spriteScale: scale };
   }, [text, color]);
 
+  // Le texte/la couleur changeant recrée texture + matériau (useMemo ci-dessus) :
+  // sans ce cleanup, chaque pays survolé laissait un CanvasTexture + un
+  // SpriteMaterial orphelins côté GPU pour toute la session.
+  useEffect(() => {
+    return () => {
+      spriteMaterial.map?.dispose();
+      spriteMaterial.dispose();
+    };
+  }, [spriteMaterial]);
+
   useEffect(() => {
     if (spriteRef.current) {
-      const lat = latlng[0];
-      const lon = latlng[1];
-      const targetPos = projectPoint(lat, lon, 1.12);
       spriteRef.current.position.set(position[0], position[1], position[2]);
 
       gsap.to(spriteRef.current.position, {
-        x: targetPos[0],
-        y: targetPos[1],
-        z: targetPos[2],
+        x: targetPosition[0],
+        y: targetPosition[1],
+        z: targetPosition[2],
         duration: 0.8,
         ease: 'back.out(1.5)',
       });
@@ -94,18 +105,17 @@ export default function HolographicText({ text, latlng, color = '#ffffff' }: Hol
     return () => {
       spriteMaterial.opacity = 0;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [text]);
+  }, [position, targetPosition, spriteMaterial]);
 
   useFrame(({ clock }) => {
     if (spriteRef.current) {
-      const basePos = projectPoint(latlng[0], latlng[1], 1.12);
-      const hoverOffset = Math.sin(clock.elapsedTime * 3) * 0.005;
-      const offsetVec = normal.clone().multiplyScalar(hoverOffset);
+      const offset = hoverOffset.current
+        .copy(normal)
+        .multiplyScalar(Math.sin(clock.elapsedTime * 3) * 0.005);
       spriteRef.current.position.set(
-        basePos[0] + offsetVec.x,
-        basePos[1] + offsetVec.y,
-        basePos[2] + offsetVec.z
+        targetPosition[0] + offset.x,
+        targetPosition[1] + offset.y,
+        targetPosition[2] + offset.z
       );
     }
   });
