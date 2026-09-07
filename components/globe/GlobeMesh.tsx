@@ -6,7 +6,6 @@ import { useFrame } from '@react-three/fiber';
 import { loadGeoJSON } from '@/lib/geojson-loader';
 import type { GeoJSONFeature, CountryData } from '@/lib/types';
 import { useAppStore } from '@/lib/store';
-import { prefetchWikiSummary, getPreferredWikiTitle } from '@/lib/wiki-summary';
 import CountryMesh from './CountryMesh';
 import BordersMesh from './BordersMesh';
 import HolographicText from './HolographicText';
@@ -57,19 +56,6 @@ export default function GlobeMesh({
     setHoveredCca3(null);
     setHoveredCountry(null);
   }, [cameraMode, setHoveredCountry]);
-
-  useEffect(() => {
-    if (!hoveredCountry) return;
-
-    const title = getPreferredWikiTitle(hoveredCountry);
-    if (!title) return;
-
-    const t = setTimeout(() => {
-      prefetchWikiSummary(title);
-    }, 150);
-
-    return () => clearTimeout(t);
-  }, [hoveredCountry]);
 
   const oceanMaterial = useMemo(() => {
     return new THREE.ShaderMaterial({
