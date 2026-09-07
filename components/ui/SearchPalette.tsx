@@ -86,6 +86,9 @@ export default function SearchPalette({
       onClick={() => setIsOpen(false)}
     >
       <div
+        role="dialog"
+        aria-modal="true"
+        aria-label="Recherche de pays"
         style={{
           backgroundColor: 'var(--bg-elevated)',
           borderRadius: '12px',
@@ -102,6 +105,13 @@ export default function SearchPalette({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
+          role="combobox"
+          aria-expanded={results.length > 0}
+          aria-controls="search-results"
+          aria-activedescendant={
+            results[selectedIndex] ? `sr-${results[selectedIndex].cca3}` : undefined
+          }
+          aria-autocomplete="list"
           style={{
             width: '100%',
             padding: '16px',
@@ -109,16 +119,23 @@ export default function SearchPalette({
             backgroundColor: 'transparent',
             color: 'var(--text-primary)',
             fontSize: '1rem',
-            outline: 'none',
             borderBottom: '1px solid var(--border-subtle)',
           }}
         />
 
-        <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
+        <div
+          id="search-results"
+          role="listbox"
+          aria-label="Résultats"
+          style={{ maxHeight: '400px', overflowY: 'auto' }}
+        >
           {results.length > 0 ? (
             results.map((result, idx) => (
               <div
                 key={result.cca3}
+                id={`sr-${result.cca3}`}
+                role="option"
+                aria-selected={idx === selectedIndex}
                 style={{
                   padding: '12px 16px',
                   backgroundColor:
