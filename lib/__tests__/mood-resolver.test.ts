@@ -27,8 +27,19 @@ const arbitraryCountryData: fc.Arbitrary<CountryData> = fc.record({
     official: fc.string({ minLength: 1, maxLength: 100 }),
     nativeName: fc.constant({}),
   }),
+  nameFr: fc.string({ minLength: 1, maxLength: 50 }),
+  officialNameFr: fc.string({ minLength: 1, maxLength: 100 }),
+  demonymFr: fc.string({ minLength: 0, maxLength: 30 }),
+  capitalFr: fc.string({ minLength: 0, maxLength: 50 }),
+  regionFr: fc.string({ minLength: 1, maxLength: 30 }),
+  subregionFr: fc.string({ minLength: 1, maxLength: 50 }),
+  primaryTimezone: fc.constant("UTC"),
+  governmentFr: fc.option(fc.string({ minLength: 1, maxLength: 40 }), {
+    nil: null,
+  }),
+  independent: fc.constant(true),
 
-  // Géographie — champs utilisés par resolveMood
+  // Géographie, champs utilisés par resolveMood
   capital: fc.array(fc.string({ minLength: 1, maxLength: 50 }), {
     minLength: 0,
     maxLength: 3,

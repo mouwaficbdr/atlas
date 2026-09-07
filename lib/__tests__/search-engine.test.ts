@@ -28,6 +28,15 @@ const arbitraryCountryData = (): fc.Arbitrary<CountryData> =>
         official: fc.string({ minLength: 1, maxLength: 80 }),
         nativeName: fc.constant({}),
       }),
+      demonymFr: fc.string({ minLength: 0, maxLength: 30 }),
+      capitalFr: fc.string({ minLength: 0, maxLength: 40 }),
+      regionFr: fc.string({ minLength: 1, maxLength: 30 }),
+      subregionFr: fc.string({ minLength: 1, maxLength: 40 }),
+      primaryTimezone: fc.constant('UTC'),
+      governmentFr: fc.option(fc.string({ minLength: 1, maxLength: 40 }), {
+        nil: null,
+      }),
+      independent: fc.constant(true),
       capital: fc.oneof(
         fc.constant([]),
         fc.array(fc.string({ minLength: 1, maxLength: 40 }), {
@@ -71,7 +80,17 @@ const arbitraryCountryData = (): fc.Arbitrary<CountryData> =>
         maxLength: 5,
       }),
     })
-    .map((c) => c as CountryData);
+    // Les tests de propriété raisonnent sur name.common ; on aligne nameFr
+    // dessus (l'insensibilité aux accents et la recherche FR sont couvertes
+    // séparément dans search-fr.test.ts).
+    .map(
+      (c) =>
+        ({
+          ...c,
+          nameFr: c.name.common,
+          officialNameFr: c.name.official,
+        }) as CountryData,
+    );
 
 /** Génère un tableau de CountryData (0 à 30 pays). */
 const arbitraryCountries = (): fc.Arbitrary<CountryData[]> =>
