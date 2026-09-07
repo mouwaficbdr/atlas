@@ -278,15 +278,19 @@ export default async function CountryPage({ params }: PageProps) {
   const extraData = await fetchCountryExtraData(country.cca3);
   const enrichedCountry = { ...country, ...extraData };
 
-  const allCountries = await getAllCountries(countries);
-  const palette = await getCountryPalette(enrichedCountry);
-  const mdxContent = await getCountryMDX(enrichedCountry.cca3);
   const canonicalUrl = `${SITE_URL}/pays/${params.code}`;
 
-  const wikiSummary = await getCachedWikiSummary(
-    enrichedCountry.name.common,
-    enrichedCountry.name.official,
-  );
+  // Indépendants une fois enrichedCountry connu : exécutés en parallèle
+  // plutôt qu'en cascade séquentielle.
+  const [allCountries, palette, mdxContent, wikiSummary] = await Promise.all([
+    getAllCountries(countries),
+    getCountryPalette(enrichedCountry),
+    getCountryMDX(enrichedCountry.cca3),
+    getCachedWikiSummary(
+      enrichedCountry.name.common,
+      enrichedCountry.name.official,
+    ),
+  ]);
 
   return (
     <CountryCard
