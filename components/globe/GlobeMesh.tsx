@@ -121,7 +121,7 @@ export default function GlobeMesh({
         hoveredCountry &&
         hoveredCountry.latlng && (
           <HolographicText
-            text={hoveredCountry.name.official}
+            text={hoveredCountry.nameFr}
             latlng={hoveredCountry.latlng}
             color={hoveredFeature.properties.colors?.primary ?? '#ffffff'}
           />

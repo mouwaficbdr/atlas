@@ -23,17 +23,17 @@ export default function MobileExplorer({ countries, isOpen, onClose, onSelect }:
   const groupedCountries = useMemo(() => {
     const groups: Record<string, CountryData[]> = {};
     countries.forEach(c => {
-      const region = c.region || 'Autres';
+      const region = c.regionFr || c.region || 'Autres';
       if (!groups[region]) groups[region] = [];
       groups[region].push(c);
     });
 
-    // Sort regions
-    const sortedRegions = Object.keys(groups).sort();
+    const sortedRegions = Object.keys(groups).sort((a, b) =>
+      a.localeCompare(b, 'fr'),
+    );
 
-    // Sort countries in regions
     sortedRegions.forEach(region => {
-      groups[region].sort((a, b) => a.name.common.localeCompare(b.name.common));
+      groups[region].sort((a, b) => a.nameFr.localeCompare(b.nameFr, 'fr'));
     });
 
     return { regions: sortedRegions, groups };
@@ -241,7 +241,7 @@ export default function MobileExplorer({ countries, isOpen, onClose, onSelect }:
                         }}
                       >
                         <div style={{ flex: 1, fontSize: '1.4rem', fontFamily: 'var(--font-dm-sans), sans-serif', color: '#fff', fontWeight: 300 }}>
-                          {c.name.common}
+                          {c.nameFr}
                         </div>
                         <div style={{ fontSize: '0.7rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em' }}>
                           {c.cca3}

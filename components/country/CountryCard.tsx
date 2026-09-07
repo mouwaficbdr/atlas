@@ -73,8 +73,12 @@ export default function CountryCard({
   }, [palette]);
 
   useEffect(() => {
-    // We remove the complex GSAP parallax to let the pure CSS sticky wipe shine,
-    // but we keep a simple entrance animation for the title.
+    // La page est remontée par pays (key={cca3}) : on repart du haut plutôt
+    // que de rester à la position de scroll du pays précédent (finding QA9).
+    window.scrollTo(0, 0);
+
+    // Parallaxe GSAP complexe retirée au profit du sticky wipe CSS ; on garde
+    // une entrée simple sur le titre.
     if (titleRef.current) {
       gsap.to(titleRef.current, {
         yPercent: -20,
@@ -129,13 +133,13 @@ export default function CountryCard({
               // Taille dynamique inversement proportionnelle à la longueur du nom
               // < 8 chars (Chad, Cuba) → énorme / > 20 chars → raisonnable
               fontSize:
-                country.name.common.length <= 6
+                country.nameFr.length <= 6
                   ? 'clamp(4rem, 18vw, 22rem)'
-                  : country.name.common.length <= 10
+                  : country.nameFr.length <= 10
                     ? 'clamp(3rem, 13vw, 17rem)'
-                    : country.name.common.length <= 15
+                    : country.nameFr.length <= 15
                       ? 'clamp(2.5rem, 10vw, 13rem)'
-                      : country.name.common.length <= 20
+                      : country.nameFr.length <= 20
                         ? 'clamp(2rem, 7.5vw, 10rem)'
                         : 'clamp(1.5rem, 5.5vw, 7rem)',
               fontWeight: 400,
@@ -153,10 +157,10 @@ export default function CountryCard({
               maxWidth: '90vw',
             }}
           >
-            {country.name.common}
+            {country.nameFr}
           </h1>
-          {/* Nom officiel en sous-titre technique — toujours lisible quelle que soit la longueur */}
-          {country.name.official !== country.name.common && (
+          {/* Nom officiel en sous-titre technique, toujours lisible quelle que soit la longueur */}
+          {country.officialNameFr !== country.nameFr && (
             <div
               style={{
                 fontSize: '0.6rem',
@@ -171,7 +175,7 @@ export default function CountryCard({
                 mixBlendMode: 'screen',
               }}
             >
-              {country.name.official}
+              {country.officialNameFr}
             </div>
           )}
         </div>
@@ -202,13 +206,13 @@ export default function CountryCard({
             }}
           >
             <Breadcrumb
-              continent={country.region}
-              countryName={country.name.common}
+              continent={country.regionFr}
+              countryName={country.nameFr}
             />
           </div>
           <FlagDisplay
             flagSvg={country.flags.svg}
-            countryName={country.name.common}
+            countryName={country.nameFr}
           />
 
           {/* Fallback élégant si pas de résumé Wikipedia */}
@@ -378,9 +382,9 @@ export default function CountryCard({
                   lineHeight: 1.2,
                 }}
               >
-                {country.region}
+                {country.regionFr}
               </div>
-              {country.subregion && (
+              {country.subregionFr && (
                 <div
                   style={{
                     fontSize: '0.7rem',
@@ -390,7 +394,7 @@ export default function CountryCard({
                     letterSpacing: '0.05em',
                   }}
                 >
-                  {country.subregion}
+                  {country.subregionFr}
                 </div>
               )}
             </div>
