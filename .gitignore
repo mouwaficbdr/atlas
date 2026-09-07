@@ -37,6 +37,7 @@ next-env.d.ts
 .idea/
 *.swp
 *.swo
+.claude/
 
 # Project-specific tooling
 .kiro.next/
