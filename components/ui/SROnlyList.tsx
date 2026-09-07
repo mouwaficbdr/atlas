@@ -18,11 +18,12 @@ export default function SROnlyList({
   countries,
   visible = false,
 }: SROnlyListProps) {
-  const sorted = [...countries].sort((a, b) => {
-    const nameA = a.name?.common || '';
-    const nameB = b.name?.common || '';
-    return nameA.localeCompare(nameB);
-  });
+  const sorted = [...countries].sort((a, b) =>
+    (a.nameFr || a.name?.common || '').localeCompare(
+      b.nameFr || b.name?.common || '',
+      'fr',
+    ),
+  );
 
   const list = (
     <ul role="list">
@@ -32,7 +33,7 @@ export default function SROnlyList({
             href={`/pays/${country.cca3.toLowerCase()}`}
             role="link"
           >
-            {country.name?.common || country.cca3}
+            {country.nameFr || country.name?.common || country.cca3}
           </Link>
         </li>
       ))}

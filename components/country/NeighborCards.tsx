@@ -80,7 +80,7 @@ export default function NeighborCards({ borders, allCountries }: NeighborCardsPr
             textTransform: 'uppercase',
             letterSpacing: '0.02em',
           }}>
-            {country.name.common}
+            {country.nameFr}
           </span>
         </Link>
       ))}
