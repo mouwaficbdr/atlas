@@ -73,7 +73,9 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
         dpr={dpr}
         camera={{ position: [0, 0, 3], fov: 45 }}
         role="application"
-        aria-label="Globe interactif — Explorateur de pays"
+        tabIndex={0}
+        aria-label="Globe interactif, explorateur de pays. Flèches pour pivoter."
+        aria-keyshortcuts="ArrowUp ArrowDown ArrowLeft ArrowRight"
         style={{
           width: '100%',
           height: '100%',

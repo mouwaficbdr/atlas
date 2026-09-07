@@ -124,11 +124,11 @@ export default function MobileExplorer({ countries, isOpen, onClose, onSelect }:
             placeholder="Où souhaitez-vous aller ?"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            aria-label="Rechercher un pays"
             style={{
               flex: 1,
               background: 'transparent',
               border: 'none',
-              outline: 'none',
               color: '#fff',
               fontSize: '1.2rem',
               fontFamily: 'var(--font-dm-sans), sans-serif',
@@ -172,15 +172,22 @@ export default function MobileExplorer({ countries, isOpen, onClose, onSelect }:
             <div style={{ padding: '0 1.5rem' }}>
               {searchResults.length > 0 ? (
                 searchResults.map(result => (
-                  <div
+                  <button
+                    type="button"
                     key={result.cca3}
                     onClick={() => {
                       onSelect(result.cca3);
                       handleClose();
                     }}
                     style={{
+                      width: '100%',
+                      textAlign: 'left',
+                      background: 'transparent',
                       padding: '1.25rem 0',
                       borderBottom: '1px solid rgba(255,255,255,0.05)',
+                      borderTop: 'none',
+                      borderLeft: 'none',
+                      borderRight: 'none',
                       display: 'flex',
                       alignItems: 'center',
                       gap: '1.25rem',
@@ -192,7 +199,7 @@ export default function MobileExplorer({ countries, isOpen, onClose, onSelect }:
                       <div style={{ fontSize: '1.2rem', fontFamily: 'var(--font-dm-sans), sans-serif', color: '#fff' }}>{result.name}</div>
                       <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginTop: '0.2rem' }}>{result.region}</div>
                     </div>
-                  </div>
+                  </button>
                 ))
               ) : (
                 <div style={{ padding: '4rem 0', textAlign: 'center', color: 'rgba(255,255,255,0.5)', fontFamily: 'var(--font-jetbrains-mono), monospace' }}>
@@ -225,15 +232,22 @@ export default function MobileExplorer({ countries, isOpen, onClose, onSelect }:
                   </h2>
                   <div style={{ padding: '0 1.5rem' }}>
                     {groupedCountries.groups[region].map(c => (
-                      <div
+                      <button
+                        type="button"
                         key={c.cca3}
                         onClick={() => {
                           onSelect(c.cca3);
                           handleClose();
                         }}
                         style={{
+                          width: '100%',
+                          textAlign: 'left',
+                          background: 'transparent',
                           padding: '1.25rem 0',
                           borderBottom: '1px solid rgba(255,255,255,0.05)',
+                          borderTop: 'none',
+                          borderLeft: 'none',
+                          borderRight: 'none',
                           display: 'flex',
                           alignItems: 'center',
                           gap: '1rem',
@@ -246,7 +260,7 @@ export default function MobileExplorer({ countries, isOpen, onClose, onSelect }:
                         <div style={{ fontSize: '0.7rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em' }}>
                           {c.cca3}
                         </div>
-                      </div>
+                      </button>
                     ))}
                   </div>
                 </div>
