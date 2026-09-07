@@ -18,6 +18,9 @@ import type { CountryData, CountryPalette, MDXContent } from '@/lib/types';
 // SSG pur : les données sont figées au build, pas de revalidation.
 export const dynamic = 'force-static';
 export const revalidate = false;
+// Les 193 codes sont tous connus au build : tout autre code renvoie un vrai
+// 404 au lieu d'une page "Pays non trouvé" servie en 200 (soft 404, finding QA2).
+export const dynamicParams = false;
 
 // ---------------------------------------------------------------------------
 // generateStaticParams
@@ -56,35 +59,26 @@ export async function generateMetadata({
 
   const canonicalUrl = `${SITE_URL}/pays/${params.code}`;
   const description =
-    `Découvrez ${country.name.official} sur ATLAS° : population, superficie, capitale, langues, monnaie, et bien plus.`.slice(
+    `Découvrez ${country.officialNameFr} sur ATLAS° : population, superficie, capitale, langues, monnaie, et bien plus.`.slice(
       0,
       160,
     );
 
-  const flagImage = {
-    url: country.flags.png,
-    width: 1200,
-    height: 630,
-    alt: `Drapeau de ${country.name.common}`,
-  };
-
+  // L'image Open Graph par pays est générée par opengraph-image.tsx (ratio
+  // 1200x630 réel), Next.js la référence automatiquement.
   return {
-    title: `${country.name.common} - ATLAS°`,
+    title: `${country.nameFr} - ATLAS°`,
     description,
     openGraph: {
-      title: country.name.common,
+      title: country.nameFr,
       description,
       type: 'website',
       url: canonicalUrl,
-      // Le PNG (pas le SVG) est utilisé : Facebook/LinkedIn/Slack/Twitter ne
-      // rendent généralement pas les SVG comme og:image.
-      images: [flagImage],
     },
     twitter: {
       card: 'summary_large_image',
-      title: country.name.common,
+      title: country.nameFr,
       description,
-      images: [flagImage.url],
     },
     alternates: {
       canonical: canonicalUrl,
@@ -217,28 +211,32 @@ async function fetchWikiExtract(
 }
 
 /**
- * NOTE: Cascade de tentatives Wikipedia pour maximiser les hits :
- * 1. FR + nom commun  2. FR + nom officiel  3. EN + nom commun  4. EN + nom officiel
- * Résultat mis en cache 24h par Next.js Data Cache.
+ * Cascade de tentatives Wikipedia, du plus pertinent pour un lecteur
+ * francophone au plus permissif : FR avec le nom français, FR avec le nom
+ * officiel français, puis repli sur l'anglais. Résultat mis en cache 24h.
  */
 const getCachedWikiSummary = unstable_cache(
   async (
-    nameCommon: string,
-    nameOfficial: string,
+    nameFr: string,
+    officialNameFr: string,
+    nameEn: string,
+    officialNameEn: string,
   ): Promise<string | null> => {
-    const attempt1 = await fetchWikiExtract(nameCommon, 'fr');
-    if (attempt1) return attempt1;
-
-    const attempt2 = await fetchWikiExtract(nameOfficial, 'fr');
-    if (attempt2) return attempt2;
-
-    const attempt3 = await fetchWikiExtract(nameCommon, 'en');
-    if (attempt3) return attempt3;
-
-    const attempt4 = await fetchWikiExtract(nameOfficial, 'en');
-    return attempt4;
+    const titles: Array<[string, 'fr' | 'en']> = [
+      [nameFr, 'fr'],
+      [officialNameFr, 'fr'],
+      [nameEn, 'fr'],
+      [nameEn, 'en'],
+      [officialNameEn, 'en'],
+    ];
+    for (const [title, lang] of titles) {
+      if (!title) continue;
+      const extract = await fetchWikiExtract(title, lang);
+      if (extract) return extract;
+    }
+    return null;
   },
-  ['wiki-summary-v2'],
+  ['wiki-summary-v3'],
   { revalidate: 60 * 60 * 24, tags: ['wiki-summary'] },
 );
 
@@ -248,19 +246,6 @@ const getCachedWikiSummary = unstable_cache(
 
 interface PageProps {
   params: { code: string };
-}
-
-async function fetchCountryExtraData(code: string) {
-  try {
-    const res = await fetch(`https://restcountries.com/v3.1/alpha/${code}?fields=timezones,tld,idd`, {
-      next: { revalidate: 86400 }
-    });
-    if (!res.ok) return {};
-    const data = await res.json();
-    return data || {};
-  } catch {
-    return {};
-  }
 }
 
 export default async function CountryPage({ params }: PageProps) {
@@ -273,28 +258,26 @@ export default async function CountryPage({ params }: PageProps) {
     notFound();
   }
 
-  // NOTE: Le GeoJSON local ne contient pas timezones, tld, ni idd.
-  // Ces champs sont complétés via REST Countries API au moment du rendu.
-  const extraData = await fetchCountryExtraData(country.cca3);
-  const enrichedCountry = { ...country, ...extraData };
-
   const canonicalUrl = `${SITE_URL}/pays/${params.code}`;
 
-  // Indépendants une fois enrichedCountry connu : exécutés en parallèle
-  // plutôt qu'en cascade séquentielle.
+  // Tout est figé dans countries-geo.json au build (timezones, tld, idd
+  // inclus). Les tâches restantes sont indépendantes : Promise.all.
   const [allCountries, palette, mdxContent, wikiSummary] = await Promise.all([
     getAllCountries(countries),
-    getCountryPalette(enrichedCountry),
-    getCountryMDX(enrichedCountry.cca3),
+    getCountryPalette(country),
+    getCountryMDX(country.cca3),
     getCachedWikiSummary(
-      enrichedCountry.name.common,
-      enrichedCountry.name.official,
+      country.nameFr,
+      country.officialNameFr,
+      country.name.common,
+      country.name.official,
     ),
   ]);
 
   return (
     <CountryCard
-      country={enrichedCountry}
+      key={country.cca3}
+      country={country}
       allCountries={allCountries}
       mdxContent={mdxContent}
       palette={palette}
