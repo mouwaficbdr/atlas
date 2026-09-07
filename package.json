@@ -34,6 +34,7 @@
     "@types/react-dom": "^18",
     "@types/three": "^0.170.0",
     "canvas": "^3.2.3",
+    "countries-and-timezones": "^3.10.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.35",
     "fast-check": "^3.23.2",

@@ -1,204 +1,405 @@
+/**
+ * Génère public/data/countries-geo.json à partir de :
+ *  - la géométrie Natural Earth déjà présente dans countries-geo.json
+ *  - scripts/vendor/mledoze-countries.json  (noms FR, gentilés, idd, tld, souveraineté)
+ *  - scripts/vendor/wikidata-gov.json       (forme de gouvernement)
+ *  - scripts/vendor/gov-overrides.json      (corrections manuelles)
+ *  - countries-and-timezones                (fuseaux IANA)
+ *
+ * Aucun appel réseau : rafraîchir les sources avec scripts/fetch-vendor-data.js.
+ *
+ *   node scripts/generate-geo.js
+ *
+ * Traitements :
+ *  1. filtre aux États souverains (mledoze.independent === true)
+ *  2. propriétés enrichies : noms FR, capitale FR, région FR, fuseau IANA de la
+ *     capitale, forme de gouvernement FR, indicatif, TLD
+ *  3. centroïde recalculé en flottant depuis la géométrie
+ *  4. géométrie : déroulage à l'antiméridien + densification des arêtes longues
+ */
+
 const fs = require('fs');
 const path = require('path');
-const { createCanvas, loadImage } = require('canvas');
+const ct = require('countries-and-timezones');
 
-const NATURAL_EARTH_URL = 'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_admin_0_countries.geojson';
-const REST_COUNTRIES_URL = 'https://restcountries.com/v3.1/all';
-const DATA_DIR = path.join(__dirname, '../public/data');
+const DATA_PATH = path.join(__dirname, '../public/data/countries-geo.json');
+const VENDOR = path.join(__dirname, 'vendor');
 
-// Simple K-Means implementation to find dominant colors
-function extractColors(pixels, k = 3, maxIterations = 10) {
-  if (pixels.length === 0) return ['#ffffff'];
+const REGION_FR = {
+  Africa: 'Afrique',
+  Americas: 'Amériques',
+  Asia: 'Asie',
+  Europe: 'Europe',
+  Oceania: 'Océanie',
+  Antarctic: 'Antarctique',
+};
 
-  // Initialize centroids randomly from pixels
-  let centroids = [];
-  for (let i = 0; i < k; i++) {
-    const randomPixel = pixels[Math.floor(Math.random() * pixels.length)];
-    centroids.push([...randomPixel]);
-  }
+const SUBREGION_FR = {
+  'Australia and New Zealand': 'Australie et Nouvelle-Zélande',
+  Caribbean: 'Caraïbes',
+  'Central America': 'Amérique centrale',
+  'Central Asia': 'Asie centrale',
+  'Central Europe': 'Europe centrale',
+  'Eastern Africa': "Afrique de l'Est",
+  'Eastern Asia': "Asie de l'Est",
+  'Eastern Europe': "Europe de l'Est",
+  Melanesia: 'Mélanésie',
+  Micronesia: 'Micronésie',
+  'Middle Africa': 'Afrique centrale',
+  'North America': 'Amérique du Nord',
+  'Northern Africa': 'Afrique du Nord',
+  'Northern Europe': 'Europe du Nord',
+  Polynesia: 'Polynésie',
+  'South America': 'Amérique du Sud',
+  'South-Eastern Asia': 'Asie du Sud-Est',
+  'Southeast Europe': "Europe du Sud-Est",
+  'Southern Africa': 'Afrique australe',
+  'Southern Asia': 'Asie du Sud',
+  'Southern Europe': 'Europe du Sud',
+  'Western Africa': "Afrique de l'Ouest",
+  'Western Asia': 'Asie occidentale',
+  'Western Europe': "Europe de l'Ouest",
+};
 
-  let assignments = new Array(pixels.length).fill(0);
+// Nom français de la capitale, uniquement quand il diffère de l'anglais.
+const CAPITAL_FR = {
+  Beijing: 'Pékin',
+  Moscow: 'Moscou',
+  Warsaw: 'Varsovie',
+  Lisbon: 'Lisbonne',
+  Athens: 'Athènes',
+  Vienna: 'Vienne',
+  Copenhagen: 'Copenhague',
+  Brussels: 'Bruxelles',
+  London: 'Londres',
+  Cairo: 'Le Caire',
+  Algiers: 'Alger',
+  Bucharest: 'Bucarest',
+  Bern: 'Berne',
+  Nicosia: 'Nicosie',
+  Valletta: 'La Valette',
+  'Andorra la Vella': 'Andorre-la-Vieille',
+  'Vatican City': 'Cité du Vatican',
+  'San Marino': 'Saint-Marin',
+  Seoul: 'Séoul',
+  Tehran: 'Téhéran',
+  Baghdad: 'Bagdad',
+  Damascus: 'Damas',
+  Beirut: 'Beyrouth',
+  Riyadh: 'Riyad',
+  Muscat: 'Mascate',
+  'Kuwait City': 'Koweït',
+  'Abu Dhabi': 'Abou Dabi',
+  Jerusalem: 'Jérusalem',
+  Kabul: 'Kaboul',
+  Kathmandu: 'Katmandou',
+  Hanoi: 'Hanoï',
+  Manila: 'Manille',
+  Singapore: 'Singapour',
+  Ulaanbaatar: 'Oulan-Bator',
+  Tashkent: 'Tachkent',
+  Bishkek: 'Bichkek',
+  Dushanbe: 'Douchanbé',
+  Ashgabat: 'Achgabat',
+  Tbilisi: 'Tbilissi',
+  Yerevan: 'Erevan',
+  Baku: 'Bakou',
+  Mogadishu: 'Mogadiscio',
+  'Addis Ababa': 'Addis-Abeba',
+  Juba: 'Djouba',
+  Khartoum: 'Khartoum',
+  Havana: 'La Havane',
+  'Santo Domingo': 'Saint-Domingue',
+  'Mexico City': 'Mexico',
+  'Panama City': 'Panama',
+  'Guatemala City': 'Guatemala',
+  'Washington, D.C.': 'Washington',
+  "N'Djamena": "N'Djaména",
+  Chisinau: 'Chișinău',
+};
 
-  for (let iter = 0; iter < maxIterations; iter++) {
-    let clusters = Array.from({ length: k }, () => []);
-    
-    for (let i = 0; i < pixels.length; i++) {
-      let minDist = Infinity;
-      let closestCentroidIndex = 0;
-      for (let j = 0; j < k; j++) {
-        const dist = Math.pow(pixels[i][0] - centroids[j][0], 2) +
-                     Math.pow(pixels[i][1] - centroids[j][1], 2) +
-                     Math.pow(pixels[i][2] - centroids[j][2], 2);
-        if (dist < minDist) {
-          minDist = dist;
-          closestCentroidIndex = j;
-        }
-      }
-      assignments[i] = closestCentroidIndex;
-      clusters[closestCentroidIndex].push(pixels[i]);
-    }
+// Fuseau IANA de la capitale, pour les pays multi-fuseaux (sinon
+// countries-and-timezones renvoie une liste alphabétique dont [0] est faux).
+const CAPITAL_TZ = {
+  ARG: 'America/Argentina/Buenos_Aires',
+  AUS: 'Australia/Sydney',
+  BRA: 'America/Sao_Paulo',
+  CAN: 'America/Toronto',
+  CHL: 'America/Santiago',
+  CHN: 'Asia/Shanghai',
+  COD: 'Africa/Kinshasa',
+  CYP: 'Asia/Nicosia',
+  DEU: 'Europe/Berlin',
+  ECU: 'America/Guayaquil',
+  ESP: 'Europe/Madrid',
+  FSM: 'Pacific/Pohnpei',
+  IDN: 'Asia/Jakarta',
+  KAZ: 'Asia/Almaty',
+  KIR: 'Pacific/Tarawa',
+  MEX: 'America/Mexico_City',
+  MHL: 'Pacific/Majuro',
+  MNG: 'Asia/Ulaanbaatar',
+  MYS: 'Asia/Kuala_Lumpur',
+  NZL: 'Pacific/Auckland',
+  PNG: 'Pacific/Port_Moresby',
+  PRT: 'Europe/Lisbon',
+  RUS: 'Europe/Moscow',
+  UKR: 'Europe/Kyiv',
+  USA: 'America/New_York',
+  UZB: 'Asia/Tashkent',
+  VNM: 'Asia/Ho_Chi_Minh',
+};
 
-    for (let j = 0; j < k; j++) {
-      if (clusters[j].length === 0) continue;
-      let rSum = 0, gSum = 0, bSum = 0;
-      for (let p of clusters[j]) {
-        rSum += p[0];
-        gSum += p[1];
-        bSum += p[2];
-      }
-      centroids[j] = [
-        Math.round(rSum / clusters[j].length),
-        Math.round(gSum / clusters[j].length),
-        Math.round(bSum / clusters[j].length)
-      ];
-    }
-  }
+const GOV_BLACKLIST = [
+  'empire',
+  'état successeur',
+  'gouvernement provisoire',
+  'dictature communiste',
+  'juche',
+  'état fantoche',
+  'régime militaire',
+];
 
-  const clusterSizes = Array.from({ length: k }, () => 0);
-  for (let a of assignments) {
-    clusterSizes[a]++;
-  }
-
-  const sortedCentroids = centroids.map((c, i) => ({ color: c, size: clusterSizes[i] }))
-                                   .sort((a, b) => b.size - a.size);
-
-  const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
-    const hex = Math.round(x).toString(16);
-    return hex.length === 1 ? '0' + hex : hex;
-  }).join('');
-
-  return sortedCentroids.map(sc => rgbToHex(sc.color[0], sc.color[1], sc.color[2]));
+function pickGovernment(labels) {
+  const clean = labels
+    .map((l) => l.trim())
+    .filter((l) => l && !/^Q\d+$/.test(l))
+    .filter((l) => !GOV_BLACKLIST.some((b) => l.toLowerCase().includes(b)));
+  if (clean.length === 0) return null;
+  const has = (s) => clean.find((l) => l.toLowerCase().includes(s));
+  const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+  if (has('monarchie constitutionnelle')) return 'Monarchie constitutionnelle';
+  if (has('monarchie absolue')) return 'Monarchie absolue';
+  if (has('république fédérale')) return 'République fédérale';
+  if (has('république parlementaire')) return 'République parlementaire';
+  if (has('république populaire')) return 'République populaire';
+  if (has('semi-présidentiel')) return 'République semi-présidentielle';
+  if (has('présidentiel')) return 'République présidentielle';
+  if (has('république islamique')) return 'République islamique';
+  if (has('monarchie')) return 'Monarchie';
+  const rep = has('république');
+  if (rep) return cap(rep);
+  return cap(clean[0]);
 }
 
-async function getFlagColors(flagUrl) {
-  try {
-    const response = await fetch(flagUrl);
-    const buffer = await response.arrayBuffer();
-    const image = await loadImage(Buffer.from(buffer));
-    
-    // Scale down to tiny image for fast processing
-    const canvas = createCanvas(20, 20);
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(image, 0, 0, 20, 20);
-    
-    const imageData = ctx.getImageData(0, 0, 20, 20).data;
-    const pixels = [];
-    
-    for (let i = 0; i < imageData.length; i += 4) {
-      if (imageData[i + 3] > 128) {
-        // Exclude pure white/black if possible, or just keep all opaque
-        pixels.push([imageData[i], imageData[i + 1], imageData[i + 2]]);
-      }
-    }
-    
-    return extractColors(pixels, 3);
-  } catch (error) {
-    console.error(`Error processing flag: ${flagUrl}`, error.message);
-    return ['#ffffff', '#cccccc', '#999999'];
-  }
+// ---------------------------------------------------------------------------
+
+function loadVendor(name) {
+  return JSON.parse(fs.readFileSync(path.join(VENDOR, name), 'utf-8'));
 }
 
-async function generate() {
-  console.log('Fetching Natural Earth GeoJSON...');
-  const geoResponse = await fetch(NATURAL_EARTH_URL);
-  const geojson = await geoResponse.json();
-
-  console.log('Fetching REST Countries data...');
-  const restResponse1 = await fetch(REST_COUNTRIES_URL + '?fields=cca3,name,latlng,population,area,region,subregion,capital,currencies,languages');
-  const restResponse2 = await fetch(REST_COUNTRIES_URL + '?fields=cca3,flags,borders');
-
-  if (!restResponse1.ok || !restResponse2.ok) {
-    throw new Error(`REST API failed: ${restResponse1.status} / ${restResponse2.status}`);
+function buildGovMap() {
+  const rows = loadVendor('wikidata-gov.json').results.bindings;
+  const byIso = {};
+  for (const b of rows) {
+    const iso = b.iso3 && b.iso3.value;
+    const label = b.govLabel && b.govLabel.value;
+    if (!iso || !label) continue;
+    (byIso[iso] = byIso[iso] || []).push(label);
   }
-
-  const restCountriesArray1 = await restResponse1.json();
-  const restCountriesArray2 = await restResponse2.json();
-
-  const restCountries = {};
-  for (const c of restCountriesArray1) {
-    restCountries[c.cca3] = c;
+  const map = {};
+  for (const [iso, labels] of Object.entries(byIso)) {
+    const picked = pickGovernment(labels);
+    if (picked) map[iso] = picked;
   }
-  for (const c of restCountriesArray2) {
-    if (restCountries[c.cca3]) {
-      restCountries[c.cca3].flags = c.flags;
-      restCountries[c.cca3].borders = c.borders;
+  const overrides = loadVendor('gov-overrides.json');
+  for (const [iso, label] of Object.entries(overrides)) {
+    if (iso.startsWith('_')) continue;
+    map[iso] = label;
+  }
+  return map;
+}
+
+function primaryTimezone(cca3, cca2) {
+  if (CAPITAL_TZ[cca3]) return CAPITAL_TZ[cca3];
+  const c = cca2 && ct.getCountry(cca2);
+  if (c && c.timezones.length > 0) return c.timezones[0];
+  return 'UTC';
+}
+
+// --- Géométrie ------------------------------------------------------------
+
+// Déroule un anneau qui franchit l'antiméridien : si des longitudes très
+// positives et très négatives coexistent, on décale les négatives de +360
+// pour que earcut ne crée pas de triangle traversant tout le globe.
+function unwrapRing(ring) {
+  let hasEast = false;
+  let hasWest = false;
+  let min = Infinity;
+  let max = -Infinity;
+  for (const [lon] of ring) {
+    if (lon > 90) hasEast = true;
+    if (lon < -90) hasWest = true;
+    if (lon < min) min = lon;
+    if (lon > max) max = lon;
+  }
+  if (hasEast && hasWest && max - min > 180) {
+    return ring.map(([lon, lat]) => [lon < 0 ? lon + 360 : lon, lat]);
+  }
+  return ring;
+}
+
+// Insère des points intermédiaires sur les arêtes > maxStep degrés pour que
+// la triangulation suive mieux la courbure une fois projetée sur la sphère.
+function densifyRing(ring, maxStep) {
+  const out = [];
+  for (let i = 0; i < ring.length - 1; i++) {
+    const [lon1, lat1] = ring[i];
+    const [lon2, lat2] = ring[i + 1];
+    out.push([lon1, lat1]);
+    const steps = Math.ceil(
+      Math.max(Math.abs(lon2 - lon1), Math.abs(lat2 - lat1)) / maxStep,
+    );
+    for (let s = 1; s < steps; s++) {
+      const t = s / steps;
+      out.push([lon1 + (lon2 - lon1) * t, lat1 + (lat2 - lat1) * t]);
     }
   }
+  out.push(ring[ring.length - 1]);
+  return out;
+}
 
-  console.log('Processing countries and extracting colors...');
-  
-  const mergedFeatures = [];
+function processPolygon(polygon) {
+  const east = polygon.some((ring) => unwrapRing(ring) !== ring);
+  return polygon.map((ring) => {
+    let r = ring;
+    if (east) r = unwrapRing(ring);
+    return densifyRing(r, 6);
+  });
+}
 
-  for (const feature of geojson.features) {
-    let cca3 = feature.properties.ADM0_A3 || feature.properties.SU_A3 || feature.properties.ISO_A3;
-    // Map France correctly if needed (sometimes France is '-99' in ADM0_A3 but 'FRA' in SU_A3)
-    if (cca3 === '-99') cca3 = feature.properties.SU_A3;
-    if (cca3 === '-99') cca3 = feature.properties.GU_A3;
-    
-    const restCountry = restCountries[cca3];
-    
-    if (!restCountry) {
-      console.warn(`No REST country found for ${feature.properties.NAME} (${cca3})`);
+function processGeometry(geometry) {
+  if (geometry.type === 'MultiPolygon') {
+    return {
+      type: 'MultiPolygon',
+      coordinates: geometry.coordinates.map(processPolygon),
+    };
+  }
+  return {
+    type: 'Polygon',
+    coordinates: processPolygon(geometry.coordinates),
+  };
+}
+
+// Centroïde flottant : centroïde d'aire (shoelace) de l'anneau extérieur le
+// plus grand, repli sur le centre de la bbox.
+function computeCentroid(geometry) {
+  const polygons =
+    geometry.type === 'MultiPolygon'
+      ? geometry.coordinates
+      : [geometry.coordinates];
+  let best = null;
+  let bestArea = -1;
+  for (const poly of polygons) {
+    const ring = poly[0];
+    let area = 0;
+    let cx = 0;
+    let cy = 0;
+    for (let i = 0; i < ring.length - 1; i++) {
+      const [x0, y0] = ring[i];
+      const [x1, y1] = ring[i + 1];
+      const cross = x0 * y1 - x1 * y0;
+      area += cross;
+      cx += (x0 + x1) * cross;
+      cy += (y0 + y1) * cross;
+    }
+    area /= 2;
+    const abs = Math.abs(area);
+    if (abs > bestArea) {
+      bestArea = abs;
+      if (abs > 1e-9) {
+        best = [cx / (6 * area), cy / (6 * area)];
+      } else {
+        const xs = ring.map((p) => p[0]);
+        const ys = ring.map((p) => p[1]);
+        best = [
+          (Math.min(...xs) + Math.max(...xs)) / 2,
+          (Math.min(...ys) + Math.max(...ys)) / 2,
+        ];
+      }
+    }
+  }
+  const wrap = (lon) => ((((lon + 180) % 360) + 360) % 360) - 180;
+  return [round(wrap(best[0])), round(best[1])];
+}
+
+function round(n) {
+  return Math.round(n * 10000) / 10000;
+}
+
+// ---------------------------------------------------------------------------
+
+function generate() {
+  const geo = JSON.parse(fs.readFileSync(DATA_PATH, 'utf-8'));
+  const mledoze = loadVendor('mledoze-countries.json');
+  const mById = new Map(mledoze.map((c) => [c.cca3, c]));
+  const govMap = buildGovMap();
+
+  const out = [];
+  let skipped = 0;
+
+  for (const feature of geo.features) {
+    const p = feature.properties;
+    const m = mById.get(p.cca3);
+
+    if (!m || m.independent !== true) {
+      skipped++;
       continue;
     }
 
-    const flagUrl = restCountry.flags?.png;
-    let colors = ['#ffffff', '#cccccc', '#999999'];
-    if (flagUrl) {
-      colors = await getFlagColors(flagUrl);
-      console.log(`Processed ${restCountry.name.common}: ${colors[0]}`);
-    }
+    const geometry = processGeometry(feature.geometry);
+    const cca2 = m.cca2 || p.cca2;
+    const capitalEn = (p.capital && p.capital[0]) || (m.capital && m.capital[0]) || '';
+    const fra = m.translations && m.translations.fra;
+    const demonym = m.demonyms && m.demonyms.fra;
 
-    // Filter out Antarctica or handle it
-    if (cca3 === 'ATA') continue;
-
-    mergedFeatures.push({
+    out.push({
       type: 'Feature',
-      geometry: feature.geometry,
+      geometry,
       properties: {
-        cca3: restCountry.cca3,
-        cca2: restCountry.cca2,
+        cca3: p.cca3,
+        cca2,
         name: {
-          common: restCountry.name.common,
-          official: restCountry.name.official,
-          nativeName: restCountry.name.nativeName
+          common: p.name.common,
+          official: p.name.official,
+          nativeName: p.name.nativeName,
         },
-        centroid: restCountry.latlng ? [restCountry.latlng[1], restCountry.latlng[0]] : [0,0],
-        latlng: restCountry.latlng,
-        population: restCountry.population,
-        area: restCountry.area,
-        region: restCountry.region,
-        subregion: restCountry.subregion,
-        landlocked: restCountry.landlocked,
-        capital: restCountry.capital || [],
-        currencies: restCountry.currencies,
-        languages: restCountry.languages,
-        timezones: restCountry.timezones,
-        idd: restCountry.idd,
-        tld: restCountry.tld,
-        flags: restCountry.flags,
-        borders: restCountry.borders || [],
-        colors: {
-          primary: colors[0],
-          palette: colors
-        }
-      }
+        nameFr: (fra && fra.common) || p.name.common,
+        officialNameFr: (fra && fra.official) || p.name.official,
+        demonymFr: (demonym && demonym.m) || '',
+        capital: p.capital && p.capital.length ? p.capital : m.capital || [],
+        capitalFr: CAPITAL_FR[capitalEn] || capitalEn,
+        region: p.region,
+        regionFr: REGION_FR[p.region] || p.region,
+        subregion: p.subregion,
+        subregionFr: SUBREGION_FR[p.subregion] || p.subregion,
+        latlng: p.latlng,
+        centroid: computeCentroid(geometry),
+        population: p.population,
+        area: p.area,
+        landlocked: p.landlocked,
+        borders: p.borders || [],
+        languages: p.languages,
+        currencies: p.currencies,
+        flags: p.flags,
+        idd: m.idd || p.idd || null,
+        tld: m.tld || p.tld || [],
+        timezones: p.timezones || [],
+        primaryTimezone: primaryTimezone(p.cca3, cca2),
+        governmentFr: govMap[p.cca3] || null,
+        independent: true,
+        colors: p.colors,
+      },
     });
   }
 
-  const finalGeoJSON = {
-    type: 'FeatureCollection',
-    features: mergedFeatures
-  };
+  const result = { type: 'FeatureCollection', features: out };
+  fs.writeFileSync(DATA_PATH, JSON.stringify(result));
 
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
-  }
-
-  const outputPath = path.join(DATA_DIR, 'countries-geo.json');
-  fs.writeFileSync(outputPath, JSON.stringify(finalGeoJSON));
-  
-  console.log(`\nSuccessfully generated ${outputPath} with ${mergedFeatures.length} countries.`);
+  console.log(`Écrit ${out.length} pays souverains (${skipped} territoires écartés).`);
+  const missingGov = out.filter((f) => !f.properties.governmentFr).length;
+  const missingTz = out.filter((f) => f.properties.primaryTimezone === 'UTC').length;
+  console.log(`Gouvernement manquant : ${missingGov} | fuseau par défaut UTC : ${missingTz}`);
 }
 
-generate().catch(console.error);
+generate();
