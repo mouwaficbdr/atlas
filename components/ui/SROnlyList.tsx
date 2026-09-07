@@ -1,5 +1,5 @@
 /**
- * SROnlyList — Liste HTML accessible des 195 pays
+ * SROnlyList : liste HTML accessible des pays.
  * Exigences : 1.6, 12.2, 12.5
  *
  * - Masquée visuellement via `sr-only` (accessible aux lecteurs d'écran)
