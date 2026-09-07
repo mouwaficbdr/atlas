@@ -48,40 +48,71 @@ const LandmarkIcon = ({ size = 140, strokeWidth = 1, color = "currentColor" }) =
 );
 
 interface PoliticalRegimeProps {
-  officialName: string;
+  /** Libellé FR de la forme de gouvernement (Wikidata P122), ou null. */
+  government: string | null;
 }
 
-export default function PoliticalRegime({ officialName }: PoliticalRegimeProps) {
-  let type = 'République';
+export default function PoliticalRegime({ government }: PoliticalRegimeProps) {
+  if (!government) {
+    return (
+      <div
+        style={{
+          color: 'var(--text-muted)',
+          fontSize: 'clamp(1.5rem, 2.5vw, 3rem)',
+          fontFamily: 'var(--font-bebas-neue), sans-serif',
+          textTransform: 'uppercase',
+          letterSpacing: '0.05em',
+          opacity: 0.5,
+        }}
+      >
+        Non renseigné
+      </div>
+    );
+  }
+
+  // Icône dérivée de mots-clés du libellé, jamais du nom du pays.
+  const g = government.toLowerCase();
   let IconComponent = LandmarkIcon;
   let color = '#4A90D9';
-
-  const nameLower = officialName.toLowerCase();
-
-  if (nameLower.includes('kingdom') || nameLower.includes('monarchy') || nameLower.includes('sultanate') || nameLower.includes('emirate')) {
-    type = 'Monarchie / Royaume';
+  if (g.includes('monarchie') || g.includes('royaume') || g.includes('émirat')) {
     IconComponent = CrownIcon;
-    color = '#D4AF37'; // Or
-  } else if (nameLower.includes('principality')) {
-    type = 'Principauté';
+    color = '#D4AF37';
+  } else if (g.includes('principauté')) {
     IconComponent = CastleIcon;
-    color = '#9B59B6'; // Violet
-  } else if (nameLower.includes('federation') || nameLower.includes('federal')) {
-    type = 'Fédération';
+    color = '#9B59B6';
+  } else if (g.includes('fédér')) {
     IconComponent = HandshakeIcon;
-    color = '#2ECC71'; // Vert
-  } else if (nameLower.includes('state') && !nameLower.includes('republic')) {
-    type = 'État Souverain';
+    color = '#2ECC71';
+  } else if (g.includes('socialiste') || g.includes('parti unique')) {
     IconComponent = ShieldIcon;
-    color = '#E67E22'; // Orange
+    color = '#E67E22';
   }
+  const type = government;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
       <div style={{ opacity: 0.15, mixBlendMode: 'screen', marginBottom: '-2rem' }}>
         <IconComponent size={140} strokeWidth={1} color={color} />
       </div>
-      <div style={{ color, fontSize: 'clamp(3rem, 5vw, 6rem)', fontWeight: 400, fontFamily: 'var(--font-bebas-neue), sans-serif', textTransform: 'uppercase', letterSpacing: '0.02em', mixBlendMode: 'screen', lineHeight: 0.9 }}>{type}</div>
+      <div
+        style={{
+          color,
+          fontSize:
+            type.length <= 12
+              ? 'clamp(3rem, 5vw, 6rem)'
+              : type.length <= 24
+                ? 'clamp(2rem, 3.5vw, 4rem)'
+                : 'clamp(1.5rem, 2.6vw, 3rem)',
+          fontWeight: 400,
+          fontFamily: 'var(--font-bebas-neue), sans-serif',
+          textTransform: 'uppercase',
+          letterSpacing: '0.02em',
+          mixBlendMode: 'screen',
+          lineHeight: 0.95,
+        }}
+      >
+        {type}
+      </div>
     </div>
   );
 }

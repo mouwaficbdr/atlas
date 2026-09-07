@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import type { CountryData, MDXContent, CountryPalette } from '@/lib/types';
+import { formatLat, formatLon, utcOffset } from '@/lib/format-coords';
 
 import FlagDisplay from './FlagDisplay';
 import CapitalClock from './CapitalClock';
@@ -17,8 +18,6 @@ import CurrencyCard from './CurrencyCard';
 import MoodBackground from './MoodBackground';
 import Breadcrumb from './Breadcrumb';
 import ShareButton from './ShareButton';
-import { resolveMood } from '@/lib/mood-resolver';
-import MoodAudio from './MoodAudio';
 import dynamic from 'next/dynamic';
 
 const MDXSection = dynamic(() => import('./MDXSection'), { ssr: false });
@@ -44,7 +43,6 @@ export default function CountryCard({
 }: CountryCardProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
-  const mood = resolveMood(country);
 
   useEffect(() => {
     document.documentElement.style.setProperty(
@@ -99,7 +97,6 @@ export default function CountryCard({
   return (
     <>
       <MoodBackground palette={palette} />
-      <MoodAudio mood={mood.type} />
 
       <div
         ref={containerRef}
@@ -526,7 +523,7 @@ export default function CountryCard({
                   letterSpacing: '0.25em',
                 }}
               >
-                GOUVERNANCE & CLIMAT
+                GOUVERNANCE & AMBIANCE
               </span>
             </div>
 
@@ -548,9 +545,9 @@ export default function CountryCard({
                   marginBottom: '2.5rem',
                 }}
               >
-                01 — RÉGIME POLITIQUE
+                01 / RÉGIME POLITIQUE
               </div>
-              <PoliticalRegime officialName={country.name.official} />
+              <PoliticalRegime government={country.governmentFr} />
               <p
                 style={{
                   marginTop: '2.5rem',
@@ -579,7 +576,7 @@ export default function CountryCard({
                   marginBottom: '2.5rem',
                 }}
               >
-                02 — CLIMAT & AMBIANCE
+                02 / AMBIANCE ESTIMÉE
               </div>
               <MoodDisplay country={country} />
             </div>
@@ -631,11 +628,11 @@ export default function CountryCard({
                   marginBottom: '2.5rem',
                 }}
               >
-                03 — TEMPS LOCAL
+                03 / TEMPS LOCAL
               </div>
               <CapitalClock
-                capital={country.capital}
-                timezones={country.timezones}
+                capital={country.capitalFr || country.capital?.[0] || '—'}
+                timezone={country.primaryTimezone}
               />
             </div>
 
@@ -650,7 +647,7 @@ export default function CountryCard({
                   marginBottom: '2.5rem',
                 }}
               >
-                04 — COORDONNÉES GLOBALES
+                04 / COORDONNÉES GLOBALES
               </div>
               <div className="coord-grid">
                 <div>
@@ -675,15 +672,9 @@ export default function CountryCard({
                   >
                     {country.latlng && country.latlng.length >= 2 ? (
                       <>
-                        {country.latlng[0].toFixed(4)}
-                        <span style={{ fontSize: '1rem', opacity: 0.4 }}>
-                          ° N
-                        </span>
+                        {formatLat(country.latlng[0])}
                         <br />
-                        {country.latlng[1].toFixed(4)}
-                        <span style={{ fontSize: '1rem', opacity: 0.4 }}>
-                          ° E
-                        </span>
+                        {formatLon(country.latlng[1])}
                       </>
                     ) : (
                       'N/A'
@@ -710,23 +701,18 @@ export default function CountryCard({
                       lineHeight: 1.2,
                     }}
                   >
-                    {country.timezones && country.timezones.length > 0
-                      ? country.timezones[0]
-                      : 'N/A'}
+                    {utcOffset(country.primaryTimezone)}
                   </div>
-                  {country.timezones && country.timezones.length > 1 && (
-                    <div
-                      style={{
-                        marginTop: '0.5rem',
-                        fontSize: '0.75rem',
-                        fontFamily: 'var(--font-jetbrains-mono), monospace',
-                        color: 'var(--text-muted)',
-                      }}
-                    >
-                      +{country.timezones.length - 1} zone
-                      {country.timezones.length > 2 ? 's' : ''}
-                    </div>
-                  )}
+                  <div
+                    style={{
+                      marginTop: '0.5rem',
+                      fontSize: '0.75rem',
+                      fontFamily: 'var(--font-jetbrains-mono), monospace',
+                      color: 'var(--text-muted)',
+                    }}
+                  >
+                    {country.primaryTimezone}
+                  </div>
                 </div>
                 <div>
                   <div
