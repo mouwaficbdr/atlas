@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { filterCountries } from '@/lib/search-engine';
 import type { CountryData, SearchResult } from '@/lib/types';
 import { useRouter } from 'next/navigation';
-import { getPreferredWikiTitle, prefetchWikiSummary } from '@/lib/wiki-summary';
 import { useAppStore } from '@/lib/store';
 
 interface SearchPaletteProps {
@@ -132,11 +131,6 @@ export default function SearchPalette({
                 }}
                 onMouseEnter={() => {
                   router.prefetch(`/pays/${result.cca3.toLowerCase()}`);
-                  const c = countries.find((cc) => cc.cca3 === result.cca3);
-                  if (!c) return;
-                  const title = getPreferredWikiTitle(c);
-                  if (!title) return;
-                  prefetchWikiSummary(title);
                 }}
                 onClick={() => {
                   onSelect(result.cca3);
