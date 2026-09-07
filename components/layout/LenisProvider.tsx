@@ -4,6 +4,7 @@ import { useEffect, ReactNode } from 'react';
 import Lenis from 'lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { prefersReducedMotion } from '@/lib/hooks/useReducedMotion';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,8 +20,9 @@ interface LenisProviderProps {
  */
 export default function LenisProvider({ children }: LenisProviderProps) {
   useEffect(() => {
-    // NOTE: Lenis est désactivé sur mobile pour laisser le scroll natif gérer l'UX
-    if (window.innerWidth < 768) return;
+    // Lenis désactivé sur mobile (scroll natif) et si l'utilisateur demande
+    // une réduction des animations (le scroll fluide est du motion).
+    if (window.innerWidth < 768 || prefersReducedMotion()) return;
 
     const lenis = new Lenis({
       duration: 1.2,

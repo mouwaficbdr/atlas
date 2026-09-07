@@ -2,6 +2,7 @@
 
 import { useMemo, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
+import { useReducedMotion } from '@/lib/hooks/useReducedMotion';
 
 import * as THREE from 'three';
 
@@ -33,6 +34,7 @@ function generateGlowTexture() {
 
 function Particles({ count }: { count: number }) {
   const pointsRef = useRef<THREE.Points>(null);
+  const reducedMotion = useReducedMotion();
 
   const geometry = useMemo(() => {
     const arr = new Float32Array(count * 3);
@@ -69,10 +71,9 @@ function Particles({ count }: { count: number }) {
   );
 
   useFrame(({ clock }) => {
-    if (pointsRef.current) {
-      pointsRef.current.rotation.y = clock.getElapsedTime() * 0.1;
-      pointsRef.current.rotation.x = clock.getElapsedTime() * 0.05;
-    }
+    if (reducedMotion || !pointsRef.current) return;
+    pointsRef.current.rotation.y = clock.getElapsedTime() * 0.1;
+    pointsRef.current.rotation.x = clock.getElapsedTime() * 0.05;
   });
 
   return <points ref={pointsRef} geometry={geometry} material={material} />;

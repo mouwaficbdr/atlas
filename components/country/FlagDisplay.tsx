@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { prefersReducedMotion } from '@/lib/hooks/useReducedMotion';
 
 interface FlagDisplayProps {
   flagSvg: string;
@@ -12,13 +13,16 @@ export default function FlagDisplay({ flagSvg }: FlagDisplayProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (ref.current) {
-      gsap.fromTo(
-        ref.current,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
-      );
+    if (!ref.current) return;
+    if (prefersReducedMotion()) {
+      gsap.set(ref.current, { opacity: 1, y: 0 });
+      return;
     }
+    gsap.fromTo(
+      ref.current,
+      { opacity: 0, y: 16 },
+      { opacity: 1, y: 0, duration: 0.25, ease: 'power2.out' },
+    );
   }, []);
 
   return (

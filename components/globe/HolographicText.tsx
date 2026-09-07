@@ -2,6 +2,7 @@ import { useRef, useEffect, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { gsap } from 'gsap';
+import { useReducedMotion } from '@/lib/hooks/useReducedMotion';
 
 interface HolographicTextProps {
   text: string;
@@ -49,6 +50,7 @@ function makeTextTexture(text: string, color: string): THREE.CanvasTexture {
 
 export default function HolographicText({ text, latlng, color = '#ffffff' }: HolographicTextProps) {
   const spriteRef = useRef<THREE.Sprite>(null);
+  const reducedMotion = useReducedMotion();
   const [lat, lon] = latlng;
 
   const position = useMemo(() => projectPoint(lat, lon, 1.02), [lat, lon]);
@@ -86,28 +88,34 @@ export default function HolographicText({ text, latlng, color = '#ffffff' }: Hol
   }, [spriteMaterial]);
 
   useEffect(() => {
-    if (spriteRef.current) {
-      spriteRef.current.position.set(position[0], position[1], position[2]);
-
-      gsap.to(spriteRef.current.position, {
-        x: targetPosition[0],
-        y: targetPosition[1],
-        z: targetPosition[2],
-        duration: 0.8,
-        ease: 'back.out(1.5)',
-      });
-
-      gsap.to(spriteMaterial, {
-        opacity: 1,
-        duration: 0.4,
-      });
+    if (!spriteRef.current) return;
+    if (reducedMotion) {
+      spriteRef.current.position.set(
+        targetPosition[0],
+        targetPosition[1],
+        targetPosition[2],
+      );
+      spriteMaterial.opacity = 1;
+      return () => {
+        spriteMaterial.opacity = 0;
+      };
     }
+    spriteRef.current.position.set(position[0], position[1], position[2]);
+    gsap.to(spriteRef.current.position, {
+      x: targetPosition[0],
+      y: targetPosition[1],
+      z: targetPosition[2],
+      duration: 0.5,
+      ease: 'power3.out',
+    });
+    gsap.to(spriteMaterial, { opacity: 1, duration: 0.3 });
     return () => {
       spriteMaterial.opacity = 0;
     };
-  }, [position, targetPosition, spriteMaterial]);
+  }, [position, targetPosition, spriteMaterial, reducedMotion]);
 
   useFrame(({ clock }) => {
+    if (reducedMotion) return;
     if (spriteRef.current) {
       const offset = hoverOffset.current
         .copy(normal)

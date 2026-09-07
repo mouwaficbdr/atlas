@@ -4,6 +4,7 @@ import { useMemo, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import type { CountryPalette } from '@/lib/types';
+import { useReducedMotion } from '@/lib/hooks/useReducedMotion';
 
 const vertexShader = `
 varying vec2 vUv;
@@ -68,6 +69,7 @@ interface MoodBackgroundProps {
 
 function FluidShader({ palette }: MoodBackgroundProps) {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
+  const reducedMotion = useReducedMotion();
 
   const uniforms = useMemo(
     () => ({
@@ -80,9 +82,8 @@ function FluidShader({ palette }: MoodBackgroundProps) {
   );
 
   useFrame(({ clock }) => {
-    if (materialRef.current) {
-      materialRef.current.uniforms.uTime.value = clock.getElapsedTime();
-    }
+    if (reducedMotion || !materialRef.current) return;
+    materialRef.current.uniforms.uTime.value = clock.getElapsedTime();
   });
 
   return (

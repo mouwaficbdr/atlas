@@ -5,7 +5,13 @@
   --text-muted: #6b7280;
   --text-accent: #4fc3f7;
   --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-default: rgba(255, 255, 255, 0.2);
   --color-primary: #1e3a5f;
   --color-secondary: #2d5986;
   --color-accent: #4a90d9;
+
+  /* Courbes de motion : une signature pour les révélations fortes, une
+     utilitaire pour le reste. Deux au maximum. */
+  --ease-signature: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-ui: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
