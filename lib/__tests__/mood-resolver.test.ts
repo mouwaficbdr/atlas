@@ -101,13 +101,14 @@ const arbitraryCountryData: fc.Arbitrary<CountryData> = fc.record({
 // Propriété 5 : Exhaustivité
 // ---------------------------------------------------------------------------
 
-describe("mood-resolver — Propriété 5 : Exhaustivité", () => {
-  // Feature: atlas-globe-3d, Property 5: resolveMood retourne toujours un MoodType valide parmi ['Île', 'Continental', 'Polaire', 'Tropical'] pour tout CountryData arbitraire
+describe("mood-resolver : Propriété 5 : Exhaustivité", () => {
+  // resolveMood retourne toujours un MoodType valide pour tout CountryData.
 
   const VALID_MOOD_TYPES: MoodType[] = [
-    "Île",
-    "Continental",
+    "Insulaire",
     "Polaire",
+    "Tempéré",
+    "Subtropical",
     "Tropical",
   ];
 
@@ -138,6 +139,32 @@ describe("mood-resolver — Propriété 5 : Exhaustivité", () => {
       { numRuns: 100 }
     );
   });
+});
+
+// ---------------------------------------------------------------------------
+// Bandes de latitude (cas concrets)
+// ---------------------------------------------------------------------------
+
+describe("mood-resolver : bandes de latitude", () => {
+  const base = {
+    borders: ["AAA"],
+    area: 500_000,
+  } as unknown as CountryData;
+  const at = (lat: number) =>
+    resolveMood({ ...base, latlng: [lat, 0] } as CountryData).type;
+
+  it("|lat| <= 23.5 : Tropical", () => expect(at(5)).toBe("Tropical"));
+  it("23.5 < |lat| <= 40 : Subtropical", () => expect(at(36)).toBe("Subtropical"));
+  it("40 < |lat| <= 60 : Tempéré", () => expect(at(51)).toBe("Tempéré"));
+  it("|lat| > 60 : Polaire", () => expect(at(-70)).toBe("Polaire"));
+  it("petit territoire sans frontière : Insulaire", () =>
+    expect(
+      resolveMood({
+        borders: [],
+        area: 21,
+        latlng: [-0.5, 166],
+      } as unknown as CountryData).type,
+    ).toBe("Insulaire"));
 });
 
 // ---------------------------------------------------------------------------

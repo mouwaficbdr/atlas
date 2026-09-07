@@ -116,10 +116,15 @@ export interface SearchResult {
 }
 
 // ---------------------------------------------------------------------------
-// CountryMood — Ambiance visuelle pays
+// CountryMood : ambiance estimée par bandes de latitude (indicatif).
 // ---------------------------------------------------------------------------
 
-export type MoodType = 'Île' | 'Continental' | 'Polaire' | 'Tropical';
+export type MoodType =
+  | 'Insulaire'
+  | 'Polaire'
+  | 'Tempéré'
+  | 'Subtropical'
+  | 'Tropical';
 
 export interface CountryMood {
   type: MoodType;
