@@ -6,6 +6,7 @@ import { useFrame } from '@react-three/fiber';
 import { loadGeoJSON } from '@/lib/geojson-loader';
 import type { GeoJSONFeature, CountryData } from '@/lib/types';
 import { useAppStore } from '@/lib/store';
+import { useReducedMotion } from '@/lib/hooks/useReducedMotion';
 import CountryMesh from './CountryMesh';
 import BordersMesh from './BordersMesh';
 import HolographicText from './HolographicText';
@@ -29,6 +30,7 @@ export default function GlobeMesh({
   const [features, setFeatures] = useState<GeoJSONFeature[]>([]);
   const [hoveredCca3, setHoveredCca3] = useState<string | null>(null);
   const setHoveredCountry = useAppStore((state) => state.setHoveredCountry);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     loadGeoJSON()
@@ -72,6 +74,8 @@ export default function GlobeMesh({
   const groupRef = useRef<THREE.Group>(null);
 
   useFrame(({ clock, mouse }) => {
+    if (reducedMotion) return;
+
     if (oceanMaterial) {
       oceanMaterial.uniforms.uTime.value = clock.elapsedTime;
     }

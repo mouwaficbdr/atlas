@@ -34,6 +34,32 @@ a {
   text-decoration: none;
 }
 
+/* Focus clavier visible sur toute cible interactive (finding E4). */
+:focus-visible {
+  outline: 2px solid var(--text-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+/* Ne pas retirer l'anneau au clic souris tout en le gardant au clavier. */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* prefers-reduced-motion : neutralise transitions, animations et
+   défilement fluide, y compris les transitions déclarées en style inline
+   (finding P1). Le JS (GSAP, Lenis, boucles r3f) est géré côté composant
+   via lib/hooks/useReducedMotion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* Screen-reader only utility class */
 .sr-only {
   position: absolute;

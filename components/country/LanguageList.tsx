@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { prefersReducedMotion } from '@/lib/hooks/useReducedMotion';
 
 interface LanguageListProps {
   languages: Record<string, string>;
@@ -14,21 +15,32 @@ export default function LanguageList({ languages }: LanguageListProps) {
   useEffect(() => {
     if (!containerRef.current) return;
     const items = containerRef.current.querySelectorAll('.lang-item');
-    
-    gsap.fromTo(items, 
-      { opacity: 0, x: -20 },
-      { 
-        opacity: 1, 
-        x: 0, 
-        stagger: 0.1, 
-        duration: 1, 
-        ease: 'power3.out',
+
+    if (prefersReducedMotion()) {
+      gsap.set(items, { opacity: 1, x: 0 });
+      return;
+    }
+
+    const tween = gsap.fromTo(
+      items,
+      { opacity: 0, x: -12 },
+      {
+        opacity: 1,
+        x: 0,
+        stagger: 0.06,
+        duration: 0.25,
+        ease: 'power2.out',
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top 90%',
-        }
-      }
+        },
+      },
     );
+
+    return () => {
+      tween.scrollTrigger?.kill();
+      tween.kill();
+    };
   }, []);
 
   if (!entries.length) return null;

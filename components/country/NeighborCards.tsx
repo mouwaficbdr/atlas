@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
 import type { CountryData } from '@/lib/types';
+import { prefersReducedMotion } from '@/lib/hooks/useReducedMotion';
 
 interface NeighborCardsProps {
   borders: string[];
@@ -16,22 +17,32 @@ export default function NeighborCards({ borders, allCountries }: NeighborCardsPr
   useEffect(() => {
     if (!containerRef.current) return;
     const cards = containerRef.current.querySelectorAll('.neighbor-card');
-    
-    gsap.fromTo(cards, 
-      { opacity: 0, scale: 0.9, y: 20 },
-      { 
-        opacity: 1, 
-        scale: 1, 
-        y: 0, 
-        stagger: 0.05, 
-        duration: 0.6, 
-        ease: 'back.out(1.7)',
+
+    if (prefersReducedMotion()) {
+      gsap.set(cards, { opacity: 1, y: 0 });
+      return;
+    }
+
+    const tween = gsap.fromTo(
+      cards,
+      { opacity: 0, y: 16 },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.05,
+        duration: 0.25,
+        ease: 'power2.out',
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top 95%',
-        }
-      }
+        },
+      },
     );
+
+    return () => {
+      tween.scrollTrigger?.kill();
+      tween.kill();
+    };
   }, [borders]);
 
   if (!borders.length) return <p style={{ color: 'var(--text-muted)' }}>Aucun pays voisin</p>;

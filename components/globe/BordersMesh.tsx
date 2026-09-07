@@ -4,6 +4,7 @@ import { useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import type { GeoJSONFeature } from '@/lib/types';
+import { useReducedMotion } from '@/lib/hooks/useReducedMotion';
 
 interface BordersMeshProps {
   features: GeoJSONFeature[];
@@ -11,6 +12,7 @@ interface BordersMeshProps {
 
 export default function BordersMesh({ features }: BordersMeshProps) {
   const materialRef = useRef<THREE.LineBasicMaterial>(null);
+  const reducedMotion = useReducedMotion();
 
   const geometry = useMemo(() => {
     const vertices: number[] = [];
@@ -58,11 +60,13 @@ export default function BordersMesh({ features }: BordersMeshProps) {
 
   // Animation de pulsation légère
   useFrame(({ clock }) => {
-    if (materialRef.current) {
-      // Oscille entre 0.5 et 1.0
-      const pulse = 0.75 + Math.sin(clock.elapsedTime * 2) * 0.25;
-      materialRef.current.opacity = pulse;
+    if (!materialRef.current) return;
+    if (reducedMotion) {
+      materialRef.current.opacity = 0.8;
+      return;
     }
+    // Oscille entre 0.5 et 1.0
+    materialRef.current.opacity = 0.75 + Math.sin(clock.elapsedTime * 2) * 0.25;
   });
 
   return (

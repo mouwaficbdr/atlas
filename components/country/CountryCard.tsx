@@ -5,6 +5,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import type { CountryData, MDXContent, CountryPalette } from '@/lib/types';
 import { formatLat, formatLon, utcOffset } from '@/lib/format-coords';
+import { prefersReducedMotion } from '@/lib/hooks/useReducedMotion';
 
 import FlagDisplay from './FlagDisplay';
 import CapitalClock from './CapitalClock';
@@ -76,8 +77,8 @@ export default function CountryCard({
     window.scrollTo(0, 0);
 
     // Parallaxe GSAP complexe retirée au profit du sticky wipe CSS ; on garde
-    // une entrée simple sur le titre.
-    if (titleRef.current) {
+    // une entrée simple sur le titre, sauf en motion réduit.
+    if (titleRef.current && !prefersReducedMotion()) {
       gsap.to(titleRef.current, {
         yPercent: -20,
         opacity: 0,
