@@ -1,0 +1,4560 @@
+{
+  "head" : {
+    "vars" : [ "iso3", "gov", "govLabel" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "JPN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NOR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NOR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q188759"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "démocratie représentative"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "KEN"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ETH"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q512187"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GHA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7174"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "démocratie"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GBR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "EST"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "UKR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49890"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime semi-présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CZE"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SVK"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SVN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q5255892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république démocratique"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ROU"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49890"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime semi-présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ROU"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q179164"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "État unitaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BGR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MKD"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ALB"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q166747"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AZE"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AZE"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49890"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime semi-présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AZE"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q179164"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "État unitaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GEO"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49890"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime semi-présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GEO"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GEO"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q179164"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "État unitaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GEO"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MLT"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3043547"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "démocratie parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MNE"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "VAT"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "VAT"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q44405"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "théocratie"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "VAT"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q12774933"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "papauté"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SMR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q936648"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "diarchie"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SMR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CUB"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q179164"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "État unitaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "UZB"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SGP"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ARM"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ARM"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q166747"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ARM"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q179164"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "État unitaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PER"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NZL"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3330103"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IND"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IND"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q512187"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IND"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1520223"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IND"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q5255892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république démocratique"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TON"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PNG"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PLW"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MNG"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q166747"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "VEN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "VEN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q512187"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GUY"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ECU"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ECU"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BOL"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BOL"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TTO"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LCA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GTM"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GTM"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q188759"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "démocratie représentative"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "HND"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "DOM"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IRN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IRN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q179164"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "État unitaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IRN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q672729"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "République islamique"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IRN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q138567551"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "théocratie islamique"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IRQ"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q43702"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "fédération"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IRQ"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q512187"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ISR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q179164"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "État unitaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ISR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "YEM"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "YEM"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "JOR"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NIC"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "KGZ"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LAO"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q465613"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république populaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LAO"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q117405807"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "dictature communiste"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LBN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MYS"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MYS"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q43702"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "fédération"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MYS"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q584683"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie élective"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MYS"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3208952"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MYS"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3330103"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "OMN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q184558"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie absolue"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SAU"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7269"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SAU"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q184558"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie absolue"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SAU"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q138567551"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "théocratie islamique"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TJK"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TKM"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TKM"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ARE"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ARE"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q184558"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie absolue"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ARE"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3208952"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "VNM"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "VNM"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q50686"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "parti unique"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "VNM"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q179164"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "État unitaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AFG"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q179164"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "État unitaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AFG"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q189898"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "émirat"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AFG"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q138567551"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "théocratie islamique"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BRN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q179164"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "État unitaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BRN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q184558"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie absolue"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BRN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4204060"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "État islamique"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "DNK"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GRC"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PRT"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "URY"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "URY"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "URY"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q310988"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "démocratie participative"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MDA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q179164"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "État unitaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MDA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GRL"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3330103"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "HRV"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BIH"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q5440547"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MCO"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MCO"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q849242"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie héréditaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IDN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IDN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ZAF"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q11409"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "apartheid"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ZAF"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q188759"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "démocratie représentative"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ZAF"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "KHM"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TLS"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TLS"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49890"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime semi-présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TLS"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q179164"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "État unitaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TUV"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "VUT"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NRU"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "FSM"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q512187"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "KIR"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "FJI"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SUR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PRY"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "VCT"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "JAM"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BHS"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "JEY"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "JEY"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3043547"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "démocratie parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "JEY"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3330103"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SLV"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SLV"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SLV"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q188759"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "démocratie représentative"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CRI"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "KWT"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MMR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NPL"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q465613"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république populaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NPL"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q512187"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PAK"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q512187"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PAK"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "QAT"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BTN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TZA"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PHL"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ZMB"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ZMB"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q188759"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "démocratie représentative"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "COG"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GNQ"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PRI"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "XKS"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BYS"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1075404"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république des conseils"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GUF"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "FRO"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ESH"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "FLK"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IMN"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "VIR"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MSR"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MAC"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GUM"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "UMI"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GLP"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MYT"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TCA"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BVT"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BMU"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BMU"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q46395"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "territoire britannique d'outre-mer"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NLD"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PYF"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NFK"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NCL"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CSK"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PCN"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CCK"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MID"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "YUG"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q50686"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "parti unique"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "YUG"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q663333"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "titisme"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "YUG"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q842112"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "État socialiste"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "YUG"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ATF"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "JTN"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "HMD"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ATN"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "FXX"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "HVO"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7448101"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "colonie autonome"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "YUG"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CTE"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CRQ"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CAN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CAN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q43702"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "fédération"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CAN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q166747"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IRL"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IRL"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q179164"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "État unitaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "HUN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ESP"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3330103"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "USA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1520223"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "USA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q5255892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république démocratique"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BEL"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q43702"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "fédération"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LUX"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "FIN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SWE"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SWE"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q188759"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "démocratie représentative"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "POL"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49890"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime semi-présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "POL"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q166747"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "POL"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q179164"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "État unitaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LTU"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49890"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime semi-présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LTU"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ITA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CHE"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q512187"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CHE"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q2523556"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime directorial"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AUT"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AUT"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49890"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime semi-présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AUT"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q5440547"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TUR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TUR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q179164"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "État unitaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ATA"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "EGY"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MEX"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q48349"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "empire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MEX"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MEX"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q512187"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MEX"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1520223"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MEX"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q5255892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république démocratique"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "FRA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49890"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime semi-présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CHN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q465613"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république populaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BRA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BRA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q188759"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "démocratie représentative"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BRA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q512187"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "RUS"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4446300"
+      },
+      "govLabel" : {
+        "type" : "literal",
+        "value" : "Q4446300"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "DEU"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BLR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BLR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ISL"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LVA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LVA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AND"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q20105434"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "coprincipauté parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CYP"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CYP"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "KAZ"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BLZ"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BLZ"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3330103"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BRB"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q179164"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "État unitaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BRB"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "DZA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49890"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime semi-présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "DZA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q465613"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république populaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CHL"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q5255892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république démocratique"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LIE"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BHR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SRB"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AUS"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AUS"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q43702"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "fédération"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AUS"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q188759"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "démocratie représentative"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ARG"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q512187"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PRK"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PRK"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q50686"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "parti unique"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PRK"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q179164"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "État unitaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PRK"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q181800"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Juche"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PRK"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q842112"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "État socialiste"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PRK"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q5433328"
+      },
+      "govLabel" : {
+        "type" : "literal",
+        "value" : "Q5433328"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PRK"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q117405807"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "dictature communiste"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TCD"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "WSM"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SLB"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MHL"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "COL"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "KNA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "KNA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3208952"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GRD"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ATG"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "DMA"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "HTI"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PAN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MDV"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LKA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SYR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q59281"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "gouvernement provisoire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TWN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7174"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "démocratie"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TWN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49890"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime semi-présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TWN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1520223"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "THA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "THA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3330103"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "KOR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "KOR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BGD"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q720477"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "système de Westminster"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BGD"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MLI"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AGO"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AGO"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CAF"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TGO"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ZWE"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BWA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BDI"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BDI"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q188759"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "démocratie représentative"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "COM"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q512187"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "COD"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "DJI"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ERI"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MWI"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MRT"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MUS"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MOZ"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NER"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "UGA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "STP"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SLE"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SOM"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q512187"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SDN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q512187"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SWZ"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q184558"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie absolue"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GIB"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CYM"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q46395"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "territoire britannique d'outre-mer"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "HKG"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ASM"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MNP"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ANT"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AIA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GGY"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "VGB"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SXM"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "COK"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BES"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NIU"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SPM"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q719487"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "collectivité d'outre-mer"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "WLF"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IOT"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MAF"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PCI"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q985073"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Territoires sous tutelle des Nations unies"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SHN"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "DHY"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SJM"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AFI"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q203396"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "France d’outre-mer"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ASC"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TUN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49890"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime semi-présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TUN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SSD"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q512187"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BEN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BFA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BFA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q25424534"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "junte"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GAB"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GMB"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GIN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GNB"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CIV"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CMR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CPV"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LSO"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LBR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LBR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LBR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1520223"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LBR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q17023307"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Démocratie Herrenvolk"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LBY"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MDG"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7270"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MAR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41614"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NAM"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NGA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q512187"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "RWA"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49890"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime semi-présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SEN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49892"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SYC"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ALA"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SUN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q43702"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "fédération"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SUN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q50686"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "parti unique"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SUN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q118365"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "dictature du prolétariat"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SUN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1075404"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république des conseils"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SUN"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "DDR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "DDR"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q117405807"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "dictature communiste"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MTQ"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "REU"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ABW"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7269"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CUW"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3043547"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "démocratie parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BLM"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CXR"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SGS"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TKL"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SCG"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ATB"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PSE"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49890"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime semi-présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PSE"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q179164"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "État unitaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PSE"
+      },
+      "gov" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4198907"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PSE"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NHB"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GEL"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ATA"
+      }
+    } ]
+  }
+}

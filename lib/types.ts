@@ -1,7 +1,9 @@
-// No external imports needed - all types are defined locally
+// Tous les types sont définis localement, aucun import externe.
 
 // ---------------------------------------------------------------------------
-// CountryData — REST Countries API v3.1
+// CountryData : figé au build dans public/data/countries-geo.json
+// (géométrie Natural Earth + propriétés issues de mledoze/countries et
+// countries-and-timezones, voir scripts/generate-geo.js).
 // ---------------------------------------------------------------------------
 
 export interface CountryData {
@@ -12,10 +14,22 @@ export interface CountryData {
     official: string;
     nativeName: Record<string, { common: string; official: string }>;
   };
+  /** Nom courant en français (repli sur name.common). */
+  nameFr: string;
+  /** Nom officiel en français (repli sur name.official). */
+  officialNameFr: string;
+  /** Gentilé masculin en français, chaîne vide si inconnu. */
+  demonymFr: string;
 
   capital: string[];
+  /** Nom de la capitale en français (repli sur l'anglais). */
+  capitalFr: string;
   region: string;
+  /** Région en français. */
+  regionFr: string;
   subregion: string;
+  /** Sous-région en français. */
+  subregionFr: string;
   latlng: [number, number];
   area: number;
   landlocked: boolean;
@@ -28,7 +42,7 @@ export interface CountryData {
   idd: {
     root: string;
     suffixes: string[];
-  };
+  } | null;
   tld: string[];
 
   flags: {
@@ -37,7 +51,15 @@ export interface CountryData {
     alt: string;
   };
 
+  /** Décalages UTC bruts (souvent vide, l'horloge utilise primaryTimezone). */
   timezones: string[];
+  /** Fuseau IANA de la capitale, ex. "Europe/Paris". "UTC" si inconnu. */
+  primaryTimezone: string;
+
+  /** Forme de gouvernement en français (Wikidata P122), null si non renseigné. */
+  governmentFr: string | null;
+  /** État souverain (toujours true dans le jeu de données livré). */
+  independent: boolean;
 
   centroid: [number, number];
   colors?: {
