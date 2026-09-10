@@ -11,6 +11,8 @@ import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 interface GlobeControlsProps {
   /** Désactive les contrôles pendant les animations caméra (ex: GSAP fly-to) */
   enabled?: boolean;
+  /** Hors du mode globe (fiche pays), la rotation clavier est neutralisée. */
+  cameraMode?: 'globe' | 'country';
 }
 
 const ROTATE_STEP = 0.06; // radians par pression de flèche
@@ -19,20 +21,24 @@ const MAX_POLAR = Math.PI - 0.1;
 
 /**
  * GlobeControls encapsule OrbitControls de @react-three/drei avec :
- * - Amortissement activé (dampingFactor=0.85) pour une décélération progressive
+ * - Amortissement activé (dampingFactor=0.05) pour une décélération progressive
  *   après relâchement du pointeur (Exigence 2.1)
  * - Prop `enabled` pour désactiver pendant les animations caméra GSAP (Exigence 2.4a)
  * - Support tactile natif via enableRotate (Exigence 2.5a)
  * - Rotation au clavier (flèches) pour les utilisateurs qui n'utilisent pas
  *   la souris/le tactile — jusque là, le globe n'avait aucun équivalent clavier.
+ *   Neutralisée hors du mode globe (le globe est alors masqué par la fiche pays).
  */
-export default function GlobeControls({ enabled = true }: GlobeControlsProps) {
+export default function GlobeControls({
+  enabled = true,
+  cameraMode = 'globe',
+}: GlobeControlsProps) {
   const controlsRef = useRef<OrbitControlsImpl>(null);
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       const controls = controlsRef.current;
-      if (!controls || !enabled) return;
+      if (!controls || !enabled || cameraMode !== 'globe') return;
 
       // Ne pas intercepter les flèches utilisées pour naviguer dans un champ
       // de saisie (ex: la palette de recherche).
@@ -65,7 +71,7 @@ export default function GlobeControls({ enabled = true }: GlobeControlsProps) {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [enabled]);
+  }, [enabled, cameraMode]);
 
   return (
     <OrbitControls

@@ -52,6 +52,9 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
       const country = countries.find(c => c.cca3 === selectedCountryCca3);
       if (!country) return;
 
+      // Attention aux conventions divergentes : centroid est en ordre GeoJSON
+      // [lon, lat] (calculé par generate-geo.js), alors que country.latlng est
+      // en ordre REST Countries [lat, lon].
       const [lon, lat] = country.centroid;
 
       // Conversion lon/lat → coordonnées sphériques Three.js

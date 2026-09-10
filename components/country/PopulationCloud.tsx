@@ -99,11 +99,11 @@ export default function PopulationCloud({ population, worldPopulation = WORLD_PO
       {inView && (
         <Canvas
           frameloop="demand"
+          camera={{ position: [0, 0, 5] }}
           style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
         >
           <ambientLight intensity={0.5} />
           <Particles count={count} />
-          <perspectiveCamera position={[0, 0, 5]} />
         </Canvas>
       )}
     </div>
