@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Bebas_Neue, DM_Sans, JetBrains_Mono } from 'next/font/google';
 import LenisProvider from '@/components/layout/LenisProvider';
-import CustomCursor from '@/components/ui/CustomCursor';
 import PersistentLayout from '@/components/layout/PersistentLayout';
 import { SITE_URL } from '@/lib/site-config';
 import './globals.css';
@@ -76,7 +75,6 @@ export default function RootLayout({
     <html lang="fr" className={`${bebasNeue.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}>
       <body>
         <LenisProvider>
-          <CustomCursor />
           <PersistentLayout>
             {children}
           </PersistentLayout>
