@@ -73,14 +73,6 @@ a {
   border-width: 0;
 }
 
-/* Hide custom cursor on touch devices */
-@media (pointer: coarse) {
-  .custom-cursor,
-  .custom-cursor-follower {
-    display: none !important;
-  }
-}
-
 /* --- ATLAS Responsive Classes --- */
 .panel-padding {
   padding: clamp(1.5rem, 5vw, 4rem);
