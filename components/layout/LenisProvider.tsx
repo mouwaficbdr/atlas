@@ -5,6 +5,7 @@ import Lenis from 'lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { prefersReducedMotion } from '@/lib/hooks/useReducedMotion';
+import { MOBILE_BREAKPOINT } from '@/lib/constants';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,7 +23,7 @@ export default function LenisProvider({ children }: LenisProviderProps) {
   useEffect(() => {
     // Lenis désactivé sur mobile (scroll natif) et si l'utilisateur demande
     // une réduction des animations (le scroll fluide est du motion).
-    if (window.innerWidth < 768 || prefersReducedMotion()) return;
+    if (window.innerWidth < MOBILE_BREAKPOINT || prefersReducedMotion()) return;
 
     const lenis = new Lenis({
       duration: 1.2,

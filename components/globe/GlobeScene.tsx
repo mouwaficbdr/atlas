@@ -103,7 +103,7 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
           cameraMode={cameraMode}
         />
         <AtmosphereMesh />
-        <GlobeControls enabled={true} />
+        <GlobeControls enabled={true} cameraMode={cameraMode} />
         <CameraTransition
           countries={countries}
           cameraMode={cameraMode}

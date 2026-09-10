@@ -34,15 +34,17 @@ export default function LoadingScreen({ loadingState, onRevealComplete }: Loadin
 
   // Pulsation ATLAS° pendant le chargement
   useEffect(() => {
-    if (textRef.current) {
-      gsap.to(textRef.current, {
-        opacity: 1,
-        duration: 1,
-        repeat: -1,
-        yoyo: true,
-        ease: 'power1.inOut',
-      });
-    }
+    if (!textRef.current) return;
+    const t = gsap.to(textRef.current, {
+      opacity: 1,
+      duration: 1,
+      repeat: -1,
+      yoyo: true,
+      ease: 'power1.inOut',
+    });
+    return () => {
+      t.kill();
+    };
   }, []);
 
   // NOTE: Le fondu de sortie attend que les assets soient prêts ET que la durée minimale soit écoulée

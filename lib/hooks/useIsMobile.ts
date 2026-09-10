@@ -1,4 +1,5 @@
 import { useState, useLayoutEffect, useEffect } from 'react';
+import { MOBILE_BREAKPOINT } from '@/lib/constants';
 
 // Le SSR n'a pas de useLayoutEffect (avertissement React) ; la détection du
 // viewport n'a de sens que côté client, donc on retombe sur useEffect côté
@@ -8,7 +9,7 @@ const useIsomorphicLayoutEffect =
 
 const RESIZE_DEBOUNCE_MS = 150;
 
-export function useIsMobile(breakpoint = 768) {
+export function useIsMobile(breakpoint = MOBILE_BREAKPOINT) {
   const [isMobile, setIsMobile] = useState(false);
 
   // useLayoutEffect (plutôt que useEffect) : la valeur correcte est appliquée
