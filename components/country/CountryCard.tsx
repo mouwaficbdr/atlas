@@ -14,6 +14,7 @@ import NeighborCards from './NeighborCards';
 import MoodDisplay from './MoodDisplay';
 import PoliticalRegime from './PoliticalRegime';
 import WikiExtract from './WikiExtract';
+import CurrencyCard from './CurrencyCard';
 import Breadcrumb from './Breadcrumb';
 import ShareButton from './ShareButton';
 import dynamic from 'next/dynamic';
@@ -27,7 +28,6 @@ const MoodBackground = dynamic(() => import('./MoodBackground'), { ssr: false })
 const PopulationCloud = dynamic(() => import('./PopulationCloud'), {
   ssr: false,
 });
-const CurrencyCard = dynamic(() => import('./CurrencyCard'), { ssr: false });
 
 gsap.registerPlugin(ScrollTrigger);
 
