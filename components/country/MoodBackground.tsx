@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import type { CountryPalette } from '@/lib/types';
@@ -69,6 +69,7 @@ interface MoodBackgroundProps {
 
 function FluidShader({ palette }: MoodBackgroundProps) {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
+  const geometryRef = useRef<THREE.PlaneGeometry>(null);
   const reducedMotion = useReducedMotion();
 
   const uniforms = useMemo(
@@ -86,9 +87,21 @@ function FluidShader({ palette }: MoodBackgroundProps) {
     materialRef.current.uniforms.uTime.value = clock.getElapsedTime();
   });
 
+  // three dispose les primitives JSX au démontage ; on reste explicite sur le
+  // programme du shader et la géométrie, ressources GPU les plus coûteuses ici
+  // (finding E1). dispose() est idempotent.
+  useEffect(() => {
+    const material = materialRef.current;
+    const geometry = geometryRef.current;
+    return () => {
+      material?.dispose();
+      geometry?.dispose();
+    };
+  }, []);
+
   return (
     <mesh>
-      <planeGeometry args={[2, 2]} />
+      <planeGeometry ref={geometryRef} args={[2, 2]} />
       <shaderMaterial
         ref={materialRef}
         vertexShader={vertexShader}
