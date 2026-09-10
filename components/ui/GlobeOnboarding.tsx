@@ -1,153 +1,203 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
-import { gsap } from 'gsap';
+import { useEffect, useState } from 'react';
 import { useIsMobile } from '@/lib/hooks/useIsMobile';
 
+const STORAGE_KEY = 'atlas_onboarding_seen';
+const IDLE_DELAY_MS = 2000;
+
+/**
+ * Indice d'interaction sur le globe (desktop). Déclenché après 2s sans aucune
+ * interaction, masqué dès la première ; vu une fois pour toutes (localStorage).
+ * Hint unique, combiné, avec une croix pour le fermer.
+ */
 export default function GlobeOnboarding() {
   const isMobile = useIsMobile();
   const [show, setShow] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const dragRef = useRef<HTMLDivElement>(null);
-  const clickRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Ne s'affiche que sur desktop
     if (isMobile) return;
 
-    // Ne s'affiche qu'au tout premier chargement
-    const hasSeen = sessionStorage.getItem('atlas_globe_onboarding');
-    if (!hasSeen) {
-      // Déclenchement peu après la fin du LoadingScreen (qui dure ~2.5s)
-      const timer = setTimeout(() => {
-        setShow(true);
-      }, 3500);
-      return () => clearTimeout(timer);
+    try {
+      if (localStorage.getItem(STORAGE_KEY) === '1') return;
+    } catch {
+      // localStorage indisponible : on affiche quand même l'indice.
     }
+
+    const markSeen = () => {
+      try {
+        localStorage.setItem(STORAGE_KEY, '1');
+      } catch {
+        // sans persistance : réapparaîtra à la prochaine visite, acceptable.
+      }
+    };
+
+    const events: Array<keyof WindowEventMap> = [
+      'pointerdown',
+      'wheel',
+      'keydown',
+    ];
+    const controller = new AbortController();
+    let shown = false;
+
+    const timer = setTimeout(() => {
+      shown = true;
+      setShow(true);
+    }, IDLE_DELAY_MS);
+
+    const onInteract = () => {
+      clearTimeout(timer);
+      if (shown) setShow(false);
+      markSeen();
+      controller.abort();
+    };
+
+    events.forEach((e) =>
+      window.addEventListener(e, onInteract, {
+        passive: true,
+        signal: controller.signal,
+      }),
+    );
+
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
   }, [isMobile]);
 
-  useEffect(() => {
-    if (show && dragRef.current && clickRef.current) {
-      const tl = gsap.timeline();
-
-      // Setup initial
-      gsap.set([dragRef.current, clickRef.current], {
-        y: '50%',
-        x: '-50%',
-        opacity: 0,
-        filter: 'blur(10px)',
-        scale: 0.95
-      });
-
-      // 1. Apparition de l'instruction de rotation
-      tl.to(dragRef.current, {
-        y: '0%',
-        opacity: 1,
-        filter: 'blur(0px)',
-        scale: 1,
-        duration: 1.2,
-        ease: 'power3.out'
-      })
-        // Pause pour la lecture (augmentée de 1s)
-        .to({}, { duration: 3.5 })
-        // Disparition de l'instruction de rotation
-        .to(dragRef.current, {
-          y: '-50%',
-          opacity: 0,
-          filter: 'blur(10px)',
-          scale: 0.95,
-          duration: 0.8,
-          ease: 'power2.in'
-        })
-
-        // 2. Apparition de l'instruction de clic
-        .to(clickRef.current, {
-          y: '0%',
-          opacity: 1,
-          filter: 'blur(0px)',
-          scale: 1,
-          duration: 1.2,
-          ease: 'power3.out',
-        }, "-=0.2") // Léger chevauchement
-        // Pause pour la lecture (augmentée de 1s)
-        .to({}, { duration: 4 })
-        // Disparition de l'instruction de clic
-        .to(clickRef.current, {
-          y: '-50%',
-          opacity: 0,
-          filter: 'blur(10px)',
-          scale: 0.95,
-          duration: 0.8,
-          ease: 'power2.in',
-          onComplete: () => {
-            sessionStorage.setItem('atlas_globe_onboarding', 'true');
-            setShow(false);
-          }
-        });
+  const dismiss = () => {
+    setShow(false);
+    try {
+      localStorage.setItem(STORAGE_KEY, '1');
+    } catch {
+      /* pas de persistance */
     }
-  }, [show]);
+  };
 
   if (!show) return null;
 
-  const hintStyle: React.CSSProperties = {
-    position: 'absolute',
-    left: '50%',
-    bottom: '12vh',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '1.25rem',
-    background: 'linear-gradient(90deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.02) 100%)',
-    backdropFilter: 'blur(12px)',
-    border: '1px solid rgba(255,255,255,0.1)',
-    borderTop: '1px solid rgba(255,255,255,0.2)',
-    padding: '1rem 2rem',
-    borderRadius: '40px',
-    color: '#fff',
-    fontFamily: 'var(--font-jetbrains-mono), monospace',
-    fontSize: '0.7rem',
-    letterSpacing: '0.25em',
-    textTransform: 'uppercase',
-    pointerEvents: 'none',
-    boxShadow: '0 20px 40px rgba(0,0,0,0.5)',
-    whiteSpace: 'nowrap',
-  };
-
-  const iconStyle: React.CSSProperties = {
-    color: 'var(--country-accent, #4A90D9)',
-  };
-
   return (
-    <div ref={containerRef} style={{
-      position: 'fixed',
-      inset: 0,
-      zIndex: 50, // Au-dessus du canvas, sous les modales
-      pointerEvents: 'none',
-    }}>
-      {/* Drag Hint */}
-      <div ref={dragRef} style={hintStyle}>
-        <div style={iconStyle}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M8 9l-4 3 4 3"></path>
-            <path d="M16 9l4 3-4 3"></path>
-            <path d="M4 12h16"></path>
-          </svg>
-        </div>
-        <span>Maintenez et glissez pour faire pivoter le globe</span>
-      </div>
+    <div className="onb" role="status">
+      <span className="onb__hint">
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M8 9l-4 3 4 3" />
+          <path d="M16 9l4 3-4 3" />
+          <path d="M4 12h16" />
+        </svg>
+        Glissez pour pivoter
+      </span>
+      <span className="onb__sep" aria-hidden="true" />
+      <span className="onb__hint">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 3v2M12 19v2M3 12h2M19 12h2" />
+        </svg>
+        Cliquez un pays pour l&apos;explorer
+      </span>
+      <button
+        type="button"
+        onClick={dismiss}
+        className="onb__close"
+        aria-label="Masquer l'indice"
+      >
+        &times;
+      </button>
 
-      {/* Click Hint */}
-      <div ref={clickRef} style={hintStyle}>
-        <div style={iconStyle}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="4"></circle>
-            <path d="M12 2v2"></path>
-            <path d="M12 20v2"></path>
-            <path d="M2 12h2"></path>
-            <path d="M20 12h2"></path>
-          </svg>
-        </div>
-        <span>Sélectionnez un pays pour l&apos;explorer</span>
-      </div>
+      <style jsx>{`
+        .onb {
+          position: fixed;
+          left: 50%;
+          bottom: 10vh;
+          transform: translateX(-50%);
+          z-index: 50;
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          padding: 0.75rem 0.75rem 0.75rem 1.5rem;
+          background: rgba(10, 10, 20, 0.72);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          border-radius: 999px;
+          color: rgba(240, 240, 240, 0.9);
+          font-family: var(--font-jetbrains-mono), monospace;
+          font-size: 0.68rem;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          white-space: nowrap;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+          animation: onb-in 0.24s var(--ease-ui, ease) both;
+        }
+        .onb__hint {
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+        }
+        .onb__hint svg {
+          color: var(--text-accent, #4fc3f7);
+          flex-shrink: 0;
+        }
+        .onb__sep {
+          width: 1px;
+          height: 1.1rem;
+          background: rgba(255, 255, 255, 0.18);
+        }
+        .onb__close {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 1.6rem;
+          height: 1.6rem;
+          border: none;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.06);
+          color: rgba(240, 240, 240, 0.7);
+          font-size: 1rem;
+          line-height: 1;
+          cursor: pointer;
+          transition: background 0.2s var(--ease-ui, ease), color 0.2s var(--ease-ui, ease);
+        }
+        .onb__close:hover,
+        .onb__close:focus-visible {
+          background: rgba(255, 255, 255, 0.14);
+          color: #fff;
+        }
+        @keyframes onb-in {
+          from {
+            opacity: 0;
+            transform: translate(-50%, 8px);
+          }
+          to {
+            opacity: 1;
+            transform: translate(-50%, 0);
+          }
+        }
+        @media (max-width: 640px) {
+          .onb {
+            flex-wrap: wrap;
+            white-space: normal;
+            max-width: calc(100vw - 2rem);
+          }
+        }
+      `}</style>
     </div>
   );
 }
