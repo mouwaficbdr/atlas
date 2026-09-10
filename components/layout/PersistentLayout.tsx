@@ -51,6 +51,7 @@ export default function PersistentLayout({
   });
 
   const setSearchOpen = useAppStore((state) => state.setSearchOpen);
+  const isOffMap = useAppStore((state) => state.isOffMap);
 
   // Dérivés directement de l'URL à chaque rendu plutôt que synchronisés dans
   // le store via un useEffect : évite le décalage d'une frame (le globe
@@ -115,6 +116,12 @@ export default function PersistentLayout({
   const handleCountrySelect = (cca3: string) => {
     router.push(`/pays/${cca3.toLowerCase()}`);
   };
+
+  // Routes hors univers (404, erreur) : OffMapScreen se suffit à lui-même, on
+  // ne monte ni le globe, ni l'écran de chargement, ni la navigation.
+  if (isOffMap) {
+    return <>{children}</>;
+  }
 
   return (
     <>
