@@ -436,12 +436,7 @@ export default function CountryCard({
             </div>
 
             {/* Colonne 3 : Densité */}
-            <div
-              style={{
-                padding: '3vw',
-                borderRight: '1px solid rgba(255,255,255,0.1)',
-              }}
-            >
+            <div style={{ padding: '3vw' }}>
               <div
                 style={{
                   fontSize: '0.7rem',
@@ -470,30 +465,6 @@ export default function CountryCard({
               </div>
             </div>
 
-            {/* Colonne 4 : Croissance (Abstract) */}
-            <div style={{ padding: '3vw' }}>
-              <div
-                style={{
-                  fontSize: '0.7rem',
-                  fontFamily: 'var(--font-jetbrains-mono), monospace',
-                  color: 'var(--text-muted)',
-                  marginBottom: '1rem',
-                  letterSpacing: '0.1em',
-                }}
-              >
-                TENDANCE GLOBALE
-              </div>
-              <div
-                style={{
-                  fontSize: '1.5rem',
-                  fontFamily: 'var(--font-dm-sans), sans-serif',
-                  fontWeight: 300,
-                  color: 'var(--country-accent)',
-                }}
-              >
-                CROISSANCE
-              </div>
-            </div>
           </div>
         </section>
 
@@ -1177,28 +1148,30 @@ export default function CountryCard({
             </div>
           </div>
 
-          <div
-            style={{
-              maxWidth: '800px',
-              margin: '0 auto',
-              marginBottom: '20vh',
-              padding: '0 5vw',
-            }}
-          >
-            <h3
+          {mdxContent.source && (
+            <div
               style={{
-                fontSize: '0.8rem',
-                fontFamily: 'var(--font-jetbrains-mono), monospace',
-                color: 'var(--text-muted)',
-                marginBottom: '4rem',
-                letterSpacing: '0.2em',
-                textAlign: 'center',
+                maxWidth: '800px',
+                margin: '0 auto',
+                marginBottom: '20vh',
+                padding: '0 5vw',
               }}
             >
-              08 / ARCHIVES
-            </h3>
-            <MDXSection content={mdxContent} />
-          </div>
+              <h3
+                style={{
+                  fontSize: '0.8rem',
+                  fontFamily: 'var(--font-jetbrains-mono), monospace',
+                  color: 'var(--text-muted)',
+                  marginBottom: '4rem',
+                  letterSpacing: '0.2em',
+                  textAlign: 'center',
+                }}
+              >
+                08 / ARCHIVES
+              </h3>
+              <MDXSection content={mdxContent} />
+            </div>
+          )}
 
           {country.borders.length > 0 && (
             <div

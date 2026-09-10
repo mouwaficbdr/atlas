@@ -89,14 +89,9 @@ a {
 /* Panel 2 Stats Grid */
 .panel-2-stats {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 }
 @media (max-width: 768px) {
-  .panel-2-stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 480px) {
   .panel-2-stats {
     grid-template-columns: 1fr;
   }
