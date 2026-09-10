@@ -1,8 +1,9 @@
 /**
  * Route : /pays/[code]
  *
- * Génération statique (SSG) de 195 pages via generateStaticParams.
- * Charge les données pays + MDX au build et monte CountryCard.
+ * Génération statique (SSG) d'une page par État souverain (193) via
+ * generateStaticParams. Charge les données pays + MDX au build et monte
+ * CountryCard.
  */
 
 import { Metadata } from 'next';
