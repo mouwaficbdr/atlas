@@ -14,14 +14,20 @@ import NeighborCards from './NeighborCards';
 import MoodDisplay from './MoodDisplay';
 import PoliticalRegime from './PoliticalRegime';
 import WikiExtract from './WikiExtract';
-import PopulationCloud from './PopulationCloud';
-import CurrencyCard from './CurrencyCard';
-import MoodBackground from './MoodBackground';
 import Breadcrumb from './Breadcrumb';
 import ShareButton from './ShareButton';
 import dynamic from 'next/dynamic';
 
 const MDXSection = dynamic(() => import('./MDXSection'), { ssr: false });
+
+// Canvas WebGL de section (three + react-three-fiber) : chargés en import
+// dynamique client pour ne pas alourdir le bundle de la fiche pays. Ce sont des
+// décors, leur rendu différé n'a aucun impact fonctionnel.
+const MoodBackground = dynamic(() => import('./MoodBackground'), { ssr: false });
+const PopulationCloud = dynamic(() => import('./PopulationCloud'), {
+  ssr: false,
+});
+const CurrencyCard = dynamic(() => import('./CurrencyCard'), { ssr: false });
 
 gsap.registerPlugin(ScrollTrigger);
 

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import GlobeScene from '@/components/globe/GlobeScene';
+import dynamic from 'next/dynamic';
 import LoadingScreen from '@/components/ui/LoadingScreen';
 import SearchPalette from '@/components/ui/SearchPalette';
 import Navigation from '@/components/layout/Navigation';
@@ -14,6 +14,14 @@ import type { CountryData, LoadingState } from '@/lib/types';
 import { fetchAllCountries } from '@/lib/countries-api';
 import { useAppStore } from '@/lib/store';
 import { useIsMobile } from '@/lib/hooks/useIsMobile';
+
+// Le globe embarque toute la stack WebGL (three + react-three-fiber). On le
+// charge en import dynamique client (ssr: false) pour le sortir du bundle
+// d'entrée ; il n'est de toute façon monté que sur desktop, une fois les pays
+// chargés (voir la condition plus bas).
+const GlobeScene = dynamic(() => import('@/components/globe/GlobeScene'), {
+  ssr: false,
+});
 
 function MobileFallbackLoader({ loadingProgress, onComplete }: { loadingProgress: number; onComplete: () => void }) {
   useEffect(() => {
