@@ -136,19 +136,15 @@ export interface CountryMood {
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // MDXContent — Contenu éditorial
-// NOTE: MDXRemoteSerializeResult est redéfini ici pour éviter une dépendance
-// directe à next-mdx-remote dans ce fichier de types fondamentaux.
+// Le MDX est rendu côté serveur (next-mdx-remote/rsc) au build : on transporte
+// la source brute, pas un bundle compilé à évaluer côté client (ce que le CSP
+// de production interdit, faute de 'unsafe-eval').
 // ---------------------------------------------------------------------------
-
-export interface MDXRemoteSerializeResult {
-  compiledSource: string;
-  scope?: Record<string, unknown>;
-  frontmatter?: Record<string, unknown>;
-}
 
 export interface MDXContent {
   cca3: string;
-  source: MDXRemoteSerializeResult | null;
+  /** Source MDX brute, ou null si le fichier est absent / malformé. */
+  raw: string | null;
   frontmatter: {
     title?: string;
     description?: string;

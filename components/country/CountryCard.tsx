@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import type { CountryData, MDXContent, CountryPalette } from '@/lib/types';
+import type { CountryData, CountryPalette } from '@/lib/types';
 import { formatLat, formatLon, utcOffset } from '@/lib/format-coords';
 import { prefersReducedMotion } from '@/lib/hooks/useReducedMotion';
 
@@ -20,8 +20,6 @@ import ShareButton from './ShareButton';
 import CountryFooter from './CountryFooter';
 import dynamic from 'next/dynamic';
 
-const MDXSection = dynamic(() => import('./MDXSection'), { ssr: false });
-
 // Canvas WebGL de section (three + react-three-fiber) : chargés en import
 // dynamique client pour ne pas alourdir le bundle de la fiche pays. Ce sont des
 // décors, leur rendu différé n'a aucun impact fonctionnel.
@@ -35,7 +33,8 @@ gsap.registerPlugin(ScrollTrigger);
 interface CountryCardProps {
   country: CountryData;
   allCountries: CountryData[];
-  mdxContent: MDXContent;
+  /** Contenu éditorial MDX rendu côté serveur (null si le pays n'en a pas). */
+  mdxSlot?: ReactNode;
   palette: CountryPalette;
   canonicalUrl: string;
   wikiSummary?: string | null;
@@ -44,7 +43,7 @@ interface CountryCardProps {
 export default function CountryCard({
   country,
   allCountries,
-  mdxContent,
+  mdxSlot,
   palette,
   canonicalUrl,
   wikiSummary,
@@ -1151,7 +1150,7 @@ export default function CountryCard({
             </div>
           </div>
 
-          {mdxContent.source && (
+          {mdxSlot && (
             <div
               style={{
                 maxWidth: '800px',
@@ -1172,7 +1171,7 @@ export default function CountryCard({
               >
                 08 / ARCHIVES
               </h3>
-              <MDXSection content={mdxContent} />
+              {mdxSlot}
             </div>
           )}
 

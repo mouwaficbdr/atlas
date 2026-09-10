@@ -10,6 +10,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { unstable_cache } from 'next/cache';
 import CountryCard from '@/components/country/CountryCard';
+import MDXSection from '@/components/country/MDXSection';
 import { fetchAllCountries } from '@/lib/countries-api';
 import { loadMDX } from '@/lib/mdx-loader';
 import { SITE_URL } from '@/lib/site-config';
@@ -158,7 +159,7 @@ async function getCountryPalette(
 
 /**
  * Charge le contenu MDX pour un pays.
- * Retourne `source: null` silencieusement si absent.
+ * Retourne `raw: null` silencieusement si absent.
  */
 async function getCountryMDX(cca3: string): Promise<MDXContent> {
   try {
@@ -166,7 +167,7 @@ async function getCountryMDX(cca3: string): Promise<MDXContent> {
   } catch {
     return {
       cca3,
-      source: null,
+      raw: null,
       frontmatter: {},
     };
   }
@@ -275,12 +276,16 @@ export default async function CountryPage({ params }: PageProps) {
     ),
   ]);
 
+  // Le MDX est rendu ici (composant serveur) et passé en slot à CountryCard,
+  // qui est un composant client : il ne peut pas monter MDXSection lui-même.
+  const mdxSlot = mdxContent.raw ? <MDXSection raw={mdxContent.raw} /> : null;
+
   return (
     <CountryCard
       key={country.cca3}
       country={country}
       allCountries={allCountries}
-      mdxContent={mdxContent}
+      mdxSlot={mdxSlot}
       palette={palette}
       canonicalUrl={canonicalUrl}
       wikiSummary={wikiSummary}
