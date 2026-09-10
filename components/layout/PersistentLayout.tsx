@@ -82,12 +82,26 @@ export default function PersistentLayout({
 
     loadCountries();
 
-    minDurationRef.current = setTimeout(() => {
-      setLoadingState((prev) => ({
-        ...prev,
-        minDurationElapsed: true,
-      }));
-    }, 1500);
+    // La durée minimale de 1500ms met en scène l'arrivée sur le globe : elle
+    // n'a de sens qu'à la première visite de la session. Ensuite, on révèle dès
+    // que les assets sont prêts (finding QA5).
+    let alreadyLoaded = false;
+    try {
+      alreadyLoaded = sessionStorage.getItem('atlas_loaded_once') === '1';
+    } catch {
+      // sessionStorage indisponible : on garde le comportement première visite.
+    }
+
+    if (alreadyLoaded) {
+      setLoadingState((prev) => ({ ...prev, minDurationElapsed: true }));
+    } else {
+      minDurationRef.current = setTimeout(() => {
+        setLoadingState((prev) => ({
+          ...prev,
+          minDurationElapsed: true,
+        }));
+      }, 1500);
+    }
 
     return () => {
       if (minDurationRef.current) clearTimeout(minDurationRef.current);
@@ -110,6 +124,11 @@ export default function PersistentLayout({
   };
 
   const handleRevealComplete = () => {
+    try {
+      sessionStorage.setItem('atlas_loaded_once', '1');
+    } catch {
+      // sessionStorage indisponible : la prochaine visite rejouera la mise en scène.
+    }
     setLoadingState((prev) => ({ ...prev, phase: 'complete' }));
   };
 
