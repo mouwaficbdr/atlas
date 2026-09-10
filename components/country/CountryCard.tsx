@@ -1143,7 +1143,10 @@ export default function CountryCard({
                   Diffusez cet atlas numérique. Chaque lien partagé étend la
                   connaissance géopolitique du monde.
                 </p>
-                <ShareButton url={canonicalUrl} />
+                <ShareButton
+                  url={canonicalUrl}
+                  title={`${country.nameFr} · ATLAS°`}
+                />
               </div>
             </div>
           </div>

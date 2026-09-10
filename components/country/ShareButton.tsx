@@ -1,28 +1,55 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface ShareButtonProps {
   url: string;
+  title?: string;
 }
 
-export default function ShareButton({ url }: ShareButtonProps) {
+export default function ShareButton({ url, title = 'ATLAS°' }: ShareButtonProps) {
   const [copied, setCopied] = useState(false);
   const [showFallback, setShowFallback] = useState(false);
+  const [canNativeShare, setCanNativeShare] = useState(false);
+
+  // Détecté après montage : navigator.share n'existe pas au rendu serveur et
+  // varie selon l'appareil, on évite ainsi tout écart d'hydratation.
+  useEffect(() => {
+    setCanNativeShare(typeof navigator !== 'undefined' && !!navigator.share);
+  }, []);
 
   const handleShare = async () => {
-    if (navigator.clipboard) {
+    if (typeof navigator !== 'undefined' && navigator.share) {
+      try {
+        await navigator.share({ title, text: title, url });
+        return;
+      } catch (err) {
+        // L'utilisateur a fermé la feuille de partage : ce n'est pas une erreur.
+        if (err instanceof Error && err.name === 'AbortError') return;
+        // Autre échec : on bascule sur le presse-papiers.
+      }
+    }
+
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
       try {
         await navigator.clipboard.writeText(url);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
+        return;
       } catch {
         setShowFallback(true);
+        return;
       }
-    } else {
-      setShowFallback(true);
     }
+
+    setShowFallback(true);
   };
+
+  const label = canNativeShare
+    ? 'Partager'
+    : copied
+      ? 'Lien copié'
+      : 'Copier le lien';
 
   return (
     <div>
@@ -46,7 +73,7 @@ export default function ShareButton({ url }: ShareButtonProps) {
         onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.5')}
         onMouseLeave={(e) => (e.currentTarget.style.opacity = copied ? '0.5' : '1')}
       >
-        {copied ? 'LIEN COPIÉ' : 'COPIER LE LIEN'}
+        {label}
       </button>
       {showFallback && (
         <input
