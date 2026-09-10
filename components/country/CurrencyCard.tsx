@@ -1,34 +1,11 @@
 'use client';
 
-import { useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
-import { useIsMobile } from '@/lib/hooks/useIsMobile';
-
 interface CurrencyCardProps {
   currencies: Record<string, { name: string; symbol: string }>;
 }
 
-function Coin() {
-  const meshRef = useRef<THREE.Mesh>(null);
-
-  useFrame(({ clock }) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y = clock.getElapsedTime() * 0.5;
-    }
-  });
-
-  return (
-    <mesh ref={meshRef} rotation={[Math.PI / 2, 0, 0]}>
-      <cylinderGeometry args={[1, 1, 0.1, 64]} />
-      <meshStandardMaterial color="#D4AF37" metalness={0.9} roughness={0.1} />
-    </mesh>
-  );
-}
-
 export default function CurrencyCard({ currencies }: CurrencyCardProps) {
   const entries = Object.entries(currencies);
-  const isMobile = useIsMobile();
 
   if (!entries.length) return null;
 
@@ -36,39 +13,11 @@ export default function CurrencyCard({ currencies }: CurrencyCardProps) {
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem' }}>
       {entries.map(([code, { name, symbol }]) => (
         <div key={code} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          {/* Pièce 3D avec symbole en overlay HTML */}
-          <div style={{ position: 'relative', width: '200px', height: '200px', filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.5))' }}>
-            {!isMobile ? (
-              <Canvas style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
-                <ambientLight intensity={1.5} />
-                <directionalLight position={[2, 5, 2]} intensity={2.5} />
-                <Coin />
-                <perspectiveCamera position={[0, 0, 3.5]} />
-              </Canvas>
-            ) : (
-              <div style={{
-                position: 'absolute', top: '10%', left: '10%', width: '80%', height: '80%',
-                borderRadius: '50%', backgroundColor: '#D4AF37',
-                boxShadow: 'inset 0 0 20px rgba(0,0,0,0.3)',
-              }} />
-            )}
-            {/* Symbole monétaire en overlay */}
-            <div
-              style={{
-                position: 'absolute',
-                inset: 0,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                pointerEvents: 'none',
-                fontSize: '3rem',
-                fontFamily: 'var(--font-bebas-neue), sans-serif',
-                color: '#8B6508',
-                textShadow: '0 2px 8px rgba(0,0,0,0.4)',
-              }}
-            >
-              {symbol || code}
-            </div>
+          {/* Piece : disque metallique CSS en rotation Y (coupee par
+              prefers-reduced-motion via la regle globale), symbole en overlay. */}
+          <div className="currency-coin-stage">
+            <div className="currency-coin" />
+            <div className="currency-coin-symbol">{symbol || code}</div>
           </div>
           <div
             style={{
@@ -96,6 +45,55 @@ export default function CurrencyCard({ currencies }: CurrencyCardProps) {
           </div>
         </div>
       ))}
+
+      <style jsx>{`
+        .currency-coin-stage {
+          position: relative;
+          width: 200px;
+          height: 200px;
+          perspective: 800px;
+          filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+        }
+        .currency-coin {
+          position: absolute;
+          inset: 15%;
+          border-radius: 50%;
+          background: linear-gradient(
+            135deg,
+            #f9e29c 0%,
+            #e6c157 28%,
+            #b8860b 50%,
+            #e6c157 72%,
+            #f9e29c 100%
+          );
+          box-shadow:
+            inset 0 0 0 6px rgba(139, 101, 8, 0.35),
+            inset 0 8px 18px rgba(255, 255, 255, 0.45),
+            inset 0 -10px 18px rgba(90, 61, 0, 0.4);
+          transform-style: preserve-3d;
+          animation: currency-coin-spin 7s linear infinite;
+        }
+        .currency-coin-symbol {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          pointer-events: none;
+          font-size: 3rem;
+          font-family: var(--font-bebas-neue), sans-serif;
+          color: #6b4e0f;
+          text-shadow: 0 1px 2px rgba(255, 255, 255, 0.35), 0 2px 8px rgba(0, 0, 0, 0.35);
+        }
+        @keyframes currency-coin-spin {
+          from {
+            transform: rotateY(0deg);
+          }
+          to {
+            transform: rotateY(360deg);
+          }
+        }
+      `}</style>
     </div>
   );
 }

@@ -1,8 +1,8 @@
 'use client';
 
 import { useMemo, useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { useReducedMotion } from '@/lib/hooks/useReducedMotion';
+import { Canvas } from '@react-three/fiber';
+import { useInView } from '@/lib/hooks/useInView';
 
 import * as THREE from 'three';
 
@@ -34,7 +34,6 @@ function generateGlowTexture() {
 
 function Particles({ count }: { count: number }) {
   const pointsRef = useRef<THREE.Points>(null);
-  const reducedMotion = useReducedMotion();
 
   const geometry = useMemo(() => {
     const arr = new Float32Array(count * 3);
@@ -70,12 +69,6 @@ function Particles({ count }: { count: number }) {
     [glowTexture]
   );
 
-  useFrame(({ clock }) => {
-    if (reducedMotion || !pointsRef.current) return;
-    pointsRef.current.rotation.y = clock.getElapsedTime() * 0.1;
-    pointsRef.current.rotation.x = clock.getElapsedTime() * 0.05;
-  });
-
   return <points ref={pointsRef} geometry={geometry} material={material} />;
 }
 
@@ -85,13 +78,23 @@ export default function PopulationCloud({ population, worldPopulation = WORLD_PO
     return Math.min(Math.max(1000, raw), 100000);
   }, [population, worldPopulation]);
 
+  // Ne monter le contexte WebGL qu'à l'approche du viewport, et le rendre une
+  // seule fois (frameloop "demand") : le nuage est un décor statique, il n'a
+  // pas besoin d'une boucle de rendu continue.
+  const { ref, inView } = useInView<HTMLDivElement>();
+
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-      <Canvas style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
-        <ambientLight intensity={0.5} />
-        <Particles count={count} />
-        <perspectiveCamera position={[0, 0, 5]} />
-      </Canvas>
+    <div ref={ref} style={{ position: 'relative', width: '100%', height: '100%' }}>
+      {inView && (
+        <Canvas
+          frameloop="demand"
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+        >
+          <ambientLight intensity={0.5} />
+          <Particles count={count} />
+          <perspectiveCamera position={[0, 0, 5]} />
+        </Canvas>
+      )}
     </div>
   );
 }
