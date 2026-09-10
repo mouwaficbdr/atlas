@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     default: 'ATLAS° — Explorateur mondial de pays',
     template: '%s | ATLAS°',
   },
-  description: 'Explorez le monde en 3D avec ATLAS° : un globe interactif présentant 195 pays avec leurs données géographiques, culturelles et économiques.',
+  description: 'Explorez le monde en 3D avec ATLAS° : un globe interactif présentant 193 États souverains avec leurs données géographiques, culturelles et économiques.',
   keywords: ['atlas', 'globe 3D', 'pays', 'géographie', 'cartographie', 'monde', 'exploration', 'données pays'],
   authors: [{ name: 'ATLAS Team' }],
   creator: 'ATLAS Team',
@@ -41,21 +41,14 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: 'ATLAS°',
     title: 'ATLAS° — Explorateur mondial de pays',
-    description: 'Explorez le monde en 3D avec ATLAS° : un globe interactif présentant 195 pays avec leurs données géographiques, culturelles et économiques.',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'ATLAS° - Globe 3D interactif',
-      },
-    ],
+    description: 'Explorez le monde en 3D avec ATLAS° : un globe interactif présentant 193 États souverains avec leurs données géographiques, culturelles et économiques.',
+    // L'image est fournie par app/opengraph-image.tsx (générée, ratio réel).
   },
   twitter: {
     card: 'summary_large_image',
     title: 'ATLAS° — Explorateur mondial de pays',
-    description: 'Explorez le monde en 3D avec ATLAS° : un globe interactif présentant 195 pays.',
-    images: ['/og-image.png'],
+    description: 'Explorez le monde en 3D avec ATLAS° : un globe interactif présentant 193 États souverains.',
+    // L'image est fournie par app/twitter-image.tsx.
   },
   robots: {
     index: true,
