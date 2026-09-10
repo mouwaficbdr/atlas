@@ -13,13 +13,18 @@ interface CameraTransitionProps {
 }
 
 export default function CameraTransition({ countries, cameraMode, selectedCountryCca3 }: CameraTransitionProps) {
-  const { camera, controls } = useThree();
+  const { camera, controls, invalidate } = useThree();
 
   useEffect(() => {
     // NOTE: controls n'est disponible qu'après le premier rendu du Canvas
     if (!controls) return;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const orbitControls = controls as any;
+
+    // En mode pays, le Canvas tourne en frameloop "demand" : sans invalidate()
+    // à chaque frame du tween, le vol de caméra GSAP muterait la position sans
+    // être rendu à l'écran (navigation voisin -> voisin notamment).
+    const render = () => invalidate();
 
     if (cameraMode === 'globe' || !selectedCountryCca3) {
       // Return to globe view
@@ -29,6 +34,7 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
         z: 3,
         duration: 1.5,
         ease: 'power3.inOut',
+        onUpdate: render,
       });
       gsap.to(orbitControls.target, {
         x: 0,
@@ -36,6 +42,7 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
         z: 0,
         duration: 1.5,
         ease: 'power3.inOut',
+        onUpdate: render,
       });
       orbitControls.enabled = true;
       return;
@@ -70,6 +77,7 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
         z: camPos.z,
         duration: 1.5,
         ease: 'power3.inOut',
+        onUpdate: render,
       });
 
       // Point controls target exactly at the country centroid
@@ -79,9 +87,10 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
         z: targetPos.z,
         duration: 1.5,
         ease: 'power3.inOut',
+        onUpdate: render,
       });
     }
-  }, [selectedCountryCca3, cameraMode, camera, controls, countries]);
+  }, [selectedCountryCca3, cameraMode, camera, controls, countries, invalidate]);
 
   return null;
 }
