@@ -562,7 +562,6 @@ export default function CountryCard({
                   fontSize: '0.85rem',
                   lineHeight: 1.8,
                   opacity: 0.55,
-                  textAlign: 'justify',
                 }}
               >
                 La structure gouvernementale définit le cadre légal et
