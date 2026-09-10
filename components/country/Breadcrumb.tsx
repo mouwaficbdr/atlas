@@ -29,12 +29,9 @@ export default function Breadcrumb({
         Globe
       </Link>
       <span>›</span>
-      <Link
-        href={`/?continent=${encodeURIComponent(continent)}`}
-        style={{ color: 'var(--text-accent)', textDecoration: 'none' }}
-      >
-        {continent}
-      </Link>
+      {/* Le continent reste un repère, pas un lien : /?continent= ne filtre
+          rien pour l'instant (finding QA6). */}
+      <span>{continent}</span>
       <span>›</span>
       <span style={{ color: 'var(--text-primary)' }}>{countryName}</span>
     </nav>
