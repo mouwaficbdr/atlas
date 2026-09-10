@@ -72,6 +72,11 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
       <Canvas
         dpr={dpr}
         camera={{ position: [0, 0, 3], fov: 45 }}
+        // Hors du mode globe (fiche pays), le globe est masque par la
+        // CountryCard : on passe la boucle de rendu en "demand" pour rendre la
+        // main au GPU. CameraTransition force un rendu via invalidate() pendant
+        // ses tweens GSAP pour que le vol de camera reste fluide.
+        frameloop={cameraMode === 'globe' ? 'always' : 'demand'}
         role="application"
         tabIndex={0}
         aria-label="Globe interactif, explorateur de pays. Flèches pour pivoter."
