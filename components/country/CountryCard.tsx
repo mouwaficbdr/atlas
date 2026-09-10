@@ -17,6 +17,7 @@ import WikiExtract from './WikiExtract';
 import CurrencyCard from './CurrencyCard';
 import Breadcrumb from './Breadcrumb';
 import ShareButton from './ShareButton';
+import CountryFooter from './CountryFooter';
 import dynamic from 'next/dynamic';
 
 const MDXSection = dynamic(() => import('./MDXSection'), { ssr: false });
@@ -1228,6 +1229,8 @@ export default function CountryCard({
             </div>
           )}
         </section>
+
+        <CountryFooter current={country} allCountries={allCountries} />
       </div>
 
       <style jsx>{`
