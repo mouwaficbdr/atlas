@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { useInView } from '@/lib/hooks/useInView';
 
@@ -67,6 +67,17 @@ function Particles({ count }: { count: number }) {
         depthWrite: false,
       }),
     [glowTexture]
+  );
+
+  // Géométrie, matériau et texture sont créés à la main : les libérer au
+  // démontage du panneau (finding E1).
+  useEffect(
+    () => () => {
+      geometry.dispose();
+      material.dispose();
+      glowTexture.dispose();
+    },
+    [geometry, material, glowTexture]
   );
 
   return <points ref={pointsRef} geometry={geometry} material={material} />;

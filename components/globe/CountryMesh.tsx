@@ -1,4 +1,4 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useEffect } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import { gsap } from 'gsap';
@@ -99,6 +99,11 @@ export default function CountryMesh({ feature, color, onSelect, onHover }: Count
 
     return geom;
   }, [feature]);
+
+  // La géométrie est construite à la main (earcut) hors du graphe JSX : r3f ne
+  // la libère pas tout seul, il faut la disposer au démontage et quand une
+  // nouvelle est recalculée (finding E1).
+  useEffect(() => () => geometry.dispose(), [geometry]);
 
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 

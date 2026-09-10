@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import type { GeoJSONFeature } from '@/lib/types';
@@ -57,6 +57,10 @@ export default function BordersMesh({ features }: BordersMeshProps) {
     geom.setAttribute('position', new THREE.BufferAttribute(new Float32Array(vertices), 3));
     return geom;
   }, [features]);
+
+  // Géométrie construite hors JSX : r3f ne la dispose pas, on s'en charge au
+  // démontage et à chaque recalcul (finding E1).
+  useEffect(() => () => geometry.dispose(), [geometry]);
 
   // Animation de pulsation légère
   useFrame(({ clock }) => {
