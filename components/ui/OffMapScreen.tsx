@@ -73,7 +73,10 @@ export default function OffMapScreen({
         <span className="offmap__coords">{lostCoordinates}</span>
       </div>
 
-      <style jsx>{`
+      {/* styled-jsx scopé n'attache pas sa classe de hash aux composants
+          (Link), seulement aux balises natives : d'ou le mode global ici. Les
+          classes offmap__* sont uniques, aucun risque de fuite. */}
+      <style jsx global>{`
         .offmap {
           position: fixed;
           inset: 0;

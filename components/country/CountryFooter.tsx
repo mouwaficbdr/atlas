@@ -56,7 +56,10 @@ export default function CountryFooter({ current, allCountries }: CountryFooterPr
         ATLAS&#176; &middot; BADAROU Mouwafic &middot; Licence MIT
       </span>
 
-      <style jsx>{`
+      {/* styled-jsx scopé n'attache pas sa classe de hash aux composants
+          (Link), seulement aux balises natives : d'ou le mode global ici. Les
+          classes country-footer__* sont uniques, aucun risque de fuite. */}
+      <style jsx global>{`
         .country-footer {
           border-top: 1px solid rgba(255, 255, 255, 0.1);
           background-color: var(--country-background, #05050a);
