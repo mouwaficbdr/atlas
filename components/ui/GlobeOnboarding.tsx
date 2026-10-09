@@ -1,203 +1,250 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useIsMobile } from '@/lib/hooks/useIsMobile';
+import { useAppStore } from '@/lib/store';
 
-const STORAGE_KEY = 'atlas_onboarding_seen';
-const IDLE_DELAY_MS = 2000;
+const STORAGE_KEY = 'atlas_onboarding_v2';
+const START_DELAY_MS = 1200;
+const DRAG_THRESHOLD_PX = 24;
+
+type Step = 0 | 1 | 2;
+
+const STEPS: Array<{ glyph: 'drag' | 'hover' | 'click'; text: string }> = [
+  { glyph: 'drag', text: 'Glissez pour faire tourner la Terre, molette pour zoomer' },
+  { glyph: 'hover', text: 'Survolez un pays pour le nommer' },
+  { glyph: 'click', text: 'Cliquez pour l’explorer, ou cherchez-le via l’étoile en haut à droite (⌘K)' },
+];
+
+function markSeen() {
+  try {
+    localStorage.setItem(STORAGE_KEY, '1');
+  } catch {
+    // Sans persistance, le guidage réapparaîtra à la prochaine visite.
+  }
+}
 
 /**
- * Indice d'interaction sur le globe (desktop). Déclenché après 2s sans aucune
- * interaction, masqué dès la première ; vu une fois pour toutes (localStorage).
- * Hint unique, combiné, avec une croix pour le fermer.
+ * Guidage progressif, sans boîte ni modale : une ligne d'annotation qui
+ * attend la fin de l'approche de la caméra, puis passe d'elle-même à
+ * l'étape suivante quand le geste est fait. Toujours sautable, vu une fois.
  */
 export default function GlobeOnboarding() {
-  const isMobile = useIsMobile();
-  const [show, setShow] = useState(false);
+  const introPhase = useAppStore((state) => state.introPhase);
+  const hoveredCountry = useAppStore((state) => state.hoveredCountryCca3);
+  const [visible, setVisible] = useState(false);
+  const [step, setStep] = useState<Step>(0);
 
   useEffect(() => {
-    if (isMobile) return;
-
+    if (introPhase !== 'done') return;
     try {
       if (localStorage.getItem(STORAGE_KEY) === '1') return;
     } catch {
-      // localStorage indisponible : on affiche quand même l'indice.
+      // localStorage indisponible : on guide quand même.
     }
+    const timer = setTimeout(() => setVisible(true), START_DELAY_MS);
+    return () => clearTimeout(timer);
+  }, [introPhase]);
 
-    const markSeen = () => {
-      try {
-        localStorage.setItem(STORAGE_KEY, '1');
-      } catch {
-        // sans persistance : réapparaîtra à la prochaine visite, acceptable.
-      }
-    };
-
-    const events: Array<keyof WindowEventMap> = [
-      'pointerdown',
-      'wheel',
-      'keydown',
-    ];
+  // Étape 1 : rotation (glisser), zoom (molette) ou flèches du clavier.
+  useEffect(() => {
+    if (!visible || step !== 0) return;
+    let origin: { x: number; y: number } | null = null;
     const controller = new AbortController();
-    let shown = false;
+    const done = () => setStep(1);
+    const opts = { passive: true, signal: controller.signal };
 
-    const timer = setTimeout(() => {
-      shown = true;
-      setShow(true);
-    }, IDLE_DELAY_MS);
-
-    const onInteract = () => {
-      clearTimeout(timer);
-      if (shown) setShow(false);
-      markSeen();
-      controller.abort();
-    };
-
-    events.forEach((e) =>
-      window.addEventListener(e, onInteract, {
-        passive: true,
-        signal: controller.signal,
-      }),
+    window.addEventListener('pointerdown', (e) => (origin = { x: e.clientX, y: e.clientY }), opts);
+    window.addEventListener(
+      'pointermove',
+      (e) => {
+        if (origin && e.buttons === 1 && Math.hypot(e.clientX - origin.x, e.clientY - origin.y) > DRAG_THRESHOLD_PX) done();
+      },
+      opts,
     );
+    window.addEventListener('wheel', done, opts);
+    window.addEventListener(
+      'keydown',
+      (e) => {
+        if (e.key.startsWith('Arrow')) done();
+      },
+      opts,
+    );
+    return () => controller.abort();
+  }, [visible, step]);
 
-    return () => {
-      clearTimeout(timer);
-      controller.abort();
-    };
-  }, [isMobile]);
+  // Étape 2 : un pays survolé. La dernière étape suffit à marquer le
+  // guidage comme vu : le clic emmène sur une fiche, qui démonte ce composant.
+  useEffect(() => {
+    if (step === 1 && hoveredCountry) setStep(2);
+  }, [step, hoveredCountry]);
 
-  const dismiss = () => {
-    setShow(false);
-    try {
-      localStorage.setItem(STORAGE_KEY, '1');
-    } catch {
-      /* pas de persistance */
-    }
+  useEffect(() => {
+    if (step === 2) markSeen();
+  }, [step]);
+
+  const skip = () => {
+    markSeen();
+    setVisible(false);
   };
 
-  if (!show) return null;
+  useEffect(() => {
+    if (!visible) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') skip();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [visible]);
+
+  if (!visible) return null;
+
+  const current = STEPS[step];
 
   return (
-    <div className="onb" role="status">
-      <span className="onb__hint">
-        <svg
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M8 9l-4 3 4 3" />
-          <path d="M16 9l4 3-4 3" />
-          <path d="M4 12h16" />
-        </svg>
-        Glissez pour pivoter
-      </span>
-      <span className="onb__sep" aria-hidden="true" />
-      <span className="onb__hint">
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <circle cx="12" cy="12" r="4" />
-          <path d="M12 3v2M12 19v2M3 12h2M19 12h2" />
-        </svg>
-        Cliquez un pays pour l&apos;explorer
-      </span>
-      <button
-        type="button"
-        onClick={dismiss}
-        className="onb__close"
-        aria-label="Masquer l'indice"
-      >
-        &times;
+    <div className="guide">
+      <ol className="guide__steps" aria-hidden="true">
+        {STEPS.map((_, i) => (
+          <li key={i} className={i < step ? 'is-done' : i === step ? 'is-current' : ''} />
+        ))}
+      </ol>
+
+      <p key={step} className="guide__hint" role="status" aria-live="polite">
+        <Glyph kind={current.glyph} />
+        <span>{current.text}</span>
+      </p>
+
+      <button type="button" className="guide__skip" onClick={skip}>
+        Passer
       </button>
 
-      <style jsx>{`
-        .onb {
+      <style dangerouslySetInnerHTML={{ __html: `
+        .guide {
           position: fixed;
           left: 50%;
-          bottom: 10vh;
+          bottom: max(18px, 2.6vh);
           transform: translateX(-50%);
           z-index: 50;
           display: flex;
           align-items: center;
-          gap: 1rem;
-          padding: 0.75rem 0.75rem 0.75rem 1.5rem;
-          background: rgba(10, 10, 20, 0.72);
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          border-radius: 999px;
-          color: rgba(240, 240, 240, 0.9);
+          gap: 1.4rem;
+          max-width: calc(100vw - 2rem);
           font-family: var(--font-jetbrains-mono), monospace;
-          font-size: 0.68rem;
-          letter-spacing: 0.18em;
+          font-size: 0.66rem;
+          letter-spacing: 0.16em;
           text-transform: uppercase;
-          white-space: nowrap;
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
-          animation: onb-in 0.24s var(--ease-ui, ease) both;
+          color: rgba(232, 240, 255, 0.86);
+          text-shadow: 0 1px 12px rgba(0, 0, 0, 0.9);
+          animation: guide-in 0.8s var(--ease-signature, ease) both;
+          pointer-events: none;
         }
-        .onb__hint {
+        .guide__steps {
           display: flex;
-          align-items: center;
-          gap: 0.6rem;
+          gap: 6px;
+          margin: 0;
+          padding: 0;
+          list-style: none;
         }
-        .onb__hint svg {
-          color: var(--text-accent, #4fc3f7);
-          flex-shrink: 0;
-        }
-        .onb__sep {
-          width: 1px;
-          height: 1.1rem;
-          background: rgba(255, 255, 255, 0.18);
-        }
-        .onb__close {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 1.6rem;
-          height: 1.6rem;
-          border: none;
+        .guide__steps li {
+          width: 5px;
+          height: 5px;
           border-radius: 50%;
-          background: rgba(255, 255, 255, 0.06);
-          color: rgba(240, 240, 240, 0.7);
-          font-size: 1rem;
-          line-height: 1;
+          border: 1px solid rgba(232, 240, 255, 0.35);
+          transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+        .guide__steps li.is-done {
+          background: rgba(212, 175, 55, 0.85);
+          border-color: rgba(212, 175, 55, 0.85);
+        }
+        .guide__steps li.is-current {
+          background: var(--text-accent, #4fc3f7);
+          border-color: var(--text-accent, #4fc3f7);
+          box-shadow: 0 0 8px rgba(79, 195, 247, 0.8);
+        }
+        .guide__hint {
+          display: flex;
+          align-items: center;
+          gap: 0.8rem;
+          margin: 0;
+          animation: guide-step 0.6s var(--ease-signature, ease) both;
+        }
+        .guide__glyph {
+          flex-shrink: 0;
+          color: var(--text-accent, #4fc3f7);
+          overflow: visible;
+        }
+        .guide__skip {
+          pointer-events: auto;
+          border: none;
+          background: none;
+          padding: 0.4rem 0;
+          font: inherit;
+          letter-spacing: inherit;
+          text-transform: inherit;
+          color: rgba(232, 240, 255, 0.4);
           cursor: pointer;
-          transition: background 0.2s var(--ease-ui, ease), color 0.2s var(--ease-ui, ease);
+          transition: color 0.2s var(--ease-ui, ease);
         }
-        .onb__close:hover,
-        .onb__close:focus-visible {
-          background: rgba(255, 255, 255, 0.14);
-          color: #fff;
+        .guide__skip:hover,
+        .guide__skip:focus-visible {
+          color: rgba(232, 240, 255, 0.9);
+          outline: none;
+          text-decoration: underline;
+          text-underline-offset: 4px;
         }
-        @keyframes onb-in {
-          from {
-            opacity: 0;
-            transform: translate(-50%, 8px);
-          }
-          to {
-            opacity: 1;
-            transform: translate(-50%, 0);
-          }
+        .glyph-drag-dot { animation: glyph-drag 2.4s var(--ease-signature, ease) infinite; }
+        .glyph-pulse { transform-origin: 9px 9px; animation: glyph-pulse 1.8s ease-in-out infinite; }
+        .glyph-press { transform-origin: 9px 9px; animation: glyph-press 1.6s ease-in-out infinite; }
+        @keyframes guide-in {
+          from { opacity: 0; transform: translate(-50%, 10px); }
+          to { opacity: 1; transform: translate(-50%, 0); }
         }
-        @media (max-width: 640px) {
-          .onb {
-            flex-wrap: wrap;
-            white-space: normal;
-            max-width: calc(100vw - 2rem);
-          }
+        @keyframes guide-step {
+          from { opacity: 0; transform: translateY(5px); filter: blur(3px); }
+          to { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
-      `}</style>
+        @keyframes glyph-drag {
+          0%, 15% { transform: translateX(-5px); opacity: 0; }
+          30% { opacity: 1; }
+          75% { transform: translateX(5px); opacity: 1; }
+          100% { transform: translateX(5px); opacity: 0; }
+        }
+        @keyframes glyph-pulse {
+          0%, 100% { transform: scale(1); opacity: 0.7; }
+          50% { transform: scale(0.82); opacity: 1; }
+        }
+        @keyframes glyph-press {
+          0%, 60%, 100% { transform: scale(1); }
+          70% { transform: scale(0.6); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .guide, .guide__hint { animation: none; }
+          .glyph-drag-dot, .glyph-pulse, .glyph-press { animation: none; }
+        }
+        @media (max-width: 760px) {
+          .guide { flex-wrap: wrap; justify-content: center; gap: 0.7rem; text-align: center; }
+        }
+      ` }} />
     </div>
+  );
+}
+
+function Glyph({ kind }: { kind: 'drag' | 'hover' | 'click' }) {
+  const reticle = 'M2 6V2h4M12 2h4v4M16 12v4h-4M6 16H2v-4';
+  return (
+    <svg className="guide__glyph" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" aria-hidden="true">
+      {kind === 'drag' && (
+        <>
+          <path d="M2 11c3-4 11-4 14 0" opacity="0.45" />
+          <circle className="glyph-drag-dot" cx="9" cy="8" r="1.8" fill="currentColor" stroke="none" />
+        </>
+      )}
+      {kind === 'hover' && <path className="glyph-pulse" d={reticle} />}
+      {kind === 'click' && (
+        <>
+          <path d={reticle} opacity="0.6" />
+          <circle className="glyph-press" cx="9" cy="9" r="2.2" fill="currentColor" stroke="none" />
+        </>
+      )}
+    </svg>
   );
 }
