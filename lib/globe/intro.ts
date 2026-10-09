@@ -40,3 +40,12 @@ export function currentGlobeDistance(): number {
 export function prefersReducedMotion(): boolean {
   return typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
+
+/**
+ * Contrôles d'orbite actifs seulement en vue globe, une fois l'intro jouée.
+ * Seule source de vérité : actifs sur une fiche, leurs mises à jour (inertie,
+ * distance minimale) déplaçaient la caméra et contrariaient ses vols.
+ */
+export function controlsEnabled(introPhase: 'waiting' | 'flying' | 'done', cameraMode: 'globe' | 'country'): boolean {
+  return introPhase === 'done' && cameraMode === 'globe';
+}

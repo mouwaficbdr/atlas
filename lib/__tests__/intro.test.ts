@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { globeDistance, sphereScreenDiameter } from '../globe/intro';
+import { controlsEnabled, globeDistance, sphereScreenDiameter } from '../globe/intro';
 
 describe('globeDistance', () => {
   it('garde la distance de 3 en paysage', () => {
@@ -13,5 +13,15 @@ describe('globeDistance', () => {
     const diameterPx = sphereScreenDiameter(d, 844);
     expect(diameterPx).toBeLessThan(390);
     expect(diameterPx).toBeGreaterThan(390 * 0.8);
+  });
+});
+
+describe('controlsEnabled', () => {
+  it('ne rend la main à l’utilisateur qu’en vue globe, après l’intro', () => {
+    expect(controlsEnabled('done', 'globe')).toBe(true);
+    expect(controlsEnabled('flying', 'globe')).toBe(false);
+    // Régression : actifs sur une fiche, ils déplaçaient la caméra et
+    // contrariaient ses vols (globe mal positionné aux frontières).
+    expect(controlsEnabled('done', 'country')).toBe(false);
   });
 });

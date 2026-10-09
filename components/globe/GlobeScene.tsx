@@ -5,7 +5,7 @@ import * as THREE from 'three';
 import { Canvas, useThree } from '@react-three/fiber';
 import type { CountryData } from '@/lib/types';
 import { SUN_DIRECTION, homeViewDirection, updateSunDirection } from '@/lib/globe/sun';
-import { INTRO_DISTANCE, currentGlobeDistance, prefersReducedMotion } from '@/lib/globe/intro';
+import { INTRO_DISTANCE, controlsEnabled, currentGlobeDistance, prefersReducedMotion } from '@/lib/globe/intro';
 import { useAppStore } from '@/lib/store';
 import GlobeMesh from './GlobeMesh';
 import AtmosphereMesh from './AtmosphereMesh';
@@ -139,7 +139,7 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
         <AtmosphereMesh />
         {/* Verrouillés pendant l'intro : OrbitControls ramènerait la caméra à
             maxDistance au premier update. */}
-        <GlobeControls enabled={introPhase === 'done'} cameraMode={cameraMode} />
+        <GlobeControls enabled={controlsEnabled(introPhase, cameraMode)} cameraMode={cameraMode} />
         <CameraTransition
           countries={countries}
           cameraMode={cameraMode}

@@ -32,6 +32,15 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
     // à chaque frame du tween, le vol de caméra GSAP muterait la position sans
     // être rendu à l'écran (navigation voisin -> voisin notamment).
     const render = () => invalidate();
+    // Contrôles désactivés en mode pays : la caméra s'oriente elle-même vers
+    // la cible à chaque image du vol.
+    const renderLooking = () => {
+      camera.lookAt(orbitControls.target);
+      invalidate();
+    };
+    // Un nouveau vol remplace le précédent au lieu de s'y superposer.
+    gsap.killTweensOf(camera.position);
+    gsap.killTweensOf(orbitControls.target);
 
     if (cameraMode === 'globe' || !selectedCountryCca3) {
       // Sous le loader, la caméra reste au loin : la Terre n'est qu'un point.
@@ -39,7 +48,6 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
 
       if (introPhase === 'flying') {
         // Approche depuis le point bleu pâle jusqu'à la vue globe.
-        orbitControls.enabled = false;
         const home = homeViewDirection();
         const end = currentGlobeDistance();
         const flight = { t: 0 };
@@ -77,7 +85,6 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
         ease: 'power3.inOut',
         onUpdate: render,
       });
-      orbitControls.enabled = true;
       return;
     }
 
@@ -99,7 +106,6 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
       const camPos = targetPos.clone().multiplyScalar(camDist);
 
       // Les OrbitControls sont désactivés en mode pays pour figer la vue
-      orbitControls.enabled = false;
 
       gsap.to(camera.position, {
         x: camPos.x,
@@ -107,7 +113,7 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
         z: camPos.z,
         duration: introPhase === 'flying' ? 2.6 : 1.5,
         ease: 'power3.inOut',
-        onUpdate: render,
+        onUpdate: renderLooking,
         // Arrivée directe sur une fiche pays : ce vol tient lieu d'intro.
         onComplete: () => {
           if (introPhase === 'flying') setIntroPhase('done');
@@ -121,7 +127,7 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
         z: targetPos.z,
         duration: 1.5,
         ease: 'power3.inOut',
-        onUpdate: render,
+        onUpdate: renderLooking,
       });
     }
   }, [selectedCountryCca3, cameraMode, camera, controls, countries, invalidate, introPhase, setIntroPhase, countryView]);
