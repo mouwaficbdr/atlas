@@ -143,7 +143,7 @@ export default function GlobeMesh({
         />
       )}
 
-      {/* Holographic Text — visible uniquement au survol en mode globe */}
+      {/* Holographic Text : visible uniquement au survol en mode globe */}
       {cameraMode === 'globe' &&
         hoveredFeature &&
         hoveredCountry &&

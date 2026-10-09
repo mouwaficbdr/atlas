@@ -58,9 +58,9 @@ export default async function Image({
   const flag = await flagDataUri(country.cca2);
 
   const facts: Array<[string, string]> = [
-    ['Capitale', country.capitalFr || '—'],
+    ['Capitale', country.capitalFr || 'N/A'],
     ['Population', frInt(country.population)],
-    ['Région', country.regionFr || country.region || '—'],
+    ['Région', country.regionFr || country.region || 'N/A'],
   ];
 
   return new ImageResponse(

@@ -69,7 +69,7 @@ export interface CountryData {
 }
 
 // ---------------------------------------------------------------------------
-// CountryPalette — Palette extraite du drapeau par median cut
+// CountryPalette : Palette extraite du drapeau par median cut
 // NOTE: Mise en cache dans localStorage sous la clé atlas_palette_[cca3]
 // ---------------------------------------------------------------------------
 
@@ -84,7 +84,7 @@ export interface CountryPalette {
 }
 
 // ---------------------------------------------------------------------------
-// GeoJSON — Natural Earth 110m
+// GeoJSON : Natural Earth 1:50m
 // ---------------------------------------------------------------------------
 
 export interface GeoJSONFeature {
@@ -102,7 +102,7 @@ export interface GeoJSONCollection {
 }
 
 // ---------------------------------------------------------------------------
-// SearchResult — Résultat du moteur de recherche client
+// SearchResult : Résultat du moteur de recherche client
 // ---------------------------------------------------------------------------
 
 export interface SearchResult {
@@ -135,7 +135,7 @@ export interface CountryMood {
 
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-// MDXContent — Contenu éditorial
+// MDXContent : Contenu éditorial
 // Le MDX est rendu côté serveur (next-mdx-remote/rsc) au build : on transporte
 // la source brute, pas un bundle compilé à évaluer côté client (ce que le CSP
 // de production interdit, faute de 'unsafe-eval').
@@ -154,7 +154,7 @@ export interface MDXContent {
 }
 
 // ---------------------------------------------------------------------------
-// LoadingState — État du chargement initial du globe
+// LoadingState : État du chargement initial du globe
 // ---------------------------------------------------------------------------
 
 export interface LoadingState {

@@ -14,7 +14,7 @@ export function useIsMobile(breakpoint = MOBILE_BREAKPOINT) {
 
   // useLayoutEffect (plutôt que useEffect) : la valeur correcte est appliquée
   // avant la peinture du premier frame, donc avant que les effets enfants
-  // (montage du <Canvas> WebGL, fetch du GeoJSON) ne se déclenchent — évite
+  // (montage du <Canvas> WebGL, fetch du GeoJSON) ne se déclenchent. Évite
   // un montage/démontage gaspillé du globe au chargement sur mobile.
   useIsomorphicLayoutEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < breakpoint);

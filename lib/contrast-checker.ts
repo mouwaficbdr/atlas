@@ -1,5 +1,5 @@
 /**
- * ATLAS° Globe 3D — Vérificateur de contraste WCAG
+ * ATLAS° Globe 3D : Vérificateur de contraste WCAG
  * Exigences : 5.4, 12.1
  *
  * Implémente le calcul de luminance relative WCAG 2.1 et l'ajustement
@@ -11,7 +11,7 @@
 // ---------------------------------------------------------------------------
 
 /**
- * Normalise un canal de couleur (0–255) en luminance linéaire
+ * Normalise un canal de couleur (0-255) en luminance linéaire
  * selon la formule WCAG 2.1.
  */
 function linearize(channel: number): number {
@@ -21,7 +21,7 @@ function linearize(channel: number): number {
 
 /**
  * Convertit une chaîne hexadécimale (3 ou 6 chiffres, avec ou sans `#`)
- * en un tableau [r, g, b] de valeurs 0–255.
+ * en un tableau [r, g, b] de valeurs 0-255.
  *
  * @throws {Error} si le format hex est invalide
  */
@@ -208,7 +208,7 @@ export function adjustForContrast(
   const extremeL = shouldDarken ? 0 : 100;
   const extremeColor = hslToHex(h, s, extremeL);
   if (getContrastRatio(extremeColor, bg) < minRatio) {
-    // Impossible d'atteindre le ratio — retourner noir ou blanc
+    // Impossible d'atteindre le ratio : retourner noir ou blanc
     return shouldDarken ? "#000000" : "#ffffff";
   }
 
@@ -219,14 +219,14 @@ export function adjustForContrast(
     const ratio = getContrastRatio(candidate, bg);
 
     if (ratio >= minRatio) {
-      // Ce candidat satisfait le ratio — on peut aller vers la couleur d'origine
+      // Ce candidat satisfait le ratio : on peut aller vers la couleur d'origine
       if (shouldDarken) {
         low = mid; // essayer une valeur L plus haute (moins sombre)
       } else {
         high = mid; // essayer une valeur L plus basse (moins claire)
       }
     } else {
-      // Pas assez de contraste — aller vers l'extrême
+      // Pas assez de contraste : aller vers l'extrême
       if (shouldDarken) {
         high = mid; // aller vers L plus basse (plus sombre)
       } else {

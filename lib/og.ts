@@ -78,7 +78,7 @@ export async function flagDataUri(cca2: string): Promise<string | null> {
   return null;
 }
 
-/** "66 351 959" — espace fine insécable, format FR. */
+/** "66 351 959" : espace fine insécable, format FR. */
 export function frInt(n: number): string {
   return new Intl.NumberFormat('fr-FR').format(n);
 }

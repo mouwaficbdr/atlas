@@ -8,7 +8,7 @@
 
 import type { GeoJSONCollection } from "./types";
 
-// NOTE: Singleton — les appels concurrents réutilisent le même cache mémoire.
+// NOTE: Singleton : les appels concurrents réutilisent le même cache mémoire.
 let cachedGeoJSON: GeoJSONCollection | null = null;
 
 /**

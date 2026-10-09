@@ -1,5 +1,5 @@
 /**
- * ATLAS° Globe 3D — Tests de propriété pour `search-engine`
+ * ATLAS° Globe 3D : Tests de propriété pour `search-engine`
  * Exigences : 8.2, 8.3, 8.4
  *
  * Validates: Requirements 8.2, 8.3, 8.4

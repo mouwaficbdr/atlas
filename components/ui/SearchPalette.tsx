@@ -34,7 +34,7 @@ export default function SearchPalette({
     }
   }, [isOpen]);
 
-  // Cmd+K / Ctrl+K — raccourci global pour ouvrir la palette
+  // Cmd+K / Ctrl+K : raccourci global pour ouvrir la palette
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {

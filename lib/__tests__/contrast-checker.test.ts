@@ -1,5 +1,5 @@
 /**
- * Tests de propriété — contrast-checker
+ * Tests de propriété : contrast-checker
  * Feature: atlas-globe-3d
  * Valide : Exigences 5.4, 12.1
  *
@@ -26,7 +26,7 @@ const hexColor = fc
 // Propriété 1 : Symétrie du ratio de contraste
 // ---------------------------------------------------------------------------
 
-describe("contrast-checker — tests de propriété", () => {
+describe("contrast-checker : tests de propriété", () => {
   // Feature: atlas-globe-3d, Property 1: Symétrie du ratio de contraste
   it("Propriété 1 : getContrastRatio(a, b) === getContrastRatio(b, a) pour toute paire de couleurs hex valides", () => {
     // Valide : Exigences 5.4, 12.1

@@ -69,7 +69,7 @@ export default function LanguageList({ languages }: LanguageListProps) {
           lineHeight: 0.95,
           fontFamily: 'var(--font-bebas-neue), sans-serif',
           color: 'rgba(0,0,0,0.85)',
-          // Pas de nowrap — les noms peuvent être longs
+          // Pas de nowrap : les noms peuvent être longs
           wordBreak: 'break-word',
           textTransform: 'uppercase',
           letterSpacing: '0.02em',

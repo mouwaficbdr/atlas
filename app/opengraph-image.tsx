@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 import { OG_COLORS, OG_CONTENT_TYPE, OG_SIZE, ogFonts } from '@/lib/og';
 
-export const alt = 'ATLAS° — explorateur mondial de pays';
+export const alt = 'atlas · Explorer les 193 États du monde';
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 

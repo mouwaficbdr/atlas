@@ -32,7 +32,7 @@ function parseFrontmatter(raw: string): MDXContent['frontmatter'] {
 
 /**
  * @param cca3 - Code Alpha-3 du pays (ex: "BEN", "FRA")
- * @returns Promise<MDXContent> — source brute + frontmatter, ou `raw: null`.
+ * @returns Promise<MDXContent> : source brute + frontmatter, ou `raw: null`.
  */
 export async function loadMDX(cca3: string): Promise<MDXContent> {
   const filePath = path.join(

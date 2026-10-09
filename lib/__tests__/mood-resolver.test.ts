@@ -1,5 +1,5 @@
 /**
- * ATLAS° Globe 3D — Tests de propriété pour `mood-resolver`
+ * ATLAS° Globe 3D : Tests de propriété pour `mood-resolver`
  * Exigence : 6.10
  *
  * Validates: Requirements 6.10
@@ -171,7 +171,7 @@ describe("mood-resolver : bandes de latitude", () => {
 // Propriété 6 : Déterminisme
 // ---------------------------------------------------------------------------
 
-describe("mood-resolver — Propriété 6 : Déterminisme", () => {
+describe("mood-resolver : Propriété 6 : Déterminisme", () => {
   // Feature: atlas-globe-3d, Property 6: resolveMood(c) === resolveMood(c) pour tout pays c
 
   it("retourne le même résultat pour le même CountryData (appels successifs)", () => {

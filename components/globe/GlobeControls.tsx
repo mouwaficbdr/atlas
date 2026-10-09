@@ -1,5 +1,5 @@
 /**
- * GlobeControls — Contrôleur de rotation/zoom de la caméra Three.js
+ * GlobeControls : contrôleur de rotation/zoom de la caméra Three.js
  * OrbitControls avec amortissement (damping) et support tactile
  * Exigences : 2.1, 2.4a, 2.5a
  */
@@ -26,7 +26,7 @@ const MAX_POLAR = Math.PI - 0.1;
  * - Prop `enabled` pour désactiver pendant les animations caméra GSAP (Exigence 2.4a)
  * - Support tactile natif via enableRotate (Exigence 2.5a)
  * - Rotation au clavier (flèches) pour les utilisateurs qui n'utilisent pas
- *   la souris/le tactile — jusque là, le globe n'avait aucun équivalent clavier.
+ *   la souris ou le tactile ; jusque-là, le globe n'avait aucun équivalent clavier.
  *   Neutralisée hors du mode globe (le globe est alors masqué par la fiche pays).
  */
 export default function GlobeControls({

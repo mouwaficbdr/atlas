@@ -144,7 +144,7 @@ export default function PersistentLayout({
 
   return (
     <>
-      {/* Globe 3D — couche fixe en fond de page */}
+      {/* Globe 3D : couche fixe en fond de page */}
       <div
         style={{
           position: 'fixed',
@@ -177,7 +177,7 @@ export default function PersistentLayout({
             background: 'radial-gradient(circle at center, #1a1a2e 0%, #0a0a14 100%)',
             color: 'var(--text-muted)'
           }}>
-            {/* Orbe lumineux — substitut statique du globe sur mobile */}
+            {/* Orbe lumineux : substitut statique du globe sur mobile */}
             <div style={{
               width: '60vw',
               height: '60vw',
@@ -200,7 +200,7 @@ export default function PersistentLayout({
               </span>
             </div>
 
-            {/* CTA Explorer + GitHub — page d'accueil uniquement */}
+            {/* CTA Explorer + GitHub (page d'accueil uniquement) */}
             {pathname === '/' && (
               <>
                 <button
@@ -224,7 +224,7 @@ export default function PersistentLayout({
                   Explorer l&apos;Index
                 </button>
 
-                {/* Lien GitHub — discret, contextuel */}
+                {/* Lien GitHub, discret et contextuel */}
                 <a
                   href="https://github.com/mouwaficbdr/atlas"
                   target="_blank"

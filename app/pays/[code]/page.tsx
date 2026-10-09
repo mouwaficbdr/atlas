@@ -175,7 +175,7 @@ async function getCountryMDX(cca3: string): Promise<MDXContent> {
 }
 
 // ---------------------------------------------------------------------------
-// Wikipedia — Fetch avec cascade de fallbacks et cache 24h
+// Wikipédia : fetch avec cascade de replis et cache 24 h
 // ---------------------------------------------------------------------------
 
 /**

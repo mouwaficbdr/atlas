@@ -115,7 +115,7 @@ export default function CountryCard({
           animation: 'fadeIn 1.5s ease-in-out',
         }}
       >
-        {/* Massive Fixed Title — taille adaptative selon longueur */}
+        {/* Massive Fixed Title : taille adaptative selon longueur */}
         <div
           ref={titleRef}
           style={{
@@ -240,7 +240,7 @@ export default function CountryCard({
                   letterSpacing: '0.2em',
                 }}
               >
-                WIKIPEDIA — DONNÉES NON DISPONIBLES
+                WIKIPÉDIA · DONNÉES NON DISPONIBLES
               </h4>
             </div>
           )}
@@ -608,7 +608,7 @@ export default function CountryCard({
                 03 / TEMPS LOCAL
               </div>
               <CapitalClock
-                capital={country.capitalFr || country.capital?.[0] || '—'}
+                capital={country.capitalFr || country.capital?.[0] || 'N/A'}
                 timezone={country.primaryTimezone}
               />
             </div>
@@ -1005,7 +1005,7 @@ export default function CountryCard({
                   }}
                 >
                   {(country.idd?.root || '') +
-                    (country.idd?.suffixes?.[0] || '') || '—'}
+                    (country.idd?.suffixes?.[0] || '') || 'N/A'}
                 </div>
                 <div
                   style={{
@@ -1057,7 +1057,7 @@ export default function CountryCard({
                     color: '#fff',
                   }}
                 >
-                  {country.tld?.[0] ?? '—'}
+                  {country.tld?.[0] ?? 'N/A'}
                 </div>
                 {country.tld && country.tld.length > 1 && (
                   <div

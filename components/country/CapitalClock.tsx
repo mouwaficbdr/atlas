@@ -60,7 +60,7 @@ export default function CapitalClock({ capital, timezone }: CapitalClockProps) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0' }}>
       <div style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-bebas-neue), sans-serif', fontSize: 'clamp(3rem, 5vw, 6rem)', lineHeight: 0.9, textTransform: 'uppercase', letterSpacing: '0.02em' }}>
-        {capital || '—'}
+        {capital || 'N/A'}
       </div>
       <div style={{ fontFamily: 'var(--font-jetbrains-mono), monospace', color: 'var(--country-accent, #fff)', fontSize: 'clamp(2rem, 3vw, 4rem)', fontWeight: 100, display: 'flex', alignItems: 'center', gap: '1.5rem', marginTop: '1rem' }}>
         <span style={{ opacity: 0.5, display: 'flex', alignItems: 'center' }}>
