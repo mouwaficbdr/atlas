@@ -91,10 +91,12 @@ export default function HoverHighlight({ feature, color }: { feature: GeoJSONFea
     [fill, outline],
   );
 
-  useFrame((_, delta) => {
+  useFrame((state, delta) => {
     const k = reducedMotion ? 1 : Math.min(1, delta * 10);
     if (fillRef.current) fillRef.current.opacity += (FILL_OPACITY - fillRef.current.opacity) * k;
     if (lineRef.current) lineRef.current.opacity += (1 - lineRef.current.opacity) * k;
+    // En mode fiche, le canvas ne rend qu'à la demande : on relance tant que le fondu n'est pas fini.
+    if (lineRef.current && lineRef.current.opacity < 0.99) state.invalidate();
   });
 
   return (

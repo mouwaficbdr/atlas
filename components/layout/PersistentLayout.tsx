@@ -53,6 +53,7 @@ export default function PersistentLayout({
 
   const setSearchOpen = useAppStore((state) => state.setSearchOpen);
   const isOffMap = useAppStore((state) => state.isOffMap);
+  const countryView = useAppStore((state) => state.countryView);
 
   // Dérivés directement de l'URL à chaque rendu plutôt que synchronisés dans
   // le store via un useEffect : évite le décalage d'une frame (le globe
@@ -62,6 +63,8 @@ export default function PersistentLayout({
     : 'globe';
   const selectedCountryCca3 =
     cameraMode === 'country' ? pathname.split('/').pop()?.toUpperCase() ?? null : null;
+
+  const globeShifted = cameraMode === 'country' && countryView === 'wide' && !isMobile;
 
   const minDurationRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -157,7 +160,9 @@ export default function PersistentLayout({
 
   return (
     <>
-      {/* Globe 3D : couche fixe en fond de page */}
+      {/* Globe 3D : couche fixe en fond de page. Sur une fiche, aux
+          frontières, il glisse vers la droite pour se montrer à côté de la
+          liste des voisins. */}
       <div
         style={{
           position: 'fixed',
@@ -167,6 +172,8 @@ export default function PersistentLayout({
           height: '100vh',
           zIndex: 0,
           backgroundColor: 'var(--bg-surface)',
+          transform: globeShifted ? 'translateX(22vw)' : 'none',
+          transition: 'transform 1.2s var(--ease-signature)',
         }}
       >
         {countries.length > 0 && !isMobile && (

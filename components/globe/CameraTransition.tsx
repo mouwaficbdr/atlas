@@ -20,6 +20,7 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
   const { camera, controls, invalidate } = useThree();
   const introPhase = useAppStore((state) => state.introPhase);
   const setIntroPhase = useAppStore((state) => state.setIntroPhase);
+  const countryView = useAppStore((state) => state.countryView);
 
   useEffect(() => {
     // NOTE: controls n'est disponible qu'après le premier rendu du Canvas
@@ -90,8 +91,10 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
 
       const targetPos = new THREE.Vector3(...lonLatToCartesian(lon, lat));
 
-      // Facteur de zoom : 1.3 = 0.3 unités au-dessus de la surface du globe (rayon=1)
-      const camDist = 1.3;
+      // Recul proportionnel à la taille du pays (Monaco de près, la Russie de
+      // loin), et plus large encore quand la fiche montre ses voisins.
+      const closeDist = Math.min(2.6, Math.max(1.35, 1.25 + Math.sqrt(country.area) / 2600));
+      const camDist = countryView === 'wide' ? closeDist + 0.9 : closeDist;
       const camPos = targetPos.clone().multiplyScalar(camDist);
 
       // Les OrbitControls sont désactivés en mode pays pour figer la vue
@@ -120,7 +123,7 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
         onUpdate: render,
       });
     }
-  }, [selectedCountryCca3, cameraMode, camera, controls, countries, invalidate, introPhase, setIntroPhase]);
+  }, [selectedCountryCca3, cameraMode, camera, controls, countries, invalidate, introPhase, setIntroPhase, countryView]);
 
   return null;
 }

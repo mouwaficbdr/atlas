@@ -134,6 +134,7 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
           onSelect={onCountrySelect}
           onLoad={handleEarthReady}
           cameraMode={cameraMode}
+          selectedCca3={selectedCountryCca3}
         />
         <AtmosphereMesh />
         {/* Verrouillés pendant l'intro : OrbitControls ramènerait la caméra à

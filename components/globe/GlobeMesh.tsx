@@ -22,6 +22,8 @@ interface GlobeMeshProps {
   onSelect: (cca3: string) => void;
   onLoad?: () => void;
   cameraMode: 'globe' | 'country';
+  /** Pays de la fiche ouverte, mis en évidence en mode pays. */
+  selectedCca3?: string | null;
 }
 
 export default function GlobeMesh({
@@ -29,7 +31,9 @@ export default function GlobeMesh({
   onSelect,
   onLoad,
   cameraMode,
+  selectedCca3 = null,
 }: GlobeMeshProps) {
+  const focusCca3 = useAppStore((state) => state.focusCca3);
   const [features, setFeatures] = useState<GeoJSONFeature[]>([]);
   const [hoveredCca3, setHoveredCca3] = useState<string | null>(null);
   const setHoveredCountry = useAppStore((state) => state.setHoveredCountry);
@@ -142,6 +146,19 @@ export default function GlobeMesh({
           color={hoveredFeature.properties.colors?.primary ?? '#4fc3f7'}
         />
       )}
+
+      {/* Fiche pays : le pays ouvert, et le voisin survolé dans la liste. */}
+      {cameraMode === 'country' &&
+        [selectedCca3, focusCca3].map((cca3) => {
+          const feature = cca3 ? features.find((f) => f.properties.cca3 === cca3) : null;
+          return feature ? (
+            <HoverHighlight
+              key={`focus-${feature.properties.cca3}`}
+              feature={feature}
+              color={feature.properties.colors?.primary ?? '#4fc3f7'}
+            />
+          ) : null;
+        })}
 
       {/* Holographic Text : visible uniquement au survol en mode globe */}
       {cameraMode === 'globe' &&
