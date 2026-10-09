@@ -76,6 +76,10 @@ export default function GlobeControls({
   return (
     <OrbitControls
       ref={controlsRef}
+      // Indispensable : CameraTransition lit les contrôles via useThree() ;
+      // sans makeDefault ils y valent null et aucun vol de caméra (intro,
+      // zoom vers un pays) ne se déclenchait.
+      makeDefault
       enableDamping={true}
       dampingFactor={0.05}
       enabled={enabled}
