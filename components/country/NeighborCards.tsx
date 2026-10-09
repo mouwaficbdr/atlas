@@ -6,6 +6,7 @@ import gsap from 'gsap';
 import type { CountryData } from '@/lib/types';
 import { prefersReducedMotion } from '@/lib/hooks/useReducedMotion';
 import { cardinalDirection, initialBearing } from '@/lib/bearing';
+import { useAppStore } from '@/lib/store';
 
 interface NeighborCardsProps {
   /** Centroïde du pays consulté, en ordre GeoJSON [lon, lat]. */
@@ -21,6 +22,8 @@ interface NeighborCardsProps {
  */
 export default function NeighborCards({ origin, borders, allCountries }: NeighborCardsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const setFocus = useAppStore((state) => state.setFocusCca3);
+  useEffect(() => () => setFocus(null), [setFocus]);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -67,6 +70,10 @@ export default function NeighborCards({ origin, borders, allCountries }: Neighbo
             href={`/pays/${country.cca3.toLowerCase()}`}
             className="nb"
             aria-label={`${country.nameFr}, au ${direction.toLowerCase()}`}
+            onMouseEnter={() => setFocus(country.cca3)}
+            onMouseLeave={() => setFocus(null)}
+            onFocus={() => setFocus(country.cca3)}
+            onBlur={() => setFocus(null)}
           >
             <span className="nb__heading" aria-hidden="true">
               <svg className="nb__compass" viewBox="0 0 24 24" width="22" height="22">
@@ -156,6 +163,15 @@ export default function NeighborCards({ origin, borders, allCountries }: Neighbo
           transition: opacity 0.35s var(--ease-ui, ease);
         }
         .nb:hover .nb__flag { opacity: 1; }
+        /* Mobile : deux colonnes compactes, tous les voisins d'un coup d'œil
+           (14 pour la Chine) plutôt qu'un carrousel à faire défiler. */
+        @media (max-width: 639px) {
+          .nbs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+          .nb { min-height: 6.5rem; padding: 0.9rem 0.9rem 1rem; gap: 0.7rem; }
+          .nb__name { font-size: 1.35rem; }
+          .nb__flag { top: 0.9rem; right: 0.9rem; width: 22px; }
+          .nb__heading { font-size: 0.55rem; letter-spacing: 0.12em; }
+        }
       ` }} />
     </div>
   );

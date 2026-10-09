@@ -1,34 +1,20 @@
 'use client';
 
-import { useEffect, useRef, type ReactNode } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useEffect, useMemo, type CSSProperties, type ReactNode } from 'react';
 import type { CountryData, CountryPalette } from '@/lib/types';
 import { formatLat, formatLon, utcOffset } from '@/lib/format-coords';
-import { prefersReducedMotion } from '@/lib/hooks/useReducedMotion';
+import { useAppStore } from '@/lib/store';
 
-import FlagDisplay from './FlagDisplay';
-import CapitalClock from './CapitalClock';
-import LanguageList from './LanguageList';
-import NeighborCards from './NeighborCards';
-import ClimateDisplay from './ClimateDisplay';
-import PoliticalRegime from './PoliticalRegime';
-import WikiExtract from './WikiExtract';
-import CurrencyCard from './CurrencyCard';
 import Breadcrumb from './Breadcrumb';
-import ShareButton from './ShareButton';
+import WikiExtract from './WikiExtract';
+import CapitalSky from './CapitalSky';
+import RankRuler from './RankRuler';
+import ClimateDisplay from './ClimateDisplay';
+import CurrencyCard from './CurrencyCard';
+import NeighborCards from './NeighborCards';
 import CountryFooter from './CountryFooter';
-import dynamic from 'next/dynamic';
-
-// Canvas WebGL de section (three + react-three-fiber) : chargés en import
-// dynamique client pour ne pas alourdir le bundle de la fiche pays. Ce sont des
-// décors, leur rendu différé n'a aucun impact fonctionnel.
-const MoodBackground = dynamic(() => import('./MoodBackground'), { ssr: false });
-const PopulationCloud = dynamic(() => import('./PopulationCloud'), {
-  ssr: false,
-});
-
-gsap.registerPlugin(ScrollTrigger);
+import DescentRail, { type DescentStage } from './DescentRail';
+import './country-page.css';
 
 interface CountryCardProps {
   country: CountryData;
@@ -40,6 +26,20 @@ interface CountryCardProps {
   wikiSummary?: string | null;
 }
 
+const fr = new Intl.NumberFormat('fr-FR');
+const frCompact = new Intl.NumberFormat('fr-FR', { notation: 'compact', compactDisplay: 'long', maximumFractionDigits: 1 });
+/** « 68,7 millions », mais le nombre exact sous le million (« 11 396 », pas « 11,4 mille »). */
+const shortCount = (n: number) => (n < 1_000_000 ? fr.format(n) : frCompact.format(n));
+const frPct = new Intl.NumberFormat('fr-FR', { style: 'percent', maximumFractionDigits: 2 });
+
+/** Rang (1 = plus grand) de `value` parmi `values`. */
+const rankOf = (value: number, values: number[]) => values.filter((v) => v > value).length + 1;
+
+/**
+ * Fiche pays en « descente orbitale » : on arrive au-dessus du pays (le globe,
+ * visible derrière le titre), puis chaque section descend d'un cran : relevé,
+ * capitale, habitants, territoire, institutions, frontières, archives.
+ */
 export default function CountryCard({
   country,
   allCountries,
@@ -48,1174 +48,324 @@ export default function CountryCard({
   canonicalUrl,
   wikiSummary,
 }: CountryCardProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
-    document.documentElement.style.setProperty(
-      '--country-primary',
-      palette.primary,
-    );
-    document.documentElement.style.setProperty(
-      '--country-secondary',
-      palette.secondary,
-    );
-    document.documentElement.style.setProperty(
-      '--country-accent',
-      palette.accent,
-    );
-    document.documentElement.style.setProperty(
-      '--country-background',
-      palette.background,
-    );
-
+    const root = document.documentElement.style;
+    root.setProperty('--country-primary', palette.primary);
+    root.setProperty('--country-accent', palette.accent);
     return () => {
-      document.documentElement.style.removeProperty('--country-primary');
-      document.documentElement.style.removeProperty('--country-secondary');
-      document.documentElement.style.removeProperty('--country-accent');
-      document.documentElement.style.removeProperty('--country-background');
+      root.removeProperty('--country-primary');
+      root.removeProperty('--country-accent');
     };
   }, [palette]);
 
   useEffect(() => {
-    // La page est remontée par pays (key={cca3}) : on repart du haut plutôt
-    // que de rester à la position de scroll du pays précédent (finding QA9).
+    // La page est remontée par pays (key={cca3}) : on repart du haut.
     window.scrollTo(0, 0);
-
-    // Parallaxe GSAP complexe retirée au profit du sticky wipe CSS ; on garde
-    // une entrée simple sur le titre, sauf en motion réduit.
-    if (titleRef.current && !prefersReducedMotion()) {
-      gsap.to(titleRef.current, {
-        yPercent: -20,
-        opacity: 0,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top top',
-          end: '+=100%',
-          scrub: true,
-        },
-      });
-    }
-
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
   }, []);
 
-  return (
-    <>
-      <MoodBackground palette={palette} />
+  // Arrivé aux frontières, la caméra recule pour montrer les voisins.
+  const setCountryView = useAppStore((state) => state.setCountryView);
+  useEffect(() => {
+    const target = document.getElementById('frontieres');
+    if (!target) return;
+    const observer = new IntersectionObserver(([entry]) => setCountryView(entry.isIntersecting ? 'wide' : 'close'), {
+      rootMargin: '-35% 0px -35% 0px',
+    });
+    observer.observe(target);
+    return () => {
+      observer.disconnect();
+      setCountryView('close');
+    };
+  }, [setCountryView]);
 
-      <div
-        ref={containerRef}
-        style={{
-          color: 'var(--text-primary)',
-          position: 'relative',
-          width: '100%',
-          minHeight: '100vh',
-          animation: 'fadeIn 1.5s ease-in-out',
-        }}
-      >
-        {/* Massive Fixed Title : taille adaptative selon longueur */}
-        <div
-          ref={titleRef}
-          style={{
-            position: 'fixed',
-            top: '10vh',
-            left: 0,
-            width: '100%',
-            zIndex: 10,
-            pointerEvents: 'none',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '1rem',
-            padding: '0 5vw',
-          }}
-        >
-          <h1
-            style={{
-              // Taille dynamique inversement proportionnelle à la longueur du nom
-              // < 8 chars (Chad, Cuba) → énorme / > 20 chars → raisonnable
-              fontSize:
-                country.nameFr.length <= 6
-                  ? 'clamp(4rem, 18vw, 22rem)'
-                  : country.nameFr.length <= 10
-                    ? 'clamp(3rem, 13vw, 17rem)'
-                    : country.nameFr.length <= 15
-                      ? 'clamp(2.5rem, 10vw, 13rem)'
-                      : country.nameFr.length <= 20
-                        ? 'clamp(2rem, 7.5vw, 10rem)'
-                        : 'clamp(1.5rem, 5.5vw, 7rem)',
-              fontWeight: 400,
-              fontFamily: 'var(--font-bebas-neue), Impact, sans-serif',
-              color: 'var(--country-primary)',
-              lineHeight: 0.85,
-              textAlign: 'center',
-              mixBlendMode: 'screen',
-              opacity: 0.9,
-              wordBreak: 'keep-all',
-              overflowWrap: 'break-word',
-              hyphens: 'auto',
-              textTransform: 'uppercase',
-              textShadow: '0 10px 30px rgba(0,0,0,0.5)',
-              maxWidth: '90vw',
-            }}
-          >
+  const stats = useMemo(() => {
+    const densities = allCountries.map((c) => c.population / (c.area || 1));
+    const density = country.population / (country.area || 1);
+    const humanity = allCountries.reduce((sum, c) => sum + c.population, 0);
+    return {
+      total: allCountries.length,
+      popRank: rankOf(country.population, allCountries.map((c) => c.population)),
+      areaRank: rankOf(country.area, allCountries.map((c) => c.area)),
+      densityRank: rankOf(density, densities),
+      density,
+      share: country.population / humanity,
+    };
+  }, [country, allCountries]);
+
+  const languages = Object.values(country.languages ?? {});
+  const [currencyCode, currency] = Object.entries(country.currencies ?? {})[0] ?? [];
+  const idd = country.idd?.root
+    ? `${country.idd.root}${country.idd.suffixes?.length === 1 ? country.idd.suffixes[0] : ''}`
+    : 'N/A';
+
+  const stages: DescentStage[] = [
+    { id: 'orbite', label: 'Orbite' },
+    { id: 'releve', label: 'Relevé' },
+    { id: 'capitale', label: 'Capitale' },
+    { id: 'habitants', label: 'Habitants' },
+    { id: 'territoire', label: 'Territoire' },
+    { id: 'institutions', label: 'Institutions' },
+    { id: 'frontieres', label: 'Frontières' },
+    ...(mdxSlot ? [{ id: 'archives', label: 'Archives' }] : []),
+  ];
+  const indexOf = (id: string) => String(stages.findIndex((s) => s.id === id) + 1).padStart(2, '0');
+
+  return (
+    <article className="cp" style={{ '--cp-accent': palette.primary } as CSSProperties}>
+      <DescentRail stages={stages} countryName={country.nameFr} shareUrl={canonicalUrl} />
+
+      {/* 01 · Orbite : le globe, centré sur le pays, reste visible. */}
+      <header id="orbite" className="cp-hero">
+        <Breadcrumb continent={country.regionFr} countryName={country.nameFr} />
+        <div className="cp-hero__id">
+          <p className="cp-kicker">
+            {country.cca3} · {country.subregionFr}
+          </p>
+          <h1 className="cp-hero__name cp-display" style={{ '--len': country.nameFr.length } as CSSProperties}>
             {country.nameFr}
           </h1>
-          {/* Nom officiel en sous-titre technique, toujours lisible quelle que soit la longueur */}
-          {country.officialNameFr !== country.nameFr && (
-            <div
-              style={{
-                fontSize: '0.6rem',
-                fontFamily: 'var(--font-jetbrains-mono), monospace',
-                color: 'var(--country-primary)',
-                letterSpacing: '0.2em',
-                opacity: 0.5,
-                textAlign: 'center',
-                textTransform: 'uppercase',
-                maxWidth: '80vw',
-                lineHeight: 1.5,
-                mixBlendMode: 'screen',
-              }}
-            >
-              {country.officialNameFr}
+          <p className="cp-hero__official">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="cp-hero__flag" src={country.flags.svg} alt={`Drapeau : ${country.nameFr}`} width={38} height={26} />
+            {country.officialNameFr}
+          </p>
+        </div>
+        <div className="cp-hero__foot">
+          <span className="cp-note">
+            {formatLat(country.centroid[1])} · {formatLon(country.centroid[0])}
+          </span>
+          <a href="#releve" className="cp-descend cp-kicker">
+            Descendre
+            <svg width="12" height="16" viewBox="0 0 12 16" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true">
+              <path d="M6 1v13M1 9l5 5 5-5" />
+            </svg>
+          </a>
+        </div>
+      </header>
+
+      {/* 02 · Relevé : l'essentiel d'un coup d'œil, puis le chapô. */}
+      <section id="releve" className="cp-section cp-section--glass" aria-labelledby="releve-h">
+        <div className="cp-head">
+          <span className="cp-index">{indexOf('releve')}</span>
+          <h2 id="releve-h">Relevé</h2>
+        </div>
+        <div className="cp-grid cp-grid--2">
+          <dl className="cp-facts">
+            <div className="cp-fact">
+              <dt className="cp-label">Capitale</dt>
+              <dd>
+                <a href="#capitale">{country.capitalFr}</a>
+              </dd>
+              <small>{utcOffset(country.primaryTimezone)}</small>
             </div>
+            <div className="cp-fact">
+              <dt className="cp-label">Population</dt>
+              <dd>{shortCount(country.population)}</dd>
+              <small>
+                {stats.popRank}e sur {stats.total}
+              </small>
+            </div>
+            <div className="cp-fact">
+              <dt className="cp-label">Superficie</dt>
+              <dd>
+                {fr.format(Math.round(country.area))} <span style={{ textTransform: 'none' }}>km²</span>
+              </dd>
+              <small>
+                {stats.areaRank}e sur {stats.total}
+              </small>
+            </div>
+            <div className="cp-fact">
+              <dt className="cp-label">{languages.length > 1 ? 'Langues' : 'Langue'}</dt>
+              <dd>{languages[0] ?? 'N/A'}</dd>
+              <small>
+                {languages.length > 1
+                  ? `et ${languages.length - 1} autre${languages.length > 2 ? 's' : ''}`
+                  : 'officielle'}
+              </small>
+            </div>
+            <div className="cp-fact">
+              <dt className="cp-label">Monnaie</dt>
+              <dd>{currency?.name ?? 'N/A'}</dd>
+              <small>
+                {currencyCode}
+                {currency?.symbol ? ` · ${currency.symbol}` : ''}
+              </small>
+            </div>
+            <div className="cp-fact">
+              <dt className="cp-label">Régime</dt>
+              <dd style={{ fontSize: 'clamp(1.1rem, 1.7vw, 1.45rem)' }}>{country.governmentFr ?? 'N/A'}</dd>
+            </div>
+          </dl>
+          {wikiSummary ? (
+            <WikiExtract wikiSummary={wikiSummary} />
+          ) : (
+            <p className="cp-note">Résumé encyclopédique indisponible pour le moment.</p>
           )}
         </div>
+      </section>
 
-        {/* Panel 1: Hero & Flag */}
-        <section
-          className="editorial-panel"
-          style={{
-            height: '100vh',
-            width: '100%',
-            position: 'sticky',
-            top: 0,
-            zIndex: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'flex-end',
-            padding: 'clamp(1rem, 5vw, 4rem)',
-            background: 'linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 100%)',
-            overflow: 'hidden',
-          }}
-        >
-          <div
-            style={{
-              position: 'absolute',
-              top: '2rem',
-              left: '2rem',
-              zIndex: 20,
-            }}
-          >
-            <Breadcrumb
-              continent={country.regionFr}
-              countryName={country.nameFr}
-            />
-          </div>
-          <FlagDisplay
-            flagSvg={country.flags.svg}
-            countryName={country.nameFr}
-          />
-
-          {/* Fallback élégant si pas de résumé Wikipedia */}
-          {wikiSummary === null && (
-            <div
-              style={{
-                position: 'absolute',
-                bottom: '5vh',
-                right: '5vw',
-                width: 'min(90vw, 400px)',
-                zIndex: 30,
-                borderTop: '1px solid rgba(255,255,255,0.2)',
-                paddingTop: '1.5rem',
-              }}
-            >
-              <h4
-                style={{
-                  fontSize: '0.6rem',
-                  fontFamily: 'var(--font-jetbrains-mono), monospace',
-                  color: 'rgba(255,255,255,0.3)',
-                  letterSpacing: '0.2em',
-                }}
-              >
-                WIKIPÉDIA · DONNÉES NON DISPONIBLES
-              </h4>
-            </div>
-          )}
-
-          {typeof wikiSummary === 'string' && (
-            <WikiExtract wikiSummary={wikiSummary} />
-          )}
-        </section>
-
-        {/* Panel 2: Population as Art */}
-        <section
-          className="editorial-panel"
-          style={{
-            height: '100vh',
-            width: '100%',
-            position: 'sticky',
-            top: 0,
-            zIndex: 2,
-            backgroundColor: 'var(--country-background, #05050A)',
-            overflow: 'hidden',
-          }}
-        >
-          <div
-            style={{
-              position: 'absolute',
-              top: '0',
-              left: '0',
-              width: '100%',
-              height: '100%',
-              opacity: 0.3,
-              zIndex: 1,
-              filter: 'blur(1px)',
-            }}
-          >
-            <PopulationCloud population={country.population} />
-          </div>
-
-          <div
-            style={{
-              position: 'absolute',
-              top: '10%',
-              right: '10%',
-              zIndex: 10,
-              textAlign: 'right',
-            }}
-          >
-            <h2
-              style={{
-                fontSize: '1rem',
-                fontFamily: 'var(--font-jetbrains-mono), monospace',
-                textTransform: 'uppercase',
-                letterSpacing: '0.3em',
-                opacity: 0.5,
-              }}
-            >
-              Démographie
-            </h2>
-          </div>
-
-          {/* Chiffre géant centré */}
-          <div
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              zIndex: 20,
-              width: '100%',
-              textAlign: 'center',
-              padding: '0 3vw',
-            }}
-          >
-            <div
-              style={{
-                fontSize:
-                  country.population >= 1_000_000_000
-                    ? 'clamp(2.5rem, 10vw, 16rem)'
-                    : country.population >= 100_000_000
-                      ? 'clamp(3rem, 12vw, 19rem)'
-                      : country.population >= 10_000_000
-                        ? 'clamp(3.5rem, 14vw, 22rem)'
-                        : 'clamp(4rem, 16vw, 26rem)',
-                fontFamily: 'var(--font-bebas-neue), sans-serif',
-                color: '#fff',
-                lineHeight: 0.85,
-                letterSpacing: '-0.03em',
-              }}
-            >
-              {new Intl.NumberFormat('fr-FR').format(country.population)}
-            </div>
-            <div
-              style={{
-                fontSize: '0.65rem',
-                fontFamily: 'var(--font-jetbrains-mono), monospace',
-                color: 'rgba(255,255,255,0.4)',
-                letterSpacing: '0.3em',
-                marginTop: '1.5rem',
-                textTransform: 'uppercase',
-              }}
-            >
-              {country.populationYear
-                ? `Habitants · Banque mondiale ${country.populationYear}`
-                : 'Habitants'}
-            </div>
-          </div>
-
-          <div
-            className="panel-2-stats"
-            style={{
-              position: 'absolute',
-              bottom: '0',
-              left: '0',
-              width: '100%',
-              zIndex: 10,
-              borderTop: '1px solid rgba(255,255,255,0.1)',
-            }}
-          >
-            {/* Colonne 1 : Région géographique */}
-            <div
-              style={{
-                padding: '2vw',
-                borderRight: '1px solid rgba(255,255,255,0.1)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'flex-end',
-              }}
-            >
-              <div
-                style={{
-                  fontSize: '0.65rem',
-                  fontFamily: 'var(--font-jetbrains-mono), monospace',
-                  color: 'rgba(255,255,255,0.4)',
-                  marginBottom: '0.75rem',
-                  letterSpacing: '0.2em',
-                }}
-              >
-                RÉGION
-              </div>
-              <div
-                style={{
-                  fontSize: '1.1rem',
-                  fontFamily: 'var(--font-dm-sans), sans-serif',
-                  fontWeight: 300,
-                  opacity: 0.9,
-                  lineHeight: 1.2,
-                }}
-              >
-                {country.regionFr}
-              </div>
-              {country.subregionFr && (
-                <div
-                  style={{
-                    fontSize: '0.7rem',
-                    fontFamily: 'var(--font-jetbrains-mono), monospace',
-                    color: 'rgba(255,255,255,0.4)',
-                    marginTop: '0.4rem',
-                    letterSpacing: '0.05em',
-                  }}
-                >
-                  {country.subregionFr}
-                </div>
-              )}
-            </div>
-
-            {/* Colonne 2 : Superficie */}
-            <div
-              style={{
-                padding: '3vw',
-                borderRight: '1px solid rgba(255,255,255,0.1)',
-              }}
-            >
-              <div
-                style={{
-                  fontSize: '0.7rem',
-                  fontFamily: 'var(--font-jetbrains-mono), monospace',
-                  color: 'var(--text-muted)',
-                  marginBottom: '1rem',
-                  letterSpacing: '0.1em',
-                }}
-              >
-                SUPERFICIE
-              </div>
-              <div
-                style={{
-                  fontSize: '1.5rem',
-                  fontFamily: 'var(--font-dm-sans), sans-serif',
-                  fontWeight: 300,
-                  opacity: 0.9,
-                }}
-              >
-                {new Intl.NumberFormat('fr-FR').format(country.area)}{' '}
-                <span style={{ fontSize: '0.9rem', opacity: 0.5 }}>km²</span>
-              </div>
-            </div>
-
-            {/* Colonne 3 : Densité */}
-            <div style={{ padding: '3vw' }}>
-              <div
-                style={{
-                  fontSize: '0.7rem',
-                  fontFamily: 'var(--font-jetbrains-mono), monospace',
-                  color: 'var(--text-muted)',
-                  marginBottom: '1rem',
-                  letterSpacing: '0.1em',
-                }}
-              >
-                DENSITÉ
-              </div>
-              <div
-                style={{
-                  fontSize: '1.5rem',
-                  fontFamily: 'var(--font-dm-sans), sans-serif',
-                  fontWeight: 300,
-                  opacity: 0.9,
-                }}
-              >
-                {country.area
-                  ? new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 }).format(country.population / country.area)
-                  : 'N/A'}{' '}
-                <span style={{ fontSize: '0.9rem', opacity: 0.5 }}>
-                  hab/km²
-                </span>
-              </div>
-            </div>
-
-          </div>
-        </section>
-
-        {/* Panel 3: Régime / Ambiance / Capitale */}
-        <section
-          className="editorial-panel panel-3-grid"
-          style={{
-            height: '100vh',
-            width: '100%',
-            position: 'sticky',
-            top: 0,
-            zIndex: 3,
-            backgroundColor: 'var(--country-background, #05050A)',
-            overflow: 'hidden',
-          }}
-        >
-          {/* Colonne gauche : Régime + Ambiance */}
-          <div className="panel-3-col">
-            {/* Header de colonne */}
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                borderBottom: '1px solid rgba(255,255,255,0.1)',
-                paddingBottom: '1.5rem',
-                marginBottom: '5vh',
-              }}
-            >
-              <span
-                style={{
-                  fontSize: '0.65rem',
-                  fontFamily: 'var(--font-jetbrains-mono), monospace',
-                  color: 'var(--text-muted)',
-                  letterSpacing: '0.25em',
-                }}
-              >
-                GOUVERNANCE & CLIMAT
-              </span>
-            </div>
-
-            {/* Bloc 01 : Régime */}
-            <div
-              style={{
-                flex: 1,
-                borderBottom: '1px solid rgba(255,255,255,0.08)',
-                paddingBottom: '5vh',
-                marginBottom: '5vh',
-              }}
-            >
-              <div
-                style={{
-                  fontSize: '0.6rem',
-                  fontFamily: 'var(--font-jetbrains-mono), monospace',
-                  color: 'var(--text-muted)',
-                  letterSpacing: '0.3em',
-                  marginBottom: '2.5rem',
-                }}
-              >
-                01 / RÉGIME POLITIQUE
-              </div>
-              <PoliticalRegime government={country.governmentFr} />
-              <p
-                style={{
-                  marginTop: '2.5rem',
-                  fontSize: '0.85rem',
-                  lineHeight: 1.8,
-                  opacity: 0.55,
-                }}
-              >
-                La structure gouvernementale définit le cadre légal et
-                administratif du territoire. Ce régime encadre l&apos;organisation
-                des pouvoirs constitutionnels, la représentation citoyenne et la
-                délégation des compétences administratives à l&apos;échelle
-                nationale.
+      {/* 03 · Capitale : heure et vrai ciel au-dessus d'elle. */}
+      <section id="capitale" className="cp-section" aria-labelledby="capitale-h">
+        <div className="cp-head">
+          <span className="cp-index">{indexOf('capitale')}</span>
+          <h2 id="capitale-h">Capitale</h2>
+        </div>
+        <div className="cp-grid cp-grid--2">
+          <div>
+            <p className="cp-display cp-big">{country.capitalFr}</p>
+            {country.capitalLonLat && (
+              <p className="cp-note" style={{ marginTop: '1rem' }}>
+                {formatLat(country.capitalLonLat[1])} · {formatLon(country.capitalLonLat[0])}
               </p>
-            </div>
-
-            {/* Bloc 02 : Climat */}
-            <div style={{ flex: 1 }}>
-              <div
-                style={{
-                  fontSize: '0.6rem',
-                  fontFamily: 'var(--font-jetbrains-mono), monospace',
-                  color: 'var(--text-muted)',
-                  letterSpacing: '0.3em',
-                  marginBottom: '2.5rem',
-                }}
-              >
-                02 / CLIMAT
-              </div>
-              <ClimateDisplay climate={country.climate} />
-            </div>
+            )}
           </div>
+          {country.capitalLonLat && <CapitalSky timezone={country.primaryTimezone} lonLat={country.capitalLonLat} />}
+        </div>
+      </section>
 
-          {/* Séparateur */}
-          <div className="panel-3-divider" />
-
-          {/* Colonne droite : Capitale + Coordonnées */}
-          <div className="panel-3-col">
-            {/* Header de colonne */}
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                borderBottom: '1px solid rgba(255,255,255,0.1)',
-                paddingBottom: '1.5rem',
-                marginBottom: '5vh',
-              }}
-            >
-              <span
-                style={{
-                  fontSize: '0.65rem',
-                  fontFamily: 'var(--font-jetbrains-mono), monospace',
-                  color: 'var(--text-muted)',
-                  letterSpacing: '0.25em',
-                }}
-              >
-                CAPITALE & GÉOLOCALISATION
-              </span>
-            </div>
-
-            {/* Bloc 03 : Horloge capitale */}
-            <div
-              style={{
-                flex: 1,
-                borderBottom: '1px solid rgba(255,255,255,0.08)',
-                paddingBottom: '5vh',
-                marginBottom: '5vh',
-              }}
-            >
-              <div
-                style={{
-                  fontSize: '0.6rem',
-                  fontFamily: 'var(--font-jetbrains-mono), monospace',
-                  color: 'var(--text-muted)',
-                  letterSpacing: '0.3em',
-                  marginBottom: '2.5rem',
-                }}
-              >
-                03 / TEMPS LOCAL
-              </div>
-              <CapitalClock
-                capital={country.capitalFr || country.capital?.[0] || 'N/A'}
-                timezone={country.primaryTimezone}
-              />
-            </div>
-
-            {/* Bloc 04 : Données techniques géo */}
-            <div style={{ flex: 1 }}>
-              <div
-                style={{
-                  fontSize: '0.6rem',
-                  fontFamily: 'var(--font-jetbrains-mono), monospace',
-                  color: 'var(--text-muted)',
-                  letterSpacing: '0.3em',
-                  marginBottom: '2.5rem',
-                }}
-              >
-                04 / COORDONNÉES GLOBALES
-              </div>
-              <div className="coord-grid">
-                <div>
-                  <div
-                    style={{
-                      fontSize: '0.6rem',
-                      fontFamily: 'var(--font-jetbrains-mono), monospace',
-                      color: 'var(--text-muted)',
-                      letterSpacing: '0.2em',
-                      marginBottom: '0.75rem',
-                    }}
-                  >
-                    CENTRE GÉOGRAPHIQUE
-                  </div>
-                  <div
-                    style={{
-                      fontSize: '1.8rem',
-                      fontFamily: 'var(--font-dm-sans), sans-serif',
-                      fontWeight: 200,
-                      lineHeight: 1.2,
-                    }}
-                  >
-                    {/* Centroïde calculé depuis la géométrie (ordre GeoJSON [lon, lat]) :
-                        latlng de restcountries est arrondi au degré pour 119 pays. */}
-                    {formatLat(country.centroid[1])}
-                    <br />
-                    {formatLon(country.centroid[0])}
-                  </div>
-                </div>
-                <div>
-                  <div
-                    style={{
-                      fontSize: '0.6rem',
-                      fontFamily: 'var(--font-jetbrains-mono), monospace',
-                      color: 'var(--text-muted)',
-                      letterSpacing: '0.2em',
-                      marginBottom: '0.75rem',
-                    }}
-                  >
-                    DÉCALAGE UTC
-                  </div>
-                  <div
-                    style={{
-                      fontSize: '1.8rem',
-                      fontFamily: 'var(--font-dm-sans), sans-serif',
-                      fontWeight: 200,
-                      lineHeight: 1.2,
-                    }}
-                  >
-                    {utcOffset(country.primaryTimezone)}
-                  </div>
-                  <div
-                    style={{
-                      marginTop: '0.5rem',
-                      fontSize: '0.75rem',
-                      fontFamily: 'var(--font-jetbrains-mono), monospace',
-                      color: 'var(--text-muted)',
-                    }}
-                  >
-                    {country.primaryTimezone}
-                  </div>
-                </div>
-                <div>
-                  <div
-                    style={{
-                      fontSize: '0.6rem',
-                      fontFamily: 'var(--font-jetbrains-mono), monospace',
-                      color: 'var(--text-muted)',
-                      letterSpacing: '0.2em',
-                      marginBottom: '0.75rem',
-                    }}
-                  >
-                    ENCLAVÉ
-                  </div>
-                  <div
-                    style={{
-                      fontSize: '1.8rem',
-                      fontFamily: 'var(--font-bebas-neue), sans-serif',
-                      lineHeight: 1,
-                      color: country.landlocked
-                        ? 'var(--country-accent)'
-                        : '#fff',
-                    }}
-                  >
-                    {country.landlocked ? 'OUI' : 'NON'}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: '0.65rem',
-                      fontFamily: 'var(--font-jetbrains-mono), monospace',
-                      color: 'var(--text-muted)',
-                      marginTop: '0.4rem',
-                    }}
-                  >
-                    {country.landlocked
-                      ? 'Aucun accès maritime'
-                      : 'Accès côtier'}
-                  </div>
-                </div>
-                <div>
-                  <div
-                    style={{
-                      fontSize: '0.6rem',
-                      fontFamily: 'var(--font-jetbrains-mono), monospace',
-                      color: 'var(--text-muted)',
-                      letterSpacing: '0.2em',
-                      marginBottom: '0.75rem',
-                    }}
-                  >
-                    FRONTIÈRES
-                  </div>
-                  <div
-                    style={{
-                      fontSize: '1.8rem',
-                      fontFamily: 'var(--font-bebas-neue), sans-serif',
-                      lineHeight: 1,
-                      color: '#fff',
-                    }}
-                  >
-                    {country.borders?.length ?? 0}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: '0.65rem',
-                      fontFamily: 'var(--font-jetbrains-mono), monospace',
-                      color: 'var(--text-muted)',
-                      marginTop: '0.4rem',
-                    }}
-                  >
-                    {country.borders?.length === 1
-                      ? 'pays voisin'
-                      : 'pays voisins'}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        {/* Panel 4: Langues + Monnaie */}
-        <section
-          className="editorial-panel"
-          style={{
-            height: '100vh',
-            width: '100%',
-            position: 'sticky',
-            top: 0,
-            zIndex: 4,
-            background: 'var(--country-primary)',
-            color: 'rgba(0,0,0,0.85)',
-            display: 'grid',
-            gridTemplateColumns: '1fr 1px 1fr',
-            overflow: 'hidden',
-          }}
-        >
-          {/* Colonne gauche : Langues */}
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              padding: '8vh 5vw',
-            }}
-          >
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                borderBottom: '1px solid rgba(0,0,0,0.1)',
-                paddingBottom: '1.5rem',
-                marginBottom: '5vh',
-              }}
-            >
-              <span
-                style={{
-                  fontSize: '0.65rem',
-                  fontFamily: 'var(--font-jetbrains-mono), monospace',
-                  color: 'rgba(0,0,0,0.5)',
-                  letterSpacing: '0.25em',
-                }}
-              >
-                LANGUES OFFICIELLES
-              </span>
-              <span
-                style={{
-                  fontSize: '0.65rem',
-                  fontFamily: 'var(--font-jetbrains-mono), monospace',
-                  color: 'rgba(0,0,0,0.35)',
-                  letterSpacing: '0.1em',
-                }}
-              >
-                ISO_639
-              </span>
-            </div>
-            <div
-              style={{
-                flex: 1,
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-              }}
-            >
-              <LanguageList languages={country.languages} />
-            </div>
-            <p
-              style={{
-                fontSize: '0.75rem',
-                fontFamily: 'var(--font-jetbrains-mono), monospace',
-                color: 'rgba(0,0,0,0.4)',
-                lineHeight: 1.6,
-                borderTop: '1px solid rgba(0,0,0,0.1)',
-                paddingTop: '2rem',
-              }}
-            >
-              La diversité linguistique reflète les strates historiques d&apos;un
-              territoire et ses influences géopolitiques séculaires.
+      {/* 04 · Habitants */}
+      <section id="habitants" className="cp-section" aria-labelledby="habitants-h">
+        <div className="cp-head">
+          <span className="cp-index">{indexOf('habitants')}</span>
+          <h2 id="habitants-h">Habitants</h2>
+        </div>
+        <div className="cp-grid cp-grid--2">
+          <div>
+            <span className="cp-label">
+              Population{country.populationYear ? ` · Banque mondiale ${country.populationYear}` : ''}
+            </span>
+            <p className="cp-display cp-big" style={{ fontVariantNumeric: 'tabular-nums' }}>
+              {fr.format(country.population)}
+            </p>
+            <RankRuler rank={stats.popRank} total={stats.total} what="pays le plus peuplé" />
+            <p className="cp-value" style={{ marginTop: '1.6rem' }}>
+              {frPct.format(stats.share)} des habitants des {stats.total} États membres de l’ONU.
             </p>
           </div>
-
-          {/* Séparateur */}
-          <div style={{ backgroundColor: 'rgba(0,0,0,0.1)', height: '100%' }} />
-
-          {/* Colonne droite : Monnaie */}
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              padding: '8vh 5vw',
-              position: 'relative',
-              overflow: 'hidden',
-            }}
-          >
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                borderBottom: '1px solid rgba(0,0,0,0.1)',
-                paddingBottom: '1.5rem',
-                marginBottom: '5vh',
-              }}
-            >
-              <span
-                style={{
-                  fontSize: '0.65rem',
-                  fontFamily: 'var(--font-jetbrains-mono), monospace',
-                  color: 'rgba(0,0,0,0.5)',
-                  letterSpacing: '0.25em',
-                }}
-              >
-                ÉCONOMIE & MONNAIE
-              </span>
-              <span
-                style={{
-                  fontSize: '0.65rem',
-                  fontFamily: 'var(--font-jetbrains-mono), monospace',
-                  color: 'rgba(0,0,0,0.35)',
-                  letterSpacing: '0.1em',
-                }}
-              >
-                ISO_4217
-              </span>
+          <div>
+            <div className="cp-stat">
+              <span className="cp-label">Densité</span>
+              <p className="cp-display cp-mid">{fr.format(Math.round(stats.density))} hab./km²</p>
+              <p className="cp-note">
+                {stats.densityRank}e plus dense sur {stats.total}
+              </p>
             </div>
-
-            {/* Filigrane symbole monnaie */}
-            {country.currencies && Object.keys(country.currencies)[0] && (
-              <div
-                style={{
-                  position: 'absolute',
-                  bottom: '-5vh',
-                  right: '-2vw',
-                  fontSize: '50vw',
-                  fontWeight: 900,
-                  color: 'rgba(0,0,0,0.04)',
-                  lineHeight: 1,
-                  pointerEvents: 'none',
-                  userSelect: 'none',
-                }}
-              >
-                {country.currencies[Object.keys(country.currencies)[0]]
-                  .symbol || Object.keys(country.currencies)[0]}
-              </div>
-            )}
-
-            <div
-              style={{
-                flex: 1,
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                position: 'relative',
-                zIndex: 2,
-              }}
-            >
-              <CurrencyCard currencies={country.currencies} />
+            <div className="cp-stat">
+              <span className="cp-label">Gentilé</span>
+              <p className="cp-value">{country.demonymFr}</p>
+            </div>
+            <div className="cp-stat">
+              <span className="cp-label">{languages.length > 1 ? 'Langues officielles' : 'Langue officielle'}</span>
+              <ul className="cp-chips">
+                {Object.entries(country.languages ?? {}).map(([code, name]) => (
+                  <li key={code}>
+                    {name}
+                    <span>{code}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
-        </section>
-        {/* Panel 5 : Réseau, Partage & Voisins */}
-        <section
-          className="editorial-panel"
-          style={{
-            minHeight: '100vh',
-            width: '100%',
-            position: 'relative',
-            zIndex: 5,
-            backgroundColor: 'var(--country-background, #05050A)',
-            display: 'flex',
-            flexDirection: 'column',
-          }}
-        >
-          {/* Barre header pleine largeur */}
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              borderBottom: '1px solid rgba(255,255,255,0.1)',
-              padding: '4vh 5vw',
-            }}
-          >
-            <span
-              style={{
-                fontSize: '0.65rem',
-                fontFamily: 'var(--font-jetbrains-mono), monospace',
-                color: 'var(--text-muted)',
-                letterSpacing: '0.25em',
-              }}
-            >
-              RÉSEAU & COMMUNICATIONS
-            </span>
-            <span
-              style={{
-                fontSize: '0.65rem',
-                fontFamily: 'var(--font-jetbrains-mono), monospace',
-                color: 'var(--country-accent)',
-                letterSpacing: '0.1em',
-              }}
-            >
-              TLD & IDD
-            </span>
-          </div>
+        </div>
+      </section>
 
-          {/* Grille de données réseau : 3 colonnes */}
-          <div className="panel-5-grid">
-            {/* Col 1 : Indicatif téléphonique */}
-            <div
-              style={{
-                padding: '5vh 5vw',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              <div
-                style={{
-                  fontSize: '0.6rem',
-                  fontFamily: 'var(--font-jetbrains-mono), monospace',
-                  color: 'var(--text-muted)',
-                  letterSpacing: '0.3em',
-                  marginBottom: '3rem',
-                }}
-              >
-                05 / INDICATIF TÉLÉPHONIQUE
+      {/* 05 · Territoire */}
+      <section id="territoire" className="cp-section" aria-labelledby="territoire-h">
+        <div className="cp-head">
+          <span className="cp-index">{indexOf('territoire')}</span>
+          <h2 id="territoire-h">Territoire</h2>
+        </div>
+        <div className="cp-grid cp-grid--2">
+          <div>
+            <span className="cp-label">Superficie</span>
+            <p className="cp-display cp-big" style={{ fontVariantNumeric: 'tabular-nums' }}>
+              {fr.format(country.area)} <span style={{ fontSize: '0.4em', textTransform: 'none' }}>km²</span>
+            </p>
+            <RankRuler rank={stats.areaRank} total={stats.total} what="pays le plus étendu" />
+            <div className="cp-pair">
+              <div>
+                <span className="cp-label">Accès à la mer</span>
+                <p className="cp-value">{country.landlocked ? 'Enclavé' : 'Côtier'}</p>
               </div>
-              <div
-                style={{
-                  flex: 1,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: 'clamp(4rem, 10vw, 12rem)',
-                    fontFamily: 'var(--font-bebas-neue), sans-serif',
-                    lineHeight: 0.9,
-                    color: 'var(--country-accent)',
-                  }}
-                >
-                  {(country.idd?.root || '') +
-                    (country.idd?.suffixes?.[0] || '') || 'N/A'}
-                </div>
-                <div
-                  style={{
-                    marginTop: '2rem',
-                    fontSize: '0.75rem',
-                    fontFamily: 'var(--font-jetbrains-mono), monospace',
-                    color: 'var(--text-muted)',
-                    lineHeight: 1.6,
-                  }}
-                >
-                  Code d&apos;appel international alloué par l&apos;UIT (Union
-                  Internationale des Télécommunications).
-                </div>
-              </div>
-            </div>
-
-            {/* Col 2 : TLD Internet */}
-            <div
-              style={{
-                padding: '5vh 5vw',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              <div
-                style={{
-                  fontSize: '0.6rem',
-                  fontFamily: 'var(--font-jetbrains-mono), monospace',
-                  color: 'var(--text-muted)',
-                  letterSpacing: '0.3em',
-                  marginBottom: '3rem',
-                }}
-              >
-                06 / DOMAINE INTERNET (TLD)
-              </div>
-              <div
-                style={{
-                  flex: 1,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: 'clamp(4rem, 10vw, 12rem)',
-                    fontFamily: 'var(--font-bebas-neue), sans-serif',
-                    lineHeight: 0.9,
-                    color: '#fff',
-                  }}
-                >
-                  {country.tld?.[0] ?? 'N/A'}
-                </div>
-                {country.tld && country.tld.length > 1 && (
-                  <div
-                    style={{
-                      marginTop: '1rem',
-                      display: 'flex',
-                      gap: '1rem',
-                      flexWrap: 'wrap',
-                    }}
-                  >
-                    {country.tld.slice(1).map((t: string) => (
-                      <span
-                        key={t}
-                        style={{
-                          fontSize: '1rem',
-                          fontFamily: 'var(--font-jetbrains-mono), monospace',
-                          color: 'var(--text-muted)',
-                          borderBottom: '1px solid rgba(255,255,255,0.2)',
-                          paddingBottom: '2px',
-                        }}
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                )}
-                <div
-                  style={{
-                    marginTop: '2rem',
-                    fontSize: '0.75rem',
-                    fontFamily: 'var(--font-jetbrains-mono), monospace',
-                    color: 'var(--text-muted)',
-                    lineHeight: 1.6,
-                  }}
-                >
-                  Domaine de premier niveau géographique géré par l&apos;ICANN pour
-                  l&apos;espace numérique souverain.
-                </div>
-              </div>
-            </div>
-
-            {/* Col 3 : Partager */}
-            <div
-              style={{
-                padding: '5vh 5vw',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              <div
-                style={{
-                  fontSize: '0.6rem',
-                  fontFamily: 'var(--font-jetbrains-mono), monospace',
-                  color: 'var(--text-muted)',
-                  letterSpacing: '0.3em',
-                  marginBottom: '3rem',
-                }}
-              >
-                07 / PARTAGER
-              </div>
-              <div
-                style={{
-                  flex: 1,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                }}
-              >
-                <p
-                  style={{
-                    fontSize: '0.85rem',
-                    fontFamily: 'var(--font-jetbrains-mono), monospace',
-                    lineHeight: 1.8,
-                    opacity: 0.5,
-                    marginBottom: '4rem',
-                  }}
-                >
-                  Diffusez cet atlas numérique. Chaque lien partagé étend la
-                  connaissance géopolitique du monde.
+              <div>
+                <span className="cp-label">Centre géographique</span>
+                <p className="cp-value">
+                  {formatLat(country.centroid[1])}
+                  <br />
+                  {formatLon(country.centroid[0])}
                 </p>
-                <ShareButton
-                  url={canonicalUrl}
-                  title={`${country.nameFr} · atlas`}
-                />
               </div>
             </div>
           </div>
+          <div>
+            <span className="cp-label">Climat</span>
+            <ClimateDisplay climate={country.climate} />
+          </div>
+        </div>
+      </section>
 
-          {mdxSlot && (
-            <div
-              style={{
-                maxWidth: '800px',
-                margin: '0 auto',
-                marginBottom: '20vh',
-                padding: '0 5vw',
-              }}
-            >
-              <h3
-                style={{
-                  fontSize: '0.8rem',
-                  fontFamily: 'var(--font-jetbrains-mono), monospace',
-                  color: 'var(--text-muted)',
-                  marginBottom: '4rem',
-                  letterSpacing: '0.2em',
-                  textAlign: 'center',
-                }}
-              >
-                08 / ARCHIVES
-              </h3>
-              {mdxSlot}
+      {/* 06 · Institutions et économie : la seule section aux couleurs du drapeau. */}
+      <section id="institutions" className="cp-section cp-section--accent" aria-labelledby="institutions-h">
+        <div className="cp-head">
+          <span className="cp-index">{indexOf('institutions')}</span>
+          <h2 id="institutions-h">Institutions et économie</h2>
+        </div>
+        <div className="cp-grid cp-grid--2-even">
+          <div>
+            <span className="cp-label">Régime politique</span>
+            <p className="cp-display cp-mid">{country.governmentFr ?? 'N/A'}</p>
+            <div className="cp-ids">
+              <div>
+                <span className="cp-label">Indicatif</span>
+                <p className="cp-display cp-mid">{idd}</p>
+              </div>
+              <div>
+                <span className="cp-label">Domaine internet</span>
+                <p className="cp-display cp-mid">{country.tld?.[0] ?? 'N/A'}</p>
+              </div>
+              <div>
+                <span className="cp-label">Codes ISO</span>
+                <p className="cp-display cp-mid">
+                  {country.cca2} · {country.cca3}
+                </p>
+              </div>
             </div>
-          )}
+          </div>
+          <div>
+            <span className="cp-label">Monnaie</span>
+            <CurrencyCard currencies={country.currencies} />
+          </div>
+        </div>
+      </section>
 
-          {country.borders.length > 0 && (
-            <div
-              style={{
-                borderTop: '1px solid rgba(255,255,255,0.1)',
-                paddingTop: '10vh',
-                paddingBottom: '15vh',
-                paddingLeft: '5vw',
-                paddingRight: '5vw',
-              }}
-            >
-              <h3
-                style={{
-                  fontSize: '0.8rem',
-                  fontFamily: 'var(--font-jetbrains-mono), monospace',
-                  color: 'var(--text-muted)',
-                  marginBottom: '5vh',
-                  letterSpacing: '0.2em',
-                }}
-              >
-                09 / FRONTIÈRES TERRESTRES
-              </h3>
-              <NeighborCards
-                origin={country.centroid}
-                borders={country.borders}
-                allCountries={allCountries}
-              />
-            </div>
-          )}
+      {/* 07 · Frontières : le globe transparaît, chaque voisin s'y allume. */}
+      <section id="frontieres" className="cp-section cp-section--glass cp-borders" aria-labelledby="frontieres-h">
+        <div className="cp-head">
+          <span className="cp-index">{indexOf('frontieres')}</span>
+          <h2 id="frontieres-h">Frontières</h2>
+        </div>
+        {country.borders.length > 0 ? (
+          <div className="cp-borders__list">
+            <NeighborCards origin={country.centroid} borders={country.borders} allCountries={allCountries} />
+          </div>
+        ) : (
+          <p className="cp-value" style={{ maxWidth: '34rem' }}>
+            Aucune frontière terrestre avec un autre État : {country.nameFr} n’est bordé que par la mer.
+          </p>
+        )}
+      </section>
+
+      {mdxSlot && (
+        <section id="archives" className="cp-section" aria-labelledby="archives-h">
+          <div className="cp-head">
+            <span className="cp-index">{indexOf('archives')}</span>
+            <h2 id="archives-h">Archives</h2>
+          </div>
+          <div className="cp-archive">{mdxSlot}</div>
         </section>
+      )}
 
-        <CountryFooter current={country} allCountries={allCountries} />
-      </div>
-
-      <style jsx>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-      `}</style>
-    </>
+      <CountryFooter current={country} allCountries={allCountries} shareUrl={canonicalUrl} />
+    </article>
   );
 }

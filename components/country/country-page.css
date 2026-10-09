@@ -1,0 +1,471 @@
+/*
+ * Fiche pays « descente orbitale » : la page part de l'orbite (le globe,
+ * visible derrière le titre) et descend section par section jusqu'au sol.
+ * Mobile d'abord ; préfixe cp- pour ne rien heurter ailleurs.
+ */
+
+.cp {
+  --cp-muted: #8d95a3; /* 5,9:1 sur le fond : lisible en petit, contrairement à --text-muted */
+  --cp-line: rgba(255, 255, 255, 0.1);
+  --cp-gutter: clamp(1rem, 5vw, 4.5rem);
+  --cp-accent: var(--country-primary, #4fc3f7);
+  position: relative;
+  color: var(--text-primary);
+}
+
+.cp-kicker,
+.cp-label,
+.cp-index,
+.cp-note {
+  font-family: var(--font-jetbrains-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.cp-kicker { font-size: 0.7rem; color: var(--cp-muted); }
+.cp-label { font-size: 0.62rem; color: var(--cp-muted); display: block; margin-bottom: 0.6rem; }
+.cp-note { font-size: 0.62rem; color: var(--cp-muted); letter-spacing: 0.1em; text-transform: none; line-height: 1.6; }
+
+.cp-display {
+  font-family: var(--font-bebas-neue), sans-serif;
+  text-transform: uppercase;
+  line-height: 0.9;
+  letter-spacing: 0.01em;
+  font-weight: 400;
+}
+
+/* ---------------------------------------------------------------- Orbite */
+
+.cp-hero {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: clamp(1rem, 3vh, 2rem) var(--cp-gutter) clamp(1.5rem, 5vh, 3.5rem);
+  /* Le globe (couche fixe) reste visible : seul un voile de lisibilité en
+     bas, et la couleur du drapeau en lueur de bord. */
+  background:
+    linear-gradient(to top, rgba(10, 10, 20, 0.92) 0%, rgba(10, 10, 20, 0.35) 34%, transparent 60%),
+    radial-gradient(120% 90% at 50% 45%, transparent 55%, color-mix(in srgb, var(--cp-accent) 14%, transparent) 100%);
+}
+
+.cp-hero__id { align-self: end; max-width: min(100%, 70rem); }
+
+.cp-hero__name {
+  margin: 0.6rem 0 0.9rem;
+  color: var(--text-primary);
+  font-size: clamp(3rem, calc(165vw / var(--len, 8)), 13.5rem);
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+  text-shadow: 0 6px 40px rgba(0, 0, 0, 0.6);
+}
+
+.cp-hero__official {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+  color: rgba(240, 240, 240, 0.8);
+}
+
+.cp-hero__flag {
+  width: 2.4rem;
+  height: auto;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+.cp-hero__foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-top: clamp(1.5rem, 5vh, 3rem);
+  padding-top: 1rem;
+  border-top: 1px solid var(--cp-line);
+}
+
+.cp-descend {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text-primary);
+}
+
+.cp-descend svg { animation: cp-nudge 2.4s var(--ease-signature) infinite; }
+
+@keyframes cp-nudge {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(5px); }
+}
+
+/* --------------------------------------------------------------- Sections */
+
+.cp-section {
+  position: relative;
+  padding: clamp(3.5rem, 10vh, 7rem) var(--cp-gutter);
+  background: rgba(10, 10, 20, 0.94);
+  border-top: 1px solid var(--cp-line);
+  scroll-margin-top: 3.5rem;
+}
+
+/* Le globe transparaît derrière le relevé et les frontières. */
+.cp-section--glass { background: linear-gradient(to bottom, rgba(10, 10, 20, 0.92), rgba(10, 10, 20, 0.8)); }
+
+.cp-section--accent {
+  background: var(--cp-accent);
+  color: #0a0a14;
+}
+.cp-section--accent .cp-label,
+.cp-section--accent .cp-index,
+.cp-section--accent .cp-note { color: rgba(10, 10, 20, 0.62); }
+
+.cp-head {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: clamp(2rem, 6vh, 3.5rem);
+}
+
+.cp-index { font-size: 0.7rem; color: var(--cp-accent); }
+
+.cp-head h2 {
+  font-family: var(--font-bebas-neue), sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  letter-spacing: 0.04em;
+}
+
+.cp-grid {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4.5rem);
+}
+
+@media (min-width: 900px) {
+  .cp-grid--2 { grid-template-columns: 1.15fr 1fr; }
+  .cp-grid--2-even { grid-template-columns: 1fr 1fr; }
+}
+
+.cp-big {
+  font-size: clamp(3.2rem, 8vw, 7.5rem);
+}
+
+.cp-mid {
+  font-size: clamp(2rem, 4vw, 3.4rem);
+}
+
+.cp-stat + .cp-stat { margin-top: 2.2rem; }
+
+.cp-value {
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  font-weight: 300;
+}
+
+/* --------------------------------------------------------------- Relevé */
+
+.cp-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--cp-line);
+  border-left: 1px solid var(--cp-line);
+}
+
+@media (min-width: 640px) {
+  .cp-facts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.cp-fact {
+  padding: 1.1rem 1rem 1.3rem;
+  border-right: 1px solid var(--cp-line);
+  border-bottom: 1px solid var(--cp-line);
+  min-width: 0;
+}
+
+.cp-fact dd {
+  margin: 0;
+  font-family: var(--font-bebas-neue), sans-serif;
+  font-size: clamp(1.45rem, 2.6vw, 2.2rem);
+  line-height: 1;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.cp-fact small {
+  display: block;
+  margin-top: 0.45rem;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.66rem;
+  color: var(--cp-muted);
+  letter-spacing: 0.06em;
+}
+
+.cp-fact a { text-decoration: underline; text-decoration-color: var(--cp-line); text-underline-offset: 4px; }
+.cp-fact a:hover { text-decoration-color: currentColor; }
+
+/* ------------------------------------------------------ Règle des rangs */
+
+.cp-rank { margin-top: 1.2rem; }
+
+.cp-rank svg { display: block; width: 100%; height: 22px; }
+
+.cp-rank__legend {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.4rem;
+}
+
+/* ----------------------------------------------------------------- Ciel */
+
+.cp-day {
+  position: relative;
+  height: 10px;
+  margin: 1.4rem 0 0.5rem;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.cp-day__light { position: absolute; top: 0; bottom: 0; background: linear-gradient(90deg, #f6b26b55, #ffe08a, #f6b26b55); }
+.cp-day__now { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--text-primary); box-shadow: 0 0 8px rgba(255, 255, 255, 0.7); }
+
+.cp-day__scale {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cp-phase {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--cp-line);
+  border-radius: 99px;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+
+.cp-phase i { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+
+/* ------------------------------------------------------------ Langues */
+
+.cp-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; padding: 0; list-style: none; }
+
+.cp-chips li {
+  padding: 0.45rem 0.8rem;
+  border: 1px solid var(--cp-line);
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.cp-chips li span { margin-left: 0.5rem; font-family: var(--font-jetbrains-mono), monospace; font-size: 0.62rem; color: var(--cp-muted); }
+
+/* -------------------------------------------------------- Identifiants */
+
+.cp-ids {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(10, 10, 20, 0.2);
+}
+
+/* ----------------------------------------------------------- Frontières */
+
+@media (min-width: 1100px) {
+  /* Les voisins à gauche ; à droite, le globe (décalé, voir PersistentLayout)
+     montre le pays et allume le voisin survolé. */
+  .cp-borders {
+    min-height: 85svh;
+    background: linear-gradient(90deg, rgba(10, 10, 20, 0.96) 0%, rgba(10, 10, 20, 0.9) 40%, rgba(10, 10, 20, 0.15) 62%, transparent 75%);
+  }
+  .cp-borders__list { max-width: 40rem; }
+}
+
+/* ------------------------------------------------------------- Archives */
+
+.cp-archive { max-width: 44rem; margin: 0 auto; }
+
+/* ------------------------------------------------------------------- Rail */
+
+.cp-rail { display: none; }
+
+@media (min-width: 1100px) {
+  .cp { --cp-gutter: clamp(6rem, 9vw, 9rem); }
+
+  .cp-rail {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    position: fixed;
+    left: 1.6rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+  }
+
+  .cp-rail { transition: opacity 0.5s var(--ease-ui); }
+  .cp-rail[data-landed='true'] { opacity: 0; pointer-events: none; }
+
+  .cp-rail__alt {
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    color: var(--cp-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .cp-rail__alt strong { display: block; color: var(--text-primary); font-weight: 400; font-size: 0.8rem; }
+
+  .cp-rail ol { list-style: none; margin: 0; padding: 0 0 0 0.9rem; border-left: 1px solid var(--cp-line); display: grid; gap: 0.15rem; }
+
+  .cp-rail a {
+    position: relative;
+    display: block;
+    padding: 0.25rem 0;
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cp-muted);
+    transition: color 0.3s var(--ease-ui);
+  }
+
+  .cp-rail a::before {
+    content: '';
+    position: absolute;
+    left: calc(-0.9rem - 3px);
+    top: 50%;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    transform: translateY(-50%) scale(0);
+    background: var(--cp-accent);
+    transition: transform 0.4s var(--ease-signature);
+  }
+
+  .cp-rail a:hover { color: var(--text-primary); }
+  .cp-rail a[aria-current='true'] { color: var(--text-primary); }
+  .cp-rail a[aria-current='true']::before { transform: translateY(-50%) scale(1); }
+}
+
+/* ----------------------------------------------- Mini-en-tête (mobile) */
+
+.cp-minibar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: calc(env(safe-area-inset-top) + 0.6rem) 1rem 0.6rem;
+  background: rgba(10, 10, 20, 0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--cp-line);
+  transform: translateY(-110%);
+  transition: transform 0.45s var(--ease-signature);
+}
+
+.cp-minibar[data-visible='true'] { transform: none; }
+
+.cp-minibar__name {
+  font-family: var(--font-bebas-neue), sans-serif;
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cp-minibar a,
+.cp-minibar button {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+@media (min-width: 1100px) {
+  .cp-minibar { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cp-descend svg { animation: none; }
+}
+
+.cp-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 2.2rem;
+}
+
+/* ------------------------------------------------------------------- Fin */
+
+.cp-end {
+  padding: clamp(4rem, 12vh, 8rem) var(--cp-gutter) clamp(2.5rem, 6vh, 4rem);
+  background: #07070e;
+  border-top: 1px solid var(--cp-line);
+}
+
+.cp-end__title {
+  margin: 0.8rem 0 clamp(2rem, 6vh, 3.5rem);
+  font-size: clamp(2.6rem, 7vw, 6rem);
+}
+
+.cp-end__next {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  border-top: 1px solid var(--cp-line);
+}
+
+@media (min-width: 900px) {
+  .cp-end__next { grid-template-columns: repeat(3, minmax(0, 1fr)); border-left: 1px solid var(--cp-line); }
+  .cp-end__next li { border-right: 1px solid var(--cp-line); }
+}
+
+.cp-end__next li { border-bottom: 1px solid var(--cp-line); }
+
+.cp-end__dest {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: 1.4rem 1.2rem 1.6rem;
+  transition: background 0.35s var(--ease-ui), color 0.35s var(--ease-ui);
+}
+
+.cp-end__dest .cp-display { font-size: clamp(2rem, 3.6vw, 3.2rem); }
+.cp-end__dest:hover,
+.cp-end__dest:focus-visible { background: rgba(255, 255, 255, 0.04); color: var(--cp-accent); }
+
+.cp-end__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+
+.cp-end__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 44px;
+  padding: 0.7rem 1.2rem;
+  border: 1px solid var(--cp-line);
+  border-radius: 99px;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: border-color 0.3s var(--ease-ui), background 0.3s var(--ease-ui);
+}
+
+.cp-end__chip:hover { border-color: var(--cp-accent); background: rgba(255, 255, 255, 0.04); }
+
+.cp-end__sources { margin-top: clamp(3rem, 9vh, 5rem); }
