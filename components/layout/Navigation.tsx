@@ -35,7 +35,7 @@ export default function Navigation({ onSearchOpen }: NavigationProps) {
         </span>
       </button>
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .atlas-wordmark {
           position: fixed;
           top: 24px;
@@ -153,7 +153,7 @@ export default function Navigation({ onSearchOpen }: NavigationProps) {
             display: none;
           }
         }
-      `}</style>
+      ` }} />
     </>
   );
 }

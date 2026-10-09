@@ -170,7 +170,7 @@ export default function SearchPalette({
         </div>
       </div>
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .atlas-search {
           position: fixed;
           inset: 0;
@@ -311,7 +311,7 @@ export default function SearchPalette({
         @media (max-width: 640px) {
           .atlas-search__meta { display: none; }
         }
-      `}</style>
+      ` }} />
     </div>
   );
 }
