@@ -12,7 +12,7 @@ export default function CountryNotFound() {
       status="404"
       kicker="Code pays non répertorié"
       headline="Pays hors-carte"
-      message="Aucun État souverain de l'atlas ne correspond à ce code. L'atlas ne répertorie que les États souverains, 193 au total."
+      message="Aucun État de l'atlas ne correspond à ce code. L'atlas répertorie les 193 États membres de l'ONU."
     />
   );
 }

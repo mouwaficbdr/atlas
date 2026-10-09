@@ -1,7 +1,7 @@
 /**
  * Route : /pays/[code]
  *
- * Génération statique (SSG) d'une page par État souverain (193) via
+ * Génération statique (SSG) d'une page par État membre de l'ONU (193) via
  * generateStaticParams. Charge les données pays + MDX au build et monte
  * CountryCard.
  */

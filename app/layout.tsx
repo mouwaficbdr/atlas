@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     default: 'atlas · Explorer les 193 États du monde',
     template: '%s · atlas',
   },
-  description: 'Explorez le monde en 3D avec atlas : un globe interactif des 193 États souverains, avec leurs données géographiques, culturelles et économiques.',
+  description: 'Explorez le monde en 3D avec atlas : un globe interactif des 193 États membres de l’ONU, avec leurs données géographiques, culturelles et économiques.',
   keywords: ['atlas', 'globe 3D', 'pays', 'géographie', 'cartographie', 'monde', 'exploration', 'données pays'],
   authors: [{ name: 'Mouwafic Badarou' }],
   creator: 'Mouwafic Badarou',
@@ -40,13 +40,13 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: 'atlas',
     title: 'atlas · Explorer les 193 États du monde',
-    description: 'Explorez le monde en 3D avec atlas : un globe interactif des 193 États souverains, avec leurs données géographiques, culturelles et économiques.',
+    description: 'Explorez le monde en 3D avec atlas : un globe interactif des 193 États membres de l’ONU, avec leurs données géographiques, culturelles et économiques.',
     // L'image est fournie par app/opengraph-image.tsx (générée, ratio réel).
   },
   twitter: {
     card: 'summary_large_image',
     title: 'atlas · Explorer les 193 États du monde',
-    description: 'Explorez le monde en 3D avec atlas : un globe interactif des 193 États souverains.',
+    description: 'Explorez le monde en 3D avec atlas : un globe interactif des 193 États membres de l’ONU.',
     // L'image est fournie par app/twitter-image.tsx.
   },
   robots: {

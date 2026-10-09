@@ -11,7 +11,8 @@
  *   node scripts/generate-geo.js
  *
  * Traitements :
- *  1. filtre aux États souverains (mledoze.independent === true)
+ *  1. filtre aux 193 États membres de l'ONU (mledoze.unMember === true) ;
+ *     les voisins hors de ce périmètre (Kosovo, Palestine, territoires) sont retirés
  *  2. propriétés enrichies : noms FR, capitale FR, région FR, fuseau IANA de la
  *     capitale, forme de gouvernement FR, indicatif, TLD
  *  3. centroïde recalculé en flottant depuis la géométrie
@@ -389,6 +390,9 @@ function generate() {
   const geo = JSON.parse(fs.readFileSync(DATA_PATH, 'utf-8'));
   const mledoze = loadVendor('mledoze-countries.json');
   const mById = new Map(mledoze.map((c) => [c.cca3, c]));
+  const members = new Set(mledoze.filter((c) => c.unMember === true).map((c) => c.cca3));
+  // mledoze marque à tort le Saint-Siège membre de l'ONU : il n'y est qu'observateur.
+  members.delete('VAT');
   const govMap = buildGovMap();
 
   const out = [];
@@ -398,7 +402,7 @@ function generate() {
     const p = feature.properties;
     const m = mById.get(p.cca3);
 
-    if (!m || m.independent !== true) {
+    if (!m || !members.has(p.cca3)) {
       skipped++;
       continue;
     }
@@ -434,7 +438,7 @@ function generate() {
         population: p.population,
         area: p.area,
         landlocked: p.landlocked,
-        borders: p.borders || [],
+        borders: (p.borders || []).filter((code) => members.has(code)),
         languages: languagesFr(p.languages),
         currencies: currenciesFr(p.currencies),
         flags: p.flags,
@@ -452,7 +456,7 @@ function generate() {
   const result = { type: 'FeatureCollection', features: out };
   fs.writeFileSync(DATA_PATH, JSON.stringify(result));
 
-  console.log(`Écrit ${out.length} pays souverains (${skipped} territoires écartés).`);
+  console.log(`Écrit ${out.length} États membres de l'ONU (${skipped} écartés).`);
   const missingGov = out.filter((f) => !f.properties.governmentFr).length;
   const missingTz = out.filter((f) => f.properties.primaryTimezone === 'UTC').length;
   console.log(`Gouvernement manquant : ${missingGov} | fuseau par défaut UTC : ${missingTz}`);

@@ -58,7 +58,7 @@ export interface CountryData {
 
   /** Forme de gouvernement en français (Wikidata P122), null si non renseigné. */
   governmentFr: string | null;
-  /** État souverain (toujours true dans le jeu de données livré). */
+  /** État souverain (toujours true : le jeu de données livré se limite aux membres de l'ONU). */
   independent: boolean;
 
   centroid: [number, number];

@@ -19,7 +19,7 @@
 ## À propos
 
 atlas est un explorateur mondial de pays construit autour d'un globe 3D WebGL.  
-Le périmètre est celui des 193 États souverains (filtre `independent` de mledoze/countries). La Terre est photoréaliste ; chaque pays révèle au survol la couleur dominante de son drapeau, calculée au build (k-means) et figée dans le GeoJSON. L'objectif est de prouver qu'une expérience de premier rang peut reposer entièrement sur des fondations statiques, ouvertes et sans backend propriétaire.
+Le périmètre est celui des 193 États membres de l'ONU (filtre `unMember` de mledoze/countries, Saint-Siège exclu car simple observateur). La Terre est photoréaliste ; chaque pays révèle au survol la couleur dominante de son drapeau, calculée au build (k-means) et figée dans le GeoJSON. L'objectif est de prouver qu'une expérience de premier rang peut reposer entièrement sur des fondations statiques, ouvertes et sans backend propriétaire.
 
 Projet personnel de [BADAROU Mouwafic](https://github.com/mouwaficbdr). Aucune vocation commerciale.
 
@@ -93,7 +93,7 @@ Projet personnel de [BADAROU Mouwafic](https://github.com/mouwaficbdr). Aucune v
 
 | Source | Données | Accès |
 |---|---|---|
-| [mledoze/countries](https://github.com/mledoze/countries) | Noms FR, gentilés, capitale, monnaies, langues, indicatif, TLD, voisins, statut souverain | Vendoré dans `scripts/vendor/`, figé au build |
+| [mledoze/countries](https://github.com/mledoze/countries) | Noms FR, gentilés, capitale, monnaies, langues, indicatif, TLD, voisins, appartenance à l'ONU | Vendoré dans `scripts/vendor/`, figé au build |
 | [countries-and-timezones](https://www.npmjs.com/package/countries-and-timezones) | Fuseau IANA de la capitale (gère l'heure d'été) | Dépendance npm, utilisée à la génération |
 | [Wikidata (SPARQL)](https://query.wikidata.org) | Forme de gouvernement (P122), libellé français | Vendoré dans `scripts/vendor/`, figé au build |
 | [Natural Earth 110m](https://www.naturalearthdata.com) | Géométrie des frontières (GeoJSON) | Fichier statique, domaine public |
@@ -133,7 +133,7 @@ atlas/
 **Flux de données**
 
 1. **Vendoring** (manuel, hors build) : `scripts/fetch-vendor-data.js` fige mledoze/countries et la forme de gouvernement Wikidata dans `scripts/vendor/`
-2. **Génération** (manuel, hors build) : `scripts/generate-geo.js` reconstruit `public/data/countries-geo.json` : filtre aux États souverains, noms FR, fuseaux IANA, indicatif, TLD, palette k-means, centroïde, passe géométrie
+2. **Génération** (manuel, hors build) : `scripts/generate-geo.js` reconstruit `public/data/countries-geo.json` : filtre aux États membres de l'ONU, noms, langues et monnaies en français, fuseaux IANA, indicatif, TLD, palette k-means, centroïde, passe géométrie
 3. **Build** : `generateStaticParams` lit les 193 codes du GeoJSON et pré-génère toutes les routes ; seul l'extrait Wikipédia est récupéré en ligne (repli silencieux)
 4. **Runtime SSG** : les données complètes de chaque pays sont injectées statiquement dans la page ; le client ne fait aucun appel réseau de données
 5. **Client** : le GeoJSON est chargé une fois au montage du globe et mis en cache en mémoire (singleton)

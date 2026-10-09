@@ -164,7 +164,7 @@ export default function SearchPalette({
             </div>
           ) : (
             <div className="atlas-search__hint">
-              193 états souverains · tapez pour explorer
+              193 États membres de l’ONU · tapez pour explorer
             </div>
           )}
         </div>

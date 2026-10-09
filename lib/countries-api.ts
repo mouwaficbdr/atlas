@@ -2,7 +2,7 @@
  * Accès aux données pays, lues depuis public/data/countries-geo.json (figé au
  * build par scripts/generate-geo.js, aucun appel réseau).
  * Utilisé au build (generateStaticParams) pour pré-générer une page par État
- * souverain. Lève une erreur explicite si le GeoJSON est indisponible, pour
+ * membre de l'ONU. Lève une erreur explicite si le GeoJSON est indisponible, pour
  * interrompre le build plutôt que produire un site incomplet.
  */
 
