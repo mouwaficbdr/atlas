@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { Canvas } from '@react-three/fiber';
+import * as THREE from 'three';
+import { Canvas, useThree } from '@react-three/fiber';
 import type { CountryData } from '@/lib/types';
-import { SUN_POSITION } from '@/lib/globe/sun';
+import { SUN_DIRECTION, homeViewDirection, updateSunDirection } from '@/lib/globe/sun';
 import { GLOBE_DISTANCE, INTRO_DISTANCE, prefersReducedMotion } from '@/lib/globe/intro';
 import { useAppStore } from '@/lib/store';
 import GlobeMesh from './GlobeMesh';
@@ -96,7 +97,7 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
     <>
       <Canvas
         dpr={dpr}
-        camera={{ position: [0, 0, initialCameraZ], fov: 45 }}
+        camera={{ position: homeViewDirection().multiplyScalar(initialCameraZ).toArray(), fov: 45 }}
         // Hors du mode globe (fiche pays), le globe est masque par la
         // CountryCard : on passe la boucle de rendu en "demand" pour rendre la
         // main au GPU. CameraTransition force un rendu via invalidate() pendant
@@ -125,7 +126,7 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
             masque le fond de page, d'où un anneau sombre autour du globe. */}
         <color attach="background" args={['#0a0a14']} />
         <ambientLight intensity={0.12} />
-        <directionalLight position={SUN_POSITION} intensity={2.6} />
+        <SunLight />
 
         <StarField />
         <GlobeMesh
@@ -148,4 +149,25 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
       <SROnlyList countries={countries} visible={false} />
     </>
   );
+}
+
+const SUN_REFRESH_MS = 30_000;
+
+/** Lumière du vrai soleil, recalée toutes les 30 s (la Terre tourne de 0,125°). */
+function SunLight() {
+  const light = useRef<THREE.DirectionalLight>(null);
+  const invalidate = useThree((state) => state.invalidate);
+
+  useEffect(() => {
+    const tick = () => {
+      updateSunDirection();
+      light.current?.position.copy(SUN_DIRECTION).multiplyScalar(5);
+      invalidate();
+    };
+    tick();
+    const id = setInterval(tick, SUN_REFRESH_MS);
+    return () => clearInterval(id);
+  }, [invalidate]);
+
+  return <directionalLight ref={light} intensity={2.6} />;
 }

@@ -6,7 +6,9 @@ import { gsap } from 'gsap';
 import type { CountryData } from '@/lib/types';
 import * as THREE from 'three';
 import { useAppStore } from '@/lib/store';
-import { introDistanceAt } from '@/lib/globe/intro';
+import { GLOBE_DISTANCE, introDistanceAt } from '@/lib/globe/intro';
+import { homeViewDirection } from '@/lib/globe/sun';
+import { lonLatToCartesian } from '@/lib/globe/pick-country';
 
 interface CameraTransitionProps {
   countries: CountryData[];
@@ -37,13 +39,14 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
       if (introPhase === 'flying') {
         // Approche depuis le point bleu pâle jusqu'à la vue globe.
         orbitControls.enabled = false;
+        const home = homeViewDirection();
         const flight = { t: 0 };
         const tween = gsap.to(flight, {
           t: 1,
           duration: 2.8,
           ease: 'power2.inOut',
           onUpdate: () => {
-            camera.position.set(0, 0, introDistanceAt(flight.t));
+            camera.position.copy(home).multiplyScalar(introDistanceAt(flight.t));
             render();
           },
           onComplete: () => setIntroPhase('done'),
@@ -53,11 +56,13 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
         };
       }
 
-      // Return to globe view
+      // Retour à la vue globe : on recule dans l'axe actuel, le pays quitté
+      // reste face à l'utilisateur.
+      const back = camera.position.clone().normalize().multiplyScalar(GLOBE_DISTANCE);
       gsap.to(camera.position, {
-        x: 0,
-        y: 0,
-        z: 3,
+        x: back.x,
+        y: back.y,
+        z: back.z,
         duration: 1.5,
         ease: 'power3.inOut',
         onUpdate: render,
@@ -83,15 +88,7 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
       // en ordre REST Countries [lat, lon].
       const [lon, lat] = country.centroid;
 
-      // Conversion lon/lat → coordonnées sphériques Three.js
-      const phi = (90 - lat) * (Math.PI / 180);
-      const theta = (lon + 180) * (Math.PI / 180);
-
-      const surfaceX = Math.sin(phi) * Math.cos(theta);
-      const surfaceY = Math.cos(phi);
-      const surfaceZ = -Math.sin(phi) * Math.sin(theta);
-
-      const targetPos = new THREE.Vector3(surfaceX, surfaceY, surfaceZ);
+      const targetPos = new THREE.Vector3(...lonLatToCartesian(lon, lat));
 
       // Facteur de zoom : 1.3 = 0.3 unités au-dessus de la surface du globe (rayon=1)
       const camDist = 1.3;

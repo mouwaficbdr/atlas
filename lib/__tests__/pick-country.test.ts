@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import * as fc from 'fast-check';
-import { cartesianToLonLat, findCountryAtLonLat } from '../globe/pick-country';
+import { cartesianToLonLat, findCountryAtLonLat, lonLatToCartesian } from '../globe/pick-country';
 import type { GeoJSONFeature } from '../types';
 
 // Même projection que BordersMesh / HoverHighlight.
@@ -62,5 +62,17 @@ describe('findCountryAtLonLat', () => {
 
   it("renvoie null sur l'océan", () => {
     expect(findCountryAtLonLat(60, -50, features)).toBeNull();
+  });
+});
+
+describe('lonLatToCartesian', () => {
+  it('est l’inverse exact de cartesianToLonLat', () => {
+    fc.assert(
+      fc.property(fc.double({ min: -179.9, max: 179.9, noNaN: true }), fc.double({ min: -89.9, max: 89.9, noNaN: true }), (lon, lat) => {
+        const back = cartesianToLonLat(...lonLatToCartesian(lon, lat));
+        expect(back.lon).toBeCloseTo(lon, 6);
+        expect(back.lat).toBeCloseTo(lat, 6);
+      }),
+    );
   });
 });

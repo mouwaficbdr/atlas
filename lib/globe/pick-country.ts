@@ -16,6 +16,17 @@ export function cartesianToLonLat(x: number, y: number, z: number): { lon: numbe
   return { lon, lat };
 }
 
+/**
+ * Point (lon, lat) en degrés vers la sphère unité, dans le repère du globe :
+ * même projection que les frontières, le survol et la caméra ; inverse exact
+ * de cartesianToLonLat.
+ */
+export function lonLatToCartesian(lon: number, lat: number): [number, number, number] {
+  const phi = (90 - lat) * (Math.PI / 180);
+  const theta = (lon + 180) * (Math.PI / 180);
+  return [Math.sin(phi) * Math.cos(theta), Math.cos(phi), -Math.sin(phi) * Math.sin(theta)];
+}
+
 function pointInRing(lon: number, lat: number, ring: number[][]): boolean {
   let inside = false;
   for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
