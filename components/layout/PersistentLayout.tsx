@@ -14,6 +14,7 @@ import type { CountryData, LoadingState } from '@/lib/types';
 import { fetchAllCountries } from '@/lib/countries-api';
 import { useAppStore } from '@/lib/store';
 import { useIsMobile } from '@/lib/hooks/useIsMobile';
+import { prefersReducedMotion } from '@/lib/hooks/useReducedMotion';
 
 // Le globe embarque toute la stack WebGL (three + react-three-fiber). On le
 // charge en import dynamique client (ssr: false) pour le sortir du bundle
@@ -131,6 +132,18 @@ export default function PersistentLayout({
     }
     setLoadingState((prev) => ({ ...prev, phase: 'complete' }));
   };
+
+  // Sur une fiche pays, le contenu (statique) s'affiche tout de suite : pas
+  // d'écran de chargement. Le globe apparaît derrière quand il est prêt et le
+  // vol de caméra vers le pays tient lieu d'intro (CameraTransition).
+  const onGlobeScreen = pathname === '/';
+  const setIntroPhase = useAppStore((state) => state.setIntroPhase);
+  useEffect(() => {
+    if (onGlobeScreen || loadingState.phase !== 'revealing') return;
+    setIntroPhase(prefersReducedMotion() ? 'done' : 'flying');
+    handleRevealComplete();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [onGlobeScreen, loadingState.phase, setIntroPhase]);
 
   const handleCountrySelect = (cca3: string) => {
     router.push(`/pays/${cca3.toLowerCase()}`);
@@ -276,10 +289,12 @@ export default function PersistentLayout({
         <div style={{ pointerEvents: 'auto' }}>{children}</div>
       </div>
 
-      <LoadingScreen
-        loadingState={loadingState}
-        onRevealComplete={handleRevealComplete}
-      />
+      {onGlobeScreen && (
+        <LoadingScreen
+          loadingState={loadingState}
+          onRevealComplete={handleRevealComplete}
+        />
+      )}
 
       {/* Navigation (desktop) : réservée à l'écran de départ (le globe). Sur
           une fiche pays, le fil d'Ariane (lien "Globe") assure déjà le retour,

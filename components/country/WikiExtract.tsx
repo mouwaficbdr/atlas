@@ -15,8 +15,10 @@ export default function WikiExtract({ wikiSummary }: WikiExtractProps) {
       style={{
         position: 'absolute',
         bottom: '5vh',
-        right: '5vw',
-        width: 'min(90vw, 400px)',
+        // En % du panneau et non en vw : vw inclut la barre de défilement, ce
+        // qui faisait déborder l'extrait à gauche sur mobile.
+        right: 'clamp(1rem, 5%, 4rem)',
+        width: 'min(calc(100% - 2rem), 400px)',
         zIndex: 30,
         borderTop: '1px solid var(--country-accent)',
         paddingTop: '1.5rem',
@@ -76,7 +78,7 @@ export default function WikiExtract({ wikiSummary }: WikiExtractProps) {
             fontSize: '0.85rem',
             lineHeight: 1.8,
             color: '#fff',
-            textAlign: 'justify',
+            textAlign: 'left',
             margin: 0,
             opacity: isExpanded ? 1 : 0.8,
             transition: 'opacity 0.8s ease',
