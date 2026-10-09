@@ -1,22 +1,20 @@
 'use client';
 
-import { useMemo, useRef, useEffect } from 'react';
+import { useMemo, useEffect } from 'react';
 import * as THREE from 'three';
-import { useFrame } from '@react-three/fiber';
 import type { GeoJSONFeature } from '@/lib/types';
-import { useReducedMotion } from '@/lib/hooks/useReducedMotion';
 
 interface BordersMeshProps {
   features: GeoJSONFeature[];
 }
 
 export default function BordersMesh({ features }: BordersMeshProps) {
-  const materialRef = useRef<THREE.LineBasicMaterial>(null);
-  const reducedMotion = useReducedMotion();
-
   const geometry = useMemo(() => {
     const vertices: number[] = [];
-    const R = 1.0025; // Slightly above country mesh to avoid Z-fighting
+    // Au-dessus de la sphère Terre (r=1) et sans maillage pays entre les
+    // deux : le depth test cache les frontières de la face arrière sans
+    // z-fighting. (L'ancien bug venait d'un R=1.0025 placé SOUS les pays.)
+    const R = 1.006;
 
     const projectPoint = (lon: number, lat: number): [number, number, number] => {
       const phi = (90 - lat) * (Math.PI / 180);
@@ -62,24 +60,12 @@ export default function BordersMesh({ features }: BordersMeshProps) {
   // démontage et à chaque recalcul (finding E1).
   useEffect(() => () => geometry.dispose(), [geometry]);
 
-  // Animation de pulsation légère
-  useFrame(({ clock }) => {
-    if (!materialRef.current) return;
-    if (reducedMotion) {
-      materialRef.current.opacity = 0.8;
-      return;
-    }
-    // Oscille entre 0.5 et 1.0
-    materialRef.current.opacity = 0.75 + Math.sin(clock.elapsedTime * 2) * 0.25;
-  });
-
   return (
-    <lineSegments geometry={geometry}>
+    <lineSegments geometry={geometry} renderOrder={10}>
       <lineBasicMaterial
-        ref={materialRef}
         color="#D4AF37" // Doré chirurgical
         transparent={true}
-        opacity={0.8}
+        opacity={0.55}
         blending={THREE.AdditiveBlending}
         depthWrite={false}
       />

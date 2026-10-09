@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import type { CountryData } from '@/lib/types';
+import { SUN_POSITION } from '@/lib/globe/sun';
 import GlobeMesh from './GlobeMesh';
 import AtmosphereMesh from './AtmosphereMesh';
 import StarField from './StarField';
@@ -91,9 +92,10 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
         onPointerUp={handlePointerUp}
         onPointerLeave={handlePointerUp}
       >
-        <ambientLight intensity={1.2} />
-        <directionalLight position={[0, 0, 5]} intensity={1.5} />
-        <directionalLight position={[5, 3, 2]} intensity={0.8} />
+        {/* Un seul soleil, faible ambiance : le terminateur jour/nuit doit
+            rester lisible (même direction que les shaders, lib/globe/sun.ts). */}
+        <ambientLight intensity={0.12} />
+        <directionalLight position={SUN_POSITION} intensity={2.6} />
 
         <StarField />
         <GlobeMesh

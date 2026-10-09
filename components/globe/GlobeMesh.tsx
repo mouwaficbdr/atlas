@@ -1,18 +1,18 @@
 'use client';
 
-import { useEffect, useState, useMemo, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import * as THREE from 'three';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, type ThreeEvent } from '@react-three/fiber';
 import { loadGeoJSON } from '@/lib/geojson-loader';
 import type { GeoJSONFeature, CountryData } from '@/lib/types';
 import { useAppStore } from '@/lib/store';
 import { useReducedMotion } from '@/lib/hooks/useReducedMotion';
-import CountryMesh from './CountryMesh';
+import { cartesianToLonLat, findCountryAtLonLat } from '@/lib/globe/pick-country';
 import BordersMesh from './BordersMesh';
 import HolographicText from './HolographicText';
-
-import oceanVert from '../../shaders/ocean.vert.glsl';
-import oceanFrag from '../../shaders/ocean.frag.glsl';
+import HoverHighlight from './HoverHighlight';
+import EarthMesh from './EarthMesh';
+import CloudsMesh from './CloudsMesh';
 
 interface GlobeMeshProps {
   countries: CountryData[];
@@ -59,26 +59,39 @@ export default function GlobeMesh({
     setHoveredCountry(null);
   }, [cameraMode, setHoveredCountry]);
 
-  const oceanMaterial = useMemo(() => {
-    return new THREE.ShaderMaterial({
-      vertexShader:
-        typeof oceanVert === 'string' ? oceanVert : (oceanVert as { default: string }).default,
-      fragmentShader:
-        typeof oceanFrag === 'string' ? oceanFrag : (oceanFrag as { default: string }).default,
-      uniforms: {
-        uTime: { value: 0 },
-      },
-    });
-  }, []);
-
   const groupRef = useRef<THREE.Group>(null);
+  const lastHoveredRef = useRef<string | null>(null);
 
-  useFrame(({ clock, mouse }) => {
-    if (reducedMotion) return;
-
-    if (oceanMaterial) {
-      oceanMaterial.uniforms.uTime.value = clock.elapsedTime;
+  const handleEarthPointerMove = (e: ThreeEvent<PointerEvent>) => {
+    e.stopPropagation();
+    // Repère du groupe (celui des frontières), pas celui de la sphère Terre
+    // qui est tournée de 180° pour aligner sa texture.
+    const local = (groupRef.current ?? e.object).worldToLocal(e.point.clone());
+    const { lon, lat } = cartesianToLonLat(local.x, local.y, local.z);
+    const cca3 = findCountryAtLonLat(lon, lat, features);
+    if (cca3 !== lastHoveredRef.current) {
+      lastHoveredRef.current = cca3;
+      setHoveredCca3(cca3);
     }
+  };
+
+  const handleEarthPointerLeave = () => {
+    lastHoveredRef.current = null;
+    setHoveredCca3(null);
+  };
+
+  const handleEarthClick = (e: ThreeEvent<MouseEvent>) => {
+    e.stopPropagation();
+    // Repère du groupe (celui des frontières), pas celui de la sphère Terre
+    // qui est tournée de 180° pour aligner sa texture.
+    const local = (groupRef.current ?? e.object).worldToLocal(e.point.clone());
+    const { lon, lat } = cartesianToLonLat(local.x, local.y, local.z);
+    const cca3 = findCountryAtLonLat(lon, lat, features);
+    if (cca3) onSelect(cca3);
+  };
+
+  useFrame(({ mouse }) => {
+    if (reducedMotion) return;
 
     // Parallaxe de léger tilt en fonction de la position de la souris
     if (groupRef.current) {
@@ -101,23 +114,22 @@ export default function GlobeMesh({
 
   return (
     <group ref={groupRef}>
-      {/* Océan */}
-      <mesh material={oceanMaterial}>
-        <sphereGeometry args={[1, 64, 64]} />
-      </mesh>
-
-      {/* Pays */}
-      {features.map((feature) => (
-        <CountryMesh
-          key={feature.properties.cca3}
-          feature={feature}
-          color={feature.properties.colors?.primary ?? '#4A5568'}
-          onSelect={onSelect}
-          onHover={setHoveredCca3}
-        />
-      ))}
+      <EarthMesh
+        onPointerMove={handleEarthPointerMove}
+        onPointerLeave={handleEarthPointerLeave}
+        onClick={handleEarthClick}
+      />
+      <CloudsMesh />
 
       <BordersMesh features={features} />
+
+      {cameraMode === 'globe' && hoveredFeature && (
+        <HoverHighlight
+          key={hoveredFeature.properties.cca3}
+          feature={hoveredFeature}
+          color={hoveredFeature.properties.colors?.primary ?? '#4fc3f7'}
+        />
+      )}
 
       {/* Holographic Text — visible uniquement au survol en mode globe */}
       {cameraMode === 'globe' &&
