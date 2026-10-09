@@ -11,7 +11,7 @@ import FlagDisplay from './FlagDisplay';
 import CapitalClock from './CapitalClock';
 import LanguageList from './LanguageList';
 import NeighborCards from './NeighborCards';
-import MoodDisplay from './MoodDisplay';
+import ClimateDisplay from './ClimateDisplay';
 import PoliticalRegime from './PoliticalRegime';
 import WikiExtract from './WikiExtract';
 import CurrencyCard from './CurrencyCard';
@@ -503,7 +503,7 @@ export default function CountryCard({
                   letterSpacing: '0.25em',
                 }}
               >
-                GOUVERNANCE & AMBIANCE
+                GOUVERNANCE & CLIMAT
               </span>
             </div>
 
@@ -544,7 +544,7 @@ export default function CountryCard({
               </p>
             </div>
 
-            {/* Bloc 02 : Ambiance / Climat */}
+            {/* Bloc 02 : Climat */}
             <div style={{ flex: 1 }}>
               <div
                 style={{
@@ -555,9 +555,9 @@ export default function CountryCard({
                   marginBottom: '2.5rem',
                 }}
               >
-                02 / AMBIANCE ESTIMÉE
+                02 / CLIMAT
               </div>
-              <MoodDisplay country={country} />
+              <ClimateDisplay climate={country.climate} />
             </div>
           </div>
 

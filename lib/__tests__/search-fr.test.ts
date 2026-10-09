@@ -27,6 +27,7 @@ function country(partial: Partial<CountryData>): CountryData {
     borders: [],
     population: 0,
     populationYear: null,
+    climate: [],
     languages: {},
     currencies: {},
     idd: null,

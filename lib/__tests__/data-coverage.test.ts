@@ -24,6 +24,7 @@ const REQUIRED: Record<string, (c: (typeof countries)[number]) => boolean> = {
   languages: (c) => Object.keys(c.languages ?? {}).length > 0,
   currencies: (c) => Object.keys(c.currencies ?? {}).length > 0,
   population: (c) => c.population > 0 && !!c.populationYear,
+  climate: (c) => c.climate.length > 0,
   area: (c) => c.area > 0,
 };
 

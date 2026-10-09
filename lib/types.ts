@@ -1,4 +1,4 @@
-// Tous les types sont définis localement, aucun import externe.
+import type { ClimateShare } from './koppen';
 
 // ---------------------------------------------------------------------------
 // CountryData : figé au build dans public/data/countries-geo.json
@@ -36,6 +36,8 @@ export interface CountryData {
   borders: string[];
 
   population: number;
+  /** Climats de Köppen-Geiger principaux (trois au plus), du plus étendu au moins étendu. */
+  climate: ClimateShare[];
   /** Année de l'estimation de population (Banque mondiale). */
   populationYear: number | null;
   languages: Record<string, string>;
@@ -117,25 +119,6 @@ export interface SearchResult {
   score: number; // 3 = exact, 2 = préfixe, 1 = sous-chaîne
 }
 
-// ---------------------------------------------------------------------------
-// CountryMood : ambiance estimée par bandes de latitude (indicatif).
-// ---------------------------------------------------------------------------
-
-export type MoodType =
-  | 'Insulaire'
-  | 'Polaire'
-  | 'Tempéré'
-  | 'Subtropical'
-  | 'Tropical';
-
-export interface CountryMood {
-  type: MoodType;
-  label: string;
-  icon: string;
-  colorScheme: string;
-}
-
-// ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // MDXContent : Contenu éditorial
 // Le MDX est rendu côté serveur (next-mdx-remote/rsc) au build : on transporte

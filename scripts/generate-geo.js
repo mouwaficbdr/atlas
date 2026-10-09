@@ -5,6 +5,7 @@
  *  - scripts/vendor/wikidata-gov.json       (forme de gouvernement)
  *  - scripts/vendor/gov-overrides.json      (corrections manuelles)
  *  - scripts/vendor/worldbank-population.json (population, Banque mondiale)
+ *  - scripts/vendor/koppen.json              (climats, voir compute-koppen.mjs)
  *  - countries-and-timezones                (fuseaux IANA)
  *
  * Aucun appel réseau : rafraîchir les sources avec scripts/fetch-vendor-data.js.
@@ -403,6 +404,7 @@ function generate() {
   members.delete('VAT');
   const govMap = buildGovMap();
   const worldBankPop = loadVendor('worldbank-population.json');
+  const koppen = loadVendor('koppen.json');
 
   const out = [];
   let skipped = 0;
@@ -457,6 +459,7 @@ function generate() {
         timezones: p.timezones || [],
         primaryTimezone: primaryTimezone(p.cca3, cca2),
         governmentFr: govMap[p.cca3] || null,
+        climate: koppen[p.cca3] || [],
         ...NAME_FR_OVERRIDES[p.cca3],
         independent: true,
         colors: p.colors,
