@@ -189,29 +189,48 @@ async function fetchWikiExtract(
   title: string,
   lang: 'fr' | 'en',
 ): Promise<string | null> {
-  try {
-    const url = `https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`;
-    const res = await fetch(url, {
-      headers: {
-        'User-Agent': 'AtlasGlobe/1.0 (contact@atlasglobe.example.com)',
-        Accept: 'application/json',
-      },
-      next: { revalidate: 60 * 60 * 24 },
-    });
-    if (!res.ok) return null;
-    const data = (await res.json()) as {
-      extract?: string;
-      type?: string;
-    };
-    // On ignore les pages de désambiguïsation
-    if (data.type === 'disambiguation') return null;
-    return typeof data.extract === 'string' && data.extract.length > 50
-      ? data.extract
-      : null;
-  } catch {
-    return null;
+  const url = `https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`;
+  // Le build interroge 193 pages en parallèle : Wikimedia répond alors 429.
+  // Sans nouvel essai, la cascade retombait sur l'anglais ou sur rien, et
+  // unstable_cache figeait ce repli pour 24 h.
+  for (let attempt = 0; attempt < 4; attempt++) {
+    try {
+      const res = await fetch(url, {
+        headers: {
+          // Politique Wikimedia : un User-Agent qui identifie le projet et un contact réel.
+          'User-Agent': 'atlas/1.0 (https://github.com/mouwaficbdr/atlas)',
+          Accept: 'application/json',
+        },
+        next: { revalidate: 60 * 60 * 24 },
+      });
+      if (res.status === 429 || res.status >= 500) {
+        const retryAfter = Number(res.headers.get('retry-after')) || 0;
+        await new Promise((r) => setTimeout(r, Math.min(retryAfter * 1000 || 500 * 2 ** attempt, 5000)));
+        continue;
+      }
+      if (!res.ok) return null;
+      const data = (await res.json()) as {
+        extract?: string;
+        type?: string;
+      };
+      // On ignore les pages de désambiguïsation
+      if (data.type === 'disambiguation') return null;
+      return typeof data.extract === 'string' && data.extract.length > 50
+        ? data.extract
+        : null;
+    } catch {
+      return null;
+    }
   }
+  return null;
 }
+
+// Articles que la cascade par nom ne trouve pas : le nom courant mène à l'île
+// (Maurice) ou à une page d'homonymie (Grenade). Relevé sur les 193 pays.
+const WIKI_TITLE_FR: Record<string, string> = {
+  MUS: 'Maurice (pays)',
+  GRD: 'Grenade (pays)',
+};
 
 /**
  * Cascade de tentatives Wikipedia, du plus pertinent pour un lecteur
@@ -220,12 +239,14 @@ async function fetchWikiExtract(
  */
 const getCachedWikiSummary = unstable_cache(
   async (
+    cca3: string,
     nameFr: string,
     officialNameFr: string,
     nameEn: string,
     officialNameEn: string,
   ): Promise<string | null> => {
     const titles: Array<[string, 'fr' | 'en']> = [
+      [WIKI_TITLE_FR[cca3], 'fr'],
       [nameFr, 'fr'],
       [officialNameFr, 'fr'],
       [nameEn, 'fr'],
@@ -239,7 +260,7 @@ const getCachedWikiSummary = unstable_cache(
     }
     return null;
   },
-  ['wiki-summary-v3'],
+  ['wiki-summary-v4'],
   { revalidate: 60 * 60 * 24, tags: ['wiki-summary'] },
 );
 
@@ -270,6 +291,7 @@ export default async function CountryPage({ params }: PageProps) {
     getCountryPalette(country),
     getCountryMDX(country.cca3),
     getCachedWikiSummary(
+      country.cca3,
       country.nameFr,
       country.officialNameFr,
       country.name.common,
