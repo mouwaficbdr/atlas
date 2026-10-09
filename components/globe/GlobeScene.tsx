@@ -13,6 +13,13 @@ import GlobeControls from './GlobeControls';
 import CameraTransition from './CameraTransition';
 import SROnlyList from '@/components/ui/SROnlyList';
 
+// Réticule de visée (même langage que le verrouillage des fiches pays),
+// liseré sombre pour rester lisible sur les zones claires du globe.
+const RETICLE_PATH = 'M4 11V4h7M21 4h7v7M28 21v7h-7M11 28H4v-7';
+const RETICLE_CURSOR = `url("data:image/svg+xml,${encodeURIComponent(
+  `<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><g fill='none' stroke-linecap='round'><path d='${RETICLE_PATH}' stroke='rgba(0,0,0,0.5)' stroke-width='3'/><path d='${RETICLE_PATH}' stroke='#eaf6ff' stroke-width='1.4'/></g><circle cx='16' cy='16' r='2.2' fill='rgba(0,0,0,0.5)'/><circle cx='16' cy='16' r='1.3' fill='#eaf6ff'/></svg>`,
+)}") 16 16, pointer`;
+
 interface GlobeSceneProps {
   countries: CountryData[];
   onCountrySelect: (cca3: string) => void;
@@ -27,6 +34,7 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
   const [isDragging, setIsDragging] = useState(false);
   const onLoadCalledRef = useRef(false);
   const introPhase = useAppStore((state) => state.introPhase);
+  const hoveredCountry = useAppStore((state) => state.hoveredCountryCca3);
   // La caméra démarre loin (la Terre n'est qu'un point sous le loader), sauf
   // si l'intro a déjà eu lieu ou si l'utilisateur refuse les animations.
   const [initialCameraZ] = useState(() =>
@@ -101,7 +109,9 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
         style={{
           width: '100%',
           height: '100%',
-          cursor: isDragging ? 'grabbing' : 'grab'
+          // Réticule seulement au-dessus d'un pays (cliquable), flèche
+          // ailleurs, main fermée pendant la rotation.
+          cursor: isDragging ? 'grabbing' : hoveredCountry ? RETICLE_CURSOR : 'default'
         }}
         onCreated={handleCreated}
         onPointerDown={handlePointerDown}
