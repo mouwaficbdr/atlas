@@ -1,157 +1,153 @@
 'use client';
 
-import Link from 'next/link';
-
 interface NavigationProps {
   onSearchOpen: () => void;
 }
 
 /**
- * Montée uniquement sur l'écran de départ (voir PersistentLayout) : pas de
- * barre de navigation, juste le logo flottant au-dessus du globe et une
- * balise de recherche (étoile du ciel) à la place d'un bouton/barre classique.
+ * Montée uniquement sur l'écran de départ (voir PersistentLayout). Ni barre
+ * ni logo : la recherche est une étoile du ciel, avec ses aigrettes de
+ * diffraction et son scintillement, qui se nomme au survol.
  */
 export default function Navigation({ onSearchOpen }: NavigationProps) {
   return (
     <>
-      <Link href="/" className="atlas-wordmark">
-        ATLAS°
-      </Link>
-
       <button
         type="button"
         onClick={onSearchOpen}
-        className="atlas-beacon"
+        className="star"
         aria-label="Localiser un pays (raccourci Cmd+K)"
       >
-        <span className="atlas-beacon__rings" aria-hidden="true">
-          <span className="atlas-beacon__ring" />
-          <span className="atlas-beacon__ring atlas-beacon__ring--delayed" />
+        <span className="star__body" aria-hidden="true">
+          <span className="star__halo" />
+          <span className="star__spike star__spike--h" />
+          <span className="star__spike star__spike--v" />
+          <span className="star__spike star__spike--d1" />
+          <span className="star__spike star__spike--d2" />
+          <span className="star__core" />
         </span>
-        <span className="atlas-beacon__core" aria-hidden="true" />
-        <span className="atlas-beacon__tag" aria-hidden="true">
-          <span className="atlas-beacon__leader" />
-          Localiser
+        <span className="star__tag" aria-hidden="true">
+          <span className="star__leader" />
+          Localiser un pays
         </span>
       </button>
 
       <style dangerouslySetInnerHTML={{ __html: `
-        .atlas-wordmark {
+        .star {
           position: fixed;
-          top: 24px;
-          left: 24px;
+          top: 30px;
+          right: 34px;
           z-index: 1000;
-          font-size: 1.4rem;
-          font-weight: 700;
-          color: var(--text-primary);
-          text-decoration: none;
-          letter-spacing: 0.02em;
-          opacity: 0.92;
-          transition: opacity 0.2s var(--ease-ui, ease);
-        }
-        .atlas-wordmark:hover,
-        .atlas-wordmark:focus-visible {
-          opacity: 1;
-        }
-
-        .atlas-beacon {
-          position: fixed;
-          top: 34px;
-          right: 36px;
-          z-index: 1000;
-          width: 28px;
-          height: 28px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          width: 44px;
+          height: 44px;
+          display: grid;
+          place-items: center;
           background: none;
           border: none;
           padding: 0;
           cursor: pointer;
         }
-        .atlas-beacon:focus-visible {
-          outline: 2px solid rgba(79, 195, 247, 0.8);
-          outline-offset: 8px;
+        .star:focus-visible {
+          outline: 1px solid rgba(79, 195, 247, 0.7);
+          outline-offset: 6px;
           border-radius: 50%;
         }
-        .atlas-beacon__core {
-          width: 7px;
-          height: 7px;
+        .star__body {
+          position: relative;
+          width: 44px;
+          height: 44px;
+          display: grid;
+          place-items: center;
+          transition: transform 0.6s var(--ease-signature, ease);
+        }
+        .star__body > * {
+          grid-area: 1 / 1;
+        }
+        .star__halo {
+          width: 26px;
+          height: 26px;
           border-radius: 50%;
-          background: #eaf6ff;
-          box-shadow:
-            0 0 6px 2px rgba(79, 195, 247, 0.85),
-            0 0 18px 6px rgba(79, 195, 247, 0.35);
-          animation: beacon-breathe 3.2s ease-in-out infinite;
+          background: radial-gradient(circle, rgba(200, 228, 255, 0.45) 0%, rgba(120, 180, 255, 0.12) 40%, transparent 70%);
+          animation: star-twinkle-a 4.3s ease-in-out infinite;
         }
-        .atlas-beacon__rings {
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-        }
-        .atlas-beacon__ring {
-          position: absolute;
-          inset: 0;
-          margin: auto;
-          width: 7px;
-          height: 7px;
+        .star__core {
+          width: 3px;
+          height: 3px;
           border-radius: 50%;
-          border: 1px solid rgba(79, 195, 247, 0.55);
-          animation: beacon-ping 3.2s ease-out infinite;
+          background: #fff;
+          box-shadow: 0 0 2px 1px rgba(255, 255, 255, 0.95), 0 0 6px 2px rgba(190, 225, 255, 0.7);
         }
-        .atlas-beacon__ring--delayed {
-          animation-delay: 1.6s;
+        /* Aigrettes de diffraction : fines, plus vives au centre, teintées
+           d'un léger bleu aux extrémités comme sur une photo de télescope. */
+        .star__spike {
+          width: 40px;
+          height: 1px;
+          background: linear-gradient(90deg, transparent 0%, rgba(150, 200, 255, 0.35) 22%, rgba(255, 255, 255, 0.95) 50%, rgba(150, 200, 255, 0.35) 78%, transparent 100%);
+          animation: star-twinkle-b 3.1s ease-in-out infinite;
         }
-        .atlas-beacon__tag {
+        .star__spike--v {
+          transform: rotate(90deg);
+          animation-duration: 3.7s;
+        }
+        .star__spike--d1,
+        .star__spike--d2 {
+          width: 18px;
+          opacity: 0.35;
+          animation: none;
+        }
+        .star__spike--d1 { transform: rotate(45deg); }
+        .star__spike--d2 { transform: rotate(-45deg); }
+        .star:hover .star__body,
+        .star:focus-visible .star__body {
+          transform: scale(1.35);
+        }
+        .star__tag {
           position: absolute;
           top: 50%;
-          right: calc(100% + 10px);
-          transform: translateY(-50%);
+          right: calc(100% + 4px);
+          transform: translate(6px, -50%);
           display: flex;
           align-items: center;
-          gap: 8px;
+          gap: 10px;
           white-space: nowrap;
           font-family: var(--font-jetbrains-mono), monospace;
-          font-size: 0.68rem;
-          letter-spacing: 0.18em;
+          font-size: 0.64rem;
+          letter-spacing: 0.22em;
           text-transform: uppercase;
-          color: var(--text-accent, #4fc3f7);
+          color: rgba(220, 238, 255, 0.85);
           opacity: 0;
-          transform-origin: right center;
-          transition: opacity 0.25s var(--ease-ui, ease);
+          pointer-events: none;
+          transition: opacity 0.35s var(--ease-ui, ease), transform 0.45s var(--ease-signature, ease);
         }
-        .atlas-beacon__leader {
-          width: 20px;
+        .star__leader {
+          width: 28px;
           height: 1px;
-          background: rgba(79, 195, 247, 0.55);
+          background: linear-gradient(90deg, transparent, rgba(220, 238, 255, 0.6));
         }
-        .atlas-beacon:hover .atlas-beacon__tag,
-        .atlas-beacon:focus-visible .atlas-beacon__tag {
+        .star:hover .star__tag,
+        .star:focus-visible .star__tag {
           opacity: 1;
+          transform: translate(0, -50%);
         }
-        .atlas-beacon:hover .atlas-beacon__core,
-        .atlas-beacon:focus-visible .atlas-beacon__core {
-          animation-duration: 1.2s;
-        }
-
-        @keyframes beacon-breathe {
+        /* Scintillement : deux périodes non multiples l'une de l'autre, pour
+           un rythme irrégulier, jamais mécanique. */
+        @keyframes star-twinkle-a {
           0%, 100% { opacity: 0.75; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.25); }
+          38% { opacity: 1; transform: scale(1.12); }
+          61% { opacity: 0.6; transform: scale(0.94); }
         }
-        @keyframes beacon-ping {
-          0% { opacity: 0.6; transform: scale(1); }
-          100% { opacity: 0; transform: scale(5); }
+        @keyframes star-twinkle-b {
+          0%, 100% { opacity: 0.85; }
+          27% { opacity: 0.45; }
+          54% { opacity: 1; }
+          79% { opacity: 0.6; }
         }
         @media (prefers-reduced-motion: reduce) {
-          .atlas-beacon__core,
-          .atlas-beacon__ring {
-            animation: none;
-          }
+          .star__halo, .star__spike { animation: none; }
+          .star__body, .star__tag { transition: none; }
         }
         @media (max-width: 640px) {
-          .atlas-beacon__tag {
-            display: none;
-          }
+          .star__tag { display: none; }
         }
       ` }} />
     </>
