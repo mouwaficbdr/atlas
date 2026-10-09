@@ -281,13 +281,15 @@ export default function PersistentLayout({
         onRevealComplete={handleRevealComplete}
       />
 
-      {/* Navigation (desktop) — disponible sur toutes les pages, y compris les
-          pages pays, pour offrir un chemin clavier/visible vers la recherche. */}
-      {!isMobile && <Navigation onSearchOpen={() => setSearchOpen(true)} />}
+      {/* Navigation (desktop) : réservée à l'écran de départ (le globe). Sur
+          une fiche pays, le fil d'Ariane (lien "Globe") assure déjà le retour,
+          superposer la marque ATLAS° y ferait doublon dans le même coin. */}
+      {!isMobile && pathname === '/' && (
+        <Navigation onSearchOpen={() => setSearchOpen(true)} />
+      )}
 
-      {/* Search Palette — disponible sur toutes les pages desktop (Cmd+K ou
-          bouton de la Navigation), pas seulement sur le globe. */}
-      {countries.length > 0 && !isMobile && (
+      {/* Search Palette : réservée à l'écran de départ, comme son déclencheur. */}
+      {countries.length > 0 && !isMobile && pathname === '/' && (
         <SearchPalette countries={countries} onSelect={handleCountrySelect} />
       )}
 
