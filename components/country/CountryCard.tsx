@@ -10,6 +10,7 @@ import WikiExtract from './WikiExtract';
 import CapitalSky from './CapitalSky';
 import RankRuler from './RankRuler';
 import ClimateDisplay from './ClimateDisplay';
+import TrueSizeCompare from './TrueSizeCompare';
 import CurrencyCard from './CurrencyCard';
 import NeighborCards from './NeighborCards';
 import CountryFooter from './CountryFooter';
@@ -302,6 +303,7 @@ export default function CountryCard({
             <ClimateDisplay climate={country.climate} />
           </div>
         </div>
+        <TrueSizeCompare country={country} allCountries={allCountries} canonicalUrl={canonicalUrl} />
       </section>
 
       {/* 06 · Institutions et économie : la seule section aux couleurs du drapeau. */}

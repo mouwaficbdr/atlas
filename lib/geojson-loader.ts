@@ -1,7 +1,7 @@
 /**
  * GeoJSON Loader avec cache mémoire (singleton).
  *
- * Le GeoJSON Natural Earth 110m est chargé une seule fois au montage du Globe
+ * Le GeoJSON (Natural Earth 1:50m) est chargé une seule fois au montage du globe
  * et conservé dans une variable de module pour toute la session.
  * Les appels suivants retournent les données en cache sans requête réseau.
  */
