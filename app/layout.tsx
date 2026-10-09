@@ -27,26 +27,26 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'ATLAS° — Explorateur mondial de pays',
-    template: '%s | ATLAS°',
+    default: 'atlas · Explorer les 193 États du monde',
+    template: '%s · atlas',
   },
-  description: 'Explorez le monde en 3D avec ATLAS° : un globe interactif présentant 193 États souverains avec leurs données géographiques, culturelles et économiques.',
+  description: 'Explorez le monde en 3D avec atlas : un globe interactif des 193 États souverains, avec leurs données géographiques, culturelles et économiques.',
   keywords: ['atlas', 'globe 3D', 'pays', 'géographie', 'cartographie', 'monde', 'exploration', 'données pays'],
-  authors: [{ name: 'ATLAS Team' }],
-  creator: 'ATLAS Team',
+  authors: [{ name: 'Mouwafic Badarou' }],
+  creator: 'Mouwafic Badarou',
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
     url: SITE_URL,
-    siteName: 'ATLAS°',
-    title: 'ATLAS° — Explorateur mondial de pays',
-    description: 'Explorez le monde en 3D avec ATLAS° : un globe interactif présentant 193 États souverains avec leurs données géographiques, culturelles et économiques.',
+    siteName: 'atlas',
+    title: 'atlas · Explorer les 193 États du monde',
+    description: 'Explorez le monde en 3D avec atlas : un globe interactif des 193 États souverains, avec leurs données géographiques, culturelles et économiques.',
     // L'image est fournie par app/opengraph-image.tsx (générée, ratio réel).
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ATLAS° — Explorateur mondial de pays',
-    description: 'Explorez le monde en 3D avec ATLAS° : un globe interactif présentant 193 États souverains.',
+    title: 'atlas · Explorer les 193 États du monde',
+    description: 'Explorez le monde en 3D avec atlas : un globe interactif des 193 États souverains.',
     // L'image est fournie par app/twitter-image.tsx.
   },
   robots: {

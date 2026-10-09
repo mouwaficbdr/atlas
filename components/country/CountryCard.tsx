@@ -1144,7 +1144,7 @@ export default function CountryCard({
                 </p>
                 <ShareButton
                   url={canonicalUrl}
-                  title={`${country.nameFr} · ATLAS°`}
+                  title={`${country.nameFr} · atlas`}
                 />
               </div>
             </div>

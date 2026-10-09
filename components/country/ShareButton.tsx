@@ -7,7 +7,7 @@ interface ShareButtonProps {
   title?: string;
 }
 
-export default function ShareButton({ url, title = 'ATLAS°' }: ShareButtonProps) {
+export default function ShareButton({ url, title = 'atlas' }: ShareButtonProps) {
   const [copied, setCopied] = useState(false);
   const [showFallback, setShowFallback] = useState(false);
   const [canNativeShare, setCanNativeShare] = useState(false);

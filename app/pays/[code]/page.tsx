@@ -55,13 +55,13 @@ export async function generateMetadata({
 
   if (!country) {
     return {
-      title: 'Pays non trouvé - ATLAS°',
+      title: 'Pays introuvable',
     };
   }
 
   const canonicalUrl = `${SITE_URL}/pays/${params.code}`;
   const description =
-    `Découvrez ${country.officialNameFr} sur ATLAS° : population, superficie, capitale, langues, monnaie, et bien plus.`.slice(
+    `Découvrez ${country.officialNameFr} sur atlas : population, superficie, capitale, langues, monnaie, et bien plus.`.slice(
       0,
       160,
     );
@@ -69,17 +69,18 @@ export async function generateMetadata({
   // L'image Open Graph par pays est générée par opengraph-image.tsx (ratio
   // 1200x630 réel), Next.js la référence automatiquement.
   return {
-    title: `${country.nameFr} - ATLAS°`,
+    // Le gabarit du layout ajoute « · atlas » : ne pas le répéter ici.
+    title: country.nameFr,
     description,
     openGraph: {
-      title: country.nameFr,
+      title: `${country.nameFr} · atlas`,
       description,
       type: 'website',
       url: canonicalUrl,
     },
     twitter: {
       card: 'summary_large_image',
-      title: country.nameFr,
+      title: `${country.nameFr} · atlas`,
       description,
     },
     alternates: {

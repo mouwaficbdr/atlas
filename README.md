@@ -1,8 +1,8 @@
 <div align="center">
 
-# ATLAS°
+# atlas
 
-**Globe 3D Interactif — Explorateur Mondial de Pays**
+**Globe 3D interactif · les 193 États du monde**
 
 [![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org)
 [![Three.js](https://img.shields.io/badge/Three.js-0.170-black?logo=three.js)](https://threejs.org)
@@ -12,14 +12,14 @@
 
 </div>
 
-![Globe 3D — Afrique et Europe](public/screenshots/globe.png)
+![Globe 3D : Afrique et Europe](public/screenshots/globe.png)
 
 ---
 
 ## À propos
 
-ATLAS° est un explorateur mondial de pays construit autour d'un globe 3D WebGL.  
-Le périmètre est celui des 193 États souverains (filtre `independent` de mledoze/countries). Chaque territoire est coloré depuis la couleur dominante de son drapeau national, calculée au build (k-means) et figée dans le GeoJSON. L'objectif est de prouver qu'une expérience de premier rang peut reposer entièrement sur des fondations statiques, ouvertes et sans backend propriétaire.
+atlas est un explorateur mondial de pays construit autour d'un globe 3D WebGL.  
+Le périmètre est celui des 193 États souverains (filtre `independent` de mledoze/countries). La Terre est photoréaliste ; chaque pays révèle au survol la couleur dominante de son drapeau, calculée au build (k-means) et figée dans le GeoJSON. L'objectif est de prouver qu'une expérience de premier rang peut reposer entièrement sur des fondations statiques, ouvertes et sans backend propriétaire.
 
 Projet personnel de [BADAROU Mouwafic](https://github.com/mouwaficbdr). Aucune vocation commerciale.
 
@@ -27,14 +27,15 @@ Projet personnel de [BADAROU Mouwafic](https://github.com/mouwaficbdr). Aucune v
 
 ## Fonctionnalités
 
-- **Globe interactif** — rotation libre, survol avec extrusion des pays, zoom caméra GSAP animé vers le pays sélectionné
-- **Couleurs générées** — chaque pays porte la palette de son drapeau, calculée au build (k-means) et figée dans le GeoJSON
-- **Fiche pays complète** — panneaux : démographie, gouvernance, capitale en temps réel, langues, monnaie, indicatif, domaine TLD, frontières voisines
-- **Extrait Wikipedia** — résumé encyclopédique en français (cascade FR → EN, cache Next.js 24h), récupéré au build avec repli silencieux
-- **Recherche instantanée** — palette Cmd+K, filtrée côté client sur les 193 États souverains, insensible aux accents et aux noms français
-- **Navigation responsive** — globe WebGL sur desktop, index mobile avec recherche et navigation par continent
-- **SSG pur** — 193 pages statiques pré-générées au build, zéro appel réseau en runtime pour les données pays
-- **Badge GitHub Gravity Well** — lien magnétique avec anneau typographique rotatif (desktop uniquement)
+- **Terre photoréaliste** : textures NASA Blue Marble (jour, relief, lumières des villes côté nuit), nuages, atmosphère en diffusion de Rayleigh (limbe bleu, crépuscule doré au terminateur), ciel profond avec Voie lactée et étoiles aux couleurs stellaires
+- **Globe interactif** : rotation et zoom libres, survol qui teinte et détoure le pays, vol de caméra GSAP vers le pays choisi
+- **Couleurs générées** : chaque pays porte la palette de son drapeau, calculée au build (k-means) et figée dans le GeoJSON
+- **Fiche pays complète** : démographie, gouvernance, capitale en temps réel, langues, monnaie, indicatif, domaine TLD, frontières voisines
+- **Extrait Wikipédia** : résumé encyclopédique en français (cascade FR puis EN, cache Next.js 24 h), récupéré au build avec repli silencieux
+- **Recherche instantanée** : depuis l'étoile de l'écran de départ ou ⌘K, filtrée côté client, insensible aux accents et aux noms français
+- **Arrivée « Pale Blue Dot »** : la Terre n'est qu'un point pendant le chargement réel, puis la caméra s'en approche ; guidage progressif et discret à la première visite
+- **Navigation responsive** : globe WebGL sur desktop, index mobile avec recherche et navigation par continent
+- **SSG pur** : 193 pages statiques pré-générées au build, aucun appel réseau au runtime pour les données pays
 
 ---
 
@@ -43,12 +44,12 @@ Projet personnel de [BADAROU Mouwafic](https://github.com/mouwaficbdr). Aucune v
 <table>
   <tr>
     <td width="50%">
-      <img src="public/screenshots/country-hero.png" alt="Page pays — Hero" />
-      <p align="center"><sub>Hero pays — palette générée depuis le drapeau</sub></p>
+      <img src="public/screenshots/country-hero.png" alt="Page pays, hero" />
+      <p align="center"><sub>Hero pays : palette générée depuis le drapeau</sub></p>
     </td>
     <td width="50%">
       <img src="public/screenshots/demography.png" alt="Panel Démographie" />
-      <p align="center"><sub>Démographie — nuage de particules + données clés</sub></p>
+      <p align="center"><sub>Démographie : nuage de particules et données clés</sub></p>
     </td>
   </tr>
   <tr>
@@ -58,7 +59,7 @@ Projet personnel de [BADAROU Mouwafic](https://github.com/mouwaficbdr). Aucune v
     </td>
     <td width="50%">
       <img src="public/screenshots/language-currency.png" alt="Langues et monnaie" />
-      <p align="center"><sub>Langues officielles et monnaie — fond issu du drapeau</sub></p>
+      <p align="center"><sub>Langues officielles et monnaie, fond issu du drapeau</sub></p>
     </td>
   </tr>
   <tr>
@@ -68,7 +69,7 @@ Projet personnel de [BADAROU Mouwafic](https://github.com/mouwaficbdr). Aucune v
     </td>
     <td width="50%">
       <img src="public/screenshots/borders.png" alt="Frontières terrestres" />
-      <p align="center"><sub>Frontières terrestres — pays voisins cliquables</sub></p>
+      <p align="center"><sub>Frontières terrestres : pays voisins cliquables</sub></p>
     </td>
   </tr>
 </table>
@@ -96,6 +97,7 @@ Projet personnel de [BADAROU Mouwafic](https://github.com/mouwaficbdr). Aucune v
 | [countries-and-timezones](https://www.npmjs.com/package/countries-and-timezones) | Fuseau IANA de la capitale (gère l'heure d'été) | Dépendance npm, utilisée à la génération |
 | [Wikidata (SPARQL)](https://query.wikidata.org) | Forme de gouvernement (P122), libellé français | Vendoré dans `scripts/vendor/`, figé au build |
 | [Natural Earth 110m](https://www.naturalearthdata.com) | Géométrie des frontières (GeoJSON) | Fichier statique, domaine public |
+| [NASA Blue Marble](https://visibleearth.nasa.gov) via les exemples [three.js](https://github.com/mrdoob/three.js/tree/dev/examples/textures/planets) | Textures de la Terre (jour, nuit, relief, nuages) | `public/textures/earth/`, domaine public / MIT |
 | [Wikipedia REST API](https://fr.wikipedia.org/api/rest_v1/) | Extraits encyclopédiques (cascade FR puis EN) | Récupéré au build, cache Next.js 24h, repli silencieux |
 | MDX local | Articles éditoriaux par pays | `/content/countries/[cca3].mdx` |
 
@@ -108,31 +110,33 @@ Les données pays sont figées dans le dépôt (`public/data/countries-geo.json`
 ```
 atlas/
 ├── app/
-│   ├── layout.tsx              # RootLayout, fonts, providers
+│   ├── layout.tsx              # RootLayout, polices, métadonnées
 │   ├── page.tsx                # Page d'accueil (globe)
-│   ├── opengraph-image.tsx     # Image OG générée (site + par pays)
-│   ├── not-found.tsx           # 404 dans l'univers ATLAS
-│   └── pays/[code]/page.tsx    # 193 pages SSG (une par État souverain)
+│   ├── opengraph-image.tsx     # Image OG générée (site et par pays)
+│   ├── not-found.tsx           # 404 dans l'univers atlas
+│   └── pays/[code]/            # 193 pages SSG et leur chargement
 ├── components/
-│   ├── globe/                  # GlobeScene, GlobeMesh, CountryMesh, shaders
+│   ├── globe/                  # GlobeScene, EarthMesh, CloudsMesh, AtmosphereMesh,
+│   │                           #   StarField, BordersMesh, HoverHighlight, CameraTransition
 │   ├── country/                # CountryCard et ses panneaux, CountryFooter
-│   ├── ui/                     # SearchPalette, LoadingScreen, OffMapScreen...
-│   └── layout/                 # PersistentLayout, Navigation, LenisProvider
-├── lib/                        # search-engine, geojson-loader, i18n-country,
-│                               #   format-coords, mood-resolver, og...
+│   ├── ui/                     # SearchPalette, LoadingScreen, GlobeOnboarding, OffMapScreen...
+│   └── layout/                 # PersistentLayout, Navigation (étoile de recherche)
+├── lib/                        # search-engine, geojson-loader, i18n-country, mood-resolver...
+│   └── globe/                  # sélection des pays, soleil, intro caméra, textures
 ├── content/countries/          # Fichiers MDX éditoriaux ([cca3].mdx)
-├── public/data/                # countries-geo.json (géométrie + propriétés figées)
+├── public/data/                # countries-geo.json (géométrie et propriétés figées)
+├── public/textures/earth/      # Textures NASA de la Terre
 ├── scripts/                    # generate-geo.js, fetch-vendor-data.js, vendor/
-└── shaders/                    # GLSL : ocean, atmosphere, country
+└── shaders/                    # GLSL : atmosphère, nuages, ciel, étoiles
 ```
 
 **Flux de données**
 
-1. **Vendoring** (manuel, hors build) — `scripts/fetch-vendor-data.js` fige mledoze/countries et la forme de gouvernement Wikidata dans `scripts/vendor/`
-2. **Génération** (manuel, hors build) — `scripts/generate-geo.js` reconstruit `public/data/countries-geo.json` : filtre aux États souverains, noms FR, fuseaux IANA, indicatif, TLD, palette k-means, centroïde, passe géométrie
-3. **Build** — `generateStaticParams` lit les 193 codes du GeoJSON et pré-génère toutes les routes ; seul l'extrait Wikipédia est récupéré en ligne (repli silencieux)
-4. **Runtime SSG** — les données complètes de chaque pays sont injectées statiquement dans la page ; le client ne fait aucun appel réseau de données
-5. **Client** — le GeoJSON est chargé une fois au montage du Globe et mis en cache en mémoire (singleton)
+1. **Vendoring** (manuel, hors build) : `scripts/fetch-vendor-data.js` fige mledoze/countries et la forme de gouvernement Wikidata dans `scripts/vendor/`
+2. **Génération** (manuel, hors build) : `scripts/generate-geo.js` reconstruit `public/data/countries-geo.json` : filtre aux États souverains, noms FR, fuseaux IANA, indicatif, TLD, palette k-means, centroïde, passe géométrie
+3. **Build** : `generateStaticParams` lit les 193 codes du GeoJSON et pré-génère toutes les routes ; seul l'extrait Wikipédia est récupéré en ligne (repli silencieux)
+4. **Runtime SSG** : les données complètes de chaque pays sont injectées statiquement dans la page ; le client ne fait aucun appel réseau de données
+5. **Client** : le GeoJSON est chargé une fois au montage du globe et mis en cache en mémoire (singleton)
 
 ---
 
@@ -154,7 +158,7 @@ npm run build
 npm start
 ```
 
-> **Note** — Le build génère les 193 pages statiques via `generateStaticParams`. Les données pays sont figées dans le dépôt ; seul l'extrait Wikipédia est récupéré au build, avec repli silencieux si l'API est indisponible.
+> **Note** : le build génère les 193 pages statiques via `generateStaticParams`. Les données pays sont figées dans le dépôt ; seul l'extrait Wikipédia est récupéré au build, avec repli silencieux si l'API est indisponible.
 
 **Régénérer les données pays**
 
@@ -172,10 +176,10 @@ npm test           # vitest run
 npm run test:watch # vitest (mode watch)
 ```
 
-Les tests couvrent les fonctions critiques : moteur de recherche (fuzzy matching, insensibilité aux accents et aux noms français), formatage des coordonnées, vérificateur de contraste WCAG 2.1, et résolution d'ambiances pays.
+Les tests couvrent les fonctions critiques : moteur de recherche (fuzzy matching, insensibilité aux accents et aux noms français), sélection d'un pays sur le globe (inversion de projection, point-in-polygon), formatage des coordonnées, vérificateur de contraste WCAG 2.1 et résolution d'ambiances pays.
 
 ---
 
 ## Licence
 
-[MIT](./LICENSE) — BADAROU Mouwafic, 2026
+[MIT](./LICENSE), BADAROU Mouwafic, 2026
