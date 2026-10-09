@@ -82,6 +82,13 @@ function currenciesFr(currencies) {
   return out;
 }
 
+// Corrections des libellés français de mledoze affichés en titre de fiche :
+// parenthèses d'abréviation ou d'exonyme anglais, gentilé anglais.
+const NAME_FR_OVERRIDES = {
+  COD: { nameFr: 'RD Congo' },
+  PLW: { nameFr: 'Palaos', officialNameFr: 'République des Palaos', demonymFr: 'Palaosien' },
+};
+
 const REGION_FR = {
   Africa: 'Afrique',
   Americas: 'Amériques',
@@ -447,6 +454,7 @@ function generate() {
         timezones: p.timezones || [],
         primaryTimezone: primaryTimezone(p.cca3, cca2),
         governmentFr: govMap[p.cca3] || null,
+        ...NAME_FR_OVERRIDES[p.cca3],
         independent: true,
         colors: p.colors,
       },

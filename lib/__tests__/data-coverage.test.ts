@@ -50,6 +50,10 @@ describe('couverture des données pays', () => {
     expect(names.filter((name) => english.test(name))).toEqual([]);
   });
 
+  it('donne des noms affichables en titre, sans parenthèse ni abréviation', () => {
+    expect(countries.filter((c) => /[().]/.test(c.nameFr)).map((c) => c.nameFr)).toEqual([]);
+  });
+
   it('couvre le Soudan du Sud sur le globe, distinct du Soudan', () => {
     expect(findCountryAtLonLat(31.58, 4.85, geo.features)).toBe('SSD'); // Djouba
     expect(findCountryAtLonLat(32.53, 15.5, geo.features)).toBe('SDN'); // Khartoum
