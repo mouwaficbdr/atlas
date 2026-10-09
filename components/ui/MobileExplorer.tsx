@@ -11,9 +11,11 @@ interface MobileExplorerProps {
   isOpen: boolean;
   onClose: () => void;
   onSelect: (cca3: string) => void;
+  /** Continent sur lequel ouvrir l'index (sans clavier), depuis le tiroir de l'accueil. */
+  initialRegion?: string | null;
 }
 
-export default function MobileExplorer({ countries, isOpen, onClose, onSelect }: MobileExplorerProps) {
+export default function MobileExplorer({ countries, isOpen, onClose, onSelect, initialRegion = null }: MobileExplorerProps) {
   const [query, setQuery] = useState('');
   const overlayRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -59,12 +61,15 @@ export default function MobileExplorer({ countries, isOpen, onClose, onSelect }:
           { y: '0%', duration: 0.6, ease: 'power3.out' }
         );
       }
-      setTimeout(() => inputRef.current?.focus(), 100);
+      setTimeout(() => {
+        if (initialRegion) document.getElementById(`mx-region-${initialRegion}`)?.scrollIntoView();
+        else inputRef.current?.focus();
+      }, 100);
     } else {
       document.body.style.overflow = '';
       setQuery(''); // Reset query when closed
     }
-  }, [isOpen]);
+  }, [isOpen, initialRegion]);
 
   const handleClose = () => {
     if (overlayRef.current && contentRef.current) {
@@ -211,7 +216,7 @@ export default function MobileExplorer({ countries, isOpen, onClose, onSelect }:
             // Render Index Grouped by Continent
             <div>
               {groupedCountries.regions.map(region => (
-                <div key={region} style={{ marginBottom: '0' }}>
+                <div key={region} id={`mx-region-${region}`} style={{ marginBottom: '0' }}>
                   <h2 style={{
                     position: 'sticky',
                     top: 0,

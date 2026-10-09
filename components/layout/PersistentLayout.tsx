@@ -6,8 +6,8 @@ import dynamic from 'next/dynamic';
 import LoadingScreen from '@/components/ui/LoadingScreen';
 import SearchPalette from '@/components/ui/SearchPalette';
 import Navigation from '@/components/layout/Navigation';
-import DesktopExperienceSuggestion from '@/components/ui/DesktopExperienceSuggestion';
 import MobileExplorer from '@/components/ui/MobileExplorer';
+import MobileHomeDock from '@/components/ui/MobileHomeDock';
 import GlobeOnboarding from '@/components/ui/GlobeOnboarding';
 import GithubBadge from '@/components/ui/GithubBadge';
 import type { CountryData, LoadingState } from '@/lib/types';
@@ -43,6 +43,14 @@ export default function PersistentLayout({
   const pathname = usePathname();
   const isMobile = useIsMobile();
   const [isMobileExplorerOpen, setIsMobileExplorerOpen] = useState(false);
+  const [explorerRegion, setExplorerRegion] = useState<string | null>(null);
+  // Appareil à ménager (économie de données, peu de mémoire) : orbe statique
+  // au lieu du globe 3D. Partout ailleurs, mobile compris, le vrai globe.
+  const [lowPower, setLowPower] = useState(false);
+  useEffect(() => {
+    const nav = navigator as Navigator & { connection?: { saveData?: boolean }; deviceMemory?: number };
+    setLowPower(!!nav.connection?.saveData || (nav.deviceMemory !== undefined && nav.deviceMemory < 3));
+  }, []);
   const [countries, setCountries] = useState<CountryData[]>([]);
   const [loadingState, setLoadingState] = useState<LoadingState>({
     progress: 0,
@@ -148,9 +156,16 @@ export default function PersistentLayout({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onGlobeScreen, loadingState.phase, setIntroPhase]);
 
+  // Sur l'accueil mobile, toucher un pays (ou le choisir dans l'index) ouvre
+  // son aperçu dans le tiroir : le survol n'existe pas au doigt.
+  const setPreviewCca3 = useAppStore((state) => state.setPreviewCca3);
   const handleCountrySelect = (cca3: string) => {
-    router.push(`/pays/${cca3.toLowerCase()}`);
+    if (isMobile && pathname === '/') setPreviewCca3(cca3);
+    else router.push(`/pays/${cca3.toLowerCase()}`);
   };
+  useEffect(() => {
+    setPreviewCca3(null);
+  }, [pathname, setPreviewCca3]);
 
   // Routes hors univers (404, erreur) : OffMapScreen se suffit à lui-même, on
   // ne monte ni le globe, ni l'écran de chargement, ni la navigation.
@@ -176,7 +191,7 @@ export default function PersistentLayout({
           transition: 'transform 1.2s var(--ease-signature)',
         }}
       >
-        {countries.length > 0 && !isMobile && (
+        {countries.length > 0 && !lowPower && (
           <GlobeScene
             countries={countries}
             onCountrySelect={handleCountrySelect}
@@ -186,7 +201,7 @@ export default function PersistentLayout({
             selectedCountryCca3={selectedCountryCca3}
           />
         )}
-        {countries.length > 0 && isMobile && (
+        {countries.length > 0 && lowPower && (
           <div style={{
             width: '100%',
             height: '100%',
@@ -197,7 +212,7 @@ export default function PersistentLayout({
             background: 'radial-gradient(circle at center, #1a1a2e 0%, #0a0a14 100%)',
             color: 'var(--text-muted)'
           }}>
-            {/* Orbe lumineux : substitut statique du globe sur mobile */}
+            {/* Orbe lumineux : substitut statique du globe sur appareil à ménager */}
             <div style={{
               width: '60vw',
               height: '60vw',
@@ -220,58 +235,7 @@ export default function PersistentLayout({
               </span>
             </div>
 
-            {/* CTA Explorer + GitHub (page d'accueil uniquement) */}
-            {pathname === '/' && (
-              <>
-                <button
-                  onClick={() => setIsMobileExplorerOpen(true)}
-                  style={{
-                    marginTop: '1rem',
-                    background: 'transparent',
-                    border: '1px solid rgba(255,255,255,0.2)',
-                    color: '#fff',
-                    padding: '1rem 2.5rem',
-                    borderRadius: '2rem',
-                    fontFamily: 'var(--font-jetbrains-mono), monospace',
-                    fontSize: '0.8rem',
-                    letterSpacing: '0.15em',
-                    textTransform: 'uppercase',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease',
-                    boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
-                  }}
-                >
-                  Explorer l&apos;Index
-                </button>
-
-                {/* Lien GitHub, discret et contextuel */}
-                <a
-                  href="https://github.com/mouwaficbdr/atlas"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    marginTop: '1.5rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    color: 'rgba(255,255,255,0.3)',
-                    textDecoration: 'none',
-                    fontFamily: 'var(--font-jetbrains-mono), monospace',
-                    fontSize: '0.65rem',
-                    letterSpacing: '0.2em',
-                    textTransform: 'uppercase',
-                    transition: 'color 0.2s ease',
-                  }}
-                >
-                  <svg height="14" viewBox="0 0 16 16" fill="currentColor" width="14">
-                    <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27-.01-1.13-.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
-                  </svg>
-                  Open Source
-                </a>
-              </>
-            )}
-
-            {/* NOTE: Force le LoadingScreen à se terminer sur mobile où le GlobeScene n'est pas monté */}
+            {/* Repli sans globe : rien ne signalera la fin du chargement, on la force. */}
             <MobileFallbackLoader
               loadingProgress={loadingState.progress}
               onComplete={() => {
@@ -315,8 +279,6 @@ export default function PersistentLayout({
         <SearchPalette countries={countries} onSelect={handleCountrySelect} />
       )}
 
-      {/* Suggestion Desktop pour Mobile */}
-      <DesktopExperienceSuggestion />
 
       {/* Mobile Navigation Index */}
       {countries.length > 0 && isMobile && (
@@ -325,6 +287,18 @@ export default function PersistentLayout({
           isOpen={isMobileExplorerOpen}
           onClose={() => setIsMobileExplorerOpen(false)}
           onSelect={handleCountrySelect}
+          initialRegion={explorerRegion}
+        />
+      )}
+
+      {/* Tiroir de l'accueil mobile, une fois l'arrivée sur le globe jouée. */}
+      {countries.length > 0 && isMobile && pathname === '/' && loadingState.phase === 'complete' && (
+        <MobileHomeDock
+          countries={countries}
+          onOpenExplorer={(region) => {
+            setExplorerRegion(region);
+            setIsMobileExplorerOpen(true);
+          }}
         />
       )}
 

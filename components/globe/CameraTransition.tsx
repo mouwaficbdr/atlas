@@ -126,5 +126,27 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
     }
   }, [selectedCountryCca3, cameraMode, camera, controls, countries, invalidate, introPhase, setIntroPhase, countryView]);
 
+  // Accueil mobile : le pays en aperçu (touché, choisi dans l'index ou tiré
+  // au hasard) vient face à l'utilisateur, à distance inchangée.
+  const previewCca3 = useAppStore((state) => state.previewCca3);
+  useEffect(() => {
+    if (cameraMode !== 'globe' || introPhase !== 'done' || !previewCca3) return;
+    const country = countries.find((c) => c.cca3 === previewCca3);
+    if (!country) return;
+    const [lon, lat] = country.centroid;
+    const target = new THREE.Vector3(...lonLatToCartesian(lon, lat)).multiplyScalar(camera.position.length());
+    const tween = gsap.to(camera.position, {
+      x: target.x,
+      y: target.y,
+      z: target.z,
+      duration: 1.2,
+      ease: 'power3.inOut',
+      onUpdate: () => invalidate(),
+    });
+    return () => {
+      tween.kill();
+    };
+  }, [previewCca3, cameraMode, introPhase, countries, camera, invalidate]);
+
   return null;
 }

@@ -14,6 +14,9 @@ interface AppState {
    * ('flying'), puis contrôles rendus à l'utilisateur ('done').
    */
   introPhase: 'waiting' | 'flying' | 'done';
+  /** Accueil mobile : pays touché sur le globe, montré en aperçu. */
+  previewCca3: string | null;
+  setPreviewCca3: (cca3: string | null) => void;
   /** Fiche pays : voisin survolé, allumé sur le globe. */
   focusCca3: string | null;
   /** Fiche pays : cadrage serré sur le pays, ou large sur ses voisins. */
@@ -31,6 +34,8 @@ export const useAppStore = create<AppState>((set) => ({
   isSearchOpen: false,
   isOffMap: false,
   introPhase: 'waiting',
+  previewCca3: null,
+  setPreviewCca3: (cca3) => set({ previewCca3: cca3 }),
   focusCca3: null,
   countryView: 'close',
   setHoveredCountry: (cca3) => set({ hoveredCountryCca3: cca3 }),

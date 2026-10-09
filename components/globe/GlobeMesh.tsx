@@ -34,6 +34,7 @@ export default function GlobeMesh({
   selectedCca3 = null,
 }: GlobeMeshProps) {
   const focusCca3 = useAppStore((state) => state.focusCca3);
+  const previewCca3 = useAppStore((state) => state.previewCca3);
   const [features, setFeatures] = useState<GeoJSONFeature[]>([]);
   const [hoveredCca3, setHoveredCca3] = useState<string | null>(null);
   const setHoveredCountry = useAppStore((state) => state.setHoveredCountry);
@@ -45,8 +46,10 @@ export default function GlobeMesh({
       .catch(console.error);
   }, []);
 
-  const hoveredFeature = hoveredCca3
-    ? features.find((f) => f.properties.cca3 === hoveredCca3)
+  // Survolé à la souris, ou en aperçu sur l'accueil mobile.
+  const highlightedCca3 = hoveredCca3 ?? previewCca3;
+  const hoveredFeature = highlightedCca3
+    ? features.find((f) => f.properties.cca3 === highlightedCca3)
     : null;
 
   const hoveredCountry = hoveredCca3
