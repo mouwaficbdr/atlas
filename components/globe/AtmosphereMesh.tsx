@@ -1,7 +1,7 @@
 /**
- * AtmosphereMesh : halo atmosphérique autour du globe. Sphère de rayon
- * 1,1× rendue par ses faces arrière, matériau additif ; le dégradé (fort au
- * ras du limbe, nul vers l'espace) est calculé dans atmosphere.frag.glsl.
+ * AtmosphereMesh : coquille d'atmosphère, rendue en diffusion de Rayleigh
+ * intégrée le long du rayon de vue (atmosphere.frag.glsl). Couvre le disque
+ * terrestre et un fin anneau autour ; matériau additif.
  */
 
 import { useMemo } from "react";
@@ -16,9 +16,9 @@ const vertexShader = typeof vertexShaderRaw === 'string' ? vertexShaderRaw : (ve
 const fragmentShader = typeof fragmentShaderRaw === 'string' ? fragmentShaderRaw : (fragmentShaderRaw as { default: string }).default;
 
 const GLOBE_RADIUS = 1.0;
-// Couplé au seuil 0.42 de atmosphere.frag.glsl (sqrt(1.1² - 1) / 1.1).
-const ATMOSPHERE_RADIUS = GLOBE_RADIUS * 1.1;
-const SPHERE_SEGMENTS = 64;
+// Doit rester égal à ATMOSPHERE_RADIUS de atmosphere.frag.glsl.
+const ATMOSPHERE_RADIUS = GLOBE_RADIUS * 1.045;
+const SPHERE_SEGMENTS = 96;
 
 export default function AtmosphereMesh() {
   const shaderMaterial = useMemo(
@@ -29,7 +29,7 @@ export default function AtmosphereMesh() {
         uniforms: {
           uSunDirection: { value: SUN_DIRECTION },
         },
-        side: THREE.BackSide,
+        side: THREE.FrontSide,
         blending: THREE.AdditiveBlending,
         transparent: true,
         depthWrite: false,

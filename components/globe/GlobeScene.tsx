@@ -110,6 +110,10 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
       >
         {/* Un seul soleil, faible ambiance : le terminateur jour/nuit doit
             rester lisible (même direction que les shaders, lib/globe/sun.ts). */}
+        {/* Fond opaque (même teinte que la page) : sur un canvas transparent,
+            un shader additif qui écrit un alpha rend ses pixels opaques et
+            masque le fond de page, d'où un anneau sombre autour du globe. */}
+        <color attach="background" args={['#0a0a14']} />
         <ambientLight intensity={0.12} />
         <directionalLight position={SUN_POSITION} intensity={2.6} />
 
