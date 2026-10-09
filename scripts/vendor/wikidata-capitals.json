@@ -1,0 +1,4162 @@
+{
+  "head" : {
+    "vars" : [ "iso3", "capLabel", "coord" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "DEU"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(13.383333333 52.516666666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Berlin"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MCO"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(7.42 43.731111111)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Monaco"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "VAT"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(12.453 41.904)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Vatican"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PSE"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(35.234156 31.776679)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Jérusalem"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BGD"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(90.394444444 23.728888888)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Dacca"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PAK"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(73.036944444 33.698888888)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Islamabad"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PHL"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(120.977222222 14.595833333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Manille"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MEX"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-99.13589 19.353773)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Mexico"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ARE"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(54.396944444 24.451111111)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Abou Dabi"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "VNM"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(105.84117 21.0245)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Hanoï"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "THA"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(100.516666666 13.75)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Bangkok"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TWN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(121.5625 25.0375)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Taipei"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SSD"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(31.5825 4.853888888)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Djouba"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NPL"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(85.32 27.71)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Katmandou"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TUN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(10.18 36.800833333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Tunis"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "DJI"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(43.148055555 11.595)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Djibouti"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ERI"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(38.916666666 15.333333333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Asmara"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SAU"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(46.71 24.65)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Riyad"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MLI"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-7.992222222 12.645833333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Bamako"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "YUG"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(20.456944444 44.817777777)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Belgrade"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SYR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(36.292 33.513)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Damas"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SYR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(36.291944444 33.513055555)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Damas"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BFA"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-1.5275 12.368611111)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Ouagadougou"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TGO"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(1.215833333 6.13)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Lomé"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BEN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(2.616666666 6.483333333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Porto-Novo"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "OMN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(58.592222222 23.613888888)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Mascate"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CAF"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(18.562833333 4.37325)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Bangui"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "COD"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(15.311944444 -4.321944444)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Kinshasa"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "COG"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(15.271111111 -4.269444444)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Brazzaville"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "QAT"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(51.529444444 25.286111111)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Doha"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TZA"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(35.746 -6.1835)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Dodoma"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ZMB"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(28.283333333 -15.416666666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Lusaka"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AGO"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(13.234444444 -8.838333333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Luanda"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "COM"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(43.253611111 -11.703611111)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Moroni"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BWA"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(25.908611111 -24.656944444)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Gaborone"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ZWE"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(31.052222222 -17.829166666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Harare"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AFG"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(69.165833333 34.532777777)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Kaboul"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "KOR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(126.99 37.56)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Séoul"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BTN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(89.63367 27.47135)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Thimphou"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BRN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(114.916666666 4.916666666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Bandar Seri Begawan"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TJK"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(68.786388888 38.573055555)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Douchanbé"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "FLK"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-57.849556 -51.693861)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Port Stanley"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IMN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-4.4775 54.15)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Douglas"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TKM"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(58.383333333 37.95)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Achgabat"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LKA"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(79.860555555 6.926666666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Colombo"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LKA"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(79.916388888 6.9)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Sri Jayawardenapura"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BEN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(2.416666666 6.366666666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Cotonou"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BDI"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(29.925 -3.428333333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Gitega"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MYS"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(101.69 2.93)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Putrajaya"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GNQ"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(10.822222222 1.591666666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Ciudad de la Paz"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NIC"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-86.273725 12.154680555)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Managua"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "USA"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-77.036666666 38.895)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Washington"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "DEU"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(13.383333333 52.516666666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Berlin"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "DEU"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(13.383333333 52.516666666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Berlin"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GBR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-0.1275 51.507222222)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Londres"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "FRA"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(2.352222222 48.856666666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Paris"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "FXX"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(2.352222222 48.856666666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Paris"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GRL"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-51.733333333 64.175)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Nuuk"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BEL"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(4.351666666 50.846666666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Bruxelles"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "UZB"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(69.279722222 41.311111111)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Tachkent"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SGP"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(103.8 1.3)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Singapour"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MKD"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(21.431666666 41.996111111)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Skopje"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SVN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(14.506111111 46.051388888)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Ljubljana"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BGR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(23.321726 42.697886)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Sofia"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NOR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(10.738888888 59.913333333)"
+      },
+      "capLabel" : {
+        "type" : "literal",
+        "value" : "Q585"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "RUS"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(37.6175 55.750555555)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Moscou"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NLD"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(4.883333333 52.366666666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Amsterdam"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CHN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(116.407526 39.90403)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Pékin"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GEO"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(44.7925 41.7225)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Tbilissi"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CZE"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(14.421388888 50.0875)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Prague"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GIB"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-5.35 36.14)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Gibraltar"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "HRV"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(15.977222222 45.813055555)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Zagreb"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "JPN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(139.691666666 35.689444444)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Tokyo"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "KAZ"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(71.433333333 51.133333333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Astana"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CUB"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-82.358888888 23.136666666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "La Havane"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IRL"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-6.260277777 53.349722222)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Dublin"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ISL"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-21.935 64.1475)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Reykjavik"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "EST"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(24.745 59.437222222)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Tallinn"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LVA"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(24.106944444 56.9475)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Riga"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SVK"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(17.1093063 48.1516988)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Bratislava"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "HUN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(19.040833333 47.498333333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Budapest"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LUX"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(6.13 49.611388888)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Luxembourg"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SMR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(12.44845 43.932011111)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Saint-Marin"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AND"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(1.522222222 42.507222222)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Andorre-la-Vieille"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "UKR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(30.523611111 50.45)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Kiev"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CAN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-75.695 45.424722222)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Ottawa"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BLR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(27.561837 53.902246)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Minsk"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ESP"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-3.703333333 40.416944444)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Madrid"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BRA"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-47.882777777 -15.793888888)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Brasilia"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CHL"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-70.65 -33.4375)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Santiago"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BLZ"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-88.7675 17.25)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Belmopan"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "DZA"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(3.058611111 36.776388888)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Alger"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AFI"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(43.148055555 11.595)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Djibouti"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ETH"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(38.7525 9.035833333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Addis-Abeba"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IDN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(106.826944444 -6.175277777)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Jakarta"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GHA"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-0.1969 5.55602)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Accra"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CYP"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(33.365 35.1725)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Nicosie"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "KEN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(36.817222222 -1.286388888)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Nairobi"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ZAF"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(28.188055555 -25.746388888)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Pretoria"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ZAF"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(18.423888888 -33.925277777)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Le Cap"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AZE"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(49.835183333 40.366655555)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Bakou"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NCL"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(166.45 -22.266666666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Nouméa"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BIH"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(18.413055555 43.856388888)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Sarajevo"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ROU"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(26.097777777 44.413361111)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Bucarest"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ALB"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(19.818055555 41.328333333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Tirana"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MDA"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(28.835277777 47.022777777)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Chișinău"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MNE"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(19.262777777 42.441388888)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Podgorica"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MLT"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(14.5125 35.897777777)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "La Valette"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "XKS"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(21.166666666 42.666666666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Pristina"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SXM"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-63.043333333 18.024166666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Philipsburg"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NFK"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(167.966666666 -29.05)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Kingston"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SHN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-5.717916666 -15.925138888)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Jamestown"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CXR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(105.678055555 -10.421666666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Flying Fish Cove"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BMU"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-64.783055555 32.295)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Hamilton"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GUM"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(144.75 13.483333333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Hagåtña"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MSR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-62.215838888 16.706416666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Plymouth"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AIA"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-63.051666666 18.220833333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "The Valley"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MSR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-62.210555555 16.792777777)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Brades"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BLM"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-62.849166666 17.898611111)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Gustavia"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TCA"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-71.141388888 21.460277777)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Cockburn Town"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BRB"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-59.616666666 13.0975)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Bridgetown"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NLD"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(4.31 52.08)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "La Haye"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ZAF"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(26.216666666 -29.1)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Bloemfontein"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PRI"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-66.116666666 18.465277777)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "San Juan"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "REU"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(55.448055555 -20.878888888)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Saint-Denis"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ASM"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-170.700555555 -14.279444444)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Pago Pago"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PCI"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(145.75 15.183333333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Saïpan"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "VIR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-64.95 18.35)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Charlotte-Amélie"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "DDR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(13.404444444 52.518611111)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Berlin-Est"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MTQ"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-61.066666666 14.6)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Fort-de-France"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SWZ"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(31.206411 -26.44648)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Lobamba"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PYF"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-149.568888888 -17.539722222)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Papeete"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ABW"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-70.035833333 12.518611111)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Oranjestad"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MYT"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(45.231666666 -12.781388888)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Mamoudzou"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ANT"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-68.935 12.108)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Willemstad"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CUW"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-68.935 12.108)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Willemstad"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PSE"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(35.201666666 31.896944444)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Ramallah"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GLP"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-61.732777777 15.996944444)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Basse-Terre"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "COK"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-159.771 -21.207)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Avarua"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GGY"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-2.55194 49.46)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Saint-Pierre-Port"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "VGB"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-64.616666666 18.433333333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Road Town"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MAF"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-63.084722222 18.066666666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Marigot"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PSE"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(35.23388 31.78336)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Jérusalem-Est"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ASC"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-14.411666666 -7.928611111)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Georgetown"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ATF"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(70.216666666 -49.35)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Port-aux-Français"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MAC"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(113.53941667 22.19327778)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Municipalité de Macao"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ATB"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-68.128333 -67.566667)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "base antarctique Rothera"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MNP"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(145.7545 15.21233)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Saïpan"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IDN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(116.708833333 -0.972972222)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Nusantara"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SDN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(32.52654 15.60308)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Khartoum"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SOM"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(45.341944444 2.039166666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Mogadiscio"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MAR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-6.841388888 34.021111111)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Rabat"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LBY"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(13.1875 32.8875)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Tripoli"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NER"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(2.1175 13.515)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Niamey"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MRT"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-15.9785 18.08581)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Nouakchott"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SEN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-17.432 14.672555555)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Dakar"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GMB"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-16.5775 13.453055555)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Banjul"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GIN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-13.712222222 9.509166666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Conakry"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GNB"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-15.583333333 11.86)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Bissau"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LBR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-10.804722222 6.310555555)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Monrovia"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CPV"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-23.509155555 14.917719444)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Praia"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CIV"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-5.274166666 6.816111111)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Yamoussoukro"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SLE"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-13.235555555 8.487222222)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Freetown"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NGA"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(7.491388888 9.055555555)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Abuja"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CMR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(11.518055555 3.857777777)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Yaoundé"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GAB"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(9.440277777 0.407777777)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Libreville"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "RWA"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(30.115 -1.9525)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Kigali"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MWI"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(33.768055555 -13.986388888)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Lilongwe"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MOZ"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(32.573333333 -25.968888888)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Maputo"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "UGA"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(32.581111111 0.313611111)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Kampala"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SWZ"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(31.133333333 -26.316666666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Mbabane"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LSO"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(27.48 -29.31)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Maseru"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MDG"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(47.525 -18.91)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Antananarivo"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MUS"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(57.498888888 -20.161944444)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Port-Louis"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "STP"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(6.728333333 0.3375)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "São Tomé"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NAM"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(17.083611111 -22.57)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Windhoek"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SYC"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(55.454444444 -4.623611111)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Victoria"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GEL"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(172.966666666 1.333333333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Tarawa-Sud"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CHE"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(7.44743 46.94798)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Berne"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "EGY"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(31.235833333 30.044444444)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Le Caire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LTU"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(25.28 54.687222222)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Vilnius"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ITA"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(12.482777777 41.893055555)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Rome"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "POL"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(21.011111111 52.23)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Varsovie"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PRT"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-9.139016 38.708042)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Lisbonne"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IND"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(77.208888888 28.613888888)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "New Delhi"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CSK"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(14.421388888 50.0875)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Prague"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ISR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(35.234156 31.776679)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Jérusalem"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "URY"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-56.191311111 -34.905916666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Montevideo"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ARG"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-58.381944444 -34.599722222)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Buenos Aires"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BOL"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-68.133333333 -16.495833333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "La Paz"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GRC"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(23.728055555 37.984166666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Athènes"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GRC"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(23.728055555 37.984166666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Athènes"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IRQ"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(44.366111111 33.315277777)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Bagdad"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "VEN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-66.914444444 10.506111111)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Caracas"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GTM"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-90.513333333 14.641666666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Guatemala"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AUT"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(16.3725 48.208333333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Vienne"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "DNK"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(12.568888888 55.676111111)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Copenhague"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SWE"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(18.068611111 59.329444444)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Stockholm"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "FIN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(24.9375 60.170833333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Helsinki"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LIE"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(9.522222222 47.140555555)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Vaduz"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "KHM"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(104.921027777 11.569583333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Phnom Penh"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MYS"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(101.695277777 3.147777777)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Kuala Lumpur"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ARM"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(44.514444444 40.181388888)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Erevan"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BHS"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-77.338611111 25.078055555)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Nassau"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "YEM"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(44.2 15.35)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Sanaa"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "COL"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-74.08175 4.60971)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Bogota"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PER"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-77.0375 -12.06)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Lima"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ECU"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-78.5125 -0.22)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Quito"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BOL"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-65.26 -19.0475)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Sucre"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PRY"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-57.634444444 -25.28)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Asuncion"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SUR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-55.166666666 5.866666666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Paramaribo"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CRI"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-84.079613888 9.932738888)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "San José"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SLV"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-89.191155555 13.697597222)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "San Salvador"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AUS"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(149.126944444 -35.293055555)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Canberra"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "HND"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-87.204705555 14.105783333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Tegucigalpa"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PAN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-79.534722222 8.971111111)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Panama"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IRN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(51.389722222 35.688888888)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Téhéran"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TUR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(32.83869 39.93576)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Ankara"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TCD"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(15.05 12.11)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "N'Djaména"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SCG"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(20.456944444 44.817777777)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Belgrade"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SRB"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(20.456944444 44.817777777)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Belgrade"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "YUG"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(20.456944444 44.817777777)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Belgrade"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "HVO"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-1.5275 12.368611111)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Ouagadougou"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "DHY"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(2.616666666 6.483333333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Porto-Novo"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "JOR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(35.926084 31.930983)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Amman"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "JOR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(35.933333333 31.95)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Amman"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LBN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(35.513055555 33.886944444)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Beyrouth"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BHR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(50.583333333 26.216666666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Manama"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TLS"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(125.578333333 -8.553611111)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Dili"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LAO"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(102.63 17.98)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Vientiane"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MDV"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(73.508333333 4.175)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Malé"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "KGZ"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(74.566666666 42.866666666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Bichkek"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "FRO"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-6.77135 62.00981)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Tórshavn"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GUY"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-58.150833333 6.805833333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Georgetown"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MHL"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(171.3802 7.0918)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Majuro"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PRK"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(125.7475 39.016666666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Pyongyang"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MNG"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(106.905515 47.921357)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Oulan-Bator"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NZL"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(174.777222222 -41.288888888)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Wellington"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NIU"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-169.921 -19.056)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Alofi"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "WLF"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-176.1737 -13.2827)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Mata Utu"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NRU"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(166.920867 -0.5477)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Yaren"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ISR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(34.78 32.08)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Tel Aviv"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TUV"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(179.117361111 -8.504777777)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Funafuti"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "HTI"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-72.340277777 18.546944444)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Port-au-Prince"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "JAM"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-76.793055555 17.971388888)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Kingston"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "DOM"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-69.936111111 18.4625)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Saint-Domingue"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "KWT"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(47.98 29.375)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Koweït"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "WSM"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-171.833333333 -13.833333333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Apia"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ATG"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-61.844722222 17.121111111)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Saint John's"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "DMA"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-61.383333333 15.3)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Roseau"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PNG"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(147.149444444 -9.478888888)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Port Moresby"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MMR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(96.115 19.7475)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Naypyidaw"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "VUT"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(168.316667 -17.73333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Port-Vila"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NHB"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(168.316667 -17.73333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Port-Vila"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "FJI"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(178.433333333 -18.133333333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Suva"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TON"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-175.201808 -21.1343401)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Nukuʻalofa"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TTO"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-61.516666666 10.666666666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Port-d'Espagne"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SLB"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(159.95 -9.433333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Honiara"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "KNA"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-62.734166666 17.298333333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Basseterre"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "VCT"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-61.22742 13.15527)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Kingstown"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GRD"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-61.753055555 12.0525)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Saint-Georges"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LCA"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-60.989444444 14.010833333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Castries"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "FSM"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(158.185 6.917777777)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Palikir"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GUF"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-52.335 4.938611111)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Cayenne"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PCN"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-130.1 -25.066666666)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Adamstown"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ALA"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(19.94444444 60.09861111)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Mariehamn"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CCK"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(96.828333333 -12.186944444)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "West Island"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "KIR"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(172.966666666 1.333333333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Tarawa-Sud"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "YEM"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(45.033333333 12.8)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Aden"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "JEY"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-2.11 49.185833333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Saint-Hélier"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CYM"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-81.381666666 19.296388888)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "George Town"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IOT"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(72.411111111 -7.313333333)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Diego Garcia"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SGS"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-36.508028 -54.281472)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Grytviken"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SPM"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-56.177777777 46.777777777)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Saint-Pierre"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SGS"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-36.494181949 -54.283291411)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "King Edward Point"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SGS"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-36.48714 -54.282264)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "King Edward Point"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PLW"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(134.624167 7.500556)"
+      },
+      "capLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Ngerulmud"
+      }
+    } ]
+  }
+}

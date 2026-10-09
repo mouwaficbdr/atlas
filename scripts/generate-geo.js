@@ -6,6 +6,7 @@
  *  - scripts/vendor/gov-overrides.json      (corrections manuelles)
  *  - scripts/vendor/worldbank-population.json (population, Banque mondiale)
  *  - scripts/vendor/koppen.json              (climats, voir compute-koppen.mjs)
+ *  - scripts/vendor/wikidata-capitals.json   (coordonnées des capitales, P36/P625)
  *  - countries-and-timezones                (fuseaux IANA)
  *
  * Aucun appel réseau : rafraîchir les sources avec scripts/fetch-vendor-data.js.
@@ -129,6 +130,15 @@ const SUBREGION_FR = {
 
 // Nom français de la capitale, uniquement quand il diffère de l'anglais.
 const CAPITAL_FR = {
+  'Port of Spain': "Port-d'Espagne",
+  'City of San Marino': 'Saint-Marin',
+  'Ulan Bator': 'Oulan-Bator',
+  'South Tarawa': 'Tarawa-Sud',
+  "St. George's": 'Saint-Georges',
+  Thimphu: 'Thimphou',
+  Dhaka: 'Dacca',
+  'Sri Jayawardenepura Kotte': 'Sri Jayawardenapura Kotte',
+  "Sana'a": 'Sanaa',
   Beijing: 'Pékin',
   Moscow: 'Moscou',
   Warsaw: 'Varsovie',
@@ -395,6 +405,35 @@ function round(n) {
 
 // ---------------------------------------------------------------------------
 
+const normalizeName = (name) =>
+  name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z]/g, '');
+
+/**
+ * Coordonnées [lon, lat] de la capitale, par pays. Plusieurs capitales
+ * (Afrique du Sud, Bolivie, Pays-Bas…) : celle dont le nom correspond à
+ * capitalFr, à défaut celle qui en partage le début, à défaut la première.
+ */
+function buildCapitalMap() {
+  const byIso = new Map();
+  for (const b of loadVendor('wikidata-capitals.json').results.bindings) {
+    const match = b.coord.value.match(/Point\(([-\d.]+) ([-\d.]+)\)/);
+    if (!match) continue;
+    const list = byIso.get(b.iso3.value) || [];
+    list.push({ name: normalizeName(b.capLabel.value), lonLat: [Number(match[1]), Number(match[2])] });
+    byIso.set(b.iso3.value, list);
+  }
+  return (cca3, capitalFr) => {
+    const list = byIso.get(cca3);
+    if (!list) return null;
+    const target = normalizeName(capitalFr);
+    const pick =
+      list.find((c) => c.name === target) ||
+      list.find((c) => c.name.slice(0, 4) === target.slice(0, 4)) ||
+      list[0];
+    return pick.lonLat.map(round);
+  };
+}
+
 function generate() {
   const geo = JSON.parse(fs.readFileSync(DATA_PATH, 'utf-8'));
   const mledoze = loadVendor('mledoze-countries.json');
@@ -405,6 +444,7 @@ function generate() {
   const govMap = buildGovMap();
   const worldBankPop = loadVendor('worldbank-population.json');
   const koppen = loadVendor('koppen.json');
+  const capitals = buildCapitalMap();
 
   const out = [];
   let skipped = 0;
@@ -440,6 +480,7 @@ function generate() {
         demonymFr: (demonym && demonym.m) || '',
         capital: p.capital && p.capital.length ? p.capital : m.capital || [],
         capitalFr: CAPITAL_FR[capitalEn] || capitalEn,
+        capitalLonLat: capitals(p.cca3, CAPITAL_FR[capitalEn] || capitalEn),
         region: p.region,
         regionFr: REGION_FR[p.region] || p.region,
         subregion: p.subregion,

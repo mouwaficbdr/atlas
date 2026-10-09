@@ -24,6 +24,8 @@ export interface CountryData {
   capital: string[];
   /** Nom de la capitale en français (repli sur l'anglais). */
   capitalFr: string;
+  /** Coordonnées de la capitale, ordre GeoJSON [lon, lat] (Wikidata). */
+  capitalLonLat: [number, number] | null;
   region: string;
   /** Région en français. */
   regionFr: string;

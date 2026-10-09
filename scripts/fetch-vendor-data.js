@@ -9,6 +9,7 @@
  *  - mledoze/countries : noms traduits, gentilés, idd, tld, statut souverain
  *  - Wikidata (SPARQL) : forme de gouvernement (P122), libellé français
  *  - Banque mondiale (SP.POP.TOTL) : population, dernière année publiée
+ *  - Wikidata (SPARQL) : coordonnées des capitales en vigueur (P36, P625)
  */
 
 const fs = require('fs');
@@ -21,6 +22,14 @@ const MLEDOZE_URL =
 
 const WORLDBANK_POP_URL =
   'https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&mrv=1&per_page=400';
+
+const CAPITALS_QUERY = `SELECT ?iso3 ?capLabel ?coord WHERE {
+  ?c wdt:P298 ?iso3 .
+  ?c p:P36 ?st . ?st ps:P36 ?cap .
+  FILTER NOT EXISTS { ?st pq:P582 ?end }
+  ?cap wdt:P625 ?coord .
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "fr". }
+}`;
 
 const WIKIDATA_QUERY = `SELECT ?iso3 ?govLabel WHERE {
   ?c wdt:P298 ?iso3 .
@@ -51,6 +60,14 @@ async function main() {
     JSON.stringify(wikidata),
   );
   console.log(`${wikidata.results.bindings.length} lignes`);
+
+  process.stdout.write('Wikidata, capitales... ');
+  const capitals = await fetch(
+    'https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(CAPITALS_QUERY),
+    { headers: { Accept: 'application/sparql-results+json' } },
+  ).then((r) => r.json());
+  fs.writeFileSync(path.join(VENDOR_DIR, 'wikidata-capitals.json'), JSON.stringify(capitals));
+  console.log(`${capitals.results.bindings.length} lignes`);
 
   process.stdout.write('Banque mondiale, population... ');
   const [, rows] = await fetch(WORLDBANK_POP_URL).then((r) => r.json());

@@ -14,6 +14,7 @@ const countries = geo.features.map((f) => f.properties);
 const REQUIRED: Record<string, (c: (typeof countries)[number]) => boolean> = {
   nameFr: (c) => !!c.nameFr,
   capitalFr: (c) => !!c.capitalFr,
+  capitalLonLat: (c) => Array.isArray(c.capitalLonLat),
   regionFr: (c) => !!c.regionFr,
   subregionFr: (c) => !!c.subregionFr,
   demonymFr: (c) => !!c.demonymFr,
