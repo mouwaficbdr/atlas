@@ -5,7 +5,7 @@ import * as THREE from 'three';
 import { Canvas, useThree } from '@react-three/fiber';
 import type { CountryData } from '@/lib/types';
 import { SUN_DIRECTION, homeViewDirection, updateSunDirection } from '@/lib/globe/sun';
-import { GLOBE_DISTANCE, INTRO_DISTANCE, prefersReducedMotion } from '@/lib/globe/intro';
+import { INTRO_DISTANCE, currentGlobeDistance, prefersReducedMotion } from '@/lib/globe/intro';
 import { useAppStore } from '@/lib/store';
 import GlobeMesh from './GlobeMesh';
 import AtmosphereMesh from './AtmosphereMesh';
@@ -39,7 +39,7 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
   // La caméra démarre loin (la Terre n'est qu'un point sous le loader), sauf
   // si l'intro a déjà eu lieu ou si l'utilisateur refuse les animations.
   const [initialCameraZ] = useState(() =>
-    useAppStore.getState().introPhase === 'done' || prefersReducedMotion() ? GLOBE_DISTANCE : INTRO_DISTANCE,
+    useAppStore.getState().introPhase === 'done' || prefersReducedMotion() ? currentGlobeDistance() : INTRO_DISTANCE,
   );
 
   useEffect(() => {

@@ -17,8 +17,24 @@ export function sphereScreenDiameter(distance: number, viewportHeight: number): 
  * échelle logarithmique : la taille apparente (∝ 1/distance) croît alors de
  * façon régulière, au lieu de rester un point puis d'exploser à la fin.
  */
-export function introDistanceAt(t: number): number {
-  return INTRO_DISTANCE * Math.pow(GLOBE_DISTANCE / INTRO_DISTANCE, t);
+export function introDistanceAt(t: number, end = GLOBE_DISTANCE): number {
+  return INTRO_DISTANCE * Math.pow(end / INTRO_DISTANCE, t);
+}
+
+/**
+ * Distance de la vue globe pour un écran de rapport `aspect` (largeur sur
+ * hauteur) : 3 en paysage ; en portrait, le champ horizontal est étroit et
+ * il faut reculer pour que la sphère tienne en largeur, avec une marge.
+ */
+export function globeDistance(aspect: number): number {
+  const halfV = (CAMERA_FOV_DEG / 2) * (Math.PI / 180);
+  const halfH = Math.atan(Math.tan(halfV) * aspect);
+  return Math.max(GLOBE_DISTANCE, 1.12 / Math.sin(Math.min(halfV, halfH)));
+}
+
+/** Distance de la vue globe pour la fenêtre courante. */
+export function currentGlobeDistance(): number {
+  return typeof window === 'undefined' ? GLOBE_DISTANCE : globeDistance(window.innerWidth / window.innerHeight);
 }
 
 export function prefersReducedMotion(): boolean {

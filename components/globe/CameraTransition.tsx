@@ -6,7 +6,7 @@ import { gsap } from 'gsap';
 import type { CountryData } from '@/lib/types';
 import * as THREE from 'three';
 import { useAppStore } from '@/lib/store';
-import { GLOBE_DISTANCE, introDistanceAt } from '@/lib/globe/intro';
+import { currentGlobeDistance, introDistanceAt } from '@/lib/globe/intro';
 import { homeViewDirection } from '@/lib/globe/sun';
 import { lonLatToCartesian } from '@/lib/globe/pick-country';
 
@@ -41,13 +41,14 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
         // Approche depuis le point bleu pâle jusqu'à la vue globe.
         orbitControls.enabled = false;
         const home = homeViewDirection();
+        const end = currentGlobeDistance();
         const flight = { t: 0 };
         const tween = gsap.to(flight, {
           t: 1,
           duration: 2.8,
           ease: 'power2.inOut',
           onUpdate: () => {
-            camera.position.copy(home).multiplyScalar(introDistanceAt(flight.t));
+            camera.position.copy(home).multiplyScalar(introDistanceAt(flight.t, end));
             render();
           },
           onComplete: () => setIntroPhase('done'),
@@ -59,7 +60,7 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
 
       // Retour à la vue globe : on recule dans l'axe actuel, le pays quitté
       // reste face à l'utilisateur.
-      const back = camera.position.clone().normalize().multiplyScalar(GLOBE_DISTANCE);
+      const back = camera.position.clone().normalize().multiplyScalar(currentGlobeDistance());
       gsap.to(camera.position, {
         x: back.x,
         y: back.y,

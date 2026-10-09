@@ -68,6 +68,8 @@ export default function GlobeMesh({
 
   const handleEarthPointerMove = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
+    // Au doigt, un « survol » n'est qu'un glisser : l'aperçu passe par le toucher.
+    if (e.pointerType === 'touch') return;
     // Repère du groupe (celui des frontières), pas celui de la sphère Terre
     // qui est tournée de 180° pour aligner sa texture.
     const local = (groupRef.current ?? e.object).worldToLocal(e.point.clone());

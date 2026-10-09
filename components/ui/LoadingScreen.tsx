@@ -3,7 +3,6 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import type { LoadingState } from '@/lib/types';
-import { useIsMobile } from '@/lib/hooks/useIsMobile';
 import { useReducedMotion } from '@/lib/hooks/useReducedMotion';
 import { useAppStore } from '@/lib/store';
 import { INTRO_DISTANCE, sphereScreenDiameter } from '@/lib/globe/intro';
@@ -32,7 +31,6 @@ function stepLabel(progress: number): string {
  * s'en approche (voir CameraTransition et lib/globe/intro.ts).
  */
 export default function LoadingScreen({ loadingState, onRevealComplete }: LoadingScreenProps) {
-  const isMobile = useIsMobile();
   const reducedMotion = useReducedMotion();
   const setIntroPhase = useAppStore((state) => state.setIntroPhase);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -47,7 +45,7 @@ export default function LoadingScreen({ loadingState, onRevealComplete }: Loadin
     if (!shouldReveal) return;
     const done = () => onCompleteRef.current();
 
-    if (reducedMotion || isMobile) {
+    if (reducedMotion) {
       setIntroPhase('done');
       const tween = gsap.to(rootRef.current, { opacity: 0, duration: 0.35, onComplete: done });
       return () => {
@@ -68,7 +66,7 @@ export default function LoadingScreen({ loadingState, onRevealComplete }: Loadin
     return () => {
       tl.kill();
     };
-  }, [shouldReveal, reducedMotion, isMobile, setIntroPhase]);
+  }, [shouldReveal, reducedMotion, setIntroPhase]);
 
   if (loadingState.phase === 'complete') return null;
 

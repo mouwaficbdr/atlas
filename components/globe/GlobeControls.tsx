@@ -6,6 +6,7 @@
 
 import { useEffect, useRef } from "react";
 import { OrbitControls } from "@react-three/drei";
+import { currentGlobeDistance } from "@/lib/globe/intro";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 
 interface GlobeControlsProps {
@@ -86,7 +87,7 @@ export default function GlobeControls({
       enableRotate={true}
       rotateSpeed={0.8}
       minDistance={1.5}
-      maxDistance={5}
+      maxDistance={Math.max(5, currentGlobeDistance() * 1.35)}
       minPolarAngle={MIN_POLAR}
       maxPolarAngle={MAX_POLAR}
     />
