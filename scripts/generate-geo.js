@@ -25,6 +25,62 @@ const ct = require('countries-and-timezones');
 const DATA_PATH = path.join(__dirname, '../public/data/countries-geo.json');
 const VENDOR = path.join(__dirname, 'vendor');
 
+// Noms français des langues et monnaies, depuis leurs codes (idempotent) :
+// Intl couvre l'essentiel, ce dictionnaire comble ce qu'il ignore.
+const LANGUAGE_DISPLAY_FR = new Intl.DisplayNames(['fr'], { type: 'language', fallback: 'none' });
+const CURRENCY_DISPLAY_FR = new Intl.DisplayNames(['fr'], { type: 'currency', fallback: 'none' });
+
+const LANGUAGE_FR = {
+  ber: 'berbère',
+  bjz: 'créole bélizien',
+  bwg: 'chibarwe',
+  glc: 'galicien',
+  hgm: 'khoekhoe',
+  kck: 'kalanga',
+  khi: 'khoïsan',
+  kwn: 'kwangali',
+  ndc: 'ndau',
+  nzs: 'langue des signes néo-zélandaise',
+  pov: 'créole de Haute-Guinée',
+  smi: 'same',
+  toi: 'tonga',
+  zdj: 'comorien',
+  zib: 'langue des signes zimbabwéenne',
+};
+
+const CURRENCY_FR = {
+  KID: 'dollar des Kiribati',
+  TVD: 'dollar de Tuvalu',
+};
+
+const capitalize = (text) => text.charAt(0).toLocaleUpperCase('fr') + text.slice(1);
+
+function displayFr(display, code) {
+  try {
+    return display.of(code);
+  } catch {
+    return undefined;
+  }
+}
+
+function languagesFr(languages) {
+  const out = {};
+  for (const [code, english] of Object.entries(languages || {})) {
+    const fr = LANGUAGE_FR[code] || displayFr(LANGUAGE_DISPLAY_FR, code);
+    out[code] = fr ? capitalize(fr) : english;
+  }
+  return out;
+}
+
+function currenciesFr(currencies) {
+  const out = {};
+  for (const [code, currency] of Object.entries(currencies || {})) {
+    const fr = CURRENCY_FR[code] || displayFr(CURRENCY_DISPLAY_FR, code);
+    out[code] = { ...currency, name: fr ? capitalize(fr) : currency.name };
+  }
+  return out;
+}
+
 const REGION_FR = {
   Africa: 'Afrique',
   Americas: 'Amériques',
@@ -379,8 +435,8 @@ function generate() {
         area: p.area,
         landlocked: p.landlocked,
         borders: p.borders || [],
-        languages: p.languages,
-        currencies: p.currencies,
+        languages: languagesFr(p.languages),
+        currencies: currenciesFr(p.currencies),
         flags: p.flags,
         idd: m.idd || p.idd || null,
         tld: m.tld || p.tld || [],
