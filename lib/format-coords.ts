@@ -4,8 +4,10 @@
  * l'hémisphère sud/ouest).
  */
 
+// Deux décimales, soit environ un kilomètre : au-delà, la précision affichée
+// dépasserait celle de la géométrie 1:50m d'où vient le centroïde.
 function frDecimal(n: number): string {
-  return Math.abs(n).toFixed(4).replace('.', ',');
+  return Math.abs(n).toFixed(2).replace('.', ',');
 }
 
 export function formatLat(lat: number): string {

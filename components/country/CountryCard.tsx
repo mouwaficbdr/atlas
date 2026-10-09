@@ -456,7 +456,7 @@ export default function CountryCard({
                 }}
               >
                 {country.area
-                  ? Math.round(country.population / country.area)
+                  ? new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 }).format(country.population / country.area)
                   : 'N/A'}{' '}
                 <span style={{ fontSize: '0.9rem', opacity: 0.5 }}>
                   hab/km²
@@ -637,7 +637,7 @@ export default function CountryCard({
                       marginBottom: '0.75rem',
                     }}
                   >
-                    LATITUDE / LONGITUDE
+                    CENTRE GÉOGRAPHIQUE
                   </div>
                   <div
                     style={{
@@ -647,15 +647,11 @@ export default function CountryCard({
                       lineHeight: 1.2,
                     }}
                   >
-                    {country.latlng && country.latlng.length >= 2 ? (
-                      <>
-                        {formatLat(country.latlng[0])}
-                        <br />
-                        {formatLon(country.latlng[1])}
-                      </>
-                    ) : (
-                      'N/A'
-                    )}
+                    {/* Centroïde calculé depuis la géométrie (ordre GeoJSON [lon, lat]) :
+                        latlng de restcountries est arrondi au degré pour 119 pays. */}
+                    {formatLat(country.centroid[1])}
+                    <br />
+                    {formatLon(country.centroid[0])}
                   </div>
                 </div>
                 <div>

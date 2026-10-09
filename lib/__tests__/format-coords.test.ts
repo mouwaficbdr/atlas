@@ -3,22 +3,22 @@ import { formatLat, formatLon, utcOffset } from '../format-coords';
 
 describe('formatLat', () => {
   it('nord : valeur positive, suffixe N', () => {
-    expect(formatLat(46.6201)).toBe('46,6201° N');
+    expect(formatLat(46.6201)).toBe('46,62° N');
   });
   it('sud : valeur absolue, suffixe S', () => {
-    expect(formatLat(-35.18)).toBe('35,1800° S');
+    expect(formatLat(-35.18)).toBe('35,18° S');
   });
   it('équateur : N', () => {
-    expect(formatLat(0)).toBe('0,0000° N');
+    expect(formatLat(0)).toBe('0,00° N');
   });
 });
 
 describe('formatLon', () => {
   it('est : valeur positive, suffixe E', () => {
-    expect(formatLon(2.4528)).toBe('2,4528° E');
+    expect(formatLon(2.4528)).toBe('2,45° E');
   });
   it('ouest : valeur absolue, suffixe O', () => {
-    expect(formatLon(-99.1439)).toBe('99,1439° O');
+    expect(formatLon(-99.1439)).toBe('99,14° O');
   });
 });
 
