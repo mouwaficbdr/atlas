@@ -1197,6 +1197,7 @@ export default function CountryCard({
                 09 / FRONTIÈRES TERRESTRES
               </h3>
               <NeighborCards
+                origin={country.centroid}
                 borders={country.borders}
                 allCountries={allCountries}
               />
