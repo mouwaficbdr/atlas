@@ -14,6 +14,9 @@ import HoverHighlight from './HoverHighlight';
 import EarthMesh from './EarthMesh';
 import CloudsMesh from './CloudsMesh';
 
+const CLICK_MAX_MOVE_PX = 4;
+const CLICK_MAX_PRESS_MS = 350;
+
 interface GlobeMeshProps {
   countries: CountryData[];
   onSelect: (cca3: string) => void;
@@ -77,8 +80,18 @@ export default function GlobeMesh({
     setHoveredCca3(null);
   };
 
+  // Un clic ne sélectionne que s'il est franc : ni glisser (rotation du
+  // globe), ni appui prolongé (saisie). Sinon, tourner le globe ouvrait la
+  // fiche du pays sous le curseur au relâchement.
+  const pressStartRef = useRef(0);
+  const handleEarthPointerDown = () => {
+    pressStartRef.current = performance.now();
+  };
+
   const handleEarthClick = (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
+    if (e.delta > CLICK_MAX_MOVE_PX) return;
+    if (performance.now() - pressStartRef.current > CLICK_MAX_PRESS_MS) return;
     // Repère du groupe (celui des frontières), pas celui de la sphère Terre
     // qui est tournée de 180° pour aligner sa texture.
     const local = (groupRef.current ?? e.object).worldToLocal(e.point.clone());
@@ -115,6 +128,7 @@ export default function GlobeMesh({
         onReady={onLoad}
         onPointerMove={handleEarthPointerMove}
         onPointerLeave={handleEarthPointerLeave}
+        onPointerDown={handleEarthPointerDown}
         onClick={handleEarthClick}
       />
       <CloudsMesh />

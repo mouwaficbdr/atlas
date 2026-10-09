@@ -14,6 +14,7 @@ interface EarthMeshProps {
   onReady?: () => void;
   onPointerMove?: (e: ThreeEvent<PointerEvent>) => void;
   onPointerLeave?: (e: ThreeEvent<PointerEvent>) => void;
+  onPointerDown?: (e: ThreeEvent<PointerEvent>) => void;
   onClick?: (e: ThreeEvent<MouseEvent>) => void;
 }
 
@@ -23,7 +24,7 @@ interface EarthMeshProps {
  * de cible de raycast pour la sélection de pays (voir GlobeMesh et
  * lib/globe/pick-country.ts).
  */
-export default function EarthMesh({ onReady, onPointerMove, onPointerLeave, onClick }: EarthMeshProps) {
+export default function EarthMesh({ onReady, onPointerMove, onPointerLeave, onPointerDown, onClick }: EarthMeshProps) {
   const [textures, setTextures] = useState<{
     day: THREE.Texture;
     night: THREE.Texture;
@@ -108,6 +109,7 @@ export default function EarthMesh({ onReady, onPointerMove, onPointerLeave, onCl
       rotation-y={Math.PI}
       onPointerMove={onPointerMove}
       onPointerLeave={onPointerLeave}
+      onPointerDown={onPointerDown}
       onClick={onClick}
     />
   );
