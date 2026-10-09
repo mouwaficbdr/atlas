@@ -70,6 +70,7 @@ const arbitraryCountryData: fc.Arbitrary<CountryData> = fc.record({
 
   // Démographie et culture
   population: fc.integer({ min: 0, max: 2_000_000_000 }),
+  populationYear: fc.constant(2025),
   languages: fc.constant({}),
   currencies: fc.constant({}),
 

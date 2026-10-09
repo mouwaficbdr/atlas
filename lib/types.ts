@@ -36,6 +36,8 @@ export interface CountryData {
   borders: string[];
 
   population: number;
+  /** Année de l'estimation de population (Banque mondiale). */
+  populationYear: number | null;
   languages: Record<string, string>;
   currencies: Record<string, { name: string; symbol: string }>;
 

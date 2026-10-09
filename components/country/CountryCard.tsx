@@ -341,7 +341,9 @@ export default function CountryCard({
                 textTransform: 'uppercase',
               }}
             >
-              Habitants recensés
+              {country.populationYear
+                ? `Habitants · Banque mondiale ${country.populationYear}`
+                : 'Habitants'}
             </div>
           </div>
 

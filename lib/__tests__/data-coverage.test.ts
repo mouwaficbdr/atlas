@@ -23,7 +23,7 @@ const REQUIRED: Record<string, (c: (typeof countries)[number]) => boolean> = {
   primaryTimezone: (c) => !!c.primaryTimezone && c.primaryTimezone !== 'UTC',
   languages: (c) => Object.keys(c.languages ?? {}).length > 0,
   currencies: (c) => Object.keys(c.currencies ?? {}).length > 0,
-  population: (c) => c.population > 0,
+  population: (c) => c.population > 0 && !!c.populationYear,
   area: (c) => c.area > 0,
 };
 

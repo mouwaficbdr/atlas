@@ -4,6 +4,7 @@
  *  - scripts/vendor/mledoze-countries.json  (noms FR, gentilés, idd, tld, souveraineté)
  *  - scripts/vendor/wikidata-gov.json       (forme de gouvernement)
  *  - scripts/vendor/gov-overrides.json      (corrections manuelles)
+ *  - scripts/vendor/worldbank-population.json (population, Banque mondiale)
  *  - countries-and-timezones                (fuseaux IANA)
  *
  * Aucun appel réseau : rafraîchir les sources avec scripts/fetch-vendor-data.js.
@@ -401,6 +402,7 @@ function generate() {
   // mledoze marque à tort le Saint-Siège membre de l'ONU : il n'y est qu'observateur.
   members.delete('VAT');
   const govMap = buildGovMap();
+  const worldBankPop = loadVendor('worldbank-population.json');
 
   const out = [];
   let skipped = 0;
@@ -442,7 +444,8 @@ function generate() {
         subregionFr: SUBREGION_FR[p.subregion] || p.subregion,
         latlng: p.latlng,
         centroid: computeCentroid(geometry),
-        population: p.population,
+        population: worldBankPop[p.cca3]?.value ?? p.population,
+        populationYear: worldBankPop[p.cca3]?.year ?? null,
         area: p.area,
         landlocked: p.landlocked,
         borders: (p.borders || []).filter((code) => members.has(code)),

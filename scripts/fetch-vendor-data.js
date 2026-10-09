@@ -8,6 +8,7 @@
  * Sources :
  *  - mledoze/countries : noms traduits, gentilés, idd, tld, statut souverain
  *  - Wikidata (SPARQL) : forme de gouvernement (P122), libellé français
+ *  - Banque mondiale (SP.POP.TOTL) : population, dernière année publiée
  */
 
 const fs = require('fs');
@@ -17,6 +18,9 @@ const VENDOR_DIR = path.join(__dirname, 'vendor');
 
 const MLEDOZE_URL =
   'https://raw.githubusercontent.com/mledoze/countries/master/dist/countries.json';
+
+const WORLDBANK_POP_URL =
+  'https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&mrv=1&per_page=400';
 
 const WIKIDATA_QUERY = `SELECT ?iso3 ?govLabel WHERE {
   ?c wdt:P298 ?iso3 .
@@ -47,6 +51,18 @@ async function main() {
     JSON.stringify(wikidata),
   );
   console.log(`${wikidata.results.bindings.length} lignes`);
+
+  process.stdout.write('Banque mondiale, population... ');
+  const [, rows] = await fetch(WORLDBANK_POP_URL).then((r) => r.json());
+  const population = {};
+  for (const r of rows) {
+    if (r.value) population[r.countryiso3code] = { value: r.value, year: Number(r.date) };
+  }
+  fs.writeFileSync(
+    path.join(VENDOR_DIR, 'worldbank-population.json'),
+    JSON.stringify(population),
+  );
+  console.log(`${Object.keys(population).length} entrées`);
 
   console.log('\nVendor à jour. Lancer ensuite : node scripts/generate-geo.js');
 }
