@@ -69,7 +69,7 @@ export default function PersistentLayout({
       try {
         const data = await fetchAllCountries();
         setCountries(data);
-        setLoadingState((prev) => ({ ...prev, progress: 50 }));
+        setLoadingState((prev) => ({ ...prev, progress: 45 }));
       } catch (error) {
         console.error('Failed to fetch countries:', error);
         setLoadingState((prev) => ({

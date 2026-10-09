@@ -34,12 +34,9 @@ export default function GlobeMesh({
 
   useEffect(() => {
     loadGeoJSON()
-      .then((data) => {
-        setFeatures(data.features);
-        onLoad?.();
-      })
+      .then((data) => setFeatures(data.features))
       .catch(console.error);
-  }, [onLoad]);
+  }, []);
 
   const hoveredFeature = hoveredCca3
     ? features.find((f) => f.properties.cca3 === hoveredCca3)
@@ -115,6 +112,7 @@ export default function GlobeMesh({
   return (
     <group ref={groupRef}>
       <EarthMesh
+        onReady={onLoad}
         onPointerMove={handleEarthPointerMove}
         onPointerLeave={handleEarthPointerLeave}
         onClick={handleEarthClick}

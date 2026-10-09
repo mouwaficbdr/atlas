@@ -5,6 +5,8 @@ import { useThree } from '@react-three/fiber';
 import { gsap } from 'gsap';
 import type { CountryData } from '@/lib/types';
 import * as THREE from 'three';
+import { useAppStore } from '@/lib/store';
+import { introDistanceAt } from '@/lib/globe/intro';
 
 interface CameraTransitionProps {
   countries: CountryData[];
@@ -14,6 +16,8 @@ interface CameraTransitionProps {
 
 export default function CameraTransition({ countries, cameraMode, selectedCountryCca3 }: CameraTransitionProps) {
   const { camera, controls, invalidate } = useThree();
+  const introPhase = useAppStore((state) => state.introPhase);
+  const setIntroPhase = useAppStore((state) => state.setIntroPhase);
 
   useEffect(() => {
     // NOTE: controls n'est disponible qu'après le premier rendu du Canvas
@@ -27,6 +31,28 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
     const render = () => invalidate();
 
     if (cameraMode === 'globe' || !selectedCountryCca3) {
+      // Sous le loader, la caméra reste au loin : la Terre n'est qu'un point.
+      if (introPhase === 'waiting') return;
+
+      if (introPhase === 'flying') {
+        // Approche depuis le point bleu pâle jusqu'à la vue globe.
+        orbitControls.enabled = false;
+        const flight = { t: 0 };
+        const tween = gsap.to(flight, {
+          t: 1,
+          duration: 2.8,
+          ease: 'power2.inOut',
+          onUpdate: () => {
+            camera.position.set(0, 0, introDistanceAt(flight.t));
+            render();
+          },
+          onComplete: () => setIntroPhase('done'),
+        });
+        return () => {
+          tween.kill();
+        };
+      }
+
       // Return to globe view
       gsap.to(camera.position, {
         x: 0,
@@ -78,9 +104,13 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
         x: camPos.x,
         y: camPos.y,
         z: camPos.z,
-        duration: 1.5,
+        duration: introPhase === 'flying' ? 2.6 : 1.5,
         ease: 'power3.inOut',
         onUpdate: render,
+        // Arrivée directe sur une fiche pays : ce vol tient lieu d'intro.
+        onComplete: () => {
+          if (introPhase === 'flying') setIntroPhase('done');
+        },
       });
 
       // Point controls target exactly at the country centroid
@@ -93,7 +123,7 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
         onUpdate: render,
       });
     }
-  }, [selectedCountryCca3, cameraMode, camera, controls, countries, invalidate]);
+  }, [selectedCountryCca3, cameraMode, camera, controls, countries, invalidate, introPhase, setIntroPhase]);
 
   return null;
 }

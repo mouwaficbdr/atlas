@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import type { CountryData } from '@/lib/types';
 import { SUN_POSITION } from '@/lib/globe/sun';
+import { GLOBE_DISTANCE, INTRO_DISTANCE, prefersReducedMotion } from '@/lib/globe/intro';
+import { useAppStore } from '@/lib/store';
 import GlobeMesh from './GlobeMesh';
 import AtmosphereMesh from './AtmosphereMesh';
 import StarField from './StarField';
@@ -24,6 +26,12 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
   const [webGLSupported, setWebGLSupported] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
   const onLoadCalledRef = useRef(false);
+  const introPhase = useAppStore((state) => state.introPhase);
+  // La caméra démarre loin (la Terre n'est qu'un point sous le loader), sauf
+  // si l'intro a déjà eu lieu ou si l'utilisateur refuse les animations.
+  const [initialCameraZ] = useState(() =>
+    useAppStore.getState().introPhase === 'done' || prefersReducedMotion() ? GLOBE_DISTANCE : INTRO_DISTANCE,
+  );
 
   useEffect(() => {
     const canvas = document.createElement('canvas');
@@ -31,7 +39,9 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
     if (!gl) setWebGLSupported(false);
   }, []);
 
-  // Fallback: if onLoad hasn't fired after 3s, call it anyway
+  // Filet de sécurité : si la Terre ne signale jamais qu'elle est prête
+  // (texture introuvable, réseau coupé), on révèle quand même la scène
+  // plutôt que de laisser l'utilisateur bloqué derrière le loader.
   useEffect(() => {
     const timer = setTimeout(() => {
       if (!onLoadCalledRef.current) {
@@ -39,7 +49,7 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
         onProgress?.(100);
         onLoad?.();
       }
-    }, 3000);
+    }, 12000);
     return () => clearTimeout(timer);
   }, [onLoad, onProgress]);
 
@@ -51,8 +61,14 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
     ? Math.min(window.devicePixelRatio, navigator.maxTouchPoints > 0 ? 1.5 : 2.0)
     : 1;
 
+  // Canvas prêt ne veut pas dire Terre prête : on n'annonce 100 % que
+  // lorsque ses textures (nuages compris) sont chargées, sinon le loader
+  // s'efface sur un globe encore vide qui se remplit sous les yeux.
   const handleCreated = () => {
-    // Canvas is ready — signal loading complete
+    if (!onLoadCalledRef.current) onProgress?.(70);
+  };
+
+  const handleEarthReady = () => {
     if (!onLoadCalledRef.current) {
       onLoadCalledRef.current = true;
       onProgress?.(100);
@@ -72,7 +88,7 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
     <>
       <Canvas
         dpr={dpr}
-        camera={{ position: [0, 0, 3], fov: 45 }}
+        camera={{ position: [0, 0, initialCameraZ], fov: 45 }}
         // Hors du mode globe (fiche pays), le globe est masque par la
         // CountryCard : on passe la boucle de rendu en "demand" pour rendre la
         // main au GPU. CameraTransition force un rendu via invalidate() pendant
@@ -101,11 +117,13 @@ export default function GlobeScene({ countries, onCountrySelect, onProgress, onL
         <GlobeMesh
           countries={countries}
           onSelect={onCountrySelect}
-          onLoad={handleCreated}
+          onLoad={handleEarthReady}
           cameraMode={cameraMode}
         />
         <AtmosphereMesh />
-        <GlobeControls enabled={true} cameraMode={cameraMode} />
+        {/* Verrouillés pendant l'intro : OrbitControls ramènerait la caméra à
+            maxDistance au premier update. */}
+        <GlobeControls enabled={introPhase === 'done'} cameraMode={cameraMode} />
         <CameraTransition
           countries={countries}
           cameraMode={cameraMode}

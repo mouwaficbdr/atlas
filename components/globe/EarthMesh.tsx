@@ -10,6 +10,8 @@ const EARTH_RADIUS = 1.0;
 const SPHERE_SEGMENTS = 96;
 
 interface EarthMeshProps {
+  /** Appelé une fois les textures (nuages compris) chargées et le matériau prêt. */
+  onReady?: () => void;
   onPointerMove?: (e: ThreeEvent<PointerEvent>) => void;
   onPointerLeave?: (e: ThreeEvent<PointerEvent>) => void;
   onClick?: (e: ThreeEvent<MouseEvent>) => void;
@@ -21,7 +23,7 @@ interface EarthMeshProps {
  * de cible de raycast pour la sélection de pays (voir GlobeMesh et
  * lib/globe/pick-country.ts).
  */
-export default function EarthMesh({ onPointerMove, onPointerLeave, onClick }: EarthMeshProps) {
+export default function EarthMesh({ onReady, onPointerMove, onPointerLeave, onClick }: EarthMeshProps) {
   const [textures, setTextures] = useState<{
     day: THREE.Texture;
     night: THREE.Texture;
@@ -34,6 +36,9 @@ export default function EarthMesh({ onPointerMove, onPointerLeave, onClick }: Ea
       loadEarthTexture('day'),
       loadEarthTexture('night'),
       loadEarthTexture('normal'),
+      // Préchargée ici (cache partagé avec CloudsMesh) : la révélation ne
+      // doit pas montrer des nuages qui apparaissent après coup.
+      loadEarthTexture('clouds'),
     ]).then(([day, night, normal]) => {
       if (!cancelled) setTextures({ day, night, normal });
     });
@@ -86,6 +91,10 @@ export default function EarthMesh({ onPointerMove, onPointerLeave, onClick }: Ea
   }, [textures]);
 
   useEffect(() => () => material?.dispose(), [material]);
+
+  useEffect(() => {
+    if (material) onReady?.();
+  }, [material, onReady]);
 
   if (!material) return null;
 
