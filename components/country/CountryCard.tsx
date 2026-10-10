@@ -7,6 +7,7 @@ import type { CountryData, CountryPalette } from '@/lib/types';
 import { formatLat, formatLon, utcOffset } from '@/lib/format-coords';
 import { useAppStore } from '@/lib/store';
 import { contrastsFor } from '@/lib/contrasts';
+import { formatShare } from '@/lib/format-share';
 import Link from 'next/link';
 import { areaFromHome, timeFromHome } from '@/lib/from-home';
 
@@ -36,7 +37,6 @@ const fr = new Intl.NumberFormat('fr-FR');
 const frCompact = new Intl.NumberFormat('fr-FR', { notation: 'compact', compactDisplay: 'long', maximumFractionDigits: 1 });
 /** « 68,7 millions », mais le nombre exact sous le million (« 11 396 », pas « 11,4 mille »). */
 const shortCount = (n: number) => (n < 1_000_000 ? fr.format(n) : frCompact.format(n));
-const frPct = new Intl.NumberFormat('fr-FR', { style: 'percent', maximumFractionDigits: 2 });
 
 /** Rang (1 = plus grand) de `value` parmi `values`. */
 /** Liseré du haut de section : les couleurs du drapeau en parts égales. */
@@ -305,7 +305,7 @@ export default function CountryCard({
             </p>
             <RankRuler rank={stats.popRank} ranked={stats.byPop} what="pays le plus peuplé" />
             <p className="cp-value" style={{ marginTop: '1.6rem' }}>
-              {frPct.format(stats.share)} des habitants des {stats.total} États membres de l’ONU.
+              {formatShare(stats.share)} des habitants des {stats.total} États membres de l’ONU.
             </p>
             {contrasts.length > 0 && (
               <ul className="cp-contrasts" aria-label="Contrastes">
