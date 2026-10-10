@@ -8,6 +8,7 @@ import type { GeoJSONFeature, CountryData } from '@/lib/types';
 import { useAppStore } from '@/lib/store';
 import { useReducedMotion } from '@/lib/hooks/useReducedMotion';
 import { cartesianToLonLat, findCountryAtLonLat } from '@/lib/globe/pick-country';
+import { tilt } from '@/lib/device-tilt';
 import BordersMesh from './BordersMesh';
 import HolographicText, { projectPoint } from './HolographicText';
 import HoverHighlight from './HoverHighlight';
@@ -151,11 +152,12 @@ export default function GlobeMesh({
   useFrame(({ mouse }) => {
     if (reducedMotion) return;
 
-    // Parallaxe de léger tilt en fonction de la position de la souris
+    // Parallaxe de léger tilt en fonction de la position de la souris, ou de
+    // l'inclinaison du téléphone quand elle est activée (#28).
     if (groupRef.current) {
-      const tiltFactor = hoveredCca3 ? 0.15 : 0.05;
-      const targetRotationX = mouse.y * tiltFactor;
-      const targetRotationY = mouse.x * tiltFactor;
+      const tiltFactor = tilt.active ? 0.15 : hoveredCca3 ? 0.15 : 0.05;
+      const targetRotationX = (tilt.active ? -tilt.y : mouse.y) * tiltFactor;
+      const targetRotationY = (tilt.active ? tilt.x : mouse.x) * tiltFactor;
 
       groupRef.current.rotation.x = THREE.MathUtils.lerp(
         groupRef.current.rotation.x,
