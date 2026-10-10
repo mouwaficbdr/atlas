@@ -33,6 +33,15 @@ const nextConfig = {
   images: {
     formats: ['image/webp'],
   },
+  experimental: {
+    // lib/geojson-loader.ts lit ce fichier par un import('fs') dynamique que le
+    // traçage ne suit pas : sans cette inclusion, la fonction serverless ne
+    // l'embarque pas et tout rendu à la demande (robots d'aperçu comme WhatsApp)
+    // tombe en 500.
+    outputFileTracingIncludes: {
+      '/pays/**': ['./public/data/countries-geo.json'],
+    },
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.(glsl|vert|frag)$/,
