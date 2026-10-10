@@ -81,9 +81,8 @@ async function main() {
   const out = {};
 
   for (const { properties: p } of geo.features) {
-    // Wikimedia (Afghanistan) n'accepte que ses largeurs de vignette standard
-    // et un User-Agent.
-    const url = p.flags.png.replace('/320px-', '/330px-');
+    // Wikimedia (drapeau afghan) refuse les requêtes sans User-Agent.
+    const url = p.flags.png;
     const res = await fetch(url, { headers: { 'User-Agent': 'atlas-build (https://atlas.mouwaficbdr.me)' } });
     if (!res.ok) throw new Error(`${p.cca3} : ${res.status} sur ${url}`);
     const img = await loadImage(Buffer.from(await res.arrayBuffer()));
