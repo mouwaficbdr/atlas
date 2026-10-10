@@ -13,6 +13,7 @@ export const contentType = OG_CONTENT_TYPE;
 const DRAW = 500;
 const fr = new Intl.NumberFormat('fr-FR');
 const fr1 = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 });
+const fr0 = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 });
 
 /**
  * Image de partage d'une comparaison (#34) : les deux silhouettes, chacune
@@ -43,7 +44,7 @@ export default async function Image({ params }: { params: { pair: string } }) {
   const colorB = '#f0f0f0';
   const ratio = b.country.area / a.country.area;
   const big = ratio >= 1 ? ratio : 1 / ratio;
-  const ratioText = `${ratio >= 1 ? '×' : '÷'} ${(big < 10 ? fr1 : fr).format(big)}`;
+  const ratioText = `${ratio >= 1 ? '×' : '÷'} ${(big < 10 ? fr1 : fr0).format(big)}`;
 
   return new ImageResponse(
     (
