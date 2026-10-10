@@ -56,11 +56,12 @@
   margin: 0.6rem 0 0.9rem;
   color: var(--text-primary);
   /* La chasse suit la longueur du nom : « TCHAD » s'élargit, « SAINT-VINCENT-
-     ET-LES-GRENADINES » se resserre, à taille presque constante. */
-  font-size: clamp(2.6rem, calc(150vw / var(--len, 8)), 12rem);
+     ET-LES-GRENADINES » se resserre, à taille presque constante. La taille
+     plafonne à 18vw : à 125 % de chasse, un nom court tient sur un téléphone. */
+  font-size: clamp(1.8rem, min(18vw, calc(230vw / var(--len, 8))), 12rem);
   font-stretch: clamp(50%, calc(700% / var(--len, 8)), 125%);
   text-wrap: balance;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   text-shadow: 0 6px 40px rgba(0, 0, 0, 0.6);
 }
 
