@@ -207,7 +207,19 @@
 
 .cp-rank { margin-top: 1.2rem; }
 
+.cp-rank__track { position: relative; cursor: pointer; }
 .cp-rank svg { display: block; width: 100%; height: 22px; }
+.cp-rank__track[data-active='true'] + .cp-rank__legend { visibility: hidden; }
+.cp-rank__tip {
+  position: absolute;
+  top: calc(100% + 0.3rem);
+  padding: 0.25rem 0.55rem;
+  white-space: nowrap;
+  color: var(--text-primary);
+  background: var(--bg-surface, #0a0a14);
+  border: 1px solid var(--cp-line);
+  pointer-events: none;
+}
 
 .cp-rank__legend {
   display: flex;
