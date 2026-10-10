@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 import { MAX_GUESSES } from '@/lib/daily';
 import { parseDefi } from '@/lib/share-urls';
-import { OG_COLORS, OG_CONTENT_TYPE, OG_SIZE, ogFonts } from '@/lib/og';
+import { OG_COLORS, OG_CONTENT_TYPE, OG_DISPLAY, OG_SIZE, ogFonts } from '@/lib/og';
 
 export const alt = 'Résultat du défi du jour sur atlas, sans la réponse';
 export const size = OG_SIZE;
@@ -26,11 +26,11 @@ export default function Image({ params }: { params: { jour: string; grille: stri
             <span style={{ fontFamily: 'JetBrains Mono', fontSize: 22, letterSpacing: 4, textTransform: 'uppercase', color: '#ffd27a' }}>
               Défi du jour
             </span>
-            <span style={{ fontFamily: 'Bebas Neue', fontSize: 96, lineHeight: 0.95, marginTop: 10 }}>
+            <span style={{ fontFamily: OG_DISPLAY, textTransform: 'uppercase', fontSize: 84, lineHeight: 0.95, marginTop: 10 }}>
               {r ? frDay.format(new Date(`${r.day}T12:00:00Z`)) : 'atlas'}
             </span>
           </div>
-          <span style={{ fontFamily: 'Bebas Neue', fontSize: 140, lineHeight: 0.9, color: won ? '#7ee2a8' : OG_COLORS.muted }}>
+          <span style={{ fontFamily: OG_DISPLAY, fontSize: 124, lineHeight: 0.9, color: won ? '#7ee2a8' : OG_COLORS.muted }}>
             {won ? rows.length : 'X'}/{MAX_GUESSES}
           </span>
         </div>

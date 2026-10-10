@@ -4,7 +4,7 @@ import { loadGeoJSON } from '@/lib/geojson-loader';
 import { adjustForContrast } from '@/lib/contrast-checker';
 import { mainPolygons, projectedPath } from '@/lib/true-size';
 import { KOPPEN } from '@/lib/koppen';
-import { OG_COLORS, OG_CONTENT_TYPE, OG_SIZE, flagDataUri, ogFonts, populationLabel } from '@/lib/og';
+import { OG_COLORS, OG_CONTENT_TYPE, OG_DISPLAY, OG_SIZE, flagDataUri, ogDisplayFor, ogFonts, populationLabel } from '@/lib/og';
 
 export const alt = 'Fiche pays sur atlas : silhouette du pays, capitale, population et climat';
 export const size = OG_SIZE;
@@ -108,7 +108,7 @@ export default async function Image({ params }: { params: { code: string } }) {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <div style={{ fontFamily: 'Bebas Neue', fontSize: country.nameFr.length > 22 ? 78 : country.nameFr.length > 14 ? 100 : 128, lineHeight: 0.92, letterSpacing: 1 }}>
+            <div style={{ fontFamily: ogDisplayFor(country.nameFr), textTransform: 'uppercase', fontSize: country.nameFr.length > 22 ? 64 : country.nameFr.length > 14 ? 80 : country.nameFr.length > 8 ? 96 : 112, lineHeight: 0.92 }}>
               {country.nameFr}
             </div>
             <div style={{ display: 'flex', alignItems: 'center', marginTop: 22, fontFamily: 'JetBrains Mono', fontSize: 20, color: OG_COLORS.muted }}>
@@ -126,7 +126,7 @@ export default async function Image({ params }: { params: { code: string } }) {
                 <span style={{ fontFamily: 'JetBrains Mono', fontSize: 16, letterSpacing: 3, textTransform: 'uppercase', color: OG_COLORS.muted, marginBottom: 8 }}>
                   {label}
                 </span>
-                <span style={{ fontFamily: 'Bebas Neue', fontSize: 38, lineHeight: 1 }}>{value}</span>
+                <span style={{ fontFamily: OG_DISPLAY, textTransform: 'uppercase', fontSize: 34, lineHeight: 1 }}>{value}</span>
               </div>
             ))}
           </div>

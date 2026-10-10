@@ -4,7 +4,7 @@ import { loadGeoJSON } from '@/lib/geojson-loader';
 import { adjustForContrast } from '@/lib/contrast-checker';
 import { mainPolygons, projectedPath } from '@/lib/true-size';
 import { parseCompare } from '@/lib/share-urls';
-import { OG_COLORS, OG_CONTENT_TYPE, OG_SIZE, ogFonts } from '@/lib/og';
+import { OG_COLORS, OG_CONTENT_TYPE, OG_DISPLAY, OG_SIZE, ogDisplayFor, ogFonts } from '@/lib/og';
 
 export const alt = 'Deux pays superposés à taille réelle sur atlas';
 export const size = OG_SIZE;
@@ -65,7 +65,7 @@ export default async function Image({ params }: { params: { pair: string } }) {
               <div key={p.country.cca3} style={{ display: 'flex', alignItems: 'center' }}>
                 <div style={{ width: 28, height: 28, marginRight: 22, backgroundColor: solid ? color : 'transparent', border: `2px solid ${color}` }} />
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                  <span style={{ fontFamily: 'Bebas Neue', fontSize: p.country.nameFr.length > 16 ? 60 : 84, lineHeight: 0.95 }}>{p.country.nameFr}</span>
+                  <span style={{ fontFamily: ogDisplayFor(p.country.nameFr), textTransform: 'uppercase', fontSize: p.country.nameFr.length > 16 ? 52 : 72, lineHeight: 0.95 }}>{p.country.nameFr}</span>
                   <span style={{ fontFamily: 'JetBrains Mono', fontSize: 18, color: OG_COLORS.muted }}>{fr.format(p.country.area)} km²</span>
                 </div>
               </div>
@@ -74,7 +74,7 @@ export default async function Image({ params }: { params: { pair: string } }) {
           <div style={{ display: 'flex', flexDirection: 'column', fontFamily: 'JetBrains Mono', fontSize: 20, color: OG_COLORS.muted }}>
             <div style={{ display: 'flex', alignItems: 'baseline', color: '#ffd27a' }}>
               <span style={{ fontSize: 40, marginRight: 8 }}>{ratioText.slice(0, 1)}</span>
-              <span style={{ fontFamily: 'Bebas Neue', fontSize: 72, lineHeight: 1 }}>{ratioText.slice(2)}</span>
+              <span style={{ fontFamily: OG_DISPLAY, fontSize: 64, lineHeight: 1 }}>{ratioText.slice(2)}</span>
             </div>
             <span>en superficie, à la même échelle</span>
           </div>
