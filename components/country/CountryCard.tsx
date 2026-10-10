@@ -1,6 +1,8 @@
 'use client';
 
-import { useEffect, useMemo, type CSSProperties, type ReactNode } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, type CSSProperties, type ReactNode } from 'react';
+import gsap from 'gsap';
+import { prefersReducedMotion } from '@/lib/hooks/useReducedMotion';
 import type { CountryData, CountryPalette } from '@/lib/types';
 import { formatLat, formatLon, utcOffset } from '@/lib/format-coords';
 import { useAppStore } from '@/lib/store';
@@ -79,6 +81,47 @@ export default function CountryCard({
   // « Vous êtes ici » : la fiche se rapporte au pays de l'utilisateur.
   const homeCca3 = useAppStore((state) => state.home?.cca3);
   const home = homeCca3 && homeCca3 !== country.cca3 ? allCountries.find((c) => c.cca3 === homeCca3) : undefined;
+
+  // Transition continue (#22) : venu d'un clic sur le globe, le titre part de
+  // l'étiquette 3D (sa place et sa taille, lettres écartées) et se compose à
+  // sa place pendant que la caméra plonge ; en partant, le pays laisse son
+  // étiquette réapparaître sur le globe.
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  useLayoutEffect(() => {
+    // Origine laissée en place (le mode strict rejoue cet effet) : sa date
+    // suffit à ne jamais la réutiliser plus tard.
+    const { titleOrigin } = useAppStore.getState();
+    const el = titleRef.current;
+    if (!el || !titleOrigin || titleOrigin.cca3 !== country.cca3) return;
+    if (performance.now() - titleOrigin.at > 3000 || prefersReducedMotion()) return;
+    // Le titre est un bloc pleine largeur : on mesure le texte lui-même.
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    const text = range.getBoundingClientRect();
+    const box = el.getBoundingClientRect();
+    const cx = text.left + text.width / 2;
+    const cy = text.top + text.height / 2;
+    const tween = gsap.fromTo(
+      el,
+      {
+        x: titleOrigin.x - cx,
+        y: titleOrigin.y - cy,
+        scale: Math.min(1, 22 / text.height),
+        transformOrigin: `${cx - box.left}px ${cy - box.top}px`,
+        letterSpacing: '0.5em',
+        opacity: 0.85,
+      },
+      { x: 0, y: 0, scale: 1, letterSpacing: getComputedStyle(el).letterSpacing, opacity: 1, duration: 1.5, ease: 'power3.inOut', clearProps: 'transform,transformOrigin,letterSpacing,opacity' },
+    );
+    return () => {
+      // Rétablit les styles d'origine : un nouveau passage (mode strict) mesure le vrai titre.
+      tween.revert();
+    };
+  }, [country.cca3]);
+  useEffect(() => {
+    const cca3 = country.cca3;
+    return () => useAppStore.getState().setReturnCca3(cca3);
+  }, [country.cca3]);
   useEffect(() => {
     const target = document.getElementById('frontieres');
     if (!target) return;
@@ -139,7 +182,7 @@ export default function CountryCard({
           <p className="cp-kicker">
             {country.cca3} · {country.subregionFr}
           </p>
-          <h1 className="cp-hero__name cp-display" style={{ '--len': country.nameFr.length } as CSSProperties}>
+          <h1 ref={titleRef} className="cp-hero__name cp-display" style={{ '--len': country.nameFr.length } as CSSProperties}>
             {country.nameFr}
           </h1>
           <p className="cp-hero__official">

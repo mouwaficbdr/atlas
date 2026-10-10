@@ -37,6 +37,15 @@ interface AppState {
   isChallenge: boolean;
   setChallenge: (value: boolean) => void;
   setLogbookOpen: (open: boolean) => void;
+  /**
+   * Transition globe ↔ fiche (#22) : position à l'écran de l'étiquette 3D du
+   * pays cliqué, d'où le titre de la fiche se compose ; au retour, le pays
+   * quitté, dont l'étiquette réapparaît un instant sur le globe.
+   */
+  titleOrigin: { cca3: string; x: number; y: number; at: number } | null;
+  setTitleOrigin: (origin: { cca3: string; x: number; y: number; at: number } | null) => void;
+  returnCca3: string | null;
+  setReturnCca3: (cca3: string | null) => void;
   setHoveredCountry: (cca3: string | null) => void;
   setFocusCca3: (cca3: string | null) => void;
   setCountryView: (view: 'close' | 'wide') => void;
@@ -62,6 +71,10 @@ export const useAppStore = create<AppState>((set) => ({
   isChallenge: false,
   setChallenge: (value) => set({ isChallenge: value }),
   setLogbookOpen: (open) => set({ isLogbookOpen: open }),
+  titleOrigin: null,
+  setTitleOrigin: (titleOrigin) => set({ titleOrigin }),
+  returnCca3: null,
+  setReturnCca3: (returnCca3) => set({ returnCca3 }),
   setHoveredCountry: (cca3) => set({ hoveredCountryCca3: cca3 }),
   setFocusCca3: (cca3) => set({ focusCca3: cca3 }),
   setCountryView: (view) => set({ countryView: view }),
