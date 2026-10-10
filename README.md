@@ -56,7 +56,7 @@ Le périmètre est celui des 193 États membres de l'ONU (filtre `unMember` de m
 **Partout**
 
 - **Mobile** : le vrai globe, cadré pour le portrait ; tiroir à portée du pouce (recherche, défi, pays au hasard, continents, carnet) et aperçu d'un pays au toucher
-- **SSG** : 193 pages statiques pré-générées au build, aucun appel réseau au runtime pour les données pays ; seules les images de partage à la demande sont rendues par une fonction
+- **Statique et rafraîchi** : 193 pages pré-générées au build puis régénérées au plus une fois par jour (extrait Wikipédia à jour) ; sources de données réextraites chaque semaine par une tâche planifiée qui propose une PR ; aucun appel réseau côté visiteur pour les données pays
 
 ---
 
@@ -157,10 +157,10 @@ Le périmètre est celui des 193 États membres de l'ONU (filtre `unMember` de m
 | [Beck et al. 2023](https://doi.org/10.1038/s41597-023-02549-6), *Scientific Data* 10, 724 | Climats de Köppen-Geiger 1991-2020 (carte à 0,1°), trois classes principales par pays | Calculé par `scripts/compute-koppen.mjs`, vendoré dans `scripts/vendor/koppen.json` |
 | [Natural Earth 1:50m](https://www.naturalearthdata.com) | Géométrie des frontières (GeoJSON) | Fichier statique, domaine public |
 | [NASA Blue Marble](https://visibleearth.nasa.gov) via les exemples [three.js](https://github.com/mrdoob/three.js/tree/dev/examples/textures/planets) | Textures de la Terre (jour, nuit, relief, nuages) | `public/textures/earth/`, domaine public / MIT |
-| [Wikipedia REST API](https://fr.wikipedia.org/api/rest_v1/) | Extraits encyclopédiques (cascade FR puis EN) | Récupéré au build, cache Next.js 24h, repli silencieux |
+| [Wikipedia REST API](https://fr.wikipedia.org/api/rest_v1/) | Extraits encyclopédiques (cascade FR puis EN) | Récupéré au build puis rafraîchi chaque jour (ISR), repli silencieux |
 | MDX local | Articles éditoriaux par pays | `/content/countries/[cca3].mdx` |
 
-Les données pays sont figées dans le dépôt (`public/data/countries-geo.json` + `scripts/vendor/`). Aucune base de données. Aucun backend propriétaire. Aucun appel réseau au runtime.
+Les données pays sont versionnées dans le dépôt (`public/data/countries-geo.json` + `scripts/vendor/`) et rafraîchies chaque lundi par le workflow `rafraichissement-donnees.yml`, qui ouvre une PR à relire quand une source a changé. Aucune base de données. Aucun backend propriétaire.
 
 ---
 
@@ -203,8 +203,8 @@ atlas/
 
 **Flux de données**
 
-1. **Vendoring** (manuel, hors build) : `scripts/fetch-vendor-data.js` fige mledoze/countries, la forme de gouvernement et les capitales (Wikidata) et la population (Banque mondiale) dans `scripts/vendor/` ; `scripts/compute-koppen.mjs` y calcule les climats depuis la carte de Beck et al. et `scripts/compute-flag-colors.mjs` les couleurs des drapeaux (couleurs réellement présentes, jamais des moyennes)
-2. **Génération** (manuel, hors build) : `scripts/generate-geo.js` reconstruit `public/data/countries-geo.json` : filtre aux États membres de l'ONU, noms, langues et monnaies en français, fuseaux IANA, indicatif, TLD, couleurs du drapeau, centroïde, passe géométrie
+1. **Vendoring** (chaque lundi par GitHub Actions, ou à la main) : `scripts/fetch-vendor-data.js` fige mledoze/countries, la forme de gouvernement et les capitales (Wikidata) et la population (Banque mondiale) dans `scripts/vendor/` ; `scripts/compute-koppen.mjs` y calcule les climats depuis la carte de Beck et al. et `scripts/compute-flag-colors.mjs` les couleurs des drapeaux (couleurs réellement présentes, jamais des moyennes)
+2. **Génération** (dans la même tâche, ou à la main) : `scripts/generate-geo.js` reconstruit `public/data/countries-geo.json` : filtre aux États membres de l'ONU, noms, langues et monnaies en français, fuseaux IANA, indicatif, TLD, couleurs du drapeau, centroïde, passe géométrie
 3. **Build** : `generateStaticParams` lit les 193 codes du GeoJSON et pré-génère toutes les fiches ; seul l'extrait Wikipédia est récupéré en ligne (repli silencieux). Les liens partagés (`/comparer`, `/carnet`, `/defi/[jour]/[grille]`) sont rendus à la demande, leurs fichiers de données et polices embarqués par `outputFileTracingIncludes`
 4. **Runtime SSG** : les données complètes de chaque pays sont injectées statiquement dans la page ; le client ne fait aucun appel réseau de données
 5. **Client** : le GeoJSON est chargé une fois au montage du globe et mis en cache en mémoire (singleton) ; le pays de l'utilisateur, le carnet et la partie du défi restent sur l'appareil (`localStorage`), jamais envoyés

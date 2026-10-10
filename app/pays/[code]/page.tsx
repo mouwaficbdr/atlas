@@ -18,9 +18,11 @@ import { countryDescription } from '@/lib/og';
 import { adjustForContrast, getContrastRatio } from '@/lib/contrast-checker';
 import type { CountryData, CountryPalette, MDXContent } from '@/lib/types';
 
-// SSG pur : les données sont figées au build, pas de revalidation.
+// Pages pré-générées au build, puis régénérées au plus une fois par jour
+// (ISR, #68) : l'extrait Wikipédia suit ainsi l'encyclopédie sans attendre un
+// déploiement. Si une régénération échoue, la version précédente reste servie.
 export const dynamic = 'force-static';
-export const revalidate = false;
+export const revalidate = 86400;
 // Les 193 codes sont tous connus au build : tout autre code renvoie un vrai
 // 404 au lieu d'une page "Pays non trouvé" servie en 200 (soft 404, finding QA2).
 export const dynamicParams = false;
