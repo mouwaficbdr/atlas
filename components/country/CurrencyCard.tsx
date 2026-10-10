@@ -44,11 +44,13 @@ export default function CurrencyCard({ currencies }: CurrencyCardProps) {
             <div
               style={{
                 color: 'var(--text-primary)',
-                fontFamily: 'var(--font-bebas-neue), sans-serif',
+                fontFamily: 'var(--font-display), sans-serif',
+                fontWeight: 700,
+                fontStretch: '70%',
+                textTransform: 'uppercase',
                 fontSize: 'clamp(2rem, 4vw, 5rem)',
                 marginTop: '2rem',
                 textAlign: 'center',
-                textTransform: 'uppercase',
                 lineHeight: 0.9,
               }}
             >
@@ -131,7 +133,10 @@ export default function CurrencyCard({ currencies }: CurrencyCardProps) {
         .coin__glyph {
           position: relative;
           z-index: 1;
-          font-family: var(--font-bebas-neue), sans-serif;
+          font-family: var(--font-display), sans-serif;
+          font-weight: 700;
+          font-stretch: 70%;
+          text-transform: uppercase;
           font-size: 3.4rem;
           line-height: 1;
           color: #8a6210;

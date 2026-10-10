@@ -161,8 +161,10 @@ export default function OffMapScreen({
           margin-bottom: 1.25rem;
         }
         .offmap__headline {
-          font-family: var(--font-bebas-neue), 'Impact', sans-serif;
-          font-weight: 400;
+          font-family: var(--font-display), sans-serif;
+          font-weight: 700;
+          font-stretch: 70%;
+          text-transform: uppercase;
           font-size: clamp(4rem, 16vw, 11rem);
           line-height: 0.88;
           letter-spacing: 0.02em;

@@ -1,14 +1,16 @@
 import type { Metadata } from 'next';
-import { Bebas_Neue, DM_Sans, JetBrains_Mono } from 'next/font/google';
+import { DM_Sans, JetBrains_Mono, Saira } from 'next/font/google';
 import LenisProvider from '@/components/layout/LenisProvider';
 import PersistentLayout from '@/components/layout/PersistentLayout';
 import { SITE_URL } from '@/lib/site-config';
 import './globals.css';
 
-const bebasNeue = Bebas_Neue({
-  weight: '400',
+// Police d'affichage variable en largeur (#24) : condensée par défaut, sa
+// chasse s'adapte à la longueur des noms de pays plutôt que leur taille.
+const display = Saira({
   subsets: ['latin'],
-  variable: '--font-bebas-neue',
+  axes: ['wdth'],
+  variable: '--font-display',
   display: 'swap',
 });
 
@@ -73,7 +75,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={`${bebasNeue.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}>
+    <html lang="fr" className={`${display.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}>
       <body>
         <LenisProvider>
           <PersistentLayout>

@@ -43,10 +43,12 @@ export default function ClimateDisplay({ climate }: { climate: ClimateShare[] })
       <style dangerouslySetInnerHTML={{ __html: `
         .climate__main {
           margin: 0 0 1.4rem;
-          font-family: var(--font-bebas-neue), sans-serif;
+          font-family: var(--font-display), sans-serif;
+          font-weight: 700;
+          font-stretch: 70%;
+          text-transform: uppercase;
           font-size: clamp(2.4rem, 4.5vw, 4.5rem);
           line-height: 0.95;
-          text-transform: uppercase;
           color: var(--text-primary);
         }
         .climate__bar {

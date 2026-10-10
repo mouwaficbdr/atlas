@@ -15,7 +15,10 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-bebas-neue), 'Impact', sans-serif;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-stretch: 70%;
+  text-transform: uppercase;
   letter-spacing: 0.02em;
 }
 
@@ -92,18 +95,22 @@ a {
 }
 .mdx-body > p:first-of-type::first-letter {
   float: left;
-  font-family: var(--font-bebas-neue), 'Impact', sans-serif;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-stretch: 70%;
+  text-transform: uppercase;
   font-size: 4.4rem;
   line-height: 0.78;
   padding: 0.1rem 0.6rem 0 0;
   color: var(--text-primary);
 }
 .mdx-body h2 {
-  font-family: var(--font-bebas-neue), 'Impact', sans-serif;
-  font-weight: 400;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-stretch: 70%;
+  text-transform: uppercase;
   font-size: clamp(1.4rem, 2.4vw, 1.9rem);
   letter-spacing: 0.04em;
-  text-transform: uppercase;
   color: var(--text-primary);
   margin: 3.5rem 0 1rem;
 }

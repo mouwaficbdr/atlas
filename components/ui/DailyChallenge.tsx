@@ -183,7 +183,7 @@ export default function DailyChallenge({ countries }: { countries: CountryData[]
           color: var(--text-primary, #f0f0f0);
         }
         .defi__kicker { margin: 0; font-family: var(--font-jetbrains-mono), monospace; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: #ffd27a; }
-        .defi__title { margin: 0.6rem 0 0.4rem; font-family: var(--font-bebas-neue), sans-serif; font-weight: 400; font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1; letter-spacing: 0.02em; }
+        .defi__title { margin: 0.6rem 0 0.4rem; font-family: var(--font-display), sans-serif; font-weight: 700; font-stretch: 70%; text-transform: uppercase; font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1; letter-spacing: 0.02em; }
         .defi__lede { margin: 0 0 1.2rem; line-height: 1.55; color: var(--text-secondary, rgba(255, 255, 255, 0.75)); }
         .defi__guesses { list-style: none; margin: 0 0 1rem; padding: 0; display: grid; gap: 1px; background: rgba(255, 255, 255, 0.08); }
         .defi__guess { display: flex; justify-content: space-between; gap: 1rem; padding: 0.6rem 0.8rem; background: #0a0a14; }

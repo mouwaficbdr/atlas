@@ -25,10 +25,10 @@ async function logbookImage(features: GeoJSONFeature[], explored: Set<string>, t
   ctx.fillStyle = '#0a0a14';
   ctx.fillRect(0, 0, 1200, 630);
   drawLogbookMap(ctx, features, explored, 60, 150, 1080, 540);
-  const display = fontOf('--font-bebas-neue', 'sans-serif');
+  const display = fontOf('--font-display', 'sans-serif');
   const mono = fontOf('--font-jetbrains-mono', 'monospace');
   ctx.fillStyle = '#f0f0f0';
-  ctx.font = `64px ${display}`;
+  ctx.font = `700 64px ${display}`;
   ctx.fillText('CARNET DE VOL', 60, 100);
   ctx.font = `22px ${mono}`;
   ctx.fillStyle = '#ffd27a';
@@ -213,7 +213,7 @@ export default function Logbook({ countries }: { countries: CountryData[] }) {
           color: var(--text-primary, #f0f0f0);
         }
         .logbook__head { display: flex; justify-content: space-between; align-items: start; gap: 1rem; margin-bottom: 1.2rem; }
-        .logbook__title { margin: 0; font-family: var(--font-bebas-neue), sans-serif; font-weight: 400; font-size: 2.4rem; letter-spacing: 0.02em; line-height: 1; }
+        .logbook__title { margin: 0; font-family: var(--font-display), sans-serif; font-weight: 700; font-stretch: 70%; text-transform: uppercase; font-size: 2.4rem; letter-spacing: 0.02em; line-height: 1; }
         .logbook__count { margin: 0.4rem 0 0; font-family: var(--font-jetbrains-mono), monospace; font-size: 0.75rem; letter-spacing: 0.1em; color: #ffd27a; }
         .logbook__close { width: 40px; height: 40px; display: grid; place-items: center; background: none; border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 50%; color: inherit; cursor: pointer; }
         .logbook__map { display: block; width: 100%; height: auto; margin-bottom: 1.2rem; }
