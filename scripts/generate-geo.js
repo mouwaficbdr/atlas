@@ -21,6 +21,7 @@
  *     capitale, forme de gouvernement FR, indicatif, TLD
  *  3. centroïde recalculé en flottant depuis la géométrie
  *  4. géométrie : déroulage à l'antiméridien + densification des arêtes longues
+ *  5. lib/data/timezone-country.json : fuseau IANA → pays membre
  */
 
 const fs = require('fs');
@@ -28,6 +29,7 @@ const path = require('path');
 const ct = require('countries-and-timezones');
 
 const DATA_PATH = path.join(__dirname, '../public/data/countries-geo.json');
+const TZ_PATH = path.join(__dirname, '../lib/data/timezone-country.json');
 const VENDOR = path.join(__dirname, 'vendor');
 
 // Noms français des langues et monnaies, depuis leurs codes (idempotent) :
@@ -512,6 +514,16 @@ function generate() {
 
   const result = { type: 'FeatureCollection', features: out };
   fs.writeFileSync(DATA_PATH, JSON.stringify(result));
+
+  // Fuseau IANA de l'appareil → pays (« Vous êtes ici », #29), alias compris
+  // (Africa/Porto-Novo désigne le Bénin, pas Lagos). Premier pays membre listé.
+  const byCca2 = new Map(out.map((f) => [f.properties.cca2, f.properties.cca3]));
+  const tzCountry = {};
+  for (const [name, tz] of Object.entries(ct.getAllTimezones({ deprecated: true }))) {
+    const cca3 = tz.countries.map((c) => byCca2.get(c)).find(Boolean);
+    if (cca3) tzCountry[name] = cca3;
+  }
+  fs.writeFileSync(TZ_PATH, JSON.stringify(tzCountry));
 
   console.log(`Écrit ${out.length} États membres de l'ONU (${skipped} écartés).`);
   const missingGov = out.filter((f) => !f.properties.governmentFr).length;

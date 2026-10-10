@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import LoadingScreen from '@/components/ui/LoadingScreen';
 import SearchPalette from '@/components/ui/SearchPalette';
 import SunLine from '@/components/ui/SunLine';
+import { resolveHome } from '@/lib/home-country';
 import Navigation from '@/components/layout/Navigation';
 import MobileExplorer from '@/components/ui/MobileExplorer';
 import MobileHomeDock from '@/components/ui/MobileHomeDock';
@@ -160,6 +161,11 @@ export default function PersistentLayout({
   // Sur l'accueil mobile, toucher un pays (ou le choisir dans l'index) ouvre
   // son aperçu dans le tiroir : le survol n'existe pas au doigt.
   const setPreviewCca3 = useAppStore((state) => state.setPreviewCca3);
+  // « Vous êtes ici » : pays de l'utilisateur, résolu une fois sur l'appareil.
+  const setHome = useAppStore((state) => state.setHome);
+  useEffect(() => {
+    setHome(resolveHome());
+  }, [setHome]);
   const handleCountrySelect = (cca3: string) => {
     if (isMobile && pathname === '/') setPreviewCca3(cca3);
     else router.push(`/pays/${cca3.toLowerCase()}`);

@@ -469,3 +469,13 @@
 .cp-end__chip:hover { border-color: var(--cp-accent); background: rgba(255, 255, 255, 0.04); }
 
 .cp-end__sources { margin-top: clamp(3rem, 9vh, 5rem); }
+
+/* Repère rapporté au pays de l'utilisateur (#29). */
+.cp-fromhome {
+  margin: 1rem 0 0;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: #ffd27a;
+}
+.cp-fromhome::before { content: '◎ '; opacity: 0.8; }
