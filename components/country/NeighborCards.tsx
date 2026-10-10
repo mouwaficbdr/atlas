@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type CSSProperties } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
 import type { CountryData } from '@/lib/types';
@@ -76,10 +76,12 @@ export default function NeighborCards({ origin, borders, allCountries }: Neighbo
             onBlur={() => setFocus(null)}
           >
             <span className="nb__heading" aria-hidden="true">
-              <svg className="nb__compass" viewBox="0 0 24 24" width="22" height="22">
+              <svg className="nb__compass" viewBox="0 0 24 24" width="34" height="34">
                 <circle cx="12" cy="12" r="10.5" />
-                <g style={{ transform: `rotate(${bearing}deg)` }}>
-                  <path d="M12 3.5 L14.6 12 L12 10.6 L9.4 12 Z" />
+                <path className="nb__tick" d="M12 1.5 V3.5" />
+                <g style={{ '--b': `${Math.round(bearing)}deg` } as CSSProperties}>
+                  <path d="M12 3 L15 12 L12 10.4 L9 12 Z" />
+                  <path className="nb__tail" d="M12 21 L15 12 L12 13.6 L9 12 Z" />
                 </g>
               </svg>
               {direction}
@@ -126,7 +128,7 @@ export default function NeighborCards({ origin, borders, allCountries }: Neighbo
           align-items: center;
           gap: 0.55rem;
           font-family: var(--font-jetbrains-mono), monospace;
-          font-size: 0.62rem;
+          font-size: 0.7rem;
           letter-spacing: 0.2em;
           text-transform: uppercase;
           color: var(--text-muted);
@@ -138,10 +140,27 @@ export default function NeighborCards({ origin, borders, allCountries }: Neighbo
         }
         .nb__compass g {
           transform-origin: 12px 12px;
-          transition: transform 0.6s var(--ease-signature, ease);
+          transform: rotate(var(--b));
         }
         .nb__compass path {
           fill: var(--country-accent, #4fc3f7);
+        }
+        .nb__compass .nb__tail { fill: rgba(255, 255, 255, 0.22); }
+        .nb__compass .nb__tick { stroke: rgba(255, 255, 255, 0.35); stroke-width: 1; }
+        /* Au survol, l'aiguille part du nord et se cale sur le cap, avec
+           l'inertie amortie d'une vraie boussole. */
+        .nb:hover .nb__compass g,
+        .nb:focus-visible .nb__compass g {
+          animation: nb-settle 1.1s var(--ease-signature, ease) both;
+        }
+        @keyframes nb-settle {
+          0% { transform: rotate(0deg); }
+          55% { transform: rotate(calc(var(--b) + 14deg)); }
+          78% { transform: rotate(calc(var(--b) - 5deg)); }
+          100% { transform: rotate(var(--b)); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .nb:hover .nb__compass g, .nb:focus-visible .nb__compass g { animation: none; }
         }
         .nb__name {
           margin-top: auto;
@@ -170,7 +189,8 @@ export default function NeighborCards({ origin, borders, allCountries }: Neighbo
           .nb { min-height: 6.5rem; padding: 0.9rem 0.9rem 1rem; gap: 0.7rem; }
           .nb__name { font-size: 1.35rem; }
           .nb__flag { top: 0.9rem; right: 0.9rem; width: 22px; }
-          .nb__heading { font-size: 0.55rem; letter-spacing: 0.12em; }
+          .nb__heading { font-size: 0.62rem; letter-spacing: 0.12em; }
+          .nb__compass { width: 26px; height: 26px; }
         }
       ` }} />
     </div>

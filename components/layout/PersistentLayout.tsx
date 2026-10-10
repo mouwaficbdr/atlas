@@ -237,7 +237,7 @@ export default function PersistentLayout({
                 letterSpacing: '0.3em',
                 opacity: 0.5
               }}>
-                ATLAS°
+                atlas
               </span>
             </div>
 
@@ -275,7 +275,7 @@ export default function PersistentLayout({
 
       {/* Navigation (desktop) : réservée à l'écran de départ (le globe). Sur
           une fiche pays, le fil d'Ariane (lien "Globe") assure déjà le retour,
-          superposer la marque ATLAS° y ferait doublon dans le même coin. */}
+          superposer la marque atlas y ferait doublon dans le même coin. */}
       {!isMobile && pathname === '/' && (
         <Navigation onSearchOpen={() => setSearchOpen(true)} />
       )}

@@ -23,8 +23,8 @@
 }
 
 .cp-kicker { font-size: 0.7rem; color: var(--cp-muted); }
-.cp-label { font-size: 0.62rem; color: var(--cp-muted); display: block; margin-bottom: 0.6rem; }
-.cp-note { font-size: 0.62rem; color: var(--cp-muted); letter-spacing: 0.1em; text-transform: none; line-height: 1.6; }
+.cp-label { font-size: 0.7rem; color: var(--cp-muted); display: block; margin-bottom: 0.6rem; }
+.cp-note { font-size: 0.7rem; color: var(--cp-muted); letter-spacing: 0.1em; text-transform: none; line-height: 1.6; }
 
 .cp-display {
   font-family: var(--font-bebas-neue), sans-serif;
@@ -259,7 +259,7 @@
   font-size: 0.95rem;
 }
 
-.cp-chips li span { margin-left: 0.5rem; font-family: var(--font-jetbrains-mono), monospace; font-size: 0.62rem; color: var(--cp-muted); }
+.cp-chips li span { margin-left: 0.5rem; font-family: var(--font-jetbrains-mono), monospace; font-size: 0.7rem; color: var(--cp-muted); }
 
 /* -------------------------------------------------------- Identifiants */
 
@@ -311,7 +311,7 @@
 
   .cp-rail__alt {
     font-family: var(--font-jetbrains-mono), monospace;
-    font-size: 0.62rem;
+    font-size: 0.7rem;
     letter-spacing: 0.1em;
     color: var(--cp-muted);
     font-variant-numeric: tabular-nums;
@@ -326,7 +326,7 @@
     display: block;
     padding: 0.25rem 0;
     font-family: var(--font-jetbrains-mono), monospace;
-    font-size: 0.6rem;
+    font-size: 0.68rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--cp-muted);

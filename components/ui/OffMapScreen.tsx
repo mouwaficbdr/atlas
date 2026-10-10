@@ -46,7 +46,7 @@ export default function OffMapScreen({
       <div className="offmap__scan" aria-hidden="true" />
 
       <div className="offmap__row">
-        <span className="offmap__mark">ATLAS&#176;</span>
+        <span className="offmap__mark">atlas</span>
         <span className="offmap__status">[ {status} ]</span>
       </div>
 
@@ -69,7 +69,7 @@ export default function OffMapScreen({
       </div>
 
       <div className="offmap__row offmap__row--foot">
-        <span>ATLAS&#176; &middot; BADAROU Mouwafic</span>
+        <span>atlas &middot; BADAROU Mouwafic</span>
         <span className="offmap__coords">{lostCoordinates}</span>
       </div>
 

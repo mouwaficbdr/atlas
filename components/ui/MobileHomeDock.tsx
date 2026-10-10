@@ -162,7 +162,7 @@ export default function MobileHomeDock({ countries, onOpenExplorer }: MobileHome
           justify-content: space-between;
           margin-top: 0.9rem;
           font-family: var(--font-jetbrains-mono), monospace;
-          font-size: 0.6rem;
+          font-size: 0.68rem;
           letter-spacing: 0.1em;
           text-transform: uppercase;
           color: #8d95a3;
@@ -171,11 +171,11 @@ export default function MobileHomeDock({ countries, onOpenExplorer }: MobileHome
         .dock__row { display: flex; align-items: center; gap: 0.9rem; }
         .dock__flag { border-radius: 3px; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15); }
         .dock__id { display: flex; flex-direction: column; flex: 1; min-width: 0; }
-        .dock__kicker { font-family: var(--font-jetbrains-mono), monospace; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: #8d95a3; }
+        .dock__kicker { font-family: var(--font-jetbrains-mono), monospace; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: #8d95a3; }
         .dock__name { font-family: var(--font-bebas-neue), sans-serif; font-size: 2rem; line-height: 1; letter-spacing: 0.02em; overflow-wrap: anywhere; }
         .dock__close { width: 44px; height: 44px; display: grid; place-items: center; background: none; border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 50%; color: var(--text-primary); }
         .dock__facts { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin: 1rem 0; }
-        .dock__facts dt { font-family: var(--font-jetbrains-mono), monospace; font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: #8d95a3; }
+        .dock__facts dt { font-family: var(--font-jetbrains-mono), monospace; font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: #8d95a3; }
         .dock__facts dd { margin: 0.25rem 0 0; font-size: 1.05rem; }
         .dock__open {
           display: flex;

@@ -45,7 +45,7 @@ export default function GlobalError({
             textTransform: 'uppercase',
           }}
         >
-          <span style={{ color: 'rgba(240,240,240,0.85)' }}>ATLAS&#176;</span>
+          <span style={{ color: 'rgba(240,240,240,0.85)' }}>atlas</span>
           <span style={{ color: '#4fc3f7' }}>[ FATAL ]</span>
         </div>
 
@@ -122,7 +122,7 @@ export default function GlobalError({
             color: 'rgba(240,240,240,0.4)',
           }}
         >
-          ATLAS&#176; &middot; BADAROU Mouwafic
+          atlas &middot; BADAROU Mouwafic
         </div>
       </body>
     </html>
