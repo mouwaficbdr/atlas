@@ -51,7 +51,7 @@ export default function CountryLoading() {
         .lock__label {
           margin-top: 120px;
           font-family: var(--font-jetbrains-mono), monospace;
-          font-size: 0.6rem;
+          font-size: 0.7rem;
           letter-spacing: 0.3em;
           margin-right: -0.3em;
           text-transform: uppercase;

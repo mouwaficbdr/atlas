@@ -88,7 +88,7 @@ export default function ShareButton({ url, title = 'atlas', compact = false }: S
         }
         .share:hover { border-color: var(--country-primary, #fff); background: rgba(255,255,255,0.04); }
         .share[data-copied='true'] { color: var(--country-primary, #4fc3f7); }
-        .share--compact { padding: 0.5rem 0.8rem; font-size: 0.62rem; }
+        .share--compact { padding: 0.5rem 0.8rem; font-size: 0.7rem; }
       ` }} />
       {showFallback && (
         <input

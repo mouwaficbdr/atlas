@@ -75,7 +75,7 @@ export default function ClimateDisplay({ climate }: { climate: ClimateShare[] })
         .climate__legend i { width: 10px; height: 10px; border-radius: 2px; }
         .climate__code, .climate__source, .climate__note {
           font-family: var(--font-jetbrains-mono), monospace;
-          font-size: 0.65rem;
+          font-size: 0.7rem;
           letter-spacing: 0.08em;
           color: var(--text-muted);
         }

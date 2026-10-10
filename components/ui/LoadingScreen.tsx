@@ -105,7 +105,7 @@ export default function LoadingScreen({ loadingState, onRevealComplete }: Loadin
       </div>
 
       <div ref={captionRef} className="pbd__caption">
-        <span className="pbd__mark">ATLAS°</span>
+        <span className="pbd__mark">atlas</span>
         <span key={label} className="pbd__step">
           {label}
         </span>
@@ -169,8 +169,8 @@ export default function LoadingScreen({ loadingState, onRevealComplete }: Loadin
           white-space: nowrap;
         }
         .pbd__mark {
-          font-family: var(--font-bebas-neue), sans-serif;
-          font-size: 1.15rem;
+          font-family: var(--font-jetbrains-mono), monospace;
+          font-size: 0.95rem;
           letter-spacing: 0.42em;
           margin-right: -0.42em;
           color: var(--text-primary);
