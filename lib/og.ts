@@ -5,6 +5,7 @@
 
 import { readFileSync } from 'fs';
 import { join } from 'path';
+import type { CountryData } from './types';
 
 const fontsDir = join(process.cwd(), 'public', 'fonts');
 
@@ -81,4 +82,31 @@ export async function flagDataUri(cca2: string): Promise<string | null> {
 /** "66 351 959" : espace fine insécable, format FR. */
 export function frInt(n: number): string {
   return new Intl.NumberFormat('fr-FR').format(n);
+}
+
+const frCompact = new Intl.NumberFormat('fr-FR', { notation: 'compact', compactDisplay: 'long', maximumFractionDigits: 1 });
+const lowerFirst = (s: string) => s.charAt(0).toLocaleLowerCase('fr') + s.slice(1);
+
+/** « 123,4 millions d’habitants », ou le nombre exact sous le million. */
+export function populationLabel(population: number): string {
+  return population < 1_000_000 ? `${frInt(population)} habitants` : `${frCompact.format(population)} d’habitants`;
+}
+
+/**
+ * Description des métadonnées d'une fiche : factuelle et sans article à
+ * accorder au nom du pays (« le Japon », « la France », « les Tuvalu »),
+ * en 160 caractères au plus.
+ */
+export function countryDescription(country: CountryData): string {
+  const language = Object.values(country.languages ?? {})[0];
+  const currency = Object.values(country.currencies ?? {})[0]?.name;
+  const facts = [
+    country.nameFr,
+    `capitale ${country.capitalFr}`,
+    populationLabel(country.population),
+    language && lowerFirst(language),
+    currency && lowerFirst(currency),
+  ].filter(Boolean);
+  const full = `${facts.join(' · ')}. Sa fiche complète sur le globe 3D atlas.`;
+  return full.length <= 160 ? full : `${facts.join(' · ')}.`.slice(0, 160);
 }

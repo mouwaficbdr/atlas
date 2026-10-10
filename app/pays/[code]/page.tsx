@@ -14,6 +14,7 @@ import MDXSection from '@/components/country/MDXSection';
 import { fetchAllCountries } from '@/lib/countries-api';
 import { loadMDX } from '@/lib/mdx-loader';
 import { SITE_URL } from '@/lib/site-config';
+import { countryDescription } from '@/lib/og';
 import { adjustForContrast, getContrastRatio } from '@/lib/contrast-checker';
 import type { CountryData, CountryPalette, MDXContent } from '@/lib/types';
 
@@ -60,11 +61,7 @@ export async function generateMetadata({
   }
 
   const canonicalUrl = `${SITE_URL}/pays/${params.code}`;
-  const description =
-    `Découvrez ${country.officialNameFr} sur atlas : population, superficie, capitale, langues, monnaie, et bien plus.`.slice(
-      0,
-      160,
-    );
+  const description = countryDescription(country);
 
   // L'image Open Graph par pays est générée par opengraph-image.tsx (ratio
   // 1200x630 réel), Next.js la référence automatiquement.
