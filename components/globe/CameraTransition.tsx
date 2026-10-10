@@ -60,7 +60,10 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
           ease: 'power2.inOut',
           onUpdate: () => {
             camera.position.copy(home).multiplyScalar(introDistanceAt(flight.t, end));
-            render();
+            // L'axe d'arrivée (pays de l'utilisateur) peut différer de celui
+            // de départ : sans visée, le globe restait décentré jusqu'à
+            // l'activation des contrôles, puis sautait au centre.
+            renderLooking();
           },
           onComplete: () => setIntroPhase('done'),
         });
