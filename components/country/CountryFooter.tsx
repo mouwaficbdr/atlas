@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useInView } from '@/lib/hooks/useInView';
 import type { CountryData } from '@/lib/types';
 import { cardinalDirection, initialBearing } from '@/lib/bearing';
 import ShareButton from './ShareButton';
@@ -30,7 +32,9 @@ function distanceKm([lon1, lat1]: [number, number], [lon2, lat2]: [number, numbe
  * au globe, puis les sources des données affichées.
  */
 export default function CountryFooter({ current, allCountries, shareUrl }: CountryFooterProps) {
+  const router = useRouter();
   const [random, setRandom] = useState<CountryData | null>(null);
+  const { ref, inView } = useInView<HTMLElement>({ rootMargin: '0px', threshold: 0.3, once: false });
 
   useEffect(() => {
     const pool = allCountries.filter((c) => c.cca3 !== current.cca3);
@@ -46,19 +50,37 @@ export default function CountryFooter({ current, allCountries, shareUrl }: Count
       .slice(0, 3);
   }, [current, allCountries]);
 
+  // Arrivé au sol, la flèche droite enchaîne sur le pays proche suivant.
+  const nextHref = next[0] ? `/pays/${next[0].country.cca3.toLowerCase()}` : null;
+  useEffect(() => {
+    if (!inView || !nextHref) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'ArrowRight' || e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return;
+      if ((e.target as HTMLElement | null)?.closest('input, textarea, select')) return;
+      router.push(nextHref);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [inView, nextHref, router]);
+
   return (
-    <footer id="fin" className="cp-end">
+    <footer id="fin" ref={ref} className="cp-end">
       <p className="cp-kicker">{current.cca3} · au sol</p>
       <h2 className="cp-display cp-end__title">Continuer l’exploration</h2>
 
       <ol className="cp-end__next">
-        {next.map(({ country, km }) => (
+        {next.map(({ country, km }, i) => (
           <li key={country.cca3}>
             <Link href={`/pays/${country.cca3.toLowerCase()}`} className="cp-end__dest">
               <span className="cp-note">
                 {cardinalDirection(initialBearing(current.centroid, country.centroid))} · {fr.format(Math.round(km / 10) * 10)} km
               </span>
               <span className="cp-display">{country.nameFr}</span>
+              {i === 0 && (
+                <span className="cp-end__key" aria-hidden="true">
+                  <kbd>→</kbd> au clavier
+                </span>
+              )}
             </Link>
           </li>
         ))}

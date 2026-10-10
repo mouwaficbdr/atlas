@@ -34,18 +34,31 @@ export default function SearchPalette({
     }
   }, [isOpen]);
 
-  // Cmd+K / Ctrl+K : raccourci global pour ouvrir la palette
+  // Cmd+K / Ctrl+K ouvre la palette ; taper directement une lettre sur le
+  // globe aussi, la lettre devenant le début de la recherche.
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
         setIsOpen(true);
+        return;
       }
+      // Une lettre (accentuée comprise) : seule une lettre change de casse.
+      const isLetter = e.key.length === 1 && e.key.toLowerCase() !== e.key.toUpperCase();
+      if (e.metaKey || e.ctrlKey || e.altKey || !isLetter) return;
+      const target = e.target as HTMLElement | null;
+      if (target?.closest('input, textarea, select, [contenteditable="true"]')) return;
+      // Les lettres tapées avant que le champ ait le focus s'ajoutent à la
+      // recherche au lieu de se perdre.
+      e.preventDefault();
+      setQuery((q) => (isOpen ? q + e.key : e.key));
+      setIsOpen(true);
+      inputRef.current?.focus();
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [setIsOpen]);
+  }, [isOpen, setIsOpen]);
 
   // Filtrage instantané à chaque frappe
   useEffect(() => {
