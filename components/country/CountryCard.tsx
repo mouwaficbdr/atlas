@@ -6,6 +6,7 @@ import { formatLat, formatLon, utcOffset } from '@/lib/format-coords';
 import { useAppStore } from '@/lib/store';
 import { contrastsFor } from '@/lib/contrasts';
 import Link from 'next/link';
+import { areaFromHome, timeFromHome } from '@/lib/from-home';
 
 import Breadcrumb from './Breadcrumb';
 import WikiExtract from './WikiExtract';
@@ -75,6 +76,9 @@ export default function CountryCard({
 
   // Arrivé aux frontières, la caméra recule pour montrer les voisins.
   const setCountryView = useAppStore((state) => state.setCountryView);
+  // « Vous êtes ici » : la fiche se rapporte au pays de l'utilisateur.
+  const homeCca3 = useAppStore((state) => state.home?.cca3);
+  const home = homeCca3 && homeCca3 !== country.cca3 ? allCountries.find((c) => c.cca3 === homeCca3) : undefined;
   useEffect(() => {
     const target = document.getElementById('frontieres');
     if (!target) return;
@@ -234,6 +238,11 @@ export default function CountryCard({
             )}
           </div>
           {country.capitalLonLat && <CapitalSky timezone={country.primaryTimezone} lonLat={country.capitalLonLat} />}
+          {homeCca3 === country.cca3 ? (
+            <p className="cp-fromhome">Vous êtes ici</p>
+          ) : (
+            home && <p className="cp-fromhome">{timeFromHome(country, home, new Date())}</p>
+          )}
         </div>
       </section>
 
@@ -307,6 +316,7 @@ export default function CountryCard({
               {fr.format(country.area)} <span style={{ fontSize: '0.4em', textTransform: 'none' }}>km²</span>
             </p>
             <RankRuler rank={stats.areaRank} ranked={stats.byArea} what="pays le plus étendu" />
+            {home && <p className="cp-fromhome">{areaFromHome(country, home)}</p>}
             <div className="cp-pair">
               <div>
                 <span className="cp-label">Accès à la mer</span>

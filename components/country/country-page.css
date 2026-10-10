@@ -520,3 +520,12 @@
 }
 .cp-contrasts a { color: var(--text-primary); text-decoration: underline; text-decoration-color: var(--cp-accent); text-underline-offset: 0.2em; }
 .cp-contrasts a:hover { color: var(--cp-accent); }
+/* Repère rapporté au pays de l'utilisateur (#29). */
+.cp-fromhome {
+  margin: 1rem 0 0;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: #ffd27a;
+}
+.cp-fromhome::before { content: '◎ '; opacity: 0.8; }

@@ -7,7 +7,7 @@ import type { CountryData } from '@/lib/types';
 import * as THREE from 'three';
 import { useAppStore } from '@/lib/store';
 import { currentGlobeDistance, introDistanceAt } from '@/lib/globe/intro';
-import { homeViewDirection } from '@/lib/globe/sun';
+import { countryViewDirection, homeViewDirection } from '@/lib/globe/sun';
 import { lonLatToCartesian } from '@/lib/globe/pick-country';
 
 interface CameraTransitionProps {
@@ -48,7 +48,10 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
 
       if (introPhase === 'flying') {
         // Approche depuis le point bleu pâle jusqu'à la vue globe.
-        const home = homeViewDirection();
+        // Arrivée sur le pays de l'utilisateur s'il est connu, sinon sur le
+        // méridien choisi pour la lumière.
+        const mine = countries.find((c) => c.cca3 === useAppStore.getState().home?.cca3);
+        const home = mine ? countryViewDirection(mine.centroid) : homeViewDirection();
         const end = currentGlobeDistance();
         const flight = { t: 0 };
         const tween = gsap.to(flight, {
