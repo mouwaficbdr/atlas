@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useId, useMemo, useState } from 'react';
+import { useAppStore } from '@/lib/store';
 import type { CountryData, GeoJSONFeature } from '@/lib/types';
 import { loadGeoJSON } from '@/lib/geojson-loader';
 import { mainPolygons, projectedPath } from '@/lib/true-size';
@@ -32,6 +33,13 @@ export default function TrueSizeCompare({ country, allCountries, canonicalUrl }:
   const selectId = useId();
   const [features, setFeatures] = useState<GeoJSONFeature[] | null>(null);
   const [other, setOther] = useState(country.cca3 === 'FRA' ? 'ESP' : 'FRA');
+
+  // Sans choix dans l'URL, le comparateur se règle sur le pays de l'utilisateur.
+  const homeCca3 = useAppStore((state) => state.home?.cca3);
+  useEffect(() => {
+    const wanted = new URLSearchParams(window.location.search).get('comparer');
+    if (!wanted && homeCca3 && homeCca3 !== country.cca3) setOther(homeCca3);
+  }, [homeCca3, country.cca3]);
 
   useEffect(() => {
     const wanted = new URLSearchParams(window.location.search).get('comparer')?.toUpperCase();

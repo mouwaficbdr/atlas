@@ -37,6 +37,14 @@ export function homeLongitude(subsolarLon: number): number {
 }
 
 /** Direction de la caméra d'accueil. */
+/**
+ * Arrivée sur le pays de l'utilisateur (#29) : face à son centre, latitude
+ * bornée pour garder le globe lisible aux hautes latitudes.
+ */
+export function countryViewDirection([lon, lat]: [number, number]): THREE.Vector3 {
+  return new THREE.Vector3(...lonLatToCartesian(lon, Math.max(-40, Math.min(55, lat))));
+}
+
 export function homeViewDirection(sun: THREE.Vector3 = SUN_DIRECTION): THREE.Vector3 {
   const { lon: subsolarLon } = cartesianToLonLat(sun.x, sun.y, sun.z);
   return new THREE.Vector3(...lonLatToCartesian(homeLongitude(subsolarLon), HOME_LATITUDE));

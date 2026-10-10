@@ -21,6 +21,13 @@ interface AppState {
   focusCca3: string | null;
   /** Fiche pays : cadrage serré sur le pays, ou large sur ses voisins. */
   countryView: 'close' | 'wide';
+  /**
+   * « Vous êtes ici » (#29) : pays de l'utilisateur, déduit du fuseau de
+   * l'appareil ou choisi (voir lib/home-country.ts). undefined tant que non
+   * résolu, null si aucun.
+   */
+  home: { cca3: string; source: 'fuseau' | 'choix' } | null | undefined;
+  setHome: (home: { cca3: string; source: 'fuseau' | 'choix' } | null) => void;
   setHoveredCountry: (cca3: string | null) => void;
   setFocusCca3: (cca3: string | null) => void;
   setCountryView: (view: 'close' | 'wide') => void;
@@ -38,6 +45,8 @@ export const useAppStore = create<AppState>((set) => ({
   setPreviewCca3: (cca3) => set({ previewCca3: cca3 }),
   focusCca3: null,
   countryView: 'close',
+  home: undefined,
+  setHome: (home) => set({ home }),
   setHoveredCountry: (cca3) => set({ hoveredCountryCca3: cca3 }),
   setFocusCca3: (cca3) => set({ focusCca3: cca3 }),
   setCountryView: (view) => set({ countryView: view }),
