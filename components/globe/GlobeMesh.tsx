@@ -49,6 +49,7 @@ export default function GlobeMesh({
   // Survolé à la souris, ou en aperçu sur l'accueil mobile.
   const highlightedCca3 = hoveredCca3 ?? previewCca3;
   const logbook = useAppStore((state) => state.logbook);
+  const isChallenge = useAppStore((state) => state.isChallenge);
   const exploredFeatures = useMemo(() => {
     const explored = new Set(logbook.map((s) => s.cca3));
     return features.filter((f) => explored.has(f.properties.cca3));
@@ -176,6 +177,7 @@ export default function GlobeMesh({
 
       {/* Holographic Text : visible uniquement au survol en mode globe */}
       {cameraMode === 'globe' &&
+        !isChallenge &&
         hoveredFeature &&
         hoveredCountry &&
         hoveredCountry.latlng && (

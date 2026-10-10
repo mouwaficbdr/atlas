@@ -18,3 +18,12 @@ const WINDS = ['Nord', 'Nord-Est', 'Est', 'Sud-Est', 'Sud', 'Sud-Ouest', 'Ouest'
 export function cardinalDirection(bearing: number): string {
   return WINDS[Math.round(bearing / 45) % 8];
 }
+
+/** Distance orthodromique entre deux points [lon, lat], en km. */
+export function distanceKm([lon1, lat1]: [number, number], [lon2, lat2]: [number, number]): number {
+  const toRad = Math.PI / 180;
+  const a =
+    Math.sin(((lat2 - lat1) * toRad) / 2) ** 2 +
+    Math.cos(lat1 * toRad) * Math.cos(lat2 * toRad) * Math.sin(((lon2 - lon1) * toRad) / 2) ** 2;
+  return 2 * 6371 * Math.asin(Math.sqrt(a));
+}

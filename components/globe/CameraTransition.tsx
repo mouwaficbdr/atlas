@@ -147,6 +147,9 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
     if (!country) return;
     const [lon, lat] = country.centroid;
     const target = new THREE.Vector3(...lonLatToCartesian(lon, lat)).multiplyScalar(camera.position.length());
+    // Comme pour le vol principal : ce vol remplace un mouvement en cours (le
+    // recul de fin d'intro, par exemple) au lieu de s'y mélanger.
+    gsap.killTweensOf(camera.position);
     const tween = gsap.to(camera.position, {
       x: target.x,
       y: target.y,
