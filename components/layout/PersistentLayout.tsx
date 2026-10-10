@@ -187,7 +187,13 @@ export default function PersistentLayout({
           height: '100vh',
           zIndex: 0,
           backgroundColor: 'var(--bg-surface)',
-          transform: globeShifted ? 'translateX(22vw)' : 'none',
+          // Sur l'accueil mobile, le globe se centre au-dessus du tiroir
+          // (hauteur publiée par MobileHomeDock) au lieu d'être en partie caché.
+          transform: globeShifted
+            ? 'translateX(22vw)'
+            : isMobile && pathname === '/'
+              ? 'translateY(calc(var(--dock-h, 0px) / -2))'
+              : 'none',
           transition: 'transform 1.2s var(--ease-signature)',
         }}
       >

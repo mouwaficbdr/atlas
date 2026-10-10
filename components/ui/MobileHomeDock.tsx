@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import type { CountryData } from '@/lib/types';
 import { useAppStore } from '@/lib/store';
@@ -25,8 +26,23 @@ export default function MobileHomeDock({ countries, onOpenExplorer }: MobileHome
 
   const random = () => setPreview(countries[Math.floor(Math.random() * countries.length)].cca3);
 
+  // Hauteur réelle du tiroir (dock ou aperçu), publiée pour que le globe se
+  // centre dans l'espace qui reste visible au-dessus (PersistentLayout).
+  const rootRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = rootRef.current;
+    if (!el) return;
+    const root = document.documentElement.style;
+    const observer = new ResizeObserver(() => root.setProperty('--dock-h', `${el.offsetHeight}px`));
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      root.removeProperty('--dock-h');
+    };
+  }, []);
+
   return (
-    <div className="dock" role="region" aria-label={preview ? `Aperçu : ${preview.nameFr}` : 'Explorer'}>
+    <div ref={rootRef} className="dock" role="region" aria-label={preview ? `Aperçu : ${preview.nameFr}` : 'Explorer'}>
       {preview ? (
         <div className="dock__preview" aria-live="polite">
           <div className="dock__row">
