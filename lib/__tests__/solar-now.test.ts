@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { nightCount, phaseOf } from '../solar-now';
+import { nightCount, phaseOf, sunriseCountry } from '../solar-now';
 import type { CountryData } from '../types';
 
 const all = (
@@ -18,6 +18,13 @@ describe('solar-now', () => {
   it('jour à Accra, nuit à Tokyo à midi UTC', () => {
     expect(phaseOf(byCode('GHA'), noon)).toBe('jour');
     expect(phaseOf(byCode('JPN'), noon)).toBe('nuit');
+  });
+
+  it('trouve un lever de soleil côté matin, au ras de l’horizon', () => {
+    const c = sunriseCountry(all, noon)!;
+    expect(['aube', 'jour']).toContain(phaseOf(c, noon));
+    // À midi UTC le matin est à l'ouest : Amériques.
+    expect(c.capitalLonLat![0]).toBeLessThan(-40);
   });
 
   it('compte une part plausible des pays dans la nuit', () => {
