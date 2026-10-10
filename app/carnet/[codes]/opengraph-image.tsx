@@ -3,7 +3,7 @@ import { fetchAllCountries } from '@/lib/countries-api';
 import { loadGeoJSON } from '@/lib/geojson-loader';
 import { parseLogbook } from '@/lib/share-urls';
 import { logbookMapPaths } from '@/lib/logbook-map';
-import { OG_COLORS, OG_CONTENT_TYPE, OG_SIZE, ogFonts } from '@/lib/og';
+import { OG_COLORS, OG_CONTENT_TYPE, OG_DISPLAY, OG_SIZE, ogFonts } from '@/lib/og';
 
 export const alt = 'Carnet de vol sur atlas : planisphère des pays explorés';
 export const size = OG_SIZE;
@@ -26,7 +26,7 @@ export default async function Image({ params }: { params: { codes: string } }) {
       <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', padding: '56px 60px 40px', backgroundColor: OG_COLORS.bg, color: OG_COLORS.ink }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <span style={{ fontFamily: 'Bebas Neue', fontSize: 72, lineHeight: 0.95 }}>Carnet de vol</span>
+            <span style={{ fontFamily: OG_DISPLAY, textTransform: 'uppercase', fontSize: 64, lineHeight: 0.95 }}>Carnet de vol</span>
             <span style={{ fontFamily: 'JetBrains Mono', fontSize: 24, color: '#ffd27a' }}>
               {n} escale{n > 1 ? 's' : ''} sur {countries.length} pays
             </span>

@@ -31,15 +31,31 @@ type OgFont = {
 
 let cached: OgFont[] | null = null;
 
+/** Largeurs de Saira embarquées (Satori n'accepte pas la police variable). */
+const SAIRA_WIDTHS = [50, 75, 125] as const;
+
+/** Police d'affichage condensée par défaut, comme sur le site (#24). */
+export const OG_DISPLAY = 'Saira 75';
+
+/**
+ * Police d'un nom de pays : la largeur suit sa longueur, comme le titre de la
+ * fiche (« TCHAD » large, « SAINT-VINCENT-ET-LES-GRENADINES » serré).
+ */
+export function ogDisplayFor(name: string): string {
+  const stretch = Math.max(50, Math.min(125, 700 / name.length));
+  const w = SAIRA_WIDTHS.reduce((a, b) => (Math.abs(b - stretch) < Math.abs(a - stretch) ? b : a));
+  return `Saira ${w}`;
+}
+
 export function ogFonts(): OgFont[] {
   if (cached) return cached;
   cached = [
-    {
-      name: 'Bebas Neue',
-      data: readFileSync(join(fontsDir, 'BebasNeue-Regular.ttf')),
-      weight: 400,
-      style: 'normal',
-    },
+    ...SAIRA_WIDTHS.map((w) => ({
+      name: `Saira ${w}`,
+      data: readFileSync(join(fontsDir, `Saira-Bold-wdth${w}.ttf`)),
+      weight: 400 as const,
+      style: 'normal' as const,
+    })),
     {
       name: 'JetBrains Mono',
       data: readFileSync(join(fontsDir, 'JetBrainsMono-Regular.ttf')),
