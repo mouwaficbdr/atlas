@@ -90,6 +90,8 @@ export default function CountryCard({
       densityRank: rankOf(density, densities),
       density,
       share: country.population / humanity,
+      byPop: [...allCountries].sort((a, b) => b.population - a.population),
+      byArea: [...allCountries].sort((a, b) => b.area - a.area),
     };
   }, [country, allCountries]);
 
@@ -238,7 +240,7 @@ export default function CountryCard({
             <p className="cp-display cp-big" style={{ fontVariantNumeric: 'tabular-nums' }}>
               {fr.format(country.population)}
             </p>
-            <RankRuler rank={stats.popRank} total={stats.total} what="pays le plus peuplé" />
+            <RankRuler rank={stats.popRank} ranked={stats.byPop} what="pays le plus peuplé" />
             <p className="cp-value" style={{ marginTop: '1.6rem' }}>
               {frPct.format(stats.share)} des habitants des {stats.total} États membres de l’ONU.
             </p>
@@ -282,7 +284,7 @@ export default function CountryCard({
             <p className="cp-display cp-big" style={{ fontVariantNumeric: 'tabular-nums' }}>
               {fr.format(country.area)} <span style={{ fontSize: '0.4em', textTransform: 'none' }}>km²</span>
             </p>
-            <RankRuler rank={stats.areaRank} total={stats.total} what="pays le plus étendu" />
+            <RankRuler rank={stats.areaRank} ranked={stats.byArea} what="pays le plus étendu" />
             <div className="cp-pair">
               <div>
                 <span className="cp-label">Accès à la mer</span>
