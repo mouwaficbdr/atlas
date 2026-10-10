@@ -110,6 +110,13 @@
   scroll-margin-top: 3.5rem;
 }
 
+/* Survol rasant de la capitale (#21) : une fenêtre s'ouvre sur le globe,
+   le texte reste sur fond sombre à gauche. */
+.cp-section--window {
+  min-height: 90vh;
+  background: linear-gradient(90deg, rgba(10, 10, 20, 0.94) 0%, rgba(10, 10, 20, 0.8) 30%, rgba(10, 10, 20, 0.2) 50%, rgba(10, 10, 20, 0.5) 75%, rgba(10, 10, 20, 0.7) 100%);
+}
+
 /* Le globe transparaît derrière le relevé et les frontières. */
 .cp-section--glass { background: linear-gradient(to bottom, rgba(10, 10, 20, 0.92), rgba(10, 10, 20, 0.8)); }
 

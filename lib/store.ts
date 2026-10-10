@@ -46,6 +46,9 @@ interface AppState {
   setTitleOrigin: (origin: { cca3: string; x: number; y: number; at: number } | null) => void;
   returnCca3: string | null;
   setReturnCca3: (cca3: string | null) => void;
+  /** Fiche pays : section courante de la descente, qui pilote la caméra (#21). */
+  descentStage: string | null;
+  setDescentStage: (stage: string | null) => void;
   setHoveredCountry: (cca3: string | null) => void;
   setFocusCca3: (cca3: string | null) => void;
   setCountryView: (view: 'close' | 'wide') => void;
@@ -75,6 +78,8 @@ export const useAppStore = create<AppState>((set) => ({
   setTitleOrigin: (titleOrigin) => set({ titleOrigin }),
   returnCca3: null,
   setReturnCca3: (returnCca3) => set({ returnCca3 }),
+  descentStage: null,
+  setDescentStage: (descentStage) => set({ descentStage }),
   setHoveredCountry: (cca3) => set({ hoveredCountryCca3: cca3 }),
   setFocusCca3: (cca3) => set({ focusCca3: cca3 }),
   setCountryView: (view) => set({ countryView: view }),
