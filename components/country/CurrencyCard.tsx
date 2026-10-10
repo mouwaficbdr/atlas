@@ -43,7 +43,7 @@ export default function CurrencyCard({ currencies }: CurrencyCardProps) {
             </div>
             <div
               style={{
-                color: 'rgba(0,0,0,0.85)',
+                color: 'var(--text-primary)',
                 fontFamily: 'var(--font-bebas-neue), sans-serif',
                 fontSize: 'clamp(2rem, 4vw, 5rem)',
                 marginTop: '2rem',
@@ -56,7 +56,7 @@ export default function CurrencyCard({ currencies }: CurrencyCardProps) {
             </div>
             <div
               style={{
-                color: 'rgba(0,0,0,0.5)',
+                color: 'var(--text-muted)',
                 fontSize: '1.5rem',
                 fontFamily: 'var(--font-jetbrains-mono), monospace',
                 marginTop: '0.5rem',
