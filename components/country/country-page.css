@@ -441,6 +441,9 @@
 }
 
 .cp-end__dest .cp-display { font-size: clamp(2rem, 3.6vw, 3.2rem); }
+.cp-end__key { font-family: var(--font-jetbrains-mono), monospace; font-size: 0.7rem; letter-spacing: 0.1em; color: var(--cp-muted); }
+.cp-end__key kbd { display: inline-block; min-width: 1.6em; padding: 0.1em 0.4em; margin-right: 0.4em; border: 1px solid var(--cp-line); border-radius: 3px; font-family: inherit; text-align: center; color: var(--text-primary); }
+@media (hover: none) { .cp-end__key { display: none; } }
 .cp-end__dest:hover,
 .cp-end__dest:focus-visible { background: rgba(255, 255, 255, 0.04); color: var(--cp-accent); }
 
