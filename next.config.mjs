@@ -41,8 +41,10 @@ const nextConfig = {
     // tombe en 500.
     outputFileTracingIncludes: {
       '/pays/**': ['./public/data/countries-geo.json'],
-      '/comparer/**': ['./public/data/countries-geo.json'],
-      '/carnet/**': ['./public/data/countries-geo.json'],
+      // Les images de partage à la demande lisent aussi les polices (lib/og.ts).
+      '/comparer/**': ['./public/data/countries-geo.json', './public/fonts/*.ttf'],
+      '/carnet/**': ['./public/data/countries-geo.json', './public/fonts/*.ttf'],
+      '/defi/**': ['./public/fonts/*.ttf'],
     },
   },
   webpack(config) {
