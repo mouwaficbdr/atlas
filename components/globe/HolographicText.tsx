@@ -8,9 +8,11 @@ interface HolographicTextProps {
   text: string;
   latlng: [number, number]; // [lat, lon]
   color?: string;
+  /** S'efface seule après ce délai (ms) : étiquette du pays quitté (#22). */
+  fadeOutAfter?: number;
 }
 
-const projectPoint = (lat: number, lon: number, r: number = 1.05): [number, number, number] => {
+export const projectPoint = (lat: number, lon: number, r: number = 1.05): [number, number, number] => {
   const phi = (90 - lat) * (Math.PI / 180);
   const theta = (lon + 180) * (Math.PI / 180);
   return [
@@ -48,7 +50,7 @@ function makeTextTexture(text: string, color: string): THREE.CanvasTexture {
   return texture;
 }
 
-export default function HolographicText({ text, latlng, color = '#ffffff' }: HolographicTextProps) {
+export default function HolographicText({ text, latlng, color = '#ffffff', fadeOutAfter }: HolographicTextProps) {
   const spriteRef = useRef<THREE.Sprite>(null);
   const reducedMotion = useReducedMotion();
   const [lat, lon] = latlng;
@@ -109,10 +111,11 @@ export default function HolographicText({ text, latlng, color = '#ffffff' }: Hol
       ease: 'power3.out',
     });
     gsap.to(spriteMaterial, { opacity: 1, duration: 0.3 });
+    if (fadeOutAfter) gsap.to(spriteMaterial, { opacity: 0, duration: 0.8, delay: fadeOutAfter / 1000 });
     return () => {
       spriteMaterial.opacity = 0;
     };
-  }, [position, targetPosition, spriteMaterial, reducedMotion]);
+  }, [position, targetPosition, spriteMaterial, reducedMotion, fadeOutAfter]);
 
   useFrame(({ clock }) => {
     if (reducedMotion) return;

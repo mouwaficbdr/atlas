@@ -2,14 +2,14 @@
 
 import { useEffect, useState, useRef, useMemo } from 'react';
 import * as THREE from 'three';
-import { useFrame, type ThreeEvent } from '@react-three/fiber';
+import { useFrame, useThree, type ThreeEvent } from '@react-three/fiber';
 import { loadGeoJSON } from '@/lib/geojson-loader';
 import type { GeoJSONFeature, CountryData } from '@/lib/types';
 import { useAppStore } from '@/lib/store';
 import { useReducedMotion } from '@/lib/hooks/useReducedMotion';
 import { cartesianToLonLat, findCountryAtLonLat } from '@/lib/globe/pick-country';
 import BordersMesh from './BordersMesh';
-import HolographicText from './HolographicText';
+import HolographicText, { projectPoint } from './HolographicText';
 import HoverHighlight from './HoverHighlight';
 import EarthMesh from './EarthMesh';
 import CloudsMesh from './CloudsMesh';
@@ -37,6 +37,21 @@ export default function GlobeMesh({
   const previewCca3 = useAppStore((state) => state.previewCca3);
   const [features, setFeatures] = useState<GeoJSONFeature[]>([]);
   const [hoveredCca3, setHoveredCca3] = useState<string | null>(null);
+  const { camera, gl } = useThree();
+  const setTitleOrigin = useAppStore((state) => state.setTitleOrigin);
+  // Retour d'une fiche (#22) : l'étiquette du pays quitté réapparaît puis s'efface.
+  const returnCca3 = useAppStore((state) => state.returnCca3);
+  const setReturnCca3 = useAppStore((state) => state.setReturnCca3);
+  useEffect(() => {
+    if (!returnCca3) return;
+    if (cameraMode !== 'globe') {
+      setReturnCca3(null);
+      return;
+    }
+    const id = setTimeout(() => setReturnCca3(null), 2600);
+    return () => clearTimeout(id);
+  }, [returnCca3, cameraMode, setReturnCca3]);
+  const returning = returnCca3 && cameraMode === 'globe' ? countries.find((c) => c.cca3 === returnCca3) : undefined;
   const setHoveredCountry = useAppStore((state) => state.setHoveredCountry);
   const reducedMotion = useReducedMotion();
 
@@ -112,7 +127,22 @@ export default function GlobeMesh({
     const local = (groupRef.current ?? e.object).worldToLocal(e.point.clone());
     const { lon, lat } = cartesianToLonLat(local.x, local.y, local.z);
     const cca3 = findCountryAtLonLat(lon, lat, features);
-    if (cca3) onSelect(cca3);
+    if (!cca3) return;
+    // Transition vers la fiche (#22) : le titre partira de l'étiquette 3D,
+    // à l'endroit exact où elle est affichée.
+    const country = countries.find((c) => c.cca3 === cca3);
+    if (country?.latlng && groupRef.current) {
+      const p = new THREE.Vector3(...projectPoint(country.latlng[0], country.latlng[1], 1.12));
+      groupRef.current.localToWorld(p).project(camera);
+      const box = gl.domElement.getBoundingClientRect();
+      setTitleOrigin({
+        cca3,
+        x: box.left + ((p.x + 1) / 2) * box.width,
+        y: box.top + ((1 - p.y) / 2) * box.height,
+        at: performance.now(),
+      });
+    }
+    onSelect(cca3);
   };
 
   useFrame(({ mouse }) => {
@@ -174,6 +204,16 @@ export default function GlobeMesh({
             />
           ) : null;
         })}
+
+      {!hoveredFeature && returning?.latlng && (
+        <HolographicText
+          key={`return-${returning.cca3}`}
+          text={returning.nameFr}
+          latlng={returning.latlng}
+          color={returning.colors?.primary ?? '#ffffff'}
+          fadeOutAfter={1600}
+        />
+      )}
 
       {/* Holographic Text : visible uniquement au survol en mode globe */}
       {cameraMode === 'globe' &&
