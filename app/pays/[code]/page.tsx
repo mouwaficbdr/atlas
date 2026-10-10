@@ -133,7 +133,8 @@ async function getCountryPalette(
   const c = country.colors;
   const rawPrimary = c?.primary || '#1E3A5F';
   const secondary = c?.palette?.[1] || '#2D5986';
-  const accent = c?.palette?.[2] || '#4A90D9';
+  // Un drapeau à deux couleurs n'a pas de troisième : l'accent reprend la primaire.
+  const accent = c?.palette?.[2] || rawPrimary;
 
   // Le ratio annoncé est réellement calculé (et la couleur primaire ajustée
   // si besoin) via lib/contrast-checker.ts, plutôt que déclaré en dur.
