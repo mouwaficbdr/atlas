@@ -7,6 +7,7 @@ import { useAppStore } from '@/lib/store';
 import { clearLogbook } from '@/lib/logbook';
 import { loadGeoJSON } from '@/lib/geojson-loader';
 import { drawLogbookMap } from '@/lib/logbook-map';
+import { logbookUrl } from '@/lib/share-urls';
 
 const frDate = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
 const escales = (n: number) => `${n} escale${n > 1 ? 's' : ''}`;
@@ -52,6 +53,7 @@ export default function Logbook({ countries }: { countries: CountryData[] }) {
   const [features, setFeatures] = useState<GeoJSONFeature[] | null>(null);
   const [confirmClear, setConfirmClear] = useState(false);
   const [sharing, setSharing] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const explored = new Set(logbook.map((s) => s.cca3));
@@ -59,6 +61,7 @@ export default function Logbook({ countries }: { countries: CountryData[] }) {
   useEffect(() => {
     if (!isOpen) return;
     setConfirmClear(false);
+    setLinkCopied(false);
     closeRef.current?.focus();
     loadGeoJSON()
       .then((geo) => setFeatures(geo.features))
@@ -153,6 +156,20 @@ export default function Logbook({ countries }: { countries: CountryData[] }) {
           {logbook.length > 0 && (
             <button type="button" className="logbook__btn logbook__btn--accent" onClick={share} disabled={sharing || !features}>
               {sharing ? 'Préparation…' : 'Partager en image'}
+            </button>
+          )}
+          {logbook.length > 0 && (
+            <button
+              type="button"
+              className="logbook__btn"
+              onClick={() =>
+                navigator.clipboard
+                  .writeText(logbookUrl(logbook.map((s) => s.cca3)))
+                  .then(() => setLinkCopied(true))
+                  .catch(() => {})
+              }
+            >
+              {linkCopied ? 'Lien copié' : 'Copier le lien'}
             </button>
           )}
           {logbook.length > 0 &&

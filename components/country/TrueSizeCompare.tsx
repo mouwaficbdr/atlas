@@ -6,11 +6,11 @@ import type { CountryData, GeoJSONFeature } from '@/lib/types';
 import { loadGeoJSON } from '@/lib/geojson-loader';
 import { mainPolygons, projectedPath } from '@/lib/true-size';
 import ShareButton from './ShareButton';
+import { compareUrl } from '@/lib/share-urls';
 
 interface TrueSizeCompareProps {
   country: CountryData;
   allCountries: CountryData[];
-  canonicalUrl: string;
 }
 
 const fr1 = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 });
@@ -29,7 +29,7 @@ function ratioLabel(a: CountryData, b: CountryData) {
  * équivalente de Lambert : la taille réelle, sans la dilatation de Mercator.
  * Le choix se partage par l'URL (?comparer=bra).
  */
-export default function TrueSizeCompare({ country, allCountries, canonicalUrl }: TrueSizeCompareProps) {
+export default function TrueSizeCompare({ country, allCountries }: TrueSizeCompareProps) {
   const selectId = useId();
   const [features, setFeatures] = useState<GeoJSONFeature[] | null>(null);
   const [other, setOther] = useState(country.cca3 === 'FRA' ? 'ESP' : 'FRA');
@@ -106,7 +106,7 @@ export default function TrueSizeCompare({ country, allCountries, canonicalUrl }:
           <p className="cp-note">Territoires situés à plus de 3 000 km du territoire principal non dessinés.</p>
         )}
         <div style={{ marginTop: '1.4rem' }}>
-          <ShareButton url={`${canonicalUrl}?comparer=${other.toLowerCase()}`} title={`${country.nameFr} et ${otherCountry.nameFr} à taille réelle · atlas`} />
+          <ShareButton url={compareUrl(country.cca3, other)} title={`${country.nameFr} et ${otherCountry.nameFr} à taille réelle · atlas`} />
         </div>
       </div>
 

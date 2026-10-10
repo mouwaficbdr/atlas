@@ -5,7 +5,7 @@ import Link from 'next/link';
 import type { CountryData } from '@/lib/types';
 import { useAppStore } from '@/lib/store';
 import { KOPPEN } from '@/lib/koppen';
-import { SITE_URL } from '@/lib/site-config';
+import { defiUrl } from '@/lib/share-urls';
 import { MAX_GUESSES, clue, dailyCountry, dayKey, matchGuess, readGuesses, roundKm, saveGuesses, shareText } from '@/lib/daily';
 
 const frDay = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
@@ -62,7 +62,13 @@ export default function DailyChallenge({ countries }: { countries: CountryData[]
   };
 
   const share = async () => {
-    const text = shareText(day, tried, answer, `${SITE_URL}/defi`);
+    // Le lien porte la grille (caps et distances), jamais la réponse : son aperçu l'illustre.
+    const rows = tried.map((g) => {
+      if (g.cca3 === answer.cca3) return 'ok' as const;
+      const c = clue(g, answer);
+      return { bearing: c.bearing, km: Math.round(c.km / 50) * 50 };
+    });
+    const text = shareText(day, tried, answer, defiUrl(day, rows));
     try {
       if (navigator.share) await navigator.share({ text });
       else {
