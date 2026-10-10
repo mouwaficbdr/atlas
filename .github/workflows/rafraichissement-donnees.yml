@@ -1,0 +1,74 @@
+# Rafraîchissement hebdomadaire des données de référence (#68).
+# Relance l'extraction (mledoze/countries, Wikidata, Banque mondiale) puis la
+# génération du GeoJSON ; si quelque chose a changé et que les tests passent,
+# pousse une branche et ouvre une PR à relire. Rien n'est fusionné tout seul.
+#
+# Déclencheurs : planification et lancement manuel seulement, jamais de code
+# venu d'une PR ni d'un fork. Aucune donnée externe n'est interpolée dans le
+# shell : le dépôt et le jeton passent par l'environnement.
+
+name: Rafraîchissement des données
+
+on:
+  schedule:
+    - cron: '17 4 * * 1' # lundi, 4 h 17 UTC
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: rafraichissement-donnees
+  cancel-in-progress: false
+
+jobs:
+  rafraichir:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write # pousser la branche de données
+      pull-requests: write # ouvrir la PR
+      issues: write # repli si les PR par Actions sont désactivées
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Extraire les sources
+        run: node scripts/fetch-vendor-data.js
+
+      - name: Régénérer le GeoJSON
+        run: node scripts/generate-geo.js
+
+      - name: Tester les données régénérées
+        run: npm test
+
+      - name: Ouvrir une PR si les données ont changé
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          if git diff --quiet; then
+            echo "Aucune donnée n'a changé."
+            exit 0
+          fi
+          branch="data/rafraichissement-$(date -u +%Y-%m-%d)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add scripts/vendor public/data lib/data
+          git commit -m "chore(data): rafraîchissement hebdomadaire des sources"
+          git push "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git" "$branch"
+          body="Rafraîchissement automatique (#68) : mledoze/countries, Wikidata et Banque mondiale réextraits, GeoJSON régénéré, tests verts. Relire le diff de données avant de fusionner."
+          if ! gh pr create --repo "$REPO" --head "$branch" --base main \
+            --title "chore(data): rafraîchissement des sources du $(date -u +%d/%m/%Y)" --body "$body"; then
+            gh issue create --repo "$REPO" \
+              --title "Données rafraîchies à relire (branche $branch)" \
+              --body "$body Les PR ouvertes par GitHub Actions sont désactivées sur ce dépôt : ouvrir la PR depuis https://github.com/${REPO}/compare/main...${branch}"
+          fi

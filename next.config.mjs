@@ -40,7 +40,8 @@ const nextConfig = {
     // l'embarque pas et tout rendu à la demande (robots d'aperçu comme WhatsApp)
     // tombe en 500.
     outputFileTracingIncludes: {
-      '/pays/**': ['./public/data/countries-geo.json'],
+      // La régénération quotidienne des fiches (ISR) relit aussi les archives MDX.
+      '/pays/**': ['./public/data/countries-geo.json', './content/countries/*.mdx'],
       // Les images de partage à la demande lisent aussi les polices (lib/og.ts).
       '/comparer/**': ['./public/data/countries-geo.json', './public/fonts/*.ttf'],
       '/carnet/**': ['./public/data/countries-geo.json', './public/fonts/*.ttf'],

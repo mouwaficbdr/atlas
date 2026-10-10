@@ -17,6 +17,17 @@ const path = require('path');
 
 const VENDOR_DIR = path.join(__dirname, 'vendor');
 
+// Wikidata (comme Wikimedia) refuse les requêtes sans User-Agent identifiant
+// le projet : sans lui, la réponse arrive vide.
+const USER_AGENT = 'atlas/1.0 (https://github.com/mouwaficbdr/atlas)';
+
+/** Requête qui échoue franchement sur une réponse non 2xx. */
+async function get(url, headers = {}) {
+  const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT, ...headers } });
+  if (!res.ok) throw new Error(`${res.status} ${res.statusText} sur ${url}`);
+  return res;
+}
+
 const MLEDOZE_URL =
   'https://raw.githubusercontent.com/mledoze/countries/master/dist/countries.json';
 
@@ -41,36 +52,33 @@ async function main() {
   fs.mkdirSync(VENDOR_DIR, { recursive: true });
 
   process.stdout.write('mledoze/countries... ');
-  const mledoze = await fetch(MLEDOZE_URL).then((r) => r.json());
-  fs.writeFileSync(
-    path.join(VENDOR_DIR, 'mledoze-countries.json'),
-    JSON.stringify(mledoze),
-  );
+  // Texte brut tel que publié (un pays par ligne) : les rafraîchissements ne
+  // produisent un diff que pour les pays qui ont réellement changé.
+  const mledozeText = await get(MLEDOZE_URL).then((r) => r.text());
+  const mledoze = JSON.parse(mledozeText);
+  fs.writeFileSync(path.join(VENDOR_DIR, 'mledoze-countries.json'), mledozeText);
   console.log(`${mledoze.length} pays`);
 
   process.stdout.write('Wikidata P122... ');
   const url =
     'https://query.wikidata.org/sparql?format=json&query=' +
     encodeURIComponent(WIKIDATA_QUERY);
-  const wikidata = await fetch(url, {
-    headers: { Accept: 'application/sparql-results+json' },
-  }).then((r) => r.json());
-  fs.writeFileSync(
-    path.join(VENDOR_DIR, 'wikidata-gov.json'),
-    JSON.stringify(wikidata),
-  );
+  const wikidataText = await get(url, { Accept: 'application/sparql-results+json' }).then((r) => r.text());
+  const wikidata = JSON.parse(wikidataText);
+  fs.writeFileSync(path.join(VENDOR_DIR, 'wikidata-gov.json'), wikidataText);
   console.log(`${wikidata.results.bindings.length} lignes`);
 
   process.stdout.write('Wikidata, capitales... ');
-  const capitals = await fetch(
+  const capitalsText = await get(
     'https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(CAPITALS_QUERY),
-    { headers: { Accept: 'application/sparql-results+json' } },
-  ).then((r) => r.json());
-  fs.writeFileSync(path.join(VENDOR_DIR, 'wikidata-capitals.json'), JSON.stringify(capitals));
+    { Accept: 'application/sparql-results+json' },
+  ).then((r) => r.text());
+  const capitals = JSON.parse(capitalsText);
+  fs.writeFileSync(path.join(VENDOR_DIR, 'wikidata-capitals.json'), capitalsText);
   console.log(`${capitals.results.bindings.length} lignes`);
 
   process.stdout.write('Banque mondiale, population... ');
-  const [, rows] = await fetch(WORLDBANK_POP_URL).then((r) => r.json());
+  const [, rows] = await get(WORLDBANK_POP_URL).then((r) => r.json());
   const population = {};
   for (const r of rows) {
     if (r.value) population[r.countryiso3code] = { value: r.value, year: Number(r.date) };
