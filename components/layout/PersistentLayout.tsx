@@ -5,6 +5,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import LoadingScreen from '@/components/ui/LoadingScreen';
 import SearchPalette from '@/components/ui/SearchPalette';
+import SunLine from '@/components/ui/SunLine';
 import Navigation from '@/components/layout/Navigation';
 import MobileExplorer from '@/components/ui/MobileExplorer';
 import MobileHomeDock from '@/components/ui/MobileHomeDock';
@@ -312,6 +313,9 @@ export default function PersistentLayout({
       {countries.length > 0 && pathname === '/' && !isMobile && (
         <GlobeOnboarding />
       )}
+
+      {/* Le vrai soleil, dit en une ligne (desktop : le tiroir occupe le bas sur mobile). */}
+      {countries.length > 0 && pathname === '/' && !isMobile && <SunLine countries={countries} />}
 
       {/* GitHub Badge - Floating Magnetic Link (page globe, desktop uniquement) */}
       {pathname === '/' && !isMobile && <GithubBadge />}
