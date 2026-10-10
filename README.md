@@ -23,8 +23,6 @@
 atlas est un explorateur mondial de pays construit autour d'un globe 3D WebGL.  
 Le périmètre est celui des 193 États membres de l'ONU (filtre `unMember` de mledoze/countries, Saint-Siège exclu car simple observateur). La Terre est photoréaliste ; chaque pays révèle au survol la couleur dominante de son drapeau, calculée au build (k-means) et figée dans le GeoJSON. L'objectif est de prouver qu'une expérience de premier rang peut reposer entièrement sur des fondations statiques, ouvertes et sans backend propriétaire.
 
-Projet personnel de [BADAROU Mouwafic](https://github.com/mouwaficbdr). Aucune vocation commerciale.
-
 ---
 
 ## Fonctionnalités
@@ -201,4 +199,4 @@ Les tests couvrent les fonctions critiques : moteur de recherche (fuzzy matching
 
 ## Licence
 
-[MIT](./LICENSE), BADAROU Mouwafic, 2026
+[MIT](./LICENSE)
