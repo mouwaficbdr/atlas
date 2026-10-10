@@ -47,3 +47,41 @@ export function drawLogbookMap(
   }
   ctx.restore();
 }
+
+/**
+ * Même planisphère en tracés SVG (image de partage, rendue sans canvas) :
+ * un tracé pour les pays explorés, un pour les autres. Un point sur `step`
+ * suffit à cette échelle et allège le rendu.
+ */
+export function logbookMapPaths(
+  features: GeoJSONFeature[],
+  explored: Set<string>,
+  w: number,
+  h: number,
+  step = 3,
+): { on: string; off: string } {
+  const px = (lon: number) => (((lon + 180) / 360) * w).toFixed(1);
+  const py = (lat: number) => (((90 - lat) / 180) * h).toFixed(1);
+  let on = '';
+  let off = '';
+  for (const f of features) {
+    const polygons =
+      f.geometry.type === 'MultiPolygon'
+        ? (f.geometry.coordinates as number[][][][])
+        : [f.geometry.coordinates as number[][][]];
+    const wraps = polygons.some((poly) => poly.some((ring) => ring.some(([lon]) => lon > 180)));
+    let d = '';
+    for (const shift of wraps ? [0, -360] : [0]) {
+      for (const poly of polygons) {
+        for (const ring of poly) {
+          const pts = ring.filter((_, i) => i % step === 0);
+          if (pts.length < 3) continue;
+          d += `M${pts.map(([lon, lat]) => `${px(lon + shift)},${py(lat)}`).join('L')}Z`;
+        }
+      }
+    }
+    if (explored.has(f.properties.cca3)) on += d;
+    else off += d;
+  }
+  return { on, off };
+}

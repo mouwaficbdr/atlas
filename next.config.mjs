@@ -41,6 +41,8 @@ const nextConfig = {
     // tombe en 500.
     outputFileTracingIncludes: {
       '/pays/**': ['./public/data/countries-geo.json'],
+      '/comparer/**': ['./public/data/countries-geo.json'],
+      '/carnet/**': ['./public/data/countries-geo.json'],
     },
   },
   webpack(config) {

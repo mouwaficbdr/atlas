@@ -337,7 +337,7 @@ export default function CountryCard({
             <ClimateDisplay climate={country.climate} />
           </div>
         </div>
-        <TrueSizeCompare country={country} allCountries={allCountries} canonicalUrl={canonicalUrl} />
+        <TrueSizeCompare country={country} allCountries={allCountries} />
       </section>
 
       {/* 06 · Institutions et économie : la seule section aux couleurs du drapeau,
