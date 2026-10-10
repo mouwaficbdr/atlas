@@ -113,13 +113,37 @@
 /* Le globe transparaît derrière le relevé et les frontières. */
 .cp-section--glass { background: linear-gradient(to bottom, rgba(10, 10, 20, 0.92), rgba(10, 10, 20, 0.8)); }
 
-.cp-section--accent {
-  background: var(--cp-accent);
-  color: #0a0a14;
+/* Institutions : le drapeau en très grand, incliné comme une étoffe et fondu
+   dans le noir, avec un liseré de ses couleurs ; la pièce flotte devant. */
+.cp-section--flag {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #0a0a14;
 }
-.cp-section--accent .cp-label,
-.cp-section--accent .cp-index,
-.cp-section--accent .cp-note { color: rgba(10, 10, 20, 0.62); }
+.cp-section--flag::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: var(--flag-bands);
+}
+.cp-flagfield {
+  position: absolute;
+  z-index: -1;
+  top: -10%;
+  right: -12%;
+  width: min(1100px, 95%);
+  aspect-ratio: 3 / 2;
+  background: var(--flag) center / cover no-repeat;
+  opacity: 0.14;
+  transform: perspective(1200px) rotateY(-24deg) rotateZ(-4deg);
+  -webkit-mask-image: radial-gradient(75% 70% at 70% 40%, #000 25%, transparent 75%);
+  mask-image: radial-gradient(75% 70% at 70% 40%, #000 25%, transparent 75%);
+}
+@media (max-width: 767px) {
+  .cp-flagfield { top: 0; right: -30%; width: 140%; opacity: 0.11; }
+}
 
 .cp-head {
   display: flex;

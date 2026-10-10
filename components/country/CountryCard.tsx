@@ -34,6 +34,13 @@ const shortCount = (n: number) => (n < 1_000_000 ? fr.format(n) : frCompact.form
 const frPct = new Intl.NumberFormat('fr-FR', { style: 'percent', maximumFractionDigits: 2 });
 
 /** Rang (1 = plus grand) de `value` parmi `values`. */
+/** Liseré du haut de section : les couleurs du drapeau en parts égales. */
+function flagBands(palette: string[] | undefined) {
+  if (!palette?.length) return 'var(--cp-accent)';
+  const step = 100 / palette.length;
+  return `linear-gradient(90deg, ${palette.map((c, i) => `${c} ${i * step}% ${(i + 1) * step}%`).join(', ')})`;
+}
+
 const rankOf = (value: number, values: number[]) => values.filter((v) => v > value).length + 1;
 
 /**
@@ -306,8 +313,20 @@ export default function CountryCard({
         <TrueSizeCompare country={country} allCountries={allCountries} canonicalUrl={canonicalUrl} />
       </section>
 
-      {/* 06 · Institutions et économie : la seule section aux couleurs du drapeau. */}
-      <section id="institutions" className="cp-section cp-section--accent" aria-labelledby="institutions-h">
+      {/* 06 · Institutions et économie : la seule section aux couleurs du drapeau,
+          composée à partir du drapeau lui-même, donc différente pour chaque pays. */}
+      <section
+        id="institutions"
+        className="cp-section cp-section--flag"
+        aria-labelledby="institutions-h"
+        style={
+          {
+            '--flag': `url("${country.flags.svg}")`,
+            '--flag-bands': flagBands(country.colors?.palette),
+          } as CSSProperties
+        }
+      >
+        <div className="cp-flagfield" aria-hidden="true" />
         <div className="cp-head">
           <span className="cp-index">{indexOf('institutions')}</span>
           <h2 id="institutions-h">Institutions et économie</h2>
