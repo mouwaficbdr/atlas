@@ -6,6 +6,7 @@
  *  - scripts/vendor/gov-overrides.json      (corrections manuelles)
  *  - scripts/vendor/worldbank-population.json (population, Banque mondiale)
  *  - scripts/vendor/koppen.json              (climats, voir compute-koppen.mjs)
+ *  - scripts/vendor/flag-colors.json         (couleurs des drapeaux, voir compute-flag-colors.mjs)
  *  - scripts/vendor/wikidata-capitals.json   (coordonnées des capitales, P36/P625)
  *  - countries-and-timezones                (fuseaux IANA)
  *
@@ -444,6 +445,7 @@ function generate() {
   const govMap = buildGovMap();
   const worldBankPop = loadVendor('worldbank-population.json');
   const koppen = loadVendor('koppen.json');
+  const flagColors = loadVendor('flag-colors.json');
   const capitals = buildCapitalMap();
 
   const out = [];
@@ -503,7 +505,7 @@ function generate() {
         climate: koppen[p.cca3] || [],
         ...NAME_FR_OVERRIDES[p.cca3],
         independent: true,
-        colors: p.colors,
+        colors: flagColors[p.cca3],
       },
     });
   }
