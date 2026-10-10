@@ -24,6 +24,8 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 });
 
+const OG_ALT = 'atlas : le globe 3D des 193 États membres de l’ONU, l’Afrique et l’Europe éclairées par le vrai soleil';
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
@@ -41,13 +43,16 @@ export const metadata: Metadata = {
     siteName: 'atlas',
     title: 'atlas · Explorer les 193 États du monde',
     description: 'Explorez le monde en 3D avec atlas : un globe interactif des 193 États membres de l’ONU, avec leurs données géographiques, culturelles et économiques.',
-    // L'image est fournie par app/opengraph-image.tsx (générée, ratio réel).
+    // Fichier statique en JPEG : la photo du globe pesait 771 Ko en PNG
+    // généré, au-delà de ce qu'accepte WhatsApp (environ 300 Ko). Composition
+    // d'origine : app/opengraph-image.tsx dans l'historique git.
+    images: [{ url: '/og/atlas.jpg', width: 1200, height: 630, type: 'image/jpeg', alt: OG_ALT }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'atlas · Explorer les 193 États du monde',
     description: 'Explorez le monde en 3D avec atlas : un globe interactif des 193 États membres de l’ONU.',
-    // L'image est fournie par app/twitter-image.tsx.
+    images: [{ url: '/og/atlas.jpg', alt: OG_ALT }],
   },
   robots: {
     index: true,
