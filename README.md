@@ -10,7 +10,7 @@
 [![GSAP](https://img.shields.io/badge/GSAP-3.12-88CE02?logo=greensock&logoColor=white)](https://gsap.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
-**[Voir le site](https://mouwafic-builds-the-world.vercel.app)**
+**[atlas.mouwaficbdr.me](https://atlas.mouwaficbdr.me)**
 
 </div>
 
