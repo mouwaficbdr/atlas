@@ -14,7 +14,7 @@
 
 </div>
 
-![Globe 3D : l'Afrique et l'Europe au matin, éclairées par le vrai soleil](public/screenshots/globe.png)
+![Globe 3D : l'Afrique et l'Europe en plein jour, l'Amérique dans la nuit, avec l'heure UTC, « Vous êtes ici » et le lever du soleil en cours](public/screenshots/globe.png)
 
 ---
 
@@ -27,29 +27,48 @@ Le périmètre est celui des 193 États membres de l'ONU (filtre `unMember` de m
 
 ## Fonctionnalités
 
+**Le globe**
+
 - **Terre photoréaliste, vrai soleil** : textures NASA Blue Marble (jour, relief, lumières des villes côté nuit), nuages, atmosphère en diffusion de Rayleigh ; le jour et la nuit affichés sont ceux de l'instant présent (point subsolaire calculé, recalé toutes les 30 s)
-- **Globe interactif** : rotation et zoom libres, survol qui teinte et détoure le pays, vol de caméra vers le pays choisi ; l'accueil vise des continents éclairés à toute heure
-- **Fiche pays en « descente orbitale »** : on arrive au-dessus du pays, le globe visible derrière le titre, puis relevé (six données clés), capitale (heure, jour ou nuit sur place, lever et coucher), habitants (rang sur 193, part de la population, langues), territoire, institutions et économie, frontières, archives ; rail de sommaire avec altimètre
-- **Le globe accompagne la fiche** : pays mis en évidence, cadrage selon sa taille, voisin survolé allumé sur le globe
-- **Climat de Köppen-Geiger** : les trois climats principaux de chaque pays et leur part du territoire (carte 1991-2020 de Beck et al.)
-- **Comparateur à taille réelle** : deux pays superposés à la même échelle en projection équivalente de Lambert, sans la dilatation de Mercator ; lien partageable
-- **Extrait Wikipédia** : résumé encyclopédique en français, récupéré au build avec nouvel essai et repli silencieux
-- **Recherche instantanée** : depuis l'étoile de l'écran de départ ou ⌘K, insensible aux accents et aux noms français
-- **Mobile** : le vrai globe, cadré pour le portrait ; tiroir à portée du pouce (recherche, pays au hasard, continents) et aperçu d'un pays au toucher
+- **Le soleil dit en clair** : heure UTC et nombre de pays dans la nuit ; au survol d'un pays posé sur le terminateur, son aube ou son crépuscule et son heure locale ; le pays où le soleil se lève en ce moment, qu'un clic amène face à soi
+- **« Vous êtes ici »** : le pays de l'utilisateur est déduit du fuseau horaire de l'appareil (sans géolocalisation ni envoi de données), modifiable d'un geste ; l'arrivée du globe vise ce pays et les fiches s'y rapportent
+- **Globe interactif** : rotation et zoom libres, survol qui teinte et détoure le pays aux couleurs réelles de son drapeau, vol de caméra vers le pays choisi ; sur mobile, inclinaison du globe avec le téléphone (option)
 - **Arrivée « Pale Blue Dot »** : la Terre n'est qu'un point pendant le chargement réel, puis la caméra s'en approche
-- **SSG pur** : 193 pages statiques pré-générées au build, aucun appel réseau au runtime pour les données pays
+
+**Les fiches**
+
+- **Transition continue** : le nom du pays passe de son étiquette 3D au titre de la fiche pendant que la caméra plonge, et revient sur le globe au retour
+- **Descente orbitale réelle** : le défilement pilote la caméra (orbite, plongée, survol rasant de la capitale, remontée aux frontières) ; rail de sommaire avec altimètre
+- **Relevé, capitale, habitants, territoire, institutions et économie, frontières, archives** : heure et ciel de la capitale, écart horaire et superficie rapportés au pays de l'utilisateur, règles de rang sur 193 explorables au survol, section institutions composée à partir du drapeau, voisins avec boussole
+- **Contrastes calculés** : une ou deux comparaisons qui étonnent, tirées uniquement des données (« Le Bangladesh compte plus d'habitants que la Russie, sur une surface 116 fois plus petite »)
+- **Climat de Köppen-Geiger** : les trois climats principaux de chaque pays et leur part du territoire (carte 1991-2020 de Beck et al.)
+- **Comparateur à taille réelle** : deux pays superposés à la même échelle en projection équivalente de Lambert, sans la dilatation de Mercator ; réglé par défaut sur le pays de l'utilisateur
+- **Extrait Wikipédia** : résumé encyclopédique en français, récupéré au build avec nouvel essai et repli silencieux
+- **Typographie variable** : la chasse du titre s'adapte à la longueur du nom (« TCHAD » large, « SAINT-VINCENT-ET-LES-GRENADINES » serré)
+
+**Jouer et partager**
+
+- **Défi du jour** : le globe se pose sur un pays, le même pour tous ce jour-là ; trois essais, avec direction et distance, puis climat, puis capitale ; résultat partageable sans révéler la réponse
+- **Carnet de vol** : chaque fiche lue jusqu'au bout laisse un tampon ; les pays explorés gardent un liseré doré sur le globe ; carnet gardé sur l'appareil, partageable en image ou en lien, effaçable à tout moment (ni série ni rappel)
+- **Aperçus de partage illustrés** : chaque fiche, comparaison, carnet ou résultat du défi a sa propre image Open Graph
+- **Recherche instantanée** : depuis l'étoile de l'écran de départ, ⌘K ou en tapant simplement un nom sur le globe ; insensible aux accents et aux noms français
+
+**Partout**
+
+- **Mobile** : le vrai globe, cadré pour le portrait ; tiroir à portée du pouce (recherche, défi, pays au hasard, continents, carnet) et aperçu d'un pays au toucher
+- **SSG** : 193 pages statiques pré-générées au build, aucun appel réseau au runtime pour les données pays ; seules les images de partage à la demande sont rendues par une fonction
 
 ---
 
 ## Aperçu
 
-<sub>Captures prises le 10 octobre 2026 à 8 h 10 UTC : l'éclairage est celui du vrai soleil à cet instant.</sub>
+<sub>Captures prises en production le 10 octobre 2026 vers 14 h 10 UTC, depuis un appareil réglé sur le fuseau du Bénin : l'éclairage est celui du vrai soleil à cet instant.</sub>
 
 <table>
   <tr>
     <td colspan="2">
-      <img src="public/screenshots/country-hero.png" alt="Fiche du Japon : le pays mis en évidence au crépuscule, lumières des villes" />
-      <p align="center"><sub>Orbite : le Japon au crépuscule (17 h 10 à Tokyo), le terminateur juste dessus</sub></p>
+      <img src="public/screenshots/country-hero.png" alt="Fiche du Japon : le pays mis en évidence de nuit, lumières des villes, titre en Saira" />
+      <p align="center"><sub>Orbite : le Japon de nuit (23 h 10 à Tokyo), le titre à la chasse adaptée au nom</sub></p>
     </td>
   </tr>
   <tr>
@@ -58,14 +77,24 @@ Le périmètre est celui des 193 États membres de l'ONU (filtre `unMember` de m
       <p align="center"><sub>Relevé : l'essentiel d'un coup d'œil</sub></p>
     </td>
     <td width="50%">
-      <img src="public/screenshots/capitale.png" alt="Capitale : Paris, heure locale, jour, lever et coucher" />
-      <p align="center"><sub>Capitale : heure locale et vrai ciel au-dessus d'elle</sub></p>
+      <img src="public/screenshots/capitale.png" alt="Capitale : survol rasant de Paris, repère doré, heure locale et écart avec Porto-Novo" />
+      <p align="center"><sub>Capitale : la caméra rase la capitale, repère doré, écart horaire avec chez soi</sub></p>
     </td>
   </tr>
   <tr>
     <td width="50%">
-      <img src="public/screenshots/territoire.png" alt="Territoire : superficie, rang et climats de Köppen" />
-      <p align="center"><sub>Territoire : rang sur 193 et climats de Köppen-Geiger</sub></p>
+      <img src="public/screenshots/habitants.png" alt="Habitants du Bangladesh : population, rang, contraste calculé avec la Russie" />
+      <p align="center"><sub>Habitants : le contraste qui étonne, calculé sur les données</sub></p>
+    </td>
+    <td width="50%">
+      <img src="public/screenshots/territoire.png" alt="Territoire de la France : superficie, rang, 4,8 fois la superficie du Bénin, climats de Köppen" />
+      <p align="center"><sub>Territoire : rang sur 193, superficie rapportée à chez soi, climats</sub></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src="public/screenshots/institutions.png" alt="Institutions des États-Unis : le drapeau en fond, la pièce de monnaie devant" />
+      <p align="center"><sub>Institutions : la section composée à partir du drapeau</sub></p>
     </td>
     <td width="50%">
       <img src="public/screenshots/comparateur.png" alt="Comparateur : le Brésil superposé aux États-Unis contigus" />
@@ -74,13 +103,29 @@ Le périmètre est celui des 193 États membres de l'ONU (filtre `unMember` de m
   </tr>
   <tr>
     <td colspan="2">
-      <img src="public/screenshots/frontieres.png" alt="Frontières de la France : voisins à gauche, la France et l'Espagne allumées sur le globe" />
+      <img src="public/screenshots/frontieres.png" alt="Frontières de la France : l'Espagne survolée et allumée sur le globe" />
       <p align="center"><sub>Frontières : survoler un voisin l'allume sur le globe</sub></p>
     </td>
   </tr>
   <tr>
+    <td width="50%">
+      <img src="public/screenshots/defi.png" alt="Défi du jour : deux essais, direction et distance, climat et capitale en indices, pays mystère allumé" />
+      <p align="center"><sub>Défi du jour : le globe se pose sur un pays mystère</sub></p>
+    </td>
+    <td width="50%">
+      <img src="public/screenshots/carnet.png" alt="Carnet de vol : planisphère des escales en or et escales datées" />
+      <p align="center"><sub>Carnet de vol : les escales, gardées sur l'appareil</sub></p>
+    </td>
+  </tr>
+  <tr>
     <td colspan="2">
-      <img src="public/screenshots/mobile.png" alt="Mobile : accueil avec tiroir, aperçu du Japon, fiche et relevé" />
+      <img src="public/screenshots/partage.png" alt="Image de partage d'une comparaison : le Bangladesh sur la Russie, × 116" />
+      <p align="center"><sub>Aperçu de partage d'une comparaison, rendu à la demande</sub></p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="public/screenshots/mobile.png" alt="Mobile : accueil avec tiroir, aperçu d'un pays, fiche et relevé du Japon" />
       <p align="center"><sub>Mobile : le vrai globe, le tiroir, l'aperçu au toucher, la fiche</sub></p>
     </td>
   </tr>
@@ -128,17 +173,26 @@ atlas/
 │   ├── page.tsx                # Page d'accueil (globe)
 │   ├── opengraph-image.tsx     # Image OG générée (site et par pays)
 │   ├── not-found.tsx           # 404 dans l'univers atlas
-│   └── pays/[code]/            # 193 pages SSG et leur chargement
+│   ├── pays/[code]/            # 193 pages SSG et leur chargement
+│   ├── defi/                   # Défi du jour, et ses résultats partagés (/defi/[jour]/[grille])
+│   ├── comparer/[pair]/        # Comparaison partagée et son image (/comparer/fra-bra)
+│   └── carnet/[codes]/         # Carnet partagé et son image (/carnet/ben-fra)
 ├── components/
 │   ├── globe/                  # GlobeScene, EarthMesh, CloudsMesh, AtmosphereMesh,
-│   │                           #   StarField, BordersMesh, HoverHighlight, CameraTransition
+│   │                           #   StarField, BordersMesh, HoverHighlight, CameraTransition,
+│   │                           #   HolographicText, CapitalMarker
 │   ├── country/                # CountryCard (descente orbitale), DescentRail, CapitalSky,
-│   │                           #   ClimateDisplay, TrueSizeCompare, NeighborCards, CountryFooter
+│   │                           #   ClimateDisplay, TrueSizeCompare, NeighborCards, CountryFooter,
+│   │                           #   RankRuler, FlightStamp
 │   ├── ui/                     # SearchPalette, LoadingScreen, GlobeOnboarding, MobileHomeDock,
-│   │                           #   MobileExplorer, OffMapScreen...
+│   │                           #   MobileExplorer, OffMapScreen, SunLine, Logbook,
+│   │                           #   DailyChallenge, SharedLogbook...
 │   └── layout/                 # PersistentLayout, Navigation (étoile de recherche)
-├── lib/                        # search-engine, geojson-loader, solar (soleil), koppen,
-│   │                           #   true-size (projection de Lambert), bearing...
+├── lib/                        # search-engine, geojson-loader, solar et solar-now (soleil),
+│   │                           #   koppen, true-size (projection de Lambert), bearing, contrasts,
+│   │                           #   fr-names (articles), home-country et from-home (« Vous êtes
+│   │                           #   ici »), logbook, daily (défi), share-urls, device-tilt...
+│   ├── data/                   # timezone-country.json (fuseau IANA → pays, généré)
 │   └── globe/                  # sélection des pays, soleil, intro caméra, textures
 ├── content/countries/          # Fichiers MDX éditoriaux ([cca3].mdx)
 ├── public/data/                # countries-geo.json (géométrie et propriétés figées)
@@ -151,9 +205,9 @@ atlas/
 
 1. **Vendoring** (manuel, hors build) : `scripts/fetch-vendor-data.js` fige mledoze/countries, la forme de gouvernement et les capitales (Wikidata) et la population (Banque mondiale) dans `scripts/vendor/` ; `scripts/compute-koppen.mjs` y calcule les climats depuis la carte de Beck et al. et `scripts/compute-flag-colors.mjs` les couleurs des drapeaux (couleurs réellement présentes, jamais des moyennes)
 2. **Génération** (manuel, hors build) : `scripts/generate-geo.js` reconstruit `public/data/countries-geo.json` : filtre aux États membres de l'ONU, noms, langues et monnaies en français, fuseaux IANA, indicatif, TLD, couleurs du drapeau, centroïde, passe géométrie
-3. **Build** : `generateStaticParams` lit les 193 codes du GeoJSON et pré-génère toutes les routes ; seul l'extrait Wikipédia est récupéré en ligne (repli silencieux)
+3. **Build** : `generateStaticParams` lit les 193 codes du GeoJSON et pré-génère toutes les fiches ; seul l'extrait Wikipédia est récupéré en ligne (repli silencieux). Les liens partagés (`/comparer`, `/carnet`, `/defi/[jour]/[grille]`) sont rendus à la demande, leurs fichiers de données et polices embarqués par `outputFileTracingIncludes`
 4. **Runtime SSG** : les données complètes de chaque pays sont injectées statiquement dans la page ; le client ne fait aucun appel réseau de données
-5. **Client** : le GeoJSON est chargé une fois au montage du globe et mis en cache en mémoire (singleton)
+5. **Client** : le GeoJSON est chargé une fois au montage du globe et mis en cache en mémoire (singleton) ; le pays de l'utilisateur, le carnet et la partie du défi restent sur l'appareil (`localStorage`), jamais envoyés
 
 ---
 
@@ -193,7 +247,7 @@ npm test           # vitest run
 npm run test:watch # vitest (mode watch)
 ```
 
-Les tests couvrent les fonctions critiques : moteur de recherche (fuzzy matching, insensibilité aux accents et aux noms français), sélection d'un pays sur le globe (inversion de projection, point-in-polygon), position du soleil (solstices, équinoxe, lever et coucher, jours polaires), projection équivalente du comparateur, cadrage du globe en portrait, couverture des données des 193 pays, formatage des coordonnées et vérificateur de contraste WCAG 2.1.
+Les tests couvrent les fonctions critiques : moteur de recherche (fuzzy matching, insensibilité aux accents et aux noms français), sélection d'un pays sur le globe (inversion de projection, point-in-polygon), position du soleil (solstices, équinoxe, lever et coucher, jours polaires, pays dans la nuit, lever en cours), projection équivalente du comparateur, cadrage du globe en portrait, couverture des données des 193 pays, extraction des couleurs de drapeau, contrastes calculés et articles français, pays de l'utilisateur (fuseaux et alias, écart horaire, superficie), carnet de vol, tirage et indices du défi, validation des liens partagés (entrées non fiables), formatage des coordonnées et vérificateur de contraste WCAG 2.1.
 
 ---
 
