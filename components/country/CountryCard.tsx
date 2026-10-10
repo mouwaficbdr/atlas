@@ -4,6 +4,8 @@ import { useEffect, useMemo, type CSSProperties, type ReactNode } from 'react';
 import type { CountryData, CountryPalette } from '@/lib/types';
 import { formatLat, formatLon, utcOffset } from '@/lib/format-coords';
 import { useAppStore } from '@/lib/store';
+import { contrastsFor } from '@/lib/contrasts';
+import Link from 'next/link';
 
 import Breadcrumb from './Breadcrumb';
 import WikiExtract from './WikiExtract';
@@ -94,6 +96,8 @@ export default function CountryCard({
       byArea: [...allCountries].sort((a, b) => b.area - a.area),
     };
   }, [country, allCountries]);
+
+  const contrasts = useMemo(() => contrastsFor(country, allCountries), [country, allCountries]);
 
   const languages = Object.values(country.languages ?? {});
   const [currencyCode, currency] = Object.entries(country.currencies ?? {})[0] ?? [];
@@ -244,6 +248,17 @@ export default function CountryCard({
             <p className="cp-value" style={{ marginTop: '1.6rem' }}>
               {frPct.format(stats.share)} des habitants des {stats.total} États membres de l’ONU.
             </p>
+            {contrasts.length > 0 && (
+              <ul className="cp-contrasts" aria-label="Contrastes">
+                {contrasts.map((c) => (
+                  <li key={c.other.cca3}>
+                    {c.lead}
+                    <Link href={`/pays/${c.other.cca3.toLowerCase()}`}>{c.otherText}</Link>
+                    {c.tail}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
           <div>
             <div className="cp-stat">

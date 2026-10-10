@@ -484,3 +484,15 @@
 .cp-end__chip:hover { border-color: var(--cp-accent); background: rgba(255, 255, 255, 0.04); }
 
 .cp-end__sources { margin-top: clamp(3rem, 9vh, 5rem); }
+
+/* Contrastes calculés (#33) : la population et la superficie mises face à un autre pays. */
+.cp-contrasts { list-style: none; margin: 1.6rem 0 0; padding: 0; display: grid; gap: 0.9rem; }
+.cp-contrasts li {
+  padding-left: 1rem;
+  border-left: 2px solid var(--cp-accent);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text-secondary, rgba(255, 255, 255, 0.75));
+}
+.cp-contrasts a { color: var(--text-primary); text-decoration: underline; text-decoration-color: var(--cp-accent); text-underline-offset: 0.2em; }
+.cp-contrasts a:hover { color: var(--cp-accent); }
