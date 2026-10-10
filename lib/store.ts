@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import type { Stamp } from './logbook';
 
 interface AppState {
   hoveredCountryCca3: string | null;
@@ -28,6 +29,11 @@ interface AppState {
    */
   home: { cca3: string; source: 'fuseau' | 'choix' } | null | undefined;
   setHome: (home: { cca3: string; source: 'fuseau' | 'choix' } | null) => void;
+  /** Carnet de vol (#30) : escales lues sur l'appareil, et son panneau. */
+  logbook: Stamp[];
+  setLogbook: (logbook: Stamp[]) => void;
+  isLogbookOpen: boolean;
+  setLogbookOpen: (open: boolean) => void;
   setHoveredCountry: (cca3: string | null) => void;
   setFocusCca3: (cca3: string | null) => void;
   setCountryView: (view: 'close' | 'wide') => void;
@@ -47,6 +53,10 @@ export const useAppStore = create<AppState>((set) => ({
   countryView: 'close',
   home: undefined,
   setHome: (home) => set({ home }),
+  logbook: [],
+  setLogbook: (logbook) => set({ logbook }),
+  isLogbookOpen: false,
+  setLogbookOpen: (open) => set({ isLogbookOpen: open }),
   setHoveredCountry: (cca3) => set({ hoveredCountryCca3: cca3 }),
   setFocusCca3: (cca3) => set({ focusCca3: cca3 }),
   setCountryView: (view) => set({ countryView: view }),

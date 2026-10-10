@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import * as THREE from 'three';
 import { useFrame, type ThreeEvent } from '@react-three/fiber';
 import { loadGeoJSON } from '@/lib/geojson-loader';
@@ -48,6 +48,11 @@ export default function GlobeMesh({
 
   // Survolé à la souris, ou en aperçu sur l'accueil mobile.
   const highlightedCca3 = hoveredCca3 ?? previewCca3;
+  const logbook = useAppStore((state) => state.logbook);
+  const exploredFeatures = useMemo(() => {
+    const explored = new Set(logbook.map((s) => s.cca3));
+    return features.filter((f) => explored.has(f.properties.cca3));
+  }, [features, logbook]);
   const hoveredFeature = highlightedCca3
     ? features.find((f) => f.properties.cca3 === highlightedCca3)
     : null;
@@ -143,6 +148,10 @@ export default function GlobeMesh({
       <CloudsMesh />
 
       <BordersMesh features={features} />
+      {/* Carnet de vol : les pays explorés gardent un liseré d'or plus vif. */}
+      {cameraMode === 'globe' && exploredFeatures.length > 0 && (
+        <BordersMesh features={exploredFeatures} color="#FFE29A" opacity={1} radius={1.0065} />
+      )}
 
       {cameraMode === 'globe' && hoveredFeature && (
         <HoverHighlight

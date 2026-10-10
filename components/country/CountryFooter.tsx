@@ -7,6 +7,7 @@ import { useInView } from '@/lib/hooks/useInView';
 import type { CountryData } from '@/lib/types';
 import { cardinalDirection, initialBearing } from '@/lib/bearing';
 import ShareButton from './ShareButton';
+import FlightStamp from './FlightStamp';
 
 interface CountryFooterProps {
   current: CountryData;
@@ -95,6 +96,8 @@ export default function CountryFooter({ current, allCountries, shareUrl }: Count
           <span aria-hidden="true">←</span> Retour au globe
         </Link>
       </div>
+
+      <FlightStamp cca3={current.cca3} />
 
       <p className="cp-note cp-end__sources">
         Sources : Natural Earth, Banque mondiale, Wikidata, mledoze/countries, Köppen-Geiger (Beck et al. 2023), Wikipédia.

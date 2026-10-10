@@ -6,15 +6,19 @@ import type { GeoJSONFeature } from '@/lib/types';
 
 interface BordersMeshProps {
   features: GeoJSONFeature[];
+  color?: string;
+  opacity?: number;
+  /** Rayon du tracé (Terre = 1). */
+  radius?: number;
 }
 
-export default function BordersMesh({ features }: BordersMeshProps) {
+export default function BordersMesh({ features, color = '#D4AF37', opacity = 0.55, radius = 1.006 }: BordersMeshProps) {
   const geometry = useMemo(() => {
     const vertices: number[] = [];
     // Au-dessus de la sphère Terre (r=1) et sans maillage pays entre les
     // deux : le depth test cache les frontières de la face arrière sans
     // z-fighting. (L'ancien bug venait d'un R=1.0025 placé SOUS les pays.)
-    const R = 1.006;
+    const R = radius;
 
     const projectPoint = (lon: number, lat: number): [number, number, number] => {
       const phi = (90 - lat) * (Math.PI / 180);
@@ -54,7 +58,7 @@ export default function BordersMesh({ features }: BordersMeshProps) {
     const geom = new THREE.BufferGeometry();
     geom.setAttribute('position', new THREE.BufferAttribute(new Float32Array(vertices), 3));
     return geom;
-  }, [features]);
+  }, [features, radius]);
 
   // Géométrie construite hors JSX : r3f ne la dispose pas, on s'en charge au
   // démontage et à chaque recalcul (finding E1).
@@ -63,9 +67,9 @@ export default function BordersMesh({ features }: BordersMeshProps) {
   return (
     <lineSegments geometry={geometry} renderOrder={10}>
       <lineBasicMaterial
-        color="#D4AF37" // Doré chirurgical
+        color={color} // Doré chirurgical par défaut
         transparent={true}
-        opacity={0.55}
+        opacity={opacity}
         blending={THREE.AdditiveBlending}
         depthWrite={false}
       />

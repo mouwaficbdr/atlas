@@ -7,6 +7,8 @@ import LoadingScreen from '@/components/ui/LoadingScreen';
 import SearchPalette from '@/components/ui/SearchPalette';
 import SunLine from '@/components/ui/SunLine';
 import { resolveHome } from '@/lib/home-country';
+import Logbook from '@/components/ui/Logbook';
+import { readLogbook } from '@/lib/logbook';
 import Navigation from '@/components/layout/Navigation';
 import MobileExplorer from '@/components/ui/MobileExplorer';
 import MobileHomeDock from '@/components/ui/MobileHomeDock';
@@ -62,6 +64,13 @@ export default function PersistentLayout({
   });
 
   const setSearchOpen = useAppStore((state) => state.setSearchOpen);
+  // Carnet de vol : escales lues une fois sur l'appareil.
+  const setLogbook = useAppStore((state) => state.setLogbook);
+  const setLogbookOpen = useAppStore((state) => state.setLogbookOpen);
+  const logbookCount = useAppStore((state) => state.logbook.length);
+  useEffect(() => {
+    setLogbook(readLogbook());
+  }, [setLogbook]);
   const isOffMap = useAppStore((state) => state.isOffMap);
   const countryView = useAppStore((state) => state.countryView);
 
@@ -322,6 +331,33 @@ export default function PersistentLayout({
 
       {/* Le vrai soleil, dit en une ligne (desktop : le tiroir occupe le bas sur mobile). */}
       {countries.length > 0 && pathname === '/' && !isMobile && <SunLine countries={countries} />}
+      {/* Carnet de vol : son panneau (toutes routes) et son compteur (accueil desktop ;
+          sur mobile, le tiroir porte le sien). */}
+      {countries.length > 0 && <Logbook countries={countries} />}
+      {countries.length > 0 && pathname === '/' && !isMobile && (
+        <button type="button" className="logbook-chip" onClick={() => setLogbookOpen(true)}>
+          Carnet · <strong>{logbookCount}</strong> sur {countries.length}
+          <style dangerouslySetInnerHTML={{ __html: `
+            .logbook-chip {
+              position: fixed;
+              right: 2.2rem;
+              bottom: 2.2rem;
+              z-index: 20;
+              padding: 0.5rem 0.8rem;
+              font-family: var(--font-jetbrains-mono), monospace;
+              font-size: 0.72rem;
+              letter-spacing: 0.12em;
+              color: var(--text-muted, #8d95a3);
+              background: rgba(10, 10, 20, 0.5);
+              border: 1px solid rgba(255, 255, 255, 0.12);
+              cursor: pointer;
+              transition: color 0.3s, border-color 0.3s;
+            }
+            .logbook-chip strong { font-weight: 400; color: #ffd27a; }
+            .logbook-chip:hover, .logbook-chip:focus-visible { color: var(--text-primary, #f0f0f0); border-color: #ffd27a; }
+          ` }} />
+        </button>
+      )}
 
       {/* GitHub Badge - Floating Magnetic Link (page globe, desktop uniquement) */}
       {pathname === '/' && !isMobile && <GithubBadge />}

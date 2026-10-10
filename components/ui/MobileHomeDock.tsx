@@ -22,6 +22,8 @@ const frCompact = new Intl.NumberFormat('fr-FR', { notation: 'compact', compactD
 export default function MobileHomeDock({ countries, onOpenExplorer }: MobileHomeDockProps) {
   const previewCca3 = useAppStore((state) => state.previewCca3);
   const setPreview = useAppStore((state) => state.setPreviewCca3);
+  const setLogbookOpen = useAppStore((state) => state.setLogbookOpen);
+  const logbookCount = useAppStore((state) => state.logbook.length);
   const preview = previewCca3 ? countries.find((c) => c.cca3 === previewCca3) : null;
 
   const random = () => setPreview(countries[Math.floor(Math.random() * countries.length)].cca3);
@@ -94,7 +96,9 @@ export default function MobileHomeDock({ countries, onOpenExplorer }: MobileHome
             ))}
           </div>
           <div className="dock__foot">
-            <span>Touchez un pays sur le globe</span>
+            <button type="button" className="dock__logbook" onClick={() => setLogbookOpen(true)}>
+              Carnet · <strong>{logbookCount}</strong> sur {countries.length}
+            </button>
             <a href="https://github.com/mouwaficbdr/atlas" target="_blank" rel="noopener noreferrer">
               Code source
             </a>
@@ -168,6 +172,8 @@ export default function MobileHomeDock({ countries, onOpenExplorer }: MobileHome
           color: #8d95a3;
         }
         .dock__foot a { text-decoration: underline; text-underline-offset: 3px; }
+        .dock__logbook { padding: 0; background: none; border: 0; font: inherit; letter-spacing: inherit; color: inherit; text-transform: inherit; cursor: pointer; }
+        .dock__logbook strong { font-weight: 400; color: #ffd27a; }
         .dock__row { display: flex; align-items: center; gap: 0.9rem; }
         .dock__flag { border-radius: 3px; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15); }
         .dock__id { display: flex; flex-direction: column; flex: 1; min-width: 0; }
