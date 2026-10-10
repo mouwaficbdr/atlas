@@ -496,7 +496,9 @@ function generate() {
         borders: (p.borders || []).filter((code) => members.has(code)),
         languages: languagesFr(p.languages),
         currencies: currenciesFr(p.currencies),
-        flags: p.flags,
+        // Wikimedia ne sert plus que ses largeurs de vignette standard (320 px
+        // répond 400) : seul le drapeau afghan vient de là.
+        flags: { ...p.flags, png: p.flags.png.replace('/320px-', '/330px-') },
         idd: m.idd || p.idd || null,
         tld: m.tld || p.tld || [],
         timezones: p.timezones || [],
