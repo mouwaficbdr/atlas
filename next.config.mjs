@@ -8,7 +8,8 @@ const contentSecurityPolicy = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline'",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: https://flagcdn.com",
+  // upload.wikimedia.org : seul le drapeau afghan n'est pas sur flagcdn.
+  "img-src 'self' data: https://flagcdn.com https://upload.wikimedia.org",
   "font-src 'self' data:",
   "connect-src 'self'",
   "object-src 'none'",
