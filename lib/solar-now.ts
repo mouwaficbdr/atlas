@@ -14,3 +14,19 @@ export function phaseOf(country: CountryData, date: Date): DaylightPhase {
 export function nightCount(countries: CountryData[], date: Date): number {
   return countries.filter((c) => phaseOf(c, date) !== 'jour').length;
 }
+
+/** Pays où le soleil se lève en ce moment : côté matin, le plus près de l'horizon. */
+export function sunriseCountry(countries: CountryData[], date: Date): CountryData | null {
+  let best: CountryData | null = null;
+  let bestGap = Infinity;
+  for (const c of countries) {
+    const [lon, lat] = anchor(c);
+    if (solarSide(date, lon) !== 'morning') continue;
+    const gap = Math.abs(solarElevation(date, lon, lat));
+    if (gap < bestGap) {
+      best = c;
+      bestGap = gap;
+    }
+  }
+  return best;
+}
