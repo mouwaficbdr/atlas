@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import ShareButton from './ShareButton';
+import { useAppStore } from '@/lib/store';
 
 export interface DescentStage {
   id: string;
@@ -30,6 +31,13 @@ export default function DescentRail({ stages, countryName, shareUrl }: DescentRa
   const [pastHero, setPastHero] = useState(false);
   const [landed, setLanded] = useState(false);
   const altRef = useRef<HTMLElement>(null);
+
+  // La section courante pilote la caméra (#21) : l'altimètre devient vrai.
+  const setDescentStage = useAppStore((s) => s.setDescentStage);
+  useEffect(() => {
+    setDescentStage(current ?? null);
+  }, [current, setDescentStage]);
+  useEffect(() => () => setDescentStage(null), [setDescentStage]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

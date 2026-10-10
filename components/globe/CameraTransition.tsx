@@ -6,7 +6,7 @@ import { gsap } from 'gsap';
 import type { CountryData } from '@/lib/types';
 import * as THREE from 'three';
 import { useAppStore } from '@/lib/store';
-import { currentGlobeDistance, introDistanceAt } from '@/lib/globe/intro';
+import { currentGlobeDistance, introDistanceAt, prefersReducedMotion } from '@/lib/globe/intro';
 import { countryViewDirection, homeViewDirection } from '@/lib/globe/sun';
 import { lonLatToCartesian } from '@/lib/globe/pick-country';
 
@@ -21,6 +21,7 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
   const introPhase = useAppStore((state) => state.introPhase);
   const setIntroPhase = useAppStore((state) => state.setIntroPhase);
   const countryView = useAppStore((state) => state.countryView);
+  const descentStage = useAppStore((state) => state.descentStage);
 
   useEffect(() => {
     // NOTE: controls n'est disponible qu'après le premier rendu du Canvas
@@ -103,12 +104,26 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
       // en ordre REST Countries [lat, lon].
       const [lon, lat] = country.centroid;
 
-      const targetPos = new THREE.Vector3(...lonLatToCartesian(lon, lat));
-
       // Recul proportionnel à la taille du pays (Monaco de près, la Russie de
       // loin), et plus large encore quand la fiche montre ses voisins.
       const closeDist = Math.min(2.6, Math.max(1.35, 1.25 + Math.sqrt(country.area) / 2600));
-      const camDist = countryView === 'wide' ? closeDist + 0.9 : closeDist;
+
+      // Descente réelle (#21) : orbite au titre, plongée au relevé, survol
+      // rasant de la capitale, altitude moyenne ensuite, remontée large aux
+      // frontières. Sans étape en mouvement réduit.
+      const stage = prefersReducedMotion() ? null : descentStage;
+      const overCapital = stage === 'capitale' && country.capitalLonLat;
+      const [aimLon, aimLat] = overCapital ? country.capitalLonLat! : [lon, lat];
+      const targetPos = new THREE.Vector3(...lonLatToCartesian(aimLon, aimLat));
+      const lower = (f: number) => 1 + (closeDist - 1) * f;
+      const camDist =
+        countryView === 'wide'
+          ? closeDist + 0.9
+          : overCapital
+            ? lower(0.45)
+            : stage && stage !== 'orbite'
+              ? lower(0.75)
+              : closeDist;
       const camPos = targetPos.clone().multiplyScalar(camDist);
 
       // Les OrbitControls sont désactivés en mode pays pour figer la vue
@@ -136,7 +151,7 @@ export default function CameraTransition({ countries, cameraMode, selectedCountr
         onUpdate: renderLooking,
       });
     }
-  }, [selectedCountryCca3, cameraMode, camera, controls, countries, invalidate, introPhase, setIntroPhase, countryView]);
+  }, [selectedCountryCca3, cameraMode, camera, controls, countries, invalidate, introPhase, setIntroPhase, countryView, descentStage]);
 
   // Accueil mobile : le pays en aperçu (touché, choisi dans l'index ou tiré
   // au hasard) vient face à l'utilisateur, à distance inchangée.

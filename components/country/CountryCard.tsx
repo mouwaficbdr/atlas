@@ -266,7 +266,7 @@ export default function CountryCard({
       </section>
 
       {/* 03 · Capitale : heure et vrai ciel au-dessus d'elle. */}
-      <section id="capitale" className="cp-section" aria-labelledby="capitale-h">
+      <section id="capitale" className="cp-section cp-section--window" aria-labelledby="capitale-h">
         <div className="cp-head">
           <span className="cp-index">{indexOf('capitale')}</span>
           <h2 id="capitale-h">Capitale</h2>

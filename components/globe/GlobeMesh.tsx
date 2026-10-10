@@ -11,6 +11,7 @@ import { cartesianToLonLat, findCountryAtLonLat } from '@/lib/globe/pick-country
 import BordersMesh from './BordersMesh';
 import HolographicText, { projectPoint } from './HolographicText';
 import HoverHighlight from './HoverHighlight';
+import CapitalMarker from './CapitalMarker';
 import EarthMesh from './EarthMesh';
 import CloudsMesh from './CloudsMesh';
 
@@ -52,6 +53,8 @@ export default function GlobeMesh({
     return () => clearTimeout(id);
   }, [returnCca3, cameraMode, setReturnCca3]);
   const returning = returnCca3 && cameraMode === 'globe' ? countries.find((c) => c.cca3 === returnCca3) : undefined;
+  const descentStage = useAppStore((state) => state.descentStage);
+  const selectedCapital = countries.find((c) => c.cca3 === selectedCca3)?.capitalLonLat ?? null;
   const setHoveredCountry = useAppStore((state) => state.setHoveredCountry);
   const reducedMotion = useReducedMotion();
 
@@ -213,6 +216,11 @@ export default function GlobeMesh({
           color={returning.colors?.primary ?? '#ffffff'}
           fadeOutAfter={1600}
         />
+      )}
+
+      {/* Descente (#21) : repère de la capitale pendant son survol rasant. */}
+      {cameraMode === 'country' && descentStage === 'capitale' && selectedCapital && (
+        <CapitalMarker lonLat={selectedCapital} />
       )}
 
       {/* Holographic Text : visible uniquement au survol en mode globe */}
