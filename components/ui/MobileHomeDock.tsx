@@ -1,9 +1,11 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import type { CountryData } from '@/lib/types';
 import { useAppStore } from '@/lib/store';
+import { disableTilt, enableTilt } from '@/lib/device-tilt';
+import { prefersReducedMotion } from '@/lib/hooks/useReducedMotion';
 
 interface MobileHomeDockProps {
   countries: CountryData[];
@@ -25,6 +27,14 @@ export default function MobileHomeDock({ countries, onOpenExplorer }: MobileHome
   const setLogbookOpen = useAppStore((state) => state.setLogbookOpen);
   const logbookCount = useAppStore((state) => state.logbook.length);
   const preview = previewCca3 ? countries.find((c) => c.cca3 === previewCca3) : null;
+
+  // Inclinaison du téléphone (#28), en option : iOS demande une autorisation.
+  const [tiltSupported, setTiltSupported] = useState(false);
+  const [tiltOn, setTiltOn] = useState(false);
+  useEffect(() => {
+    setTiltSupported(typeof DeviceOrientationEvent !== 'undefined' && !prefersReducedMotion());
+    return () => disableTilt();
+  }, []);
 
   const random = () => setPreview(countries[Math.floor(Math.random() * countries.length)].cca3);
 
@@ -78,6 +88,23 @@ export default function MobileHomeDock({ countries, onOpenExplorer }: MobileHome
       ) : (
         <div className="dock__rest">
           <span className="dock__handle" aria-hidden="true" />
+          {tiltSupported && (
+            <button
+              type="button"
+              className="dock__tilt"
+              aria-pressed={tiltOn}
+              onClick={async () => {
+                if (tiltOn) {
+                  disableTilt();
+                  setTiltOn(false);
+                } else {
+                  setTiltOn(await enableTilt());
+                }
+              }}
+            >
+              Inclinaison {tiltOn ? 'activée' : 'désactivée'}
+            </button>
+          )}
           <button type="button" className="dock__search" onClick={() => onOpenExplorer(null)}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
               <circle cx="11" cy="11" r="7" />
@@ -126,6 +153,8 @@ export default function MobileHomeDock({ countries, onOpenExplorer }: MobileHome
         }
         @keyframes dock-in { from { transform: translateY(100%); } }
         .dock__handle { display: block; width: 36px; height: 4px; margin: 0 auto 0.8rem; border-radius: 2px; background: rgba(255, 255, 255, 0.2); }
+        .dock__tilt { position: absolute; top: 0.55rem; right: 1rem; padding: 0.3rem 0; font-family: var(--font-jetbrains-mono), monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: #8d95a3; background: none; border: 0; }
+        .dock__tilt[aria-pressed='true'] { color: var(--text-accent); }
         .dock__search {
           display: flex;
           align-items: center;
