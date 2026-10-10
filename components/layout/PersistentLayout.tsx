@@ -8,6 +8,8 @@ import SearchPalette from '@/components/ui/SearchPalette';
 import SunLine from '@/components/ui/SunLine';
 import { resolveHome } from '@/lib/home-country';
 import Logbook from '@/components/ui/Logbook';
+import DailyChallenge from '@/components/ui/DailyChallenge';
+import Link from 'next/link';
 import { readLogbook } from '@/lib/logbook';
 import Navigation from '@/components/layout/Navigation';
 import MobileExplorer from '@/components/ui/MobileExplorer';
@@ -176,6 +178,8 @@ export default function PersistentLayout({
     setHome(resolveHome());
   }, [setHome]);
   const handleCountrySelect = (cca3: string) => {
+    // Pendant le défi, toucher le globe ne doit pas révéler la réponse.
+    if (pathname === '/defi') return;
     if (isMobile && pathname === '/') setPreviewCca3(cca3);
     else router.push(`/pays/${cca3.toLowerCase()}`);
   };
@@ -334,6 +338,28 @@ export default function PersistentLayout({
       {/* Carnet de vol : son panneau (toutes routes) et son compteur (accueil desktop ;
           sur mobile, le tiroir porte le sien). */}
       {countries.length > 0 && <Logbook countries={countries} />}
+      {countries.length > 0 && pathname === '/defi' && <DailyChallenge countries={countries} />}
+      {countries.length > 0 && pathname === '/' && !isMobile && (
+        <Link href="/defi" className="defi-chip">
+          Défi du jour <span aria-hidden="true">→</span>
+          <style dangerouslySetInnerHTML={{ __html: `
+            .defi-chip {
+              position: fixed;
+              right: 2.2rem;
+              bottom: 5.4rem;
+              z-index: 20;
+              padding: 0.5rem 0.8rem;
+              font-family: var(--font-jetbrains-mono), monospace;
+              font-size: 0.72rem;
+              letter-spacing: 0.12em;
+              color: #0a0a14;
+              background: #ffd27a;
+              text-decoration: none;
+            }
+            .defi-chip:hover, .defi-chip:focus-visible { background: #ffe29a; }
+          ` }} />
+        </Link>
+      )}
       {countries.length > 0 && pathname === '/' && !isMobile && (
         <button type="button" className="logbook-chip" onClick={() => setLogbookOpen(true)}>
           Carnet · <strong>{logbookCount}</strong> sur {countries.length}

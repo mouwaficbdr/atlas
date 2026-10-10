@@ -33,6 +33,9 @@ interface AppState {
   logbook: Stamp[];
   setLogbook: (logbook: Stamp[]) => void;
   isLogbookOpen: boolean;
+  /** Défi du jour en cours : le globe ne nomme plus les pays au survol. */
+  isChallenge: boolean;
+  setChallenge: (value: boolean) => void;
   setLogbookOpen: (open: boolean) => void;
   setHoveredCountry: (cca3: string | null) => void;
   setFocusCca3: (cca3: string | null) => void;
@@ -56,6 +59,8 @@ export const useAppStore = create<AppState>((set) => ({
   logbook: [],
   setLogbook: (logbook) => set({ logbook }),
   isLogbookOpen: false,
+  isChallenge: false,
+  setChallenge: (value) => set({ isChallenge: value }),
   setLogbookOpen: (open) => set({ isLogbookOpen: open }),
   setHoveredCountry: (cca3) => set({ hoveredCountryCca3: cca3 }),
   setFocusCca3: (cca3) => set({ focusCca3: cca3 }),

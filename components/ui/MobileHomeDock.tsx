@@ -86,7 +86,10 @@ export default function MobileHomeDock({ countries, onOpenExplorer }: MobileHome
             Localiser un pays
           </button>
           <div className="dock__chips">
-            <button type="button" className="dock__chip dock__chip--accent" onClick={random}>
+            <Link href="/defi" className="dock__chip dock__chip--accent">
+              Défi du jour
+            </Link>
+            <button type="button" className="dock__chip" onClick={random}>
               Au hasard
             </button>
             {REGIONS.map((region) => (
@@ -160,6 +163,7 @@ export default function MobileHomeDock({ countries, onOpenExplorer }: MobileHome
           letter-spacing: 0.1em;
           text-transform: uppercase;
         }
+        a.dock__chip { display: inline-flex; align-items: center; text-decoration: none; }
         .dock__chip--accent { border-color: var(--text-accent); color: var(--text-accent); }
         .dock__foot {
           display: flex;
