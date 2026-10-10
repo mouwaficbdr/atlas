@@ -3,4 +3,4 @@
  * Open Graph) et les métadonnées par pays (canonicalUrl), pour éviter toute
  * divergence entre les deux.
  */
-export const SITE_URL = 'https://atlas-globe.vercel.app';
+export const SITE_URL = 'https://atlas.mouwaficbdr.me';
