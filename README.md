@@ -21,7 +21,7 @@
 ## À propos
 
 atlas est un explorateur mondial de pays construit autour d'un globe 3D WebGL.  
-Le périmètre est celui des 193 États membres de l'ONU (filtre `unMember` de mledoze/countries, Saint-Siège exclu car simple observateur). La Terre est photoréaliste ; chaque pays révèle au survol la couleur dominante de son drapeau, calculée au build (k-means) et figée dans le GeoJSON. L'objectif est de prouver qu'une expérience de premier rang peut reposer entièrement sur des fondations statiques, ouvertes et sans backend propriétaire.
+Le périmètre est celui des 193 États membres de l'ONU (filtre `unMember` de mledoze/countries, Saint-Siège exclu car simple observateur). La Terre est photoréaliste ; chaque pays révèle au survol la couleur dominante de son drapeau, extraite des pixels du drapeau et figée dans le GeoJSON. L'objectif est de prouver qu'une expérience de premier rang peut reposer entièrement sur des fondations statiques, ouvertes et sans backend propriétaire.
 
 ---
 
@@ -143,14 +143,14 @@ atlas/
 ├── content/countries/          # Fichiers MDX éditoriaux ([cca3].mdx)
 ├── public/data/                # countries-geo.json (géométrie et propriétés figées)
 ├── public/textures/earth/      # Textures NASA de la Terre
-├── scripts/                    # generate-geo.js, fetch-vendor-data.js, compute-koppen.mjs, vendor/
+├── scripts/                    # generate-geo.js, fetch-vendor-data.js, compute-koppen.mjs, compute-flag-colors.mjs, vendor/
 └── shaders/                    # GLSL : atmosphère, nuages, ciel, étoiles
 ```
 
 **Flux de données**
 
-1. **Vendoring** (manuel, hors build) : `scripts/fetch-vendor-data.js` fige mledoze/countries, la forme de gouvernement et les capitales (Wikidata) et la population (Banque mondiale) dans `scripts/vendor/` ; `scripts/compute-koppen.mjs` y calcule les climats depuis la carte de Beck et al.
-2. **Génération** (manuel, hors build) : `scripts/generate-geo.js` reconstruit `public/data/countries-geo.json` : filtre aux États membres de l'ONU, noms, langues et monnaies en français, fuseaux IANA, indicatif, TLD, palette k-means, centroïde, passe géométrie
+1. **Vendoring** (manuel, hors build) : `scripts/fetch-vendor-data.js` fige mledoze/countries, la forme de gouvernement et les capitales (Wikidata) et la population (Banque mondiale) dans `scripts/vendor/` ; `scripts/compute-koppen.mjs` y calcule les climats depuis la carte de Beck et al. et `scripts/compute-flag-colors.mjs` les couleurs des drapeaux (couleurs réellement présentes, jamais des moyennes)
+2. **Génération** (manuel, hors build) : `scripts/generate-geo.js` reconstruit `public/data/countries-geo.json` : filtre aux États membres de l'ONU, noms, langues et monnaies en français, fuseaux IANA, indicatif, TLD, couleurs du drapeau, centroïde, passe géométrie
 3. **Build** : `generateStaticParams` lit les 193 codes du GeoJSON et pré-génère toutes les routes ; seul l'extrait Wikipédia est récupéré en ligne (repli silencieux)
 4. **Runtime SSG** : les données complètes de chaque pays sont injectées statiquement dans la page ; le client ne fait aucun appel réseau de données
 5. **Client** : le GeoJSON est chargé une fois au montage du globe et mis en cache en mémoire (singleton)
