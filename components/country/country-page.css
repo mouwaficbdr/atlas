@@ -27,11 +27,12 @@
 .cp-note { font-size: 0.7rem; color: var(--cp-muted); letter-spacing: 0.1em; text-transform: none; line-height: 1.6; }
 
 .cp-display {
-  font-family: var(--font-bebas-neue), sans-serif;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-stretch: 70%;
   text-transform: uppercase;
   line-height: 0.9;
   letter-spacing: 0.01em;
-  font-weight: 400;
 }
 
 /* ---------------------------------------------------------------- Orbite */
@@ -54,7 +55,10 @@
 .cp-hero__name {
   margin: 0.6rem 0 0.9rem;
   color: var(--text-primary);
-  font-size: clamp(3rem, calc(165vw / var(--len, 8)), 13.5rem);
+  /* La chasse suit la longueur du nom : « TCHAD » s'élargit, « SAINT-VINCENT-
+     ET-LES-GRENADINES » se resserre, à taille presque constante. */
+  font-size: clamp(2.6rem, calc(150vw / var(--len, 8)), 12rem);
+  font-stretch: clamp(50%, calc(700% / var(--len, 8)), 125%);
   text-wrap: balance;
   overflow-wrap: anywhere;
   text-shadow: 0 6px 40px rgba(0, 0, 0, 0.6);
@@ -162,8 +166,10 @@
 .cp-index { font-size: 0.7rem; color: var(--cp-accent); }
 
 .cp-head h2 {
-  font-family: var(--font-bebas-neue), sans-serif;
-  font-weight: 400;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-stretch: 70%;
+  text-transform: uppercase;
   font-size: clamp(1.6rem, 3vw, 2.4rem);
   letter-spacing: 0.04em;
 }
@@ -215,10 +221,12 @@
 
 .cp-fact dd {
   margin: 0;
-  font-family: var(--font-bebas-neue), sans-serif;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-stretch: 70%;
+  text-transform: uppercase;
   font-size: clamp(1.45rem, 2.6vw, 2.2rem);
   line-height: 1;
-  text-transform: uppercase;
   overflow-wrap: anywhere;
 }
 
@@ -417,7 +425,10 @@
 .cp-minibar[data-visible='true'] { transform: none; }
 
 .cp-minibar__name {
-  font-family: var(--font-bebas-neue), sans-serif;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-stretch: 70%;
+  text-transform: uppercase;
   font-size: 1.35rem;
   letter-spacing: 0.04em;
   white-space: nowrap;

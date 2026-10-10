@@ -72,7 +72,7 @@ export default function SharedLogbook({ codes }: { codes: string[] }) {
           color: var(--text-primary, #f0f0f0);
         }
         .shared-log__kicker { margin: 0; font-family: var(--font-jetbrains-mono), monospace; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: #ffd27a; }
-        .shared-log__title { margin: 0.5rem 0 1rem; font-family: var(--font-bebas-neue), sans-serif; font-weight: 400; font-size: 2.6rem; line-height: 1; }
+        .shared-log__title { margin: 0.5rem 0 1rem; font-family: var(--font-display), sans-serif; font-weight: 700; font-stretch: 70%; text-transform: uppercase; font-size: 2.6rem; line-height: 1; }
         .shared-log__map { display: block; width: 100%; height: auto; margin-bottom: 1rem; }
         .shared-log__list { list-style: none; margin: 0 0 1.2rem; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
         .shared-log__list a { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.35rem 0.6rem; font-size: 0.85rem; color: inherit; text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.12); }

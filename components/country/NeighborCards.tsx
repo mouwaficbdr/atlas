@@ -164,11 +164,13 @@ export default function NeighborCards({ origin, borders, allCountries }: Neighbo
         }
         .nb__name {
           margin-top: auto;
-          font-family: var(--font-bebas-neue), sans-serif;
+          font-family: var(--font-display), sans-serif;
+          font-weight: 700;
+          font-stretch: 70%;
+          text-transform: uppercase;
           font-size: clamp(1.7rem, 2.4vw, 2.5rem);
           line-height: 0.95;
           letter-spacing: 0.02em;
-          text-transform: uppercase;
         }
         .nb__flag {
           position: absolute;
