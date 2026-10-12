@@ -6,7 +6,7 @@
     "bindings" : [ {
       "iso3" : {
         "type" : "literal",
-        "value" : "DNK"
+        "value" : "CAN"
       },
       "govLabel" : {
         "xml:lang" : "fr",
@@ -16,57 +16,27 @@
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "GRC"
+        "value" : "CAN"
       },
       "govLabel" : {
         "xml:lang" : "fr",
         "type" : "literal",
-        "value" : "république parlementaire"
+        "value" : "fédération"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "PRT"
+        "value" : "CAN"
       },
       "govLabel" : {
         "xml:lang" : "fr",
         "type" : "literal",
-        "value" : "république"
+        "value" : "régime parlementaire"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "URY"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "URY"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "régime présidentiel"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "URY"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "démocratie participative"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "MDA"
+        "value" : "IRL"
       },
       "govLabel" : {
         "xml:lang" : "fr",
@@ -76,7 +46,7 @@
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "MDA"
+        "value" : "IRL"
       },
       "govLabel" : {
         "xml:lang" : "fr",
@@ -86,7 +56,17 @@
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "GRL"
+        "value" : "HUN"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ESP"
       },
       "govLabel" : {
         "xml:lang" : "fr",
@@ -96,27 +76,37 @@
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "HRV"
+        "value" : "USA"
       },
       "govLabel" : {
         "xml:lang" : "fr",
         "type" : "literal",
-        "value" : "république"
+        "value" : "république constitutionnelle"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "BIH"
+        "value" : "USA"
       },
       "govLabel" : {
         "xml:lang" : "fr",
         "type" : "literal",
-        "value" : "république parlementaire fédérale"
+        "value" : "république démocratique"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "MCO"
+        "value" : "BEL"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "fédération"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LUX"
       },
       "govLabel" : {
         "xml:lang" : "fr",
@@ -126,57 +116,7 @@
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "MCO"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "monarchie héréditaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "IDN"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "IDN"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "régime présidentiel"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "ZAF"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "apartheid"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "ZAF"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "démocratie représentative"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "ZAF"
+        "value" : "FIN"
       },
       "govLabel" : {
         "xml:lang" : "fr",
@@ -186,7 +126,7 @@
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "KHM"
+        "value" : "SWE"
       },
       "govLabel" : {
         "xml:lang" : "fr",
@@ -196,17 +136,17 @@
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "TLS"
+        "value" : "SWE"
       },
       "govLabel" : {
         "xml:lang" : "fr",
         "type" : "literal",
-        "value" : "république"
+        "value" : "démocratie représentative"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "TLS"
+        "value" : "POL"
       },
       "govLabel" : {
         "xml:lang" : "fr",
@@ -216,7 +156,17 @@
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "TLS"
+        "value" : "POL"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "POL"
       },
       "govLabel" : {
         "xml:lang" : "fr",
@@ -226,22 +176,37 @@
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "TUV"
+        "value" : "LTU"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime semi-présidentiel"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "VUT"
+        "value" : "LTU"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "NRU"
+        "value" : "ITA"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "FSM"
+        "value" : "CHE"
       },
       "govLabel" : {
         "xml:lang" : "fr",
@@ -251,17 +216,17 @@
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "KIR"
+        "value" : "CHE"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime directorial"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "FJI"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "SUR"
+        "value" : "AUT"
       },
       "govLabel" : {
         "xml:lang" : "fr",
@@ -271,77 +236,27 @@
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "PRY"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "VCT"
+        "value" : "AUT"
       },
       "govLabel" : {
         "xml:lang" : "fr",
         "type" : "literal",
-        "value" : "monarchie constitutionnelle"
+        "value" : "régime semi-présidentiel"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "JAM"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "BHS"
+        "value" : "AUT"
       },
       "govLabel" : {
         "xml:lang" : "fr",
         "type" : "literal",
-        "value" : "monarchie constitutionnelle"
+        "value" : "république parlementaire fédérale"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "JEY"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "monarchie constitutionnelle"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "JEY"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "démocratie parlementaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "JEY"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "monarchie parlementaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "SLV"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "SLV"
+        "value" : "TUR"
       },
       "govLabel" : {
         "xml:lang" : "fr",
@@ -351,32 +266,22 @@
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "SLV"
+        "value" : "TUR"
       },
       "govLabel" : {
         "xml:lang" : "fr",
         "type" : "literal",
-        "value" : "démocratie représentative"
+        "value" : "État unitaire"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "CRI"
+        "value" : "ATA"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "KWT"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "monarchie constitutionnelle"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "MMR"
+        "value" : "EGY"
       },
       "govLabel" : {
         "xml:lang" : "fr",
@@ -386,7 +291,67 @@
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "NPL"
+        "value" : "MEX"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "empire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MEX"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MEX"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MEX"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MEX"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république démocratique"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "FRA"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime semi-présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CHN"
       },
       "govLabel" : {
         "xml:lang" : "fr",
@@ -396,72 +361,7 @@
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "NPL"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république fédérale"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "PAK"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république fédérale"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "PAK"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république parlementaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "QAT"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "monarchie constitutionnelle"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "BTN"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "monarchie constitutionnelle"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "TZA"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "PHL"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "ZMB"
+        "value" : "BRA"
       },
       "govLabel" : {
         "xml:lang" : "fr",
@@ -471,7 +371,7 @@
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "ZMB"
+        "value" : "BRA"
       },
       "govLabel" : {
         "xml:lang" : "fr",
@@ -481,162 +381,36 @@
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "COG"
+        "value" : "BRA"
       },
       "govLabel" : {
         "xml:lang" : "fr",
         "type" : "literal",
-        "value" : "république parlementaire"
+        "value" : "république fédérale"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "GNQ"
+        "value" : "RUS"
+      },
+      "govLabel" : {
+        "type" : "literal",
+        "value" : "Q4446300"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "PRI"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "XKS"
+        "value" : "DEU"
       },
       "govLabel" : {
         "xml:lang" : "fr",
         "type" : "literal",
-        "value" : "république parlementaire"
+        "value" : "république parlementaire fédérale"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "BYS"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république des conseils"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "GUF"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "FRO"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "ESH"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "FLK"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "IMN"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "VIR"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "MSR"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "MAC"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "GUM"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "UMI"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "GLP"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "MYT"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "TCA"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "BVT"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "BMU"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "monarchie constitutionnelle"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "BMU"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "territoire britannique d'outre-mer"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "NLD"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "monarchie constitutionnelle"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "PYF"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "NFK"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "NCL"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "CSK"
+        "value" : "BLR"
       },
       "govLabel" : {
         "xml:lang" : "fr",
@@ -646,22 +420,237 @@
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "PCN"
+        "value" : "BLR"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "CCK"
+        "value" : "ISL"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "MID"
+        "value" : "LVA"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "YUG"
+        "value" : "LVA"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AND"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "coprincipauté parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CYP"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CYP"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "KAZ"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BLZ"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BLZ"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BRB"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "État unitaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BRB"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "DZA"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime semi-présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "DZA"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république populaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CHL"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république démocratique"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LIE"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BHR"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SRB"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AUS"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AUS"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "fédération"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AUS"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "démocratie représentative"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ARG"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PRK"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PRK"
       },
       "govLabel" : {
         "xml:lang" : "fr",
@@ -671,17 +660,27 @@
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "YUG"
+        "value" : "PRK"
       },
       "govLabel" : {
         "xml:lang" : "fr",
         "type" : "literal",
-        "value" : "titisme"
+        "value" : "État unitaire"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "YUG"
+        "value" : "PRK"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Juche"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PRK"
       },
       "govLabel" : {
         "xml:lang" : "fr",
@@ -691,52 +690,46 @@
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "YUG"
+        "value" : "PRK"
+      },
+      "govLabel" : {
+        "type" : "literal",
+        "value" : "Q5433328"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PRK"
       },
       "govLabel" : {
         "xml:lang" : "fr",
         "type" : "literal",
-        "value" : "république parlementaire"
+        "value" : "dictature communiste"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "ATF"
+        "value" : "TCD"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "JTN"
+        "value" : "WSM"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "HMD"
+        "value" : "SLB"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "ATN"
+        "value" : "MHL"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "FXX"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "HVO"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "colonie autonome"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "YUG"
+        "value" : "COL"
       },
       "govLabel" : {
         "xml:lang" : "fr",
@@ -746,12 +739,212 @@
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "CTE"
+        "value" : "KNA"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
       }
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "CRQ"
+        "value" : "KNA"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GRD"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ATG"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "DMA"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "HTI"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PAN"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MDV"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "LKA"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SYR"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "gouvernement provisoire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TWN"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "démocratie"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TWN"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime semi-présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TWN"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TWN"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république démocratique"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "THA"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "THA"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "KOR"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "KOR"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BGD"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "système de Westminster"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BGD"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MLI"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AGO"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "AGO"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CAF"
       }
     }, {
       "iso3" : {
@@ -1726,949 +1919,6 @@
     }, {
       "iso3" : {
         "type" : "literal",
-        "value" : "CAN"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "monarchie constitutionnelle"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "CAN"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "fédération"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "CAN"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "régime parlementaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "IRL"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "État unitaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "IRL"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république parlementaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "HUN"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république parlementaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "ESP"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "monarchie parlementaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "USA"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république constitutionnelle"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "USA"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république démocratique"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "BEL"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "fédération"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "LUX"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "monarchie constitutionnelle"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "FIN"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république parlementaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "SWE"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "monarchie constitutionnelle"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "SWE"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "démocratie représentative"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "POL"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "régime semi-présidentiel"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "POL"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "régime parlementaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "POL"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "État unitaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "LTU"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "régime semi-présidentiel"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "LTU"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république parlementaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "ITA"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république parlementaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "CHE"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république fédérale"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "CHE"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "régime directorial"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "AUT"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "AUT"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "régime semi-présidentiel"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "AUT"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république parlementaire fédérale"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "TUR"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "régime présidentiel"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "TUR"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "État unitaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "ATA"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "EGY"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "MEX"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "empire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "MEX"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "régime présidentiel"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "MEX"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république fédérale"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "MEX"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république constitutionnelle"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "MEX"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république démocratique"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "FRA"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "régime semi-présidentiel"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "CHN"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république populaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "BRA"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "régime présidentiel"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "BRA"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "démocratie représentative"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "BRA"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république fédérale"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "RUS"
-      },
-      "govLabel" : {
-        "type" : "literal",
-        "value" : "Q4446300"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "DEU"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république parlementaire fédérale"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "BLR"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "BLR"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "régime présidentiel"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "ISL"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république parlementaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "LVA"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "LVA"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république parlementaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "AND"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "coprincipauté parlementaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "CYP"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "CYP"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "régime présidentiel"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "KAZ"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "régime présidentiel"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "BLZ"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "monarchie constitutionnelle"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "BLZ"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "monarchie parlementaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "BRB"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "État unitaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "BRB"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république parlementaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "DZA"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "régime semi-présidentiel"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "DZA"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république populaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "CHL"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république démocratique"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "LIE"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "monarchie constitutionnelle"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "BHR"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "monarchie constitutionnelle"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "SRB"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république parlementaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "AUS"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "monarchie constitutionnelle"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "AUS"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "fédération"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "AUS"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "démocratie représentative"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "ARG"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république fédérale"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "PRK"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "PRK"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "parti unique"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "PRK"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "État unitaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "PRK"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "Juche"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "PRK"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "État socialiste"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "PRK"
-      },
-      "govLabel" : {
-        "type" : "literal",
-        "value" : "Q5433328"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "PRK"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "dictature communiste"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "TCD"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "WSM"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "SLB"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "MHL"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "COL"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "KNA"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "monarchie constitutionnelle"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "KNA"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "monarchie fédérale"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "GRD"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "ATG"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "monarchie constitutionnelle"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "DMA"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "HTI"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "PAN"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "régime présidentiel"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "MDV"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "LKA"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "SYR"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "gouvernement provisoire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "TWN"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "démocratie"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "TWN"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "régime semi-présidentiel"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "TWN"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république constitutionnelle"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "TWN"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république démocratique"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "THA"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "monarchie constitutionnelle"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "THA"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "monarchie parlementaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "KOR"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "KOR"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "régime présidentiel"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "BGD"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "système de Westminster"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "BGD"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république parlementaire"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "MLI"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "AGO"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "république"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "AGO"
-      },
-      "govLabel" : {
-        "xml:lang" : "fr",
-        "type" : "literal",
-        "value" : "régime présidentiel"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
-        "value" : "CAF"
-      }
-    }, {
-      "iso3" : {
-        "type" : "literal",
         "value" : "TGO"
       }
     }, {
@@ -3440,6 +2690,756 @@
       "iso3" : {
         "type" : "literal",
         "value" : "ASC"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "DNK"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GRC"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PRT"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "URY"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "URY"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "URY"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "démocratie participative"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MDA"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "État unitaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MDA"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GRL"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "HRV"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BIH"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MCO"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MCO"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie héréditaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IDN"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IDN"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ZAF"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "apartheid"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ZAF"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "démocratie représentative"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ZAF"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "KHM"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TLS"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TLS"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime semi-présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TLS"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "État unitaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TUV"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "VUT"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NRU"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "FSM"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "KIR"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "FJI"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SUR"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PRY"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "VCT"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "JAM"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BHS"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "JEY"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "JEY"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "démocratie parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "JEY"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SLV"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SLV"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "SLV"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "démocratie représentative"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CRI"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "KWT"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MMR"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NPL"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république populaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NPL"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PAK"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république fédérale"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PAK"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "QAT"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BTN"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TZA"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PHL"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ZMB"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "régime présidentiel"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ZMB"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "démocratie représentative"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "COG"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GNQ"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PRI"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "XKS"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BYS"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république des conseils"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GUF"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "FRO"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ESH"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "FLK"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "IMN"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "VIR"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MSR"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MAC"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GUM"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "UMI"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "GLP"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MYT"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "TCA"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BVT"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BMU"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "BMU"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "territoire britannique d'outre-mer"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NLD"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "monarchie constitutionnelle"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PYF"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NFK"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "NCL"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CSK"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "PCN"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CCK"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "MID"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "YUG"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "parti unique"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "YUG"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "titisme"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "YUG"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "État socialiste"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "YUG"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république parlementaire"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ATF"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "JTN"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "HMD"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "ATN"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "FXX"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "HVO"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "colonie autonome"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "YUG"
+      },
+      "govLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "république"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CTE"
+      }
+    }, {
+      "iso3" : {
+        "type" : "literal",
+        "value" : "CRQ"
       }
     } ]
   }
