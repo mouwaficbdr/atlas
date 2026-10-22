@@ -1,18 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <defs>
-    <radialGradient id="day" cx="30%" cy="28%" r="80%">
-      <stop offset="0" stop-color="#e3f6ff"/>
-      <stop offset="0.42" stop-color="#4fc3f7"/>
-      <stop offset="1" stop-color="#164f8c"/>
-    </radialGradient>
-    <clipPath id="disc"><circle cx="16" cy="16" r="13"/></clipPath>
-  </defs>
-  <circle cx="16" cy="16" r="13" fill="#0b1026"/>
-  <g clip-path="url(#disc)">
-    <ellipse cx="8.5" cy="16" rx="12.5" ry="17" fill="url(#day)"/>
-    <circle cx="22.6" cy="11.4" r="1" fill="#ffd36e"/>
-    <circle cx="25.2" cy="16.6" r="0.85" fill="#ffd36e"/>
-    <circle cx="21.4" cy="20.6" r="0.75" fill="#ffd36e" opacity="0.85"/>
-  </g>
-  <circle cx="16" cy="16" r="13.6" fill="none" stroke="#4fc3f7" stroke-opacity="0.6" stroke-width="1"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><radialGradient id="day" cx="30%" cy="28%" r="80%"><stop offset="0" stop-color="#e3f6ff"/><stop offset=".42" stop-color="#4fc3f7"/><stop offset="1" stop-color="#164f8c"/></radialGradient><clipPath id="disc"><circle cx="16" cy="16" r="13"/></clipPath></defs><circle cx="16" cy="16" r="13" fill="#0b1026"/><g clip-path="url(#disc)"><ellipse cx="8.5" cy="16" fill="url(#day)" rx="12.5" ry="17"/><circle cx="22.6" cy="11.4" r="1" fill="#ffd36e"/><circle cx="25.2" cy="16.6" r=".85" fill="#ffd36e"/><circle cx="21.4" cy="20.6" r=".75" fill="#ffd36e" opacity=".85"/></g><circle cx="16" cy="16" r="13.6" fill="none" stroke="#4fc3f7" stroke-opacity=".6" stroke-width="1"/></svg>
