@@ -266,7 +266,7 @@
       "coord" : {
         "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
         "type" : "literal",
-        "value" : "Point(46.71 24.65)"
+        "value" : "Point(46.715 24.638333333)"
       },
       "capLabel" : {
         "xml:lang" : "fr",
